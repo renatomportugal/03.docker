@@ -1,0 +1,7 @@
+docker run \
+  --network elasticsearch \
+  --name elasticsearch \
+  -e "discovery.type=single-node" \
+  -p 9200:9200 \
+  -e xpack.ml.enable=false \
+  elasticsearch:7.7.1
