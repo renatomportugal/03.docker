@@ -1,1 +1,21 @@
 docker pull mysql:5.7
+docker pull mysql:5.7
+
+__MySQL
+docker run mysql
+
+vai aparecer uma mensagem de erro para especificar algumas variáveis.
+MYSQL_ROOT_PASSWORD
+MYSQL_ALLOW_EMPTY_PASSWORD
+MYSQL_RANDOM_ROOT_PASSWORD
+
+
+docker ps
+docker --help
+docker run -e MYSQL_ROOT_PASSWORD=my-password mysql
+
+em outra janela de terminal
+docker ps
+
+verifique se a variável foi atribuída
+docker exec 09 env
