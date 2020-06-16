@@ -3,13 +3,13 @@ https://docs.docker.com/engine/install/ubuntu/
 
 ## Ubuntu
 ###  Passo 01
-1.0. Atualizar o sistema<br>
+Atualizar o sistema<br>
 ```
 sudo apt-get update
 ```
   
 ### Passo 02
-1.0. Copiar e colar todas essas linhas (-y aceita tudo por padrão)<br>
+Copiar e colar todas essas linhas (-y aceita tudo por padrão)<br>
 ```
 sudo apt-get install \
     apt-transport-https \
@@ -20,17 +20,17 @@ sudo apt-get install \
 ```
 
 ### Passo 03
-1.0. Adicionar a chave oficial do Docker<br>
+Adicionar a chave oficial do Docker<br>
 ```
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 ```
 
 ### Passo 04
-1.0. Verificar a impressão digital<br>
+Verificar a impressão digital<br>
 ```
 sudo apt-key fingerprint 0EBFCD88
 ```
-1.1. Tela de retorno:<br>
+Tela de retorno:<br>
 ```
 pub   rsa4096 2017-02-22 [SCEA]
       9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
@@ -39,7 +39,7 @@ sub   rsa4096 2017-02-22 [S]
 ```
 
 ### Passo 05
-1.0. Setup do repositório<br>
+Setup do repositório<br>
 ```
 sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
@@ -48,40 +48,40 @@ sudo add-apt-repository \
 ```
 
 ### Passo 06
-1.0. Instalar o motor Docker<br>
+Instalar o motor Docker<br>
 ```
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io
 ```
 
 ### Passo 07
-1.0. Verificar se instalou<br>
+Verificar se instalou<br>
 ```
 docker --help
 ```
 
 ### Passo 08
-1.0. Rodar a imagem hello-world<br>
+Rodar a imagem hello-world<br>
 ```
 sudo docker run hello-world
 ```
 
 ### Passo 09
-1.0. Ver quais containers existem<br>
+Ver quais containers existem<br>
 ```
 docker ps
 ```
-1.1. Dará um erro de permissão, descobriremos qual o nome do usuário utilizado.<br>
+Dará um erro de permissão, descobriremos qual o nome do usuário utilizado.<br>
 ```
 whoami
 ```
-1.2. Colocaremos o usuário no grupo Docker.<br>
+Colocaremos o usuário no grupo Docker.<br>
 ```
 sudo usermod -aG docker usuario
 ```
 
 ### Passo 10
-1.0. Reiniciar o sistema.<br>
+Reiniciar o sistema.<br>
 ```
 reboot
 ```
