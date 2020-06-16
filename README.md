@@ -1,7 +1,7 @@
 # Instalação do Docker
 https://docs.docker.com/engine/install/ubuntu/
 
-## Ubuntu
+## No Ubuntu
 ###  Passo 01
 Atualizar o sistema<br>
 ```
@@ -86,7 +86,7 @@ Reiniciar o sistema.<br>
 reboot
 ```
 
-## Raspberry Pi 3
+## No Raspberry Pi 3
 https://docs.docker.com/engine/install/debian/#install-using-the-convenience-script<br>
 ```
 cat /etc/ *-release
