@@ -1,0 +1,9 @@
+docker pull httpd
+
+__APACHE
+docker run -p 8080:80 -d httpd
+a5
+
+acesse localhost:8080 e veja o resultado.
+docker stop a5
+docker rm a5

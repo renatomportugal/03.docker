@@ -78,7 +78,7 @@ docker rm 64
 docker ps -a
 
 vamos criar uma pasta mongo dentro da pasta container
-cd /home/menezes/Desktop/containers
+cd /home/usuario/Desktop/containers
 mkdir mongo
 cd mongo
 mkdir db

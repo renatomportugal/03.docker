@@ -1,7 +1,67 @@
+__Elasticsearch
+dentro da pasta containers
+cd /home/usuario/Desktop/containers
+mkdir elasticsearch
+cd elasticsearch
+touch elasticsearch-commands.txt
+touch commands.txt
+
+tentar instalar sem java da próxima vez
+docker pull openjdk
+
+docker network create elasticsearch
+docker network ls
+
 docker run \
-  --network elasticsearch \
-  --name elasticsearch \
-  -e "discovery.type=single-node" \
-  -p 9200:9200 \
-  -e xpack.ml.enable=false \
-  elasticsearch:7.7.1
+    --network elasticsearch \
+    --name elasticsearch \
+    -e "discovery.type=single-node" \
+    -p 9200:9200 \
+    -e xpack.ml.enabled=false \
+    elasticsearch:7.7.1
+    
+docker ps
+
+5c
+
+docker run \
+    -it \
+    --network elasticsearch \
+    --name curl \
+     appropriate/curl sh
+
+bb
+
+
+__reiniciar os containers parados
+docker start 5c
+
+
+docker start -i bb
+
+no container do curl
+ping elasticsearch
+
+pare o ping
+Ctrl+C
+
+curl -XPUT http://elasticsearch:9200/my-index
+curl -XGET http://elasticsearch:9200/_cat/indices?v
+
+curl -XPOST http://elasticsearch:9200/my-index/cities/1 \
+  -H 'Content-Type: application/json' \
+  -d '{"city":"New York"}'
+
+curl -XPOST http://elasticsearch:9200/my-index/cities/2 \
+  -H 'Content-Type: application/json' \
+  -d '{"city":"Paris"}'
+
+curl -XPOST http://elasticsearch:9200/my-index/cities/3 \
+  -H 'Content-Type: application/json' \
+  -d '{"city":"London"}'
+  
+curl -XGET http://elasticsearch:9200/my-index/_mapping?pretty
+curl -XGET http://elasticsearch:9200/my-index/cities/1?pretty
+curl -XGET http://elasticsearch:9200/my-index/cities/2?pretty
+
+curl -XGET http://elasticsearch:9200/my-index/_search?q=city:new
