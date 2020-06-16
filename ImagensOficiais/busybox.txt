@@ -1,0 +1,18 @@
+docker run busybox
+
+docker run -it busybox
+
+digite ls e verá que a lista de pastas é bem menor.
+liste ls /bin e verá que também tem o comando echo, que poderá ser usado
+echo "Olá mundo"
+
+teste o comando uptime
+
+crie uma pasta
+mkdir my-folder
+
+entre na pasta e crie um arquivo de texto
+mkdir my-folder
+cd my-folder
+touch file.txt
+ls
