@@ -1,0 +1,12 @@
+docker pull alpine
+
+cria o container e vai para o shell dele
+docker run -it alpine
+ls
+
+ver a versáo
+cat /etc/os-release
+ls /bin
+
+verá que no alpine existem links para a busybox container
+ls -la bin
