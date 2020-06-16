@@ -1,0 +1,172 @@
+no terminal podemos ver que não há o nodejs instalado (no Sistema Operacional)
+node -v
+bem como o npm
+npm -v
+
+Então instalaremos via docker
+verificar se tem containers rodando
+docker ps
+
+verificar a lista de containers
+docker ps -a
+
+apagaremos a lista (-f forçar)
+docker container prune -f
+
+verificar
+docker ps -a
+
+baixar a imagem
+docker pull node
+
+verificar se a imagem existe
+docker images
+
+docker run node
+docker ps
+docker ps -a
+
+rodar com interação
+docker run -it node
+
+chame ajuda
+.help
+
+console.log('Hello from Node.js container')
+10+5
+const a = 10;
+a
+
+sair
+.exit
+
+dentro do Visual Studio code, na pasta containers, crie uma pasta node e inclua o script hello.js
+console.log('This application was executed by Node.js container');
+
+Salve com control+s
+acesse a pasta node
+cd /home/usuario/Desktop/containers/node
+ls
+
+vamos criar a imagem do docker
+docker run -v $PWD:/app -w /app node node hello.js
+docker ps
+
+MÓDULO EXPRESS
+https://www.npmjs.com/package/express
+
+Criar uma pasta dentro da pasta node, nomear como express.
+criar index.js dentro da pasta express
+copiar o texto para o arquivo
+
+const express = require('express')
+const app = express()
+app.get('/', function (req, res) {
+  res.send('This Express app was executed by Node.js container inside of the Docker')
+})
+app.listen(3000)
+
+cd express
+ls
+docker run -v $PWD:/app -w /app node node index.js
+
+dará um erro porque o módulo express não foi achado
+para resolver deveremos instalar o modulo no docker
+docker run -v $PWD:/app -w /app node npm install
+
+deu outro erro, ENOENT: no such file or directory
+o projeto precisa ser iniciado
+docker run -v $PWD:/app -w /app node npm init
+
+o comando anterior necessita de interação, vamos acrescentar o parâmetro -it
+vamos novamente...
+docker run -v $PWD:/app -w /app -it node npm init
+
+selecione as opções padrões, ele mostrará para conferência, enter para yes
+verifique se foi criado o arquivo
+ls
+
+vamos instalar o expres (atualmente express@4.17.1)
+docker run -v $PWD:/app -w /app -it node npm install express
+
+veja que foi criada a pasta node_modules
+ls
+
+docker run -v $PWD:/app -w /app -it node node index.js
+
+verifica se está rodando
+docker ps
+
+acessando http://localhost:3000/ pelo browser dá o erro ERR_CONNECTION_REFUSED
+docker stop 57
+
+vamos expor a porta
+docker run -v $PWD:/app -w /app -it -p 3000:3000 node node index.js
+
+teste no browser e verá que está funcionando
+
+__SIGINT
+o código a seguir identifica o fim do processo.
+
+const express = require('express')
+const process = require('process')
+const app = express()
+process.on('SIGINT', () =>{
+    console.log('Application is being interrupted...')
+    process.exit(0)
+})
+process.on('SIGTERM', () =>{
+    console.log('Application is being terminated...')
+    process.exit(0)
+})
+app.get('/', function (req, res) {
+  res.send('This Express app was executed by Node.js container inside of the Docker')
+})
+app.listen(3000)
+
+docker ps
+docker stop e4
+docker ps
+
+docker run -v $PWD:/app -w /app -it -p 3000:3000 node node index.js
+
+abra outro terminal...
+docker ps
+docker stop 98
+
+volte no terminal que rodou a aplicação e veja a mensagem
+Application is being terminated...
+
+__Aplicação Node
+cd /home/usuario/Desktop/containers/node/express
+cd ..
+ls
+mkdir files
+cd files
+touch index.js
+
+const fs = require('fs')
+const readline = require('readline').createInterface({
+    input: process.stdin,
+    output: process.stdout
+})
+readline.question('Enter filename: ', filename => {
+    readline.question('Enter some text: ', text=> {
+        fs.writeFile(`${filename}.txt`, text, err =>{
+            if (err) throw err
+            console.log('File was created')
+            readline.close()
+        })
+    })
+})
+
+docker run -v $PWD:/app -w /app -it node node index.js
+
+digita
+myfile1
+Hi
+
+ls
+more file1
+
+mostrará o conteúdo (Hi)
