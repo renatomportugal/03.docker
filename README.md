@@ -3,7 +3,7 @@ https://docs.docker.com/engine/install/ubuntu/
 
 ## Ubuntu
 ###  Passo 01
-atualizar o sistema
+atualizar o sistema <br>
 ```sudo apt-get update```
 
 
