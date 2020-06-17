@@ -1,0 +1,55 @@
+https://hub.docker.com/_/owncloud
+owncloud.org
+
+docker pull owncloud
+
+docker run -d -p 80:80 owncloud:8.1
+
+For a MySQL database you can link an database container, e.g. --link my-mysql:mysql, and then use mysql as the database host on setup.
+
+ownCloud is a self-hosted file sync and share server.
+
+ownCloud is a self-hosted file sync and share server. It provides access to your data through a web interface, sync clients or WebDAV while providing a platform to view, sync and share across devices easily—all under your control. ownCloud’s open architecture is extensible via a simple but powerful API for applications and plugins and it works with any storage.
+
+Persistent data
+All data beyond what lives in the database (file uploads, etc) is stored within the default volume /var/www/html. With this volume, ownCloud will only be updated when the file version.php is not present.
+
+-v /<mydatalocation>:/var/www/html
+For fine grained data persistence, you can use 3 volumes, as shown below.
+
+-v /<mydatalocation>/apps:/var/www/html/apps installed / modified apps
+-v /<mydatalocation>/config:/var/www/html/config local configuration
+-v /<mydatalocation>/data:/var/www/html/data the actual data of your ownCloud
+
+docker exec -u www-data some-owncloud php occ status
+
+Example stack.yml for owncloud:
+
+# ownCloud with MariaDB/MySQL
+#
+# Access via "http://localhost:8080" (or "http://$(docker-machine ip):8080" if using docker-machine)
+#
+# During initial ownCloud setup, select "Storage & database" --> "Configure the database" --> "MySQL/MariaDB"
+# Database user: root
+# Database password: example
+# Database name: pick any name
+# Database host: replace "localhost" with "mysql"
+
+version: '3.1'
+
+services:
+
+  owncloud:
+    image: owncloud
+    restart: always
+    ports:
+      - 8080:80
+
+  mysql:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+
+Run docker stack deploy -c stack.yml owncloud (or docker-compose -f stack.yml up), wait for it to initialize completely, and visit http://swarm-ip:8080/, http://localhost:8080/, or http://host-ip:8080 (as appropriate).
+
