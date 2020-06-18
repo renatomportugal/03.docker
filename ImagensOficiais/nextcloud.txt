@@ -15,6 +15,25 @@ Configurar Domínios Confiáveis (para funcionar na internet)
 Edite a configuração "trusted_domains" em /config/config.php
 Exemplo pode ser encontrado em config.sample.php
 
+Verifique o id do container
+docker ps -a
+
+Inicie
+docker start 2d
+
+Acesse a linha de comando
+docker exec -it 2d bash
+
+A pasta padrão da aplicação é /var/www/html
+Liste o conteúdo
+ls -la
+
+acesse a pasta config
+cd config
+
+procurar um editor para editar o arquivo
+... config.sample.php
+
 _______________________________________________________________________________
 
 https://hub.docker.com/_/nextcloud
