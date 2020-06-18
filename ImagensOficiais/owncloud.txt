@@ -1,7 +1,14 @@
+Baixar
+docker pull owncloud
+
+Rodar
+docker run -d -p 80:80 owncloud
+
+Instalar
+
+
 https://hub.docker.com/_/owncloud
 owncloud.org
-
-docker pull owncloud
 
 docker run -d -p 80:80 owncloud:8.1
 
