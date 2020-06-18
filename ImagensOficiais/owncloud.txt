@@ -4,8 +4,11 @@ docker pull owncloud
 Rodar
 docker run -d -p 80:80 owncloud
 
-Instalar
-
+Instalar (SQLite)
+Crie uma conta de administrador
+Apenas para teste escolha a base SQLite, na pasta padrão /var/www/html/data
+Clique em concluir
+___________________________________________________________________________________
 
 https://hub.docker.com/_/owncloud
 owncloud.org
