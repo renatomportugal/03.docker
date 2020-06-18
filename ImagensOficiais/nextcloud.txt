@@ -4,6 +4,18 @@ docker pull nextcloud
 Rodar
 docker run -d -p 8080:80 nextcloud
 
+Instalar (SQLite)
+Acesse localhost:8080
+Escolha um usuário e senha para a conta de administrador
+Selecione o banco de dados, no nosso caso deixaremos o SQLite, com a pasta padrão /var/www/html/data.
+Deixe selecionado para instalar os aplicativos recomendados (Calendar, Contacts, Talk, Mail e Collaborative Editing)
+Clique no botão concluir
+
+Configurar Domínios Confiáveis (para funcionar na internet)
+Edite a configuração "trusted_domains" em /config/config.php
+Exemplo pode ser encontrado em config.sample.php
+
+_______________________________________________________________________________
 
 https://hub.docker.com/_/nextcloud
 A safe home for all your data. Access & share your files, calendars, contacts, mail & more from any device, on your terms.
