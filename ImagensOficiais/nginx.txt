@@ -5,6 +5,9 @@ docker run nginx
 vamos rodar na porta 80
 docker run -p 8080:80 nginx
 
+testar para iniciar com o Sistema
+docker run -d -p 8080:80 --restart=always nginx
+
 abra o browser e acesse o nginx digitando localhost:8080
 
 Criando uma página e mostrando no container
