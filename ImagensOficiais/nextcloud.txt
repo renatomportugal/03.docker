@@ -18,11 +18,11 @@ Exemplo pode ser encontrado em config.sample.php
 Verifique o id do container
 docker ps -a
 
-Inicie
-docker start 2d
+Inicie, caso esteja parado.
+docker start cd
 
 Acesse a linha de comando
-docker exec -it 2d bash
+docker exec -it cd bash
 
 A pasta padrão da aplicação é /var/www/html
 Liste o conteúdo
@@ -31,8 +31,60 @@ ls -la
 acesse a pasta config
 cd config
 
-procurar um editor para editar o arquivo
-... config.sample.php
+Como o container não tem editor de texto, copiaremos o arquivo para fora, editaremos, depois devolveremos.
+
+Saia do bash do container
+exit
+
+identifique o id do container
+docker ps
+docker ps -a
+docker cp 
+
+copie a pasta do container para o seu diretório atual
+pode usar os dois primeiros dígitos
+docker cp cd:/var/www/html/config/config.php config.php
+
+verifique se realmente copiou
+ls
+
+copie o arquivo de exemplo também
+docker cp cd:/var/www/html/config/config.sample.php config.sample.php
+
+Abra-os para edição, destrave o terminal com &
+gedit config.sample.php &
+gedit config.php &
+
+Faça as alterações conforme a seguir, não substitua tudo, apenas complete com sua necessidade.
+No meu caso adicionei o site "seuSite.com"
+
+'trusted_domains' =>
+array(
+    0 => 'localhost',
+    1 => 'seuSite.com'
+)
+
+Cole novamente dentro do container (não se esqueça que cd é o id do container) .
+docker cp config.php cd:/var/www/html/config/config.php
+
+Reinicie o container...
+docker stop cd
+docker start cd
+
+Está dando outro erro...
+Can't write into config directory!
+
+Teremos de dar direito de escrita para o servidor.
+docker exec -it cd bash
+
+deve estar na pasta /var/www/html/
+ls -la
+
+mude o dono do config.php
+chown www-data config.php
+
+Veja se refletiu
+ls -la
 
 _______________________________________________________________________________
 
