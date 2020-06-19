@@ -72,6 +72,9 @@ docker restart 58
 Veja se refletiu
 ls -la
 
+EXPORTAR
+docker container export -o NC.tar 59d58da934e3
+
 _______________________________________________________________________________
 
 https://hub.docker.com/_/nextcloud
