@@ -15,44 +15,38 @@ Configurar Domínios Confiáveis (para funcionar na internet)
 Edite a configuração "trusted_domains" em /config/config.php
 Exemplo pode ser encontrado em config.sample.php
 
-Verifique o id do container
+Verifique o id do container (o meu começa com 58)
 docker ps -a
-
-Inicie, caso esteja parado.
-docker start cd
 
 Acesse a linha de comando
 docker exec -it cd bash
 
-A pasta padrão da aplicação é /var/www/html
-Liste o conteúdo
-ls -la
-
 acesse a pasta config
 cd config
 
+Liste o conteúdo
+ls -la
+
+faça uma cópia do arquivo config.php
+cp config.php config.bck.php
+
+Veja se realmente criou
+ls -la
+
+note que o dono é o root, pode trocar se quiser (não afetará em nada o resultado)
+Note que o dono é www-root, então daremos o arquivo para ele
+chown www-root config.bck.php
+
+Abra outra tela de terminal com Ctrl+Shift+T
 Como o container não tem editor de texto, copiaremos o arquivo para fora, editaremos, depois devolveremos.
-
-Saia do bash do container
-exit
-
-identifique o id do container
-docker ps
-docker ps -a
-docker cp 
-
 copie a pasta do container para o seu diretório atual
 pode usar os dois primeiros dígitos
-docker cp cd:/var/www/html/config/config.php config.php
+docker cp 58:/var/www/html/config/config.php config.php
 
 verifique se realmente copiou
-ls
-
-copie o arquivo de exemplo também
-docker cp cd:/var/www/html/config/config.sample.php config.sample.php
+ls -la
 
 Abra-os para edição, destrave o terminal com &
-gedit config.sample.php &
 gedit config.php &
 
 Faça as alterações conforme a seguir, não substitua tudo, apenas complete com sua necessidade.
@@ -64,24 +58,16 @@ array(
     1 => 'seuSite.com'
 )
 
+Salve com Ctrl+S
+
 Cole novamente dentro do container (não se esqueça que cd é o id do container) .
-docker cp config.php cd:/var/www/html/config/config.php
+docker cp config.php 58:/var/www/html/config/config.php
+
+Mude o dono imediatamente (se mexer no site dará erro)
+chown www-root config.php
 
 Reinicie o container...
-docker stop cd
-docker start cd
-
-Está dando outro erro...
-Can't write into config directory!
-
-Teremos de dar direito de escrita para o servidor.
-docker exec -it cd bash
-
-deve estar na pasta /var/www/html/
-ls -la
-
-mude o dono do config.php
-chown www-data config.php
+docker restart 58
 
 Veja se refletiu
 ls -la
