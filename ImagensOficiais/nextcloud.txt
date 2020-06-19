@@ -2,10 +2,10 @@ Baixar
 docker pull nextcloud
 
 Rodar
-docker run -d -p 8080:80 nextcloud
+docker run -d -p 80:80 nextcloud
 
 Instalar (SQLite)
-Acesse localhost:8080
+Acesse localhost:80
 Escolha um usuário e senha para a conta de administrador
 Selecione o banco de dados, no nosso caso deixaremos o SQLite, com a pasta padrão /var/www/html/data.
 Deixe selecionado para instalar os aplicativos recomendados (Calendar, Contacts, Talk, Mail e Collaborative Editing)
