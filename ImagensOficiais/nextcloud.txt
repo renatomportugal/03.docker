@@ -72,14 +72,17 @@ docker restart 58
 Veja se refletiu
 ls -la
 
+Não funcionou ainda.
+________________________________________________
 EXPORTAR
 docker container export -o NC.tar 59d58da934e3
 
-Crie outro Container, em outra porta
-docker run -d -p 8081:80 nextcloud
-
 IMPORTAR
 docker load -i NC.tar 6e06070969e9
+cat NC.tar | docker import - exampleimagelocal:new
+
+Crie outro Container a partir da imagem criada
+docker run -d -p 8081:80 exampleimagelocal:new
 
 _______________________________________________________________________________
 
