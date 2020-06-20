@@ -1,8 +1,26 @@
 docker pull mysql:5.7
-docker pull mysql:5.7
+dcoker pull phpmyadmin/phpmyadmin
 
-__MySQL
-docker run mysql
+__REDE
+docker network create mysql
+docker network inspect mysql
+
+__Rodar o MySQL
+docker run \
+    --network mysql \
+    -e MYSQL_ROOT_PASSWORD=my-password \
+    --name mysql \
+    -d mysql
+
+__Rodar o PHPmyadmin
+docker run \
+    --network mysql \
+    -p 8080:80 \
+    -e PMA_HOST=mysql \
+    -d phpmyadmin/phpmyadmin
+
+docker ps
+
 
 vai aparecer uma mensagem de erro para especificar algumas variáveis.
 MYSQL_ROOT_PASSWORD
