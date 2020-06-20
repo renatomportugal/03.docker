@@ -92,7 +92,7 @@ ls
 
 Descompactar o arquivo
 Estando no diretório onde a pasta esteja
-tar -vzxf html html20jun20.tar.gz
+tar -vzxf html20jun20.tar.gz
 
 Substitua a pasta html no destino (o sistema não perguntará, fará direto)
 docker cp ./ 1e:/var/www/
