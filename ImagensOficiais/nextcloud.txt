@@ -74,49 +74,28 @@ ls -la
 
 Não funcionou ainda.
 ________________________________________________
-EXPORTAR
-docker container export -o NC.tar 59d58da934e3
+FAZENDO O BAKUP DOS DADOS (SQLite)
+docker stop 59 1e
+cd ~
+mkdir nc20
+cd nc20
+docker cp 59:/var/www/html ./
+Comprima, nomeie com a data e guarde
 
-IMPORTAR
-docker load -i NC.tar 6e06070969e9
-cat NC.tar | docker import - exampleimagelocal:new
+RECUPERAR OS DADOS
+cd nc20
 
-Crie outro Container a partir da imagem criada
-docker run -d -p 8081:80 exampleimagelocal:new
-
-________________________________________________
-USANDO COMMIT, SAVE E LOAD
-
-docker ps -a
-docker start 59
-localhost:8080
-docker stop 59
-docker ps
-docker images
-ls
-docker ps -a
-docker commit -p 59 nextcloud20jun20
-docker images
-docker save -o nextcloud20jun20.tar nextcloud20jun20
+Deve ter apenas uma pasta (html)
 ls
 
-docker images
-docker rmi nextcloud20jun20
-docker images
+Substitua a pasta html no destino (o sistema não perguntará, fará direto)
+docker cp ./ 1e:/var/www/
 
-docker ps
-ls
-docker load -i nextcloud20jun20.tar
-docker images
-
-
-docker run -d -p 80:80 nextcloud20jun20
-docker ps
-docker exec -it idDoMysqlTestBackup bash
-
-Rodou, mas está zerado
-________________________________________________
-DIFERENÇA ENTRE OS CONTAINERS EXPORTADOS E SALVOS
+Abra outra tela de terminal
+docker exec -it 1e bash
+cd /var/www/
+mudar o dono de tudo
+chown -R www-data html
 
 
 ________________________________________________
