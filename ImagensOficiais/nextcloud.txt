@@ -84,6 +84,42 @@ cat NC.tar | docker import - exampleimagelocal:new
 Crie outro Container a partir da imagem criada
 docker run -d -p 8081:80 exampleimagelocal:new
 
+________________________________________________
+USANDO COMMIT, SAVE E LOAD
+
+docker ps -a
+docker start 59
+localhost:8080
+docker stop 59
+docker ps
+docker images
+ls
+docker ps -a
+docker commit -p 59 nextcloud20jun20
+docker images
+docker save -o nextcloud20jun20.tar nextcloud20jun20
+ls
+
+docker images
+docker rmi nextcloud20jun20
+docker images
+
+docker ps
+ls
+docker load -i nextcloud20jun20.tar
+docker images
+
+
+docker run -d -p 80:80 nextcloud20jun20
+docker ps
+docker exec -it idDoMysqlTestBackup bash
+
+Rodou, mas está zerado
+________________________________________________
+DIFERENÇA ENTRE OS CONTAINERS EXPORTADOS E SALVOS
+
+
+________________________________________________
 _______________________________________________________________________________
 
 https://hub.docker.com/_/nextcloud
