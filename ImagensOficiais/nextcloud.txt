@@ -80,13 +80,19 @@ cd ~
 mkdir nc20
 cd nc20
 docker cp 59:/var/www/html ./
-Comprima, nomeie com a data e guarde
+
+Compactar o arquivo
+tar -czvf html20jun20.tar.gz html
 
 RECUPERAR OS DADOS
 cd nc20
 
-Deve ter apenas uma pasta (html)
+Deve ter arquivos compactados
 ls
+
+Descompactar o arquivo
+Estando no diretório onde a pasta esteja
+tar -vzxf html html20jun20.tar.gz
 
 Substitua a pasta html no destino (o sistema não perguntará, fará direto)
 docker cp ./ 1e:/var/www/
