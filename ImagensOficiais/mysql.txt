@@ -14,7 +14,7 @@ docker run \
     -e MYSQL_DATABASE=wordpress \
     -e MYSQL_USER=root \
     -e MYSQL_PASSWORD=my-password \
-    --name mysql.5.7 \
+    --name mysql.5.7.wp \
     -d mysql:5.7
 
 __Mais simples
