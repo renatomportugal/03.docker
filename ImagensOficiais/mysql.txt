@@ -28,7 +28,7 @@ __Rodar o PHPmyadmin
 docker run \
     --network mysql \
     -p 8080:80 \
-    -e PMA_HOST=mysql.5.7 \
+    -e PMA_HOST=mysql.5.7.wp \
     -d phpmyadmin/phpmyadmin
 
 docker ps
