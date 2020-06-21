@@ -135,6 +135,21 @@ docker inspect mysql
 Veja o nome da instância do docker do mysql e coloque no nome do host
 No meu caso é 172.18.0.2
 
+________________________________________________
+FAZENDO O BAKUP DOS DADOS (MySQL)
+Faça o backup do banco de dados com o phpMyAdmin
+
+docker stop 48
+cd ~
+mkdir ncMySQL
+cd ncMySQL
+docker stop 48
+docker cp 48:/var/www/html ./
+
+Compactar o arquivo
+tar -czvf nc_html_mysql_20jun20.tar.gz html
+
+Também deixe junto o arquivo sql
 
 _______________________________________________________________________________
 
