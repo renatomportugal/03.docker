@@ -1,6 +1,47 @@
 Baixar
 docker pull nextcloud
+_______________________________________________________________________________
+__CONFIGURAÇÕES________________________________________________________________
+Autorizar domínio
+docker ps -a
+2d
+docker stop 2d
+Abra outra tela de terminal com Ctrl+Shift+T
+Como o container não tem editor de texto, copiaremos o arquivo para fora, editaremos, depois devolveremos.
+copie a pasta do container para o seu diretório atual
+pode usar os dois primeiros dígitos
+docker cp 2d:/var/www/html/config/config.php config.php
 
+verifique se realmente copiou
+ls -la
+
+Abra-os para edição, destrave o terminal com &
+gedit config.php &
+
+Faça as alterações conforme a seguir, não substitua tudo, apenas complete com sua necessidade.
+No meu caso adicionei o site "seuSite.com"
+
+'trusted_domains' =>
+array(
+    0 => 'localhost',
+    1 => 'seuSite.com'
+)
+
+Salve com Ctrl+S
+
+Cole novamente dentro do container (não se esqueça que cd é o id do container) .
+docker cp config.php 2d:/var/www/html/config/config.php
+
+Mude o dono imediatamente (se mexer no site dará erro)
+docker start 2d
+docker exec -it 2d bash
+cd config
+ls -la
+chown www-data config.php
+ls -la
+
+Reinicie o container...
+docker restart 2d
 _______________________________________________________________________________
 __INSATALANDO COM MYSQL________________________________________________________
 Instale o MySQL e o PHPmyAdmin, veja em no arquivo deste mesmo diretório mysql.txt
@@ -102,71 +143,6 @@ Selecione o banco de dados, no nosso caso deixaremos o SQLite, com a pasta padr�
 Deixe selecionado para instalar os aplicativos recomendados (Calendar, Contacts, Talk, Mail e Collaborative Editing)
 Clique no botão concluir
 
-Configurar Domínios Confiáveis (para funcionar na internet)
-Edite a configuração "trusted_domains" em /config/config.php
-Exemplo pode ser encontrado em config.sample.php
-
-Verifique o id do container (o meu começa com 58)
-docker ps -a
-
-Acesse a linha de comando
-docker exec -it cd bash
-
-acesse a pasta config
-cd config
-
-Liste o conteúdo
-ls -la
-
-faça uma cópia do arquivo config.php
-cp config.php config.bck.php
-
-Veja se realmente criou
-ls -la
-
-note que o dono é o root, pode trocar se quiser (não afetará em nada o resultado)
-Note que o dono é www-root, então daremos o arquivo para ele
-chown www-root config.bck.php
-
-Abra outra tela de terminal com Ctrl+Shift+T
-Como o container não tem editor de texto, copiaremos o arquivo para fora, editaremos, depois devolveremos.
-copie a pasta do container para o seu diretório atual
-pode usar os dois primeiros dígitos
-docker cp 58:/var/www/html/config/config.php config.php
-
-verifique se realmente copiou
-ls -la
-
-Abra-os para edição, destrave o terminal com &
-gedit config.php &
-
-Faça as alterações conforme a seguir, não substitua tudo, apenas complete com sua necessidade.
-No meu caso adicionei o site "seuSite.com"
-
-'trusted_domains' =>
-array(
-    0 => 'localhost',
-    1 => 'seuSite.com'
-)
-
-Salve com Ctrl+S
-
-Cole novamente dentro do container (não se esqueça que cd é o id do container) .
-docker cp config.php 58:/var/www/html/config/config.php
-
-Mude o dono imediatamente (se mexer no site dará erro)
-docker exec -it 58 bash
-cd config
-ls -la
-chown www-data config.php
-
-Reinicie o container...
-docker restart 58
-
-Veja se refletiu
-ls -la
-
-Não funcionou ainda.
 _______________________________________________________________________________
 FAZENDO O BAKUP DOS DADOS (SQLite)
 docker stop 59 1e
