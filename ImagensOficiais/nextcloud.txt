@@ -1,10 +1,10 @@
 Baixar
 docker pull nextcloud
 
+__INSTALANDO COM SQLite_____________________________________________________________
 Rodar
 docker run -d -p 80:80 nextcloud
 
-__INSTALANDO COM SQLite_____________________________________________________________
 Acesse localhost:80
 Escolha um usuário e senha para a conta de administrador
 Selecione o banco de dados, no nosso caso deixaremos o SQLite, com a pasta padrão /var/www/html/data.
@@ -150,6 +150,61 @@ Compactar o arquivo
 tar -czvf nc_html_mysql_20jun20.tar.gz html
 
 Também deixe junto o arquivo sql
+
+_______________________________________________________________________________
+APLICATIVOS
+Accessibility
+Activity
+Appointments
+Auditing / Logging
+Automated PDF conversion
+Brute-force settings
+Calendar
+Collabora Online
+Collabora Online - Built-in CODE Server
+Collaborative tags
+Comments
+Contacts
+Contacts Interaction
+Cookbook
+Cospend
+Custom Properties
+Deck
+Deleted files
+Federation
+File sharing
+First run wizard
+Forms
+Group folders
+Log Reader
+Mail
+Maps
+Monitoring
+Nextcloud announcements
+Notes
+Notifications
+Password policy
+PDF viewer
+Photos
+Privacy
+Recommendations
+Right click
+Share by mail
+Support
+Talk
+Tasks
+Text
+Theming
+Update notification
+Usage survey
+User retention
+Versions
+Video player
+Workflow external scripts
+Default encryption module
+External storage support
+LDAP user and group backend
+
 
 _______________________________________________________________________________
 
