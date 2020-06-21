@@ -7,6 +7,17 @@ docker network create mysql
 docker network inspect mysql
 
 __Rodar o MySQL
+__Para Wordpress
+docker run \
+    --network mysql \
+    -e MYSQL_ROOT_PASSWORD=my-password \
+    -e MYSQL_DATABASE=wordpress \
+    -e MYSQL_USER=root \
+    -e MYSQL_PASSWORD=my-password \
+    --name mysql.5.7 \
+    -d mysql:5.7
+
+__Mais simples
 docker run \
     --network mysql \
     -e MYSQL_ROOT_PASSWORD=my-password \
