@@ -12,7 +12,7 @@ docker run \
   --network mysql \
   nextcloud
 
-c5
+2d
 
 Não é necessário criar a base de dados, mas é necessário excluir caso exista
 
@@ -64,7 +64,32 @@ Deu erro, agora estou tentando retornar a base de dados.
 Também deu erro. Vou fazer novamente, mas copiando apenas a pasta de dados.
 Deu erro de novo, e parece que não vai funcionar.
 
-Vou tentar fazer o restore com o SQLite.
+__Vou tentar restaurar a base de dados primeiro
+Mexendo só na base não deu erro, mas precisa ver a restauração dos APPS.
+Agora restaurar só a pasta data.
+docker exec -it 2d bash
+cd data
+ls
+docker stop 2d
+
+Abra outro terminal
+docker cp 2d:/var/www/html/data ./
+
+agora acesse a pasta data do bacjup a restaurar
+cd data
+
+vamos copiar a pasta data para o servidor
+docker cp ./ 2d:/var/www/html/data
+
+Abra outro terminal
+docker exec -it 2d bash
+chown -R www-data data
+
+Agora a pasta dos aplicativos
+mv appdata_ochsuvqvqiwm/ appdata_oclhjk56fpwo/
+
+Ainda está funcionando, precisamos fazer mais testes.
+
 
 _______________________________________________________________________________
 __INSTALANDO COM SQLite________________________________________________________
