@@ -64,7 +64,10 @@ Cole novamente dentro do container (não se esqueça que cd é o id do container
 docker cp config.php 58:/var/www/html/config/config.php
 
 Mude o dono imediatamente (se mexer no site dará erro)
-chown www-root config.php
+docker exec -it 58 bash
+cd config
+ls -la
+chown www-data config.php
 
 Reinicie o container...
 docker restart 58
@@ -151,6 +154,21 @@ tar -czvf nc_html_mysql_20jun20.tar.gz html
 
 Também deixe junto o arquivo sql
 
+
+MUDANÇA DE IP
+docker cp 48:/var/www/html/config/config.php config.php
+
+Coloque o novo IP no item
+'dbhost' => '172.18.0.5',
+
+Cole novamente dentro do container (não se esqueça que cd é o id do container) .
+docker cp config.php 48:/var/www/html/config/config.php
+
+Mude o dono imediatamente (se mexer no site dará erro)
+docker exec -it 48 bash
+cd config
+ls -la
+chown www-data config.php
 _______________________________________________________________________________
 APLICATIVOS
 Accessibility
