@@ -130,7 +130,14 @@ Agora a pasta dos aplicativos
 mv appdata_ochsuvqvqiwm/ appdata_oclhjk56fpwo/
 
 Ainda está funcionando, precisamos fazer mais testes.
+_______________________________________________________________________________
+__TABELAS MYSQL________________________________________________________________
+oc_group_user - usuários admin
 
+_______________________________________________________________________________
+__RECUPERAR ADMIN______________________________________________________________
+Logue com uma conta normar, substitua em oc_group_user,  altere a senha do admin padrão,
+volte a tabela com o nome padrão e teste
 
 _______________________________________________________________________________
 __INSTALANDO COM SQLite________________________________________________________
