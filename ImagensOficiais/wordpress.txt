@@ -1,18 +1,27 @@
-__Wordpress
-docker run wordpress
+Instale o MySQL e o PHPmyAdmin, veja em no arquivo deste mesmo diretório mysql.txt
 
-docker stop 6f
-docker run -d -p 8080:80 wordpress
+docker pull wordpress:5.4
 
-docker ps
+docker run \
+    --network mysql \
+    --name wordpress \
+    -p 80:80 \
+    -d wordpress:5.4
+  
+__Configuração
+Abra o browser e acesse
+localhost
 
-id novo é aa
+prosseguindo a configuração, escolha língua (Português do Brasil), continue
+Nome do banco de dados: wordpress
+Nome de usuário: root
+Senha: my-password
+Servidor do banco de dados: 172.18.0.5
+Prefixo da tabela: wp_
 
-abra o browser e acesse
-localhost:8080
 
-prosseguindo a configuração, escolha língua inglesa, continue
-por causa do mysql iremos parar...
+
+
 
 __Estabelecendo comunicação entre dois containers
 docker stop aa
