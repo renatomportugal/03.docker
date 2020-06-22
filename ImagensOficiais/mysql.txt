@@ -16,6 +16,32 @@ docker run \
     -e MYSQL_PASSWORD=my-password \
     --name mysql.5.7.wp \
     -d mysql:5.7
+    
+20
+__ACESSO EXTERNO    
+docker run \
+    --network mysql \
+    -p 3306:3306 \
+    -e MYSQL_ROOT_PASSWORD=my-password \
+    -e MYSQL_DATABASE=wordpress \
+    -e MYSQL_USER=root \
+    -e MYSQL_PASSWORD=my-password \
+    --name mysql.5.7.External \
+    -d mysql:5.7    
+
+88
+
+Para impedir o acesso externo deve alterar uma configuração, primeiro copie o arquivo para a máquina
+docker cp 88:/etc/mysql/mysql.conf.d/mysqld.cnf mysqld.cnf
+
+Comentar (colocando a cerquilha da frente)
+#bind-address	= 127.0.0.1
+
+Copiar de volta
+docker cp mysqld.cnf 88:/etc/mysql/mysql.conf.d/mysqld.cnf
+
+Reinicia o docker
+docker restart 88
 
 __Mais simples
 docker run \
