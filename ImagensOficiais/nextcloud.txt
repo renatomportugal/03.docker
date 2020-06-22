@@ -1,6 +1,32 @@
 Baixar
 docker pull nextcloud
 _______________________________________________________________________________
+__INSATALANDO COM MYSQL________________________________________________________
+Instale o MySQL e o PHPmyAdmin, veja em no arquivo deste mesmo diretório mysql.txt
+
+Vamos rodar outra instância do nextcloud, na mesma rede do mysql
+docker run \
+  -d \
+  -p 80:80 \
+  --network mysql \
+  nextcloud
+
+2d
+
+Não é necessário criar a base de dados, mas é necessário excluir caso exista
+
+Crie um usuário e uma senha de administrador
+Em Armazenamento & banco de dados...
+Pasta de dados /var/www/html/data
+
+Selecione o banco de dados: MySQL
+usuario (do mySQL): root
+senha (do mySQL): my-password
+nome (do banco): nextcloud
+nome do host e porta: mysql.5.7.wp
+
+Evite trabalhar com IP de host. Trabalhe sempre com o nome (neste caso é mysql.5.7.wp)
+_______________________________________________________________________________
 __CONFIGURAÇÕES________________________________________________________________
 Autorizar domínio
 docker ps -a
@@ -42,32 +68,6 @@ ls -la
 
 Reinicie o container...
 docker restart 2d
-_______________________________________________________________________________
-__INSATALANDO COM MYSQL________________________________________________________
-Instale o MySQL e o PHPmyAdmin, veja em no arquivo deste mesmo diretório mysql.txt
-
-Vamos rodar outra instância do nextcloud, na mesma rede do mysql
-docker run \
-  -d \
-  -p 80:80 \
-  --network mysql \
-  nextcloud
-
-2d
-
-Não é necessário criar a base de dados, mas é necessário excluir caso exista
-
-Crie um usuário e uma senha de administrador
-Em Armazenamento & banco de dados...
-Pasta de dados /var/www/html/data
-
-Selecione o banco de dados: MySQL
-usuario (do mySQL): root
-senha (do mySQL): my-password
-nome (do banco): nextcloud
-nome do host e porta: mysql.5.7.wp
-
-Evite trabalhar com IP de host. Trabalhe sempre com o nome (neste caso é mysql.5.7.wp)
 ________________________________________________
 FAZENDO O BAKUP DOS DADOS (MySQL)
 Faça o backup do banco de dados com o phpMyAdmin
