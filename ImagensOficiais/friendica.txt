@@ -11,10 +11,17 @@ docker run \
   -d \
   -p 80:80 \
   --network mysql \
+  --name friendica \
   friendica
   
+  56 (deu errado, parece que é certificado)
+  93
   
-
+  mysql.5.7.wp
+  
+  o banco de dados friendica deve ser criado
+  
+Por algum motivo, depois de configurar, não permitiu executar o site sem o https, mesmo eliminando.
 
 
 Friendica Settings
