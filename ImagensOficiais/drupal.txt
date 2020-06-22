@@ -1,1 +1,20 @@
+https://hub.docker.com/_/drupal
 
+docker pull drupal
+
+docker run \
+  -d \
+  -p 80:80 \
+  --network mysql \
+  --name drupal \
+  drupal
+
+e9
+
+docker run --name some-drupal -d drupal
+docker run --name some-drupal -p 8080:80 -d drupal
+http://localhost:8080
+
+
+  
+  mysql.5.7.wp
