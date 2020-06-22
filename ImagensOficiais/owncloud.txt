@@ -1,15 +1,83 @@
 Baixar
 docker pull owncloud
+_______________________________________________________________________________
+__INSATALANDO COM MYSQL________________________________________________________
+Instale o MySQL e o PHPmyAdmin, veja em no arquivo deste mesmo diretório mysql.txt
 
-Rodar
-docker run -d -p 80:80 owncloud
+Vamos rodar outra instância do nextcloud, na mesma rede do mysql
+docker run \
+  -d \
+  -p 80:80 \
+  --network mysql \
+  owncloud
 
+89
+
+Não é necessário criar a base de dados, mas é necessário excluir caso exista
+
+Crie um usuário e uma senha de administrador
+Em Armazenamento & banco de dados...
+Pasta de dados /var/www/html/data
+
+Selecione o banco de dados: MySQL
+usuario (do mySQL): root
+senha (do mySQL): my-password
+nome (do banco): owncloud
+nome do host e porta: mysql.5.7.wp
+
+Evite trabalhar com IP de host. Trabalhe sempre com o nome (neste caso é mysql.5.7.wp)
+_______________________________________________________________________________
+__CONFIGURAÇÕES________________________________________________________________
+Autorizar domínio
+docker ps -a
+89
+docker stop 89
+Abra outra tela de terminal com Ctrl+Shift+T
+Como o container não tem editor de texto, copiaremos o arquivo para fora, editaremos, depois devolveremos.
+copie a pasta do container para o seu diretório atual
+pode usar os dois primeiros dígitos
+docker cp 89:/var/www/html/config/config.php config.php
+
+verifique se realmente copiou
+ls -la
+
+Abra-os para edição, destrave o terminal com &
+gedit config.php &
+
+Faça as alterações conforme a seguir, não substitua tudo, apenas complete com sua necessidade.
+No meu caso adicionei o site "seuSite.com"
+
+'trusted_domains' =>
+array(
+    0 => 'localhost',
+    1 => 'seuSite.com'
+)
+
+Salve com Ctrl+S
+
+Cole novamente dentro do container (não se esqueça que cd é o id do container) .
+docker cp config.php 89:/var/www/html/config/config.php
+
+Mude o dono imediatamente (se mexer no site dará erro)
+docker start 89
+docker exec -it 89 bash
+cd config
+ls -la
+chown www-data config.php
+ls -la
+
+Reinicie o container...
+docker restart 89
+
+_______________________________________________________________________________
 Instalar (SQLite)
 Crie uma conta de administrador
 Apenas para teste escolha a base SQLite, na pasta padrão /var/www/html/data
 Clique em concluir
 ___________________________________________________________________________________
+APLICATIVOS
 
+___________________________________________________________________________________
 https://hub.docker.com/_/owncloud
 owncloud.org
 
