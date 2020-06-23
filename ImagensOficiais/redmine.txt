@@ -1,1 +1,24 @@
+https://hub.docker.com/_/redmine
 
+docker pull redmine
+
+Crie o banco de dados redmine
+
+docker run \
+  -d \
+  -p 80:3000 \
+  -e REDMINE_DB_MYSQL=mysql.5.7.wp \
+  -e REDMINE_DB_USERNAME=root \
+  -e REDMINE_DB_PASSWORD=my-password \
+  --name redmine \
+  --network mysql \
+  redmine
+
+d43
+
+senha
+admin
+admin
+
+Crie conta para o admin aprovar.
+Funcionou.
