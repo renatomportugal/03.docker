@@ -1,0 +1,17 @@
+docker pull php:7.1.26-apache
+
+Instale o MySQL e o PHPmyAdmin, veja em no arquivo deste mesmo diretório mysql.txt
+
+cd php
+
+docker run \
+  -d \
+  -p 80:80 \
+  --name App01 \
+  --network mysql \
+  -v "$PWD":/var/www/html \
+  php:7.1.26-apache
+  
+3b0
+
+docker exec -it App01 bash
