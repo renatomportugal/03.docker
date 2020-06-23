@@ -1,1 +1,6 @@
+https://hub.docker.com/_/lightstreamer
+docker pull lightstreamer
 
+docker run --name ls-server -d -p 80:8080 lightstreamer
+
+4da
