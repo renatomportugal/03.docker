@@ -1,1 +1,5 @@
+https://hub.docker.com/_/odoo
 
+docker pull odoo
+
+testar com postgres:10
