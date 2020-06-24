@@ -7,29 +7,28 @@ docker network create mysql
 docker network inspect mysql
 
 __Rodar o MySQL
-__Para Wordpress
 docker run \
-    --network mysql \
-    -e MYSQL_ROOT_PASSWORD=my-password \
-    -e MYSQL_DATABASE=wordpress \
-    -e MYSQL_USER=root \
-    -e MYSQL_PASSWORD=my-password \
-    --name mysql.5.7.wp \
-    -d mysql:5.7
-    
-20
-__ACESSO EXTERNO    
-docker run \
-    --network mysql \
+    -d \
     -p 3306:3306 \
     -e MYSQL_ROOT_PASSWORD=my-password \
-    -e MYSQL_DATABASE=wordpress \
     -e MYSQL_USER=root \
     -e MYSQL_PASSWORD=my-password \
-    --name mysql.5.7.External \
-    -d mysql:5.7    
+    --network mysql \
+    --name mysql.5.7 \
+    mysql:5.7 
 
-88
+416
+
+__Rodar o PHPmyadmin
+docker run \
+    -d \
+    -p 8080:80 \
+    -e PMA_HOST=mysql.5.7 \
+    --network mysql \
+    --name phpmyadmin \
+    phpmyadmin/phpmyadmin
+
+c81
 
 Para impedir o acesso externo deve alterar uma configuração, primeiro copie o arquivo para a máquina
 docker cp 88:/etc/mysql/mysql.conf.d/mysqld.cnf mysqld.cnf
@@ -42,20 +41,6 @@ docker cp mysqld.cnf 88:/etc/mysql/mysql.conf.d/mysqld.cnf
 
 Reinicia o docker
 docker restart 88
-
-__Mais simples
-docker run \
-    --network mysql \
-    -e MYSQL_ROOT_PASSWORD=my-password \
-    --name mysql.5.7 \
-    -d mysql:5.7
-
-__Rodar o PHPmyadmin
-docker run \
-    --network mysql \
-    -p 8080:80 \
-    -e PMA_HOST=mysql.5.7.wp \
-    -d phpmyadmin/phpmyadmin
 
 docker ps
 
