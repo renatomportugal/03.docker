@@ -1,3 +1,0 @@
-docker pull bitnami/moodle
-https://hub.docker.com/r/bitnami/moodle/
-

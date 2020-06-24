@@ -1,0 +1,10 @@
+docker pull bitnami/moodle
+https://hub.docker.com/r/bitnami/moodle/
+
+Instale o docker compose na sua máquina, veja o arquivo docker/08.Docker-compose.md, acesso em:
+https://github.com/renatomportugal/docker/blob/master/08.Docker-compose.md
+
+mkdir bitnami-moodle
+cd bitnami-moodle
+curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-moodle/master/docker-compose.yml > docker-compose.yml
+docker-compose up -d
