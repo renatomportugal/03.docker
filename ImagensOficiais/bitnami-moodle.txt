@@ -1,6 +1,13 @@
 docker pull bitnami/moodle
 https://hub.docker.com/r/bitnami/moodle/
 
+Se der falha na instalação
+docker volume ls
+docker volume rm bitnami-moodle_mariadb_data
+docker volume rm bitnami-moodle_moodle_data
+docker volume ls
+______________________________
+__Usando Composer
 Instale o docker compose na sua máquina, veja o arquivo docker/08.Docker-compose.md, acesso em:
 https://github.com/renatomportugal/docker/blob/master/08.Docker-compose.md
 
