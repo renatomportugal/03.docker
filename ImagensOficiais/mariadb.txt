@@ -1,0 +1,27 @@
+https://hub.docker.com/_/mariadb
+
+docker pull mariadb
+
+https://hub.docker.com/_/mariadb
+
+docker run --name some-mariadb -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mariadb:tag
+docker run -it --network some-network --rm mariadb mysql -hsome-mariadb -uexample-user -p
+docker run -it --rm mariadb mysql -hsome.mysql.host -usome-mysql-user -p
+docker exec -it some-mariadb bash
+docker logs some-mariadb
+
+Using a custom MySQL configuration file
+The startup configuration is specified in the file /etc/mysql/my.cnf, and that file in turn includes any files found in the /etc/mysql/conf.d directory that end with .cnf. Settings in files in this directory will augment and/or override settings in /etc/mysql/my.cnf. If you want to use a customized MySQL configuration, you can create your alternative configuration file in a directory on the host machine and then mount that directory location as /etc/mysql/conf.d inside the mariadb container.
+
+If /my/custom/config-file.cnf is the path and name of your custom configuration file, you can start your mariadb container like this (note that only the directory path of the custom config file is used in this command):
+
+$ docker run --name some-mariadb -v /my/custom:/etc/mysql/conf.d -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mariadb:tag
+This will start a new container some-mariadb where the MariaDB instance uses the combined startup settings from /etc/mysql/my.cnf and /etc/mysql/conf.d/config-file.cnf, with settings from the latter taking precedence.
+
+Configuration without a cnf file
+Many configuration options can be passed as flags to mysqld. This will give you the flexibility to customize the container without needing a cnf file. For example, if you want to change the default encoding and collation for all tables to use UTF-8 (utf8mb4) just run the following:
+
+docker run --name some-mariadb -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mariadb:tag --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+docker run -it --rm mariadb:tag --verbose --help
+
