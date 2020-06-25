@@ -1,5 +1,14 @@
 __MongoDB
 docker pull mongo
+
+__Rodar
+docker run \
+    -d \
+    --network mysql \
+    --name mongo \
+    mongo
+_______________________________________________________________
+
 docker run mongo
 
 abra outro terminal
