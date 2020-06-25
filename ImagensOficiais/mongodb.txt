@@ -9,8 +9,8 @@ docker run \
     mongo
 _______________________________________________________________
 __Executar
-docker run -i mongo
-
+docker run -it mongo
+docker exec -it b0
 
 _______________________________________________________________
 docker run mongo
