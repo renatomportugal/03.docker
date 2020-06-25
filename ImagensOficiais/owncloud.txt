@@ -75,7 +75,11 @@ Crie uma conta de administrador
 Apenas para teste escolha a base SQLite, na pasta padrão /var/www/html/data
 Clique em concluir
 ___________________________________________________________________________________
-APLICATIVOS
+APLICAÇÕES
+Custom Groups
+Gallery
+PDF Viewer
+
 
 ___________________________________________________________________________________
 https://hub.docker.com/_/owncloud
