@@ -1,4 +1,7 @@
 https://hub.docker.com/r/rancher/server/
+
+https://rancher.com/docs/rancher/v1.6/en/
+
 docker pull rancher/server
 docker pull rancher/server:latest
 docker pull rancher/server:stable
