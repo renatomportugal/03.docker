@@ -1,6 +1,6 @@
-__MongoDB
+__Baixar
 docker pull mongo
-
+_______________________________________________________________
 __Rodar
 docker run \
     -d \
@@ -8,7 +8,12 @@ docker run \
     --name mongo \
     mongo
 _______________________________________________________________
+__Executar
+docker ps
 
+
+
+_______________________________________________________________
 docker run mongo
 
 abra outro terminal
