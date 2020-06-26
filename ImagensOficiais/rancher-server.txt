@@ -3,12 +3,13 @@ https://rancher.com/docs/rancher/v1.6/en/
 
 docker pull rancher/server
 docker pull rancher/server:stable
+rancher/agent:v1.2.11
 
 Instale o MySQL e o PHPmyAdmin, veja em no arquivo deste mesmo diretório mysql.txt
 
 docker run \
   -d \
-  -p 8081:8080 \
+  -p 8080:8080 \
   --network mysql \
   --name rancher \
   rancher/server
