@@ -2,3 +2,13 @@ https://hub.docker.com/_/postgres
 
 docker pull postgres:10
 
+Instale o MySQL e o PHPmyAdmin, veja em no arquivo deste mesmo diretório mysql.txt
+
+docker run \
+  -d \
+  -e "POSTGRES_PASSWORD=12345678" \
+  -e "POSTGRES_USER=docker_user" \
+  -e "POSTGRES_DB=docker_db" \
+  --name postgres \
+  --network mysql \
+  postgres10
