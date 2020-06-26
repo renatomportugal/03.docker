@@ -3,5 +3,5 @@ docker pull jenkins/jenkins
 docker run \
   -d \
   -p 9090:8080 \
-  --name \
+  --name jenkins \
   jenkins/jenkins
