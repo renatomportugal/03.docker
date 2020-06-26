@@ -14,11 +14,9 @@ docker run \
   --name rancher \
   rancher/server
   
-bca  
-docker start -i bca
+79c  
+docker start -i 79c
 
-a76
-docker start -i a76
 
 
 
