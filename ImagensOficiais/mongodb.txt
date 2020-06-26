@@ -4,13 +4,28 @@ _______________________________________________________________
 __Rodar
 docker run \
     -d \
+    -p 27017:27017 \
     --network mysql \
     --name mongo \
     mongo
+d31
 _______________________________________________________________
 __Executar
-docker run -it mongo
-docker exec -it b0
+docker exec -it d31 bash
+mongo
+show dbs
+show collections
+use admin
+db.stats()
+exit
+
+netstat -nltp
+
+docker cp d31:/etc/mongod.conf.orig mongod.conf.orig
+_______________________________________________________________
+
+
+
 
 _______________________________________________________________
 docker run mongo
