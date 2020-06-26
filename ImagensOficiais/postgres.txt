@@ -5,6 +5,7 @@ docker pull postgres:10
 Instale o MySQL e o PHPmyAdmin, veja em no arquivo deste mesmo diretório mysql.txt
 
 docker run \
+  -p 5432:5432 \
   -d \
   -e "POSTGRES_PASSWORD=12345678" \
   -e "POSTGRES_USER=docker_user" \
