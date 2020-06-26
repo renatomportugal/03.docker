@@ -15,3 +15,5 @@ docker run \
   postgres:10
 
 ab9
+
+docker exec -it ab9 bash
