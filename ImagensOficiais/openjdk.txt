@@ -1,1 +1,2 @@
 docker pull openjdk
+docker pull openjdk:8-alpine
