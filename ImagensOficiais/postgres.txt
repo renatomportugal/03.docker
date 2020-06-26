@@ -11,4 +11,4 @@ docker run \
   -e "POSTGRES_DB=docker_db" \
   --name postgres \
   --network mysql \
-  postgres10
+  postgres:10
