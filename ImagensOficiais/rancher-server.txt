@@ -6,3 +6,21 @@ docker pull rancher/server
 docker pull rancher/server:latest
 docker pull rancher/server:stable
 
+docker run \
+  -d \
+  -p 8080:8080 \
+  rancher/server
+
+a76
+
+docker start -i a76
+
+
+
+docker run \
+  -d \
+  -p 8080:8080 \
+  --restart=unless-stopped \
+  rancher/server
+  
+  
