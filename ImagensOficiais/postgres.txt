@@ -17,3 +17,4 @@ docker run \
 ab9
 
 docker exec -it ab9 bash
+psql -d docker_db -U docker_user
