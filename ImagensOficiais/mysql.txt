@@ -81,6 +81,23 @@ docker run \
 
 28d
 
+Acesse o localhost:8081 para ver se tudo está certo. Agora iremos passar o conteúdo da pasta volumemysql/mysql para a pasta de dados do mysql.5.7.3307.
+cd ~/volumesql/mysql
+docker cp . 226:/var/lib/mysql
+
+Agora acesse a pasta mysql do 226 para mudar o dono:
+docker exec 226 -t bash
+cd /var/lib
+ls -la
+chown -R mysql mysql
+cd mysql
+ls -la
+
+Reinicie o container do mysql
+docker restart 226
+
+Acesse o localhost:8081 e verá que está funcionando. Se não reiniciar dará um erro ao acessar as tabelas.
+Foi utilizado o mysql da mesma imagem. Para outros parâmetros faça outro estudo.
 _____________________________________________________________________________________
 
 vai aparecer uma mensagem de erro para especificar algumas variáveis.
