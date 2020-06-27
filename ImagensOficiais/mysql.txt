@@ -48,6 +48,20 @@ acesse localhos:8080
 usuário root senha my-password
 
 _____________________________________________________________________________________
+Por padáo a pasta que guarda os dados é /var/lib/mysql
+docker exec -it <id> bash
+cd /var/lib/mysql
+
+Para fazer backup dos dados abra outra janela de terminal e poie a pasta
+cd ~
+mkdir volumemysql
+cd volumemysql
+docker cp <id>:/var/lib/mysql .
+
+Para terstar se o backup deu certo crie outro container mysql e outro phpmyadmin (use as portas 3307 e 8081)
+
+
+_____________________________________________________________________________________
 
 vai aparecer uma mensagem de erro para especificar algumas variáveis.
 MYSQL_ROOT_PASSWORD
