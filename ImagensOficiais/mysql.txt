@@ -129,7 +129,15 @@ docker run \
     --network mysql \
     --name mysql.5.7 \
     mysql:5.7
-    
+
+700
+
+Acesse a pasta do volume local para ver como está (/volumesdocker/mysql.5.7):
+cd /volumesdocker/mysql.5.7
+
+Note a estrutura da pasta antes do phpmyadmin acessar:
+
+
 Agora iremos copiar o backup para a pasta do volume, para restaurar os dados.
 
 _____________________________________________________________________________________
