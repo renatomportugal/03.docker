@@ -59,7 +59,27 @@ cd volumemysql
 docker cp <id>:/var/lib/mysql .
 
 Para terstar se o backup deu certo crie outro container mysql e outro phpmyadmin (use as portas 3307 e 8081)
+docker run \
+    -d \
+    -p 3307:3306 \
+    -e MYSQL_ROOT_PASSWORD=my-password \
+    -e MYSQL_USER=root \
+    -e MYSQL_PASSWORD=my-password \
+    --network mysql \
+    --name mysql.5.7.3307 \
+    mysql:5.7
 
+226
+
+docker run \
+    -d \
+    -p 8081:80 \
+    -e PMA_HOST=mysql.5.7.3307 \
+    --network mysql \
+    --name phpmyadmin.8081 \
+    phpmyadmin/phpmyadmin
+
+28d
 
 _____________________________________________________________________________________
 
