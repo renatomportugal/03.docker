@@ -99,46 +99,7 @@ docker restart 226
 Acesse o localhost:8081 e verá que está funcionando. Se não reiniciar dará um erro ao acessar as tabelas.
 Foi utilizado o mysql da mesma imagem. Para outros parâmetros faça outro estudo.
 _____________________________________________________________________________________
-Teste de volume
 
-Iremos fazer um container mapeando o volume com uma pasta local.
-Pare o container do mysql.5.7
-docker stop 416
-
-Renomeie para utilizarmos o mesmo host de phpmyadmin
-docker rename 416 mysql.5.7.old
-
-Para persistência de dados iremos criar uma pasta no root
-cd /
-sudo mkdir volumesdocker
-cd volumesdocker
-sudo mkdir mysql.5.7
-ls -la
-mudar os privilégios para todos escreverem (estude isso melhor antes de usar, adapte para sua necessidade)
-sudo chomd 777 mysql.5.7
-cd mysql.5.7
-
-Crie o container com o volume mapeado
-docker run \
-    -d \
-    -p 3306:3306 \
-    -e MYSQL_ROOT_PASSWORD=my-password \
-    -e MYSQL_USER=root \
-    -e MYSQL_PASSWORD=my-password \
-    -v /volumesdocker/mysql.5.7:/var/lib/mysql \
-    --network mysql \
-    --name mysql.5.7 \
-    mysql:5.7
-
-700
-
-Acesse a pasta do volume local para ver como está (/volumesdocker/mysql.5.7):
-cd /volumesdocker/mysql.5.7
-
-Note a estrutura da pasta antes do phpmyadmin acessar:
-
-
-Agora iremos copiar o backup para a pasta do volume, para restaurar os dados.
 
 _____________________________________________________________________________________
 
