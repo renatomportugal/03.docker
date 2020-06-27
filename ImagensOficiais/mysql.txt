@@ -113,18 +113,25 @@ cd /
 sudo mkdir volumesdocker
 cd volumesdocker
 sudo mkdir mysql.5.7
+ls -la
+mudar os privilégios para todos escreverem (estude isso melhor antes de usar, adapte para sua necessidade)
+sudo chomd 777 mysql.5.7
 cd mysql.5.7
 
+Crie o container com o volume mapeado
 docker run \
     -d \
     -p 3306:3306 \
     -e MYSQL_ROOT_PASSWORD=my-password \
     -e MYSQL_USER=root \
     -e MYSQL_PASSWORD=my-password \
-    -v 
+    -v /volumesdocker/mysql.5.7:/var/lib/mysql \
     --network mysql \
     --name mysql.5.7 \
     mysql:5.7
+    
+Agora iremos copiar o backup para a pasta do volume, para restaurar os dados.
+
 _____________________________________________________________________________________
 
 vai aparecer uma mensagem de erro para especificar algumas variáveis.
