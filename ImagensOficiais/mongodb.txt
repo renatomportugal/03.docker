@@ -43,6 +43,7 @@ abra outra janela de terminal
 docker exec -it 64 sh
 ps -e
 
+_______________________________________________________________
 __Inspecionando o Docker
 docker ps
 docker inspect 64
@@ -53,6 +54,7 @@ ls /usr/local/bin
 more /usr/local/bin/docker-entrypoint.sh
 ls /usr/bin
 
+_______________________________________________________________
 __Criando um Mongo Database
 docker ps
 docker exec -it 64 mongo
@@ -87,6 +89,7 @@ show dbs
 use test
 db.animals.find()
 
+_______________________________________________________________
 __Persistent database
 exit
 docker ps -a
@@ -163,3 +166,17 @@ exit
 docker ps
 docker stop 70
 docker rm 70
+_______________________________________________________________
+__Outro caso de persistência de dados, com mapeamento de porta externa.
+
+create volume create mongo
+
+docker run \
+    -d \
+    -p 27017:27017 \
+    -v mongo:/data/db
+    --network mysql \
+    --name mongo \
+    mongo
+
+_______________________________________________________________
