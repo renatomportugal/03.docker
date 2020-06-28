@@ -99,8 +99,58 @@ docker restart 226
 Acesse o localhost:8081 e verá que está funcionando. Se não reiniciar dará um erro ao acessar as tabelas.
 Foi utilizado o mysql da mesma imagem. Para outros parâmetros faça outro estudo.
 _____________________________________________________________________________________
+Persistência de dados (na pasta usuário)
+Pare o docker e renomeie para criarmos outro com o mesmo nome.
+Isso evita mudar o host do phpmyadmin.
+docker ps
+docker stop 416
+docker rename 416 mysql.5.7.old
 
+docker run \
+    -d \
+    -p 3306:3306 \
+    -e MYSQL_ROOT_PASSWORD=my-password \
+    -e MYSQL_USER=root \
+    -e MYSQL_PASSWORD=my-password \
+    -v ~/volumesdocker/mysql.5.7:/var/lib/mysql \
+    --network mysql \
+    --name mysql.5.7 \
+    mysql:5.7
 
+948
+Tentei copiar a pasta, está travada.
+docker stop 948
+docker rm 948
+
+Para manusear a pasta é necessário mudar o dono.
+sudo chown -R root mysql.5.7
+
+Fazendo um backup
+mkdir mysql.5.7.bck
+sudo cp -R mysql.5.7/ mysql.5.7.bck/
+
+Veja que a pasta mysql.5.7 foi copiada para a pasta mysql.5.7.bck.Faremos...
+cd mysql.5.7.bck
+cd mysql.5.7
+sudo cp -r * ..
+cd ..
+sudo rm -rf mysql.5.7
+
+Agora iremos testar a criação de um container com volume externo de uma pasta existente.
+docker run \
+    -d \
+    -p 3306:3306 \
+    -e MYSQL_ROOT_PASSWORD=my-password \
+    -e MYSQL_USER=root \
+    -e MYSQL_PASSWORD=my-password \
+    -v ~/volumemysql/mysql:/var/lib/mysql \
+    --network mysql \
+    --name mysql.5.7 \
+    mysql:5.7
+    
+7a8
+
+O Container foi criado com os dados que já estavam. Funcionou.
 _____________________________________________________________________________________
 
 vai aparecer uma mensagem de erro para especificar algumas variáveis.
