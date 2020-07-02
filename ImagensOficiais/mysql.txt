@@ -1,5 +1,5 @@
 docker pull mysql:5.7
-dcoker pull phpmyadmin/phpmyadmin
+docker pull phpmyadmin/phpmyadmin
 
 __REDE
 docker network ls
@@ -15,7 +15,8 @@ docker run \
     -e MYSQL_PASSWORD=my-password \
     --network mysql \
     --name mysql.5.7 \
-    mysql:5.7 
+    --restart=always \
+    mysql:5.7
 
 416
 
@@ -26,6 +27,7 @@ docker run \
     -e PMA_HOST=mysql.5.7 \
     --network mysql \
     --name phpmyadmin \
+    --restart=always \
     phpmyadmin/phpmyadmin
 
 c81
