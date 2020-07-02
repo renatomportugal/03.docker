@@ -10,7 +10,7 @@ wget https://download.opensuse.org/repositories/isv:ownCloud:desktop/CentOS_7.6/
 yum install owncloud-client
 
 _______________________________________________________________________________
-__INSATALANDO COM MYSQL________________________________________________________
+__INSTALANDO COM MYSQL_________________________________________________________
 Instale o MySQL e o PHPmyAdmin, veja em no arquivo deste mesmo diretório mysql.txt
 
 Vamos rodar outra instância do nextcloud, na mesma rede do mysql
