@@ -4,6 +4,11 @@ docker pull owncloud
 https://software.opensuse.org/download/package?project=isv:ownCloud:desktop&package=owncloud-client
 owncloud-client
 
+Para CentOS 7.6 execute o seguinte como root:
+cd /etc/yum.repos.d/
+wget https://download.opensuse.org/repositories/isv:ownCloud:desktop/CentOS_7.6/isv:ownCloud:desktop.repo
+yum install owncloud-client
+
 _______________________________________________________________________________
 __INSATALANDO COM MYSQL________________________________________________________
 Instale o MySQL e o PHPmyAdmin, veja em no arquivo deste mesmo diretório mysql.txt
