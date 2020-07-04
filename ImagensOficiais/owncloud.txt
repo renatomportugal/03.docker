@@ -88,7 +88,14 @@ APLICAÇÕES
 Custom Groups
 Gallery
 PDF Viewer
-
+Drawio
+Carnet ()
+Contacts
+Activity
+Polls
+Tasks
+Wallpaper
+Brute-Force Protection
 
 ___________________________________________________________________________________
 https://hub.docker.com/_/owncloud
