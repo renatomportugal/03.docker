@@ -14,12 +14,13 @@ Após a instalação coloque o usuário e senha de administrador.
 
 __Configurando_________________________________________________________________
 Defina o ESCOPO do seu projeto, ou as REGRAS de utilização. Explicarei as minhas e poderá copiar.
+_______________________________________________________________________________
 R01 (Regra 01) - Nossos usuários terão de fazer diagramas.
+_______________________________________________________________________________
 Vamos instalar a aplicação Drawio.
 Vá em menu Arquivos, Market, procure por Drawio, abra e instale.
 DESENVOLVEDOR Tom Needham, VERSÃO 0.0.8, RELEASE 13 de Ago de 2018, DATE General Public License, LICENÇA Version 2
 Para testar vá nos arquivos e adicione um diagrama. Se abrir a tela de edição é porque funcionou.
-
 _______________________________________________________________________________
 R02 - Compartilhamento de pasta do administrador para grupo específico
 _______________________________________________________________________________
@@ -40,7 +41,6 @@ Campo extra para exibir em resultados de preenchimento automático
 Group Sharing Blacklist
  Exclude groups from receiving shares
   biblioteca
-
 _______________________________________________________________________________
 R03 - Limitar a quantidade de espaço para cada usuário em 1GB.
 _______________________________________________________________________________
@@ -52,8 +52,26 @@ Mostrar o endereço de email
 
 Para o administrador dê a cota de 10GB para postar os arquivos.
 _______________________________________________________________________________
+R04 - Leitura de PDF
+_______________________________________________________________________________
+Ao clicar num PDF o sistema baixa, mas queremos ler. Vamos instalar o leitor.
+Vá em Menu, Market, ache o PDF Viewer.
+DESENVOLVEDOR: ownCloud, 	VERSÃO: 0.11.0, RELEASE DATE: 11 de Abr de 2019,LICENÇA: GNU Affero General Public License
+_______________________________________________________________________________
+R05 - Gallery
+_______________________________________________________________________________
+Mostrar as imagens em formato de galeria.
+Vá em Menu, Market, ache o Gallery
+DESENVOLVEDOR: ownCloud, VERSÃO: 16.1.1, RELEASE DATE: 10 de Dez de 2018,LICENÇA: GNU Affero General Public License
+_______________________________________________________________________________
+R06 - Brute-Force Protection
+_______________________________________________________________________________
+Impedir que tentem logar com brute force.
 
-
+Vá em Menu, Market, ache o Brute-Force Protection
+DESENVOLVEDOR: Semih Serhat Karakaya, VERSÃO: 1.0.1,	RELEASE DATE: 6 de Dez de 2018,	LICENÇA: General Public License, Version 2
+Funcionamento: depois de várias tentativas ele trava, e devemos esperar. Mesmo digitando a correta tem de esperar.
+_______________________________________________________________________________
 https://software.opensuse.org/download/package?project=isv:ownCloud:desktop&package=owncloud-client
 owncloud-client
 
@@ -139,16 +157,16 @@ Clique em concluir
 ___________________________________________________________________________________
 APLICAÇÕES
 Custom Groups
-Gallery
-PDF Viewer
-Drawio
+ok Gallery
+ok PDF Viewer
+ok Drawio
 Carnet ()
 Contacts
 Activity
 Polls
 Tasks
 Wallpaper
-Brute-Force Protection
+OK Brute-Force Protection
 
 ___________________________________________________________________________________
 https://hub.docker.com/_/owncloud
