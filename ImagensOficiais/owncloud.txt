@@ -20,13 +20,38 @@ Vá em menu Arquivos, Market, procure por Drawio, abra e instale.
 DESENVOLVEDOR Tom Needham, VERSÃO 0.0.8, RELEASE 13 de Ago de 2018, DATE General Public License, LICENÇA Version 2
 Para testar vá nos arquivos e adicione um diagrama. Se abrir a tela de edição é porque funcionou.
 
-R02 - Compartilhamento de pasta do administrador
-Precisamos configurar a visão dos arquivos. Clique no seu usuário, lado direito superior, Configurações.
-Do lado esquerdo, Admin, Compartilhamento. Selecione APENAS:
+_______________________________________________________________________________
+R02 - Compartilhamento de pasta do administrador para grupo específico
+_______________________________________________________________________________
+__Criar um grupo_______________________________________________________________
+Com a conta de administrador, clique no seu usuário, lado superior direito, Usuários, 
+Adicione um grupo chamado Biblioteca
+_______________________________________________________________________________
+__Configurar Compartilhamento__________________________________________________
+Com a conta de administrador, clique no seu usuário, lado superior direito, Configurações
+No lado esquerdo, Admin, Compartilhamento
 Permitir que aplicativos usem a API de Compartilhamento
-Permitir que os usuários compartilhem por link
- Permitir envio público
- 
+Permitir o compartilhamento com grupos
+Excluir grupos de compartilhamento
+ biblioteca
+Restringir a enumeração aos membros do grupo
+Campo extra para exibir em resultados de preenchimento automático
+ ID do usuário
+Group Sharing Blacklist
+ Exclude groups from receiving shares
+  biblioteca
+
+_______________________________________________________________________________
+R03 - Limitar a quantidade de espaço para cada usuário em 1GB.
+_______________________________________________________________________________
+Com a conta de administrador, clique no seu usuário, lado superior direito, Usuários, 
+Clique na engrenagem no lado inferior esquerdo, Quota padrão 1BG.
+Selecione as opções:
+Mostrar o último acesso
+Mostrar o endereço de email
+
+Para o administrador dê a cota de 10GB para postar os arquivos.
+_______________________________________________________________________________
 
 
 https://software.opensuse.org/download/package?project=isv:ownCloud:desktop&package=owncloud-client
