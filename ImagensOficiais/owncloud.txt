@@ -1,6 +1,34 @@
 Baixar
 docker pull owncloud
 
+_______________________________________________________________________________
+__Nova instalação MySQL________________________________________________________
+Depois de rodar o container, acesse o local onde instalou, aqui estou no localhost.
+Criar conta de administrador, coloque usuário e senha.
+Expanda a opção Armazenamento & Banco de dados, selecione a pasta de dados padrão (/var/www/html/data)
+Selecione MySQL/MariaDB, coloque as informações do banco:
+usuário, senha, nome do banco e host(nome ou IP). O banco não precisa existir, mas se tiver deverá apagar.
+A aplicação cria a tabela a partir do nome colocado.
+Clique em concluir a instalação.
+Após a instalação coloque o usuário e senha de administrador.
+
+__Configurando_________________________________________________________________
+Defina o ESCOPO do seu projeto, ou as REGRAS de utilização. Explicarei as minhas e poderá copiar.
+R01 (Regra 01) - Nossos usuários terão de fazer diagramas.
+Vamos instalar a aplicação Drawio.
+Vá em menu Arquivos, Market, procure por Drawio, abra e instale.
+DESENVOLVEDOR Tom Needham, VERSÃO 0.0.8, RELEASE 13 de Ago de 2018, DATE General Public License, LICENÇA Version 2
+Para testar vá nos arquivos e adicione um diagrama. Se abrir a tela de edição é porque funcionou.
+
+R02 - Compartilhamento de pasta do administrador
+Precisamos configurar a visão dos arquivos. Clique no seu usuário, lado direito superior, Configurações.
+Do lado esquerdo, Admin, Compartilhamento. Selecione APENAS:
+Permitir que aplicativos usem a API de Compartilhamento
+Permitir que os usuários compartilhem por link
+ Permitir envio público
+ 
+
+
 https://software.opensuse.org/download/package?project=isv:ownCloud:desktop&package=owncloud-client
 owncloud-client
 
