@@ -74,6 +74,7 @@ Funcionamento: depois de várias tentativas ele trava, e devemos esperar. Mesmo 
 _______________________________________________________________________________
 _______________________________________________________________________________
 https://doc.owncloud.org/server/10.1/admin_manual/configuration/server/occ_command.html#command-line-upgrade
+NÃO ATUALIZAR SENÃO PERDE OS PROGRAMAS 
 UPGRADE
 docker exec -it 895 bash
 su www-data -s /bin/sh
