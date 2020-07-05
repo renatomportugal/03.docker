@@ -72,7 +72,8 @@ Vá em Menu, Market, ache o Brute-Force Protection
 DESENVOLVEDOR: Semih Serhat Karakaya, VERSÃO: 1.0.1,	RELEASE DATE: 6 de Dez de 2018,	LICENÇA: General Public License, Version 2
 Funcionamento: depois de várias tentativas ele trava, e devemos esperar. Mesmo digitando a correta tem de esperar.
 _______________________________________________________________________________
-
+Update no Raspberry Pi
+https://ssi.le-piolot.fr/updating-an-owncloud-instance-running-in-docker/
 _______________________________________________________________________________
 https://doc.owncloud.org/server/10.1/admin_manual/configuration/server/occ_command.html#command-line-upgrade
 NÃO ATUALIZAR SENÃO PERDE OS PROGRAMAS
