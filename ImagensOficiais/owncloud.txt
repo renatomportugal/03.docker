@@ -73,6 +73,7 @@ DESENVOLVEDOR: Semih Serhat Karakaya, VERSÃO: 1.0.1,	RELEASE DATE: 6 de Dez de 
 Funcionamento: depois de várias tentativas ele trava, e devemos esperar. Mesmo digitando a correta tem de esperar.
 _______________________________________________________________________________
 _______________________________________________________________________________
+https://doc.owncloud.org/server/10.1/admin_manual/configuration/server/occ_command.html#command-line-upgrade
 UPGRADE
 docker exec -it 895 bash
 su www-data -s /bin/sh
@@ -82,6 +83,7 @@ php occ maintenance:mode --on
 php occ upgrade --help
 php occ upgrade
 
+Atualizando para a versaõ 10.1.1
 Deu defeito...
 php occ app:disable files_opds
 php occ app:disable files_reader
@@ -90,6 +92,12 @@ php occ app:disable polls
 php occ app:disable files_paperhive
 
 php occ upgrade
+Atualizando para a versão 10.3.2.2
+php occ app:disable drawio
+php occ app:disable wallpaper
+
+Atualizando para a versão 10.4.1
+
 
 php occ maintenance:mode --off
 
