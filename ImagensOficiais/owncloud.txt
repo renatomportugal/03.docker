@@ -96,7 +96,7 @@ Atualizando para a versão 10.3.2.2
 php occ app:disable drawio
 php occ app:disable wallpaper
 
-Atualizando para a versão 10.4.1
+Atualizando para a versão 10.4.1.3
 
 
 php occ maintenance:mode --off
