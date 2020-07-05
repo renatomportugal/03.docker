@@ -72,9 +72,17 @@ Vá em Menu, Market, ache o Brute-Force Protection
 DESENVOLVEDOR: Semih Serhat Karakaya, VERSÃO: 1.0.1,	RELEASE DATE: 6 de Dez de 2018,	LICENÇA: General Public License, Version 2
 Funcionamento: depois de várias tentativas ele trava, e devemos esperar. Mesmo digitando a correta tem de esperar.
 _______________________________________________________________________________
+
 _______________________________________________________________________________
 https://doc.owncloud.org/server/10.1/admin_manual/configuration/server/occ_command.html#command-line-upgrade
-NÃO ATUALIZAR SENÃO PERDE OS PROGRAMAS 
+NÃO ATUALIZAR SENÃO PERDE OS PROGRAMAS
+
+__DESATIVAR O AVISO SOBRE AS ATUALIZAÇÕES
+Com a conta de administrador, clique no seu usuário, lado superior direito, Configurações
+Lado esquerdo inferior, Admin, Geral
+No item atualizador retire o grupo admin de Notificar membros dos seguintes grupos sobre atualizações disponíveis.
+Lado esquerdo inferior, Admin, Configurações, Update notification, Desabilitar.
+
 UPGRADE
 docker exec -it 895 bash
 su www-data -s /bin/sh
