@@ -2,7 +2,7 @@ https://github.com/owncloud/richdocuments
 
 docker pull collabora/code
 
-$ docker run -t -d \
+docker run -t -d \
 -p 9980:9980 \
 -e "username=admin" \
 -e "password=admin" \
