@@ -1,0 +1,50 @@
+https://rancher.com/docs/rancher/v2.x/en/installation/other-installation-methods/single-node-docker/
+
+1.Baixar
+docker pull rancher/rancher
+
+2.Criar Volume
+Verifique se náo existe o nome
+docker volume ls
+Crie um volume
+docker volume create rancher
+Verifique se foi criado
+docker volume ls
+
+3.Ligar na rede desejada
+Verifique quais redes existem
+docker network ls
+Verifique quais containers tëm na rede
+docker network inspect 
+Utilize a rede escolhida
+
+docker run \
+  -d \
+  -p 9500:80 \
+  -p 444:443 \
+  -v rancher:/var/lib/rancher \
+  --name rancher \
+  --network bridge.66.6 \
+  --ip 66.6.0.180 \
+  --restart=always \
+  rancher/rancher:latest
+
+
+
+FUNCIONOU
+__________________________________________________  
+ 
+
+
+docker run -d --restart=unless-stopped \
+  -p 80:80 -p 443:443 \
+  rancher/rancher:latest
+  
+  docker run -d --restart=unless-stopped \
+  -p 80:80 -p 443:443 \
+  -v /<CERT_DIRECTORY>/<FULL_CHAIN.pem>:/etc/rancher/ssl/cert.pem \
+  -v /<CERT_DIRECTORY>/<PRIVATE_KEY.pem>:/etc/rancher/ssl/key.pem \
+  -v /<CERT_DIRECTORY>/<CA_CERTS.pem>:/etc/rancher/ssl/cacerts.pem \
+  rancher/rancher:latest
+  
+  
