@@ -8,3 +8,12 @@ docker run \
   -p 8005:80 \
   --network mysql \
   onlyoffice/documentserver
+  
+Acesse http://localhost:8005/ e verá que aparecerá uma página, significa que está rodando.
+  
+Após instalar ele não está reconhecendo o adicionar arquivos.
+Abra o prompt de comando do container do owncloud.
+docker exec -it bc2 bash
+pwd
+/var/www/html
+cd apps/
