@@ -20,8 +20,8 @@ Utilize a rede escolhida
 
 docker run \
   -d \
-  -p 9500:80 \
-  -p 444:443 \
+  -p 80:80 \
+  -p 443:443 \
   -v rancher:/var/lib/rancher \
   --name rancher \
   --network bridge.66.6 \
@@ -30,8 +30,40 @@ docker run \
   rancher/rancher:latest
 
 
+FUNCIONOU, ver se dá para mudar de porta.
+__________________________________________________  
+__Configurações
+Dark mode
+Clique na imagem, lado superior direito, Preferences, Them, Dark
 
-FUNCIONOU
+Adicionar Cluste
+Clique em Menu Cluster, botão Add Cluster no lado superior direito, From existing mode (Custom)
+Nomeie (owncloud), Next
+Em Node options selecione etcd, Control Plane e Worker. Copie o código...
+
+sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run rancher/rancher-agent:v2.4.5 --server https://192.168.1.106 --token v52ttj9shzwhzjs7t6vqgvl6h5mnlwsrcgsk5fk92qsz4jgfs898mg --ca-checksum 24393920386be9fd8d36ea0f52cf939e534be152b74c81574bc0a8c7c020c2ce --etcd --controlplane --worker
+
+clique em Done, Vá no terminal, cole e execute o código.
+
+Volte ao terminal e execute o comando top para verificar o processamento.
+
+Vamos implantar (Deploy, adicionar) um container pelo próprio rancher.
+Vá em Default, active, botão deploy.
+Nome: nginx-8001
+Docker Image: nginx
+Add Port
+Port Mapping:
+Port Name: nginx.8001
+Publish the container port: 80
+Protocol: TCP
+As a: HostPort
+On listening port: 8001
+Clica em Volumes, Add Volume (Bind-mount)
+Volume Name: nginx.vol
+Clicar em Launch
+
+
+
 __________________________________________________  
  
 
