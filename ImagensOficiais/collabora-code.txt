@@ -12,6 +12,14 @@ docker run -t -d \
 collabora/code
 
 docker exec -it collabora /bin/bash -c "apt-get -y update && apt-get -y install xmlstarlet && xmlstarlet ed --inplace -u \"/config/ssl/enable\" -v false /etc/loolwsd/loolwsd.xml && xmlstarlet ed --inplace -u \"/config/ssl/termination\" -v false /etc/loolwsd/loolwsd.xml"
+
+Reading package lists... Done
+E: List directory /var/lib/apt/lists/partial is missing. - Acquire (13: Permission denied)
+
+docker exec -it collabora bash
+
+su root -s /bin/sh
+
 Espere um temo e reinicie.
 docker restart collabora
 
