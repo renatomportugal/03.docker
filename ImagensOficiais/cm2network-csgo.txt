@@ -17,7 +17,19 @@ docker run \
   --name ubuntu \
   ubuntu
 
-e8f
+e8f  
+  
+
+  
+  
+
+docker network ls
+docker update \
+  --network bridge.66.6 \
+  --ip 66.6.0.17 \
+  ubuntu
+
+
 
 exit
 docker ps -a | grep ubuntu
@@ -46,7 +58,7 @@ wget -O linuxgsm.sh https://linuxgsm.sh && chmod +x linuxgsm.sh && bash linuxgsm
 /home/csgoserver/logs
 ./csgoserver monitor
 
-
+Para reconhecer o ifconfig
 apt-get update
 apt-get install pciutils
 
@@ -70,6 +82,48 @@ apt-get install --reinstall systemd
 
 
 __outro________________________________________________
+  docker run \
+  -it \
+  -p 27015:27015 \
+  -p 27016:27016 \
+  -p 27021:27021 \
+  -e LANG=C.UTF-8 \
+  --name ubuntu2 \
+  --network bridge.66.6 \
+  --ip 66.6.0.17 \
+  ubuntu
+
+c6d
+
+Para reconhecer o lspci
+apt-get update
+apt-get install pciutils
+lspci
+
+Para reconhecer o ifconfig
+apt-get update
+apt-get install net-tools
+ifconfig
+
+Instalar o nano
+apt-get install nano
+
+Instalar o ping
+apt-get update
+apt-get install iputils-ping
+
+
+
+
+
+
+
+
+
+
+
+
+
 https://hub.docker.com/r/dorowu/ubuntu-desktop-lxde-vnc
 
 
