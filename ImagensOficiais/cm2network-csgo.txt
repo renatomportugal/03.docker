@@ -21,7 +21,7 @@ e8f
 
 exit
 docker ps -a | grep ubuntu
-docker exec -it 
+docker exec -it ubuntu bash
 
 dpkg --add-architecture i386; apt update; apt install mailutils postfix curl wget file tar bzip2 gzip unzip bsdmainutils python util-linux ca-certificates binutils bc jq tmux netcat lib32gcc1 lib32stdc++6 steamcmd
 adduser csgoserver
@@ -45,6 +45,27 @@ wget -O linuxgsm.sh https://linuxgsm.sh && chmod +x linuxgsm.sh && bash linuxgsm
 ./csgoserver debug
 /home/csgoserver/logs
 ./csgoserver monitor
+
+
+apt-get update
+apt-get install pciutils
+
+Veja qual a placa de rede
+lspci
+
+apt-get install net-tools
+apt-get install nano
+
+apt-get update
+apt-get install iputils-ping
+
+nano /etc/resolv.conf
+nameserver 192.168.1.1
+
+apt-get install systemd
+Ou para reinstalar
+apt-get install --reinstall systemd
+
 
 
 
