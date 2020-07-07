@@ -15,6 +15,8 @@ docker volume ls
 Verifique quais redes existem
 docker network ls
 Verifique quais containers tëm na rede
+Para criar a rede vá em:
+https://github.com/renatomportugal/docker/blob/master/05.RedeDeContainers.md#organizando-os-containers
 docker network inspect 
 Utilize a rede escolhida
 
