@@ -2,11 +2,18 @@ admin/admin
 https://hub.docker.com/r/openproject/community
 
 https://docs.openproject.org/installation-and-operations/installation/docker/
+
+docker pull openproject/community
 mkdir openproject
 cd openproject
 git clone --depth=1 --branch=stable/10 https://github.com/opf/openproject
+
+Instalação do Docker Compose: https://github.com/renatomportugal/docker/blob/master/08.Docker-compose.md
+
 docker-compose up -d
 docker-compose down
+
+_________________________________________________________________________________________________________
 
 docker run -it -p 8080:80 -e SECRET_KEY_BASE=secret openproject/community:10
 
