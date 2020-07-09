@@ -36,6 +36,20 @@ Acesse o localhost ou endereço que foi instalado.
 Vá em menu Clusters, botão Add Cluster, From existing nodes (Custom), Nomeie como cluster01, botão next.
 Aguarde pelo provisionamento.
 
+__
+Edite o cluster01, em Customize Node Run Command, Selecione:
+etcd
+Control Plane
+
+Copie a linha de comando, parecendo com:
+sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run rancher/rancher-agent:v2.4.5 --server https://192.168.1.106 --token h86gqvnq5wb4fw8hpnhzqqnbmprthrkf2k5xf5gd8x45bdfqdpnbrc --ca-checksum 70db14697fb1a4ae6d9d11da1c9568b31c3792306e7957576fb3f6afb83154a4 --etcd --controlplane --worker
+
+Cole no terminal e execute, ele baixará o que for necessário para rodar.
+Aguarde na tela de monitoramento que ficará pronta.
+
+
+
+
 __ADICIONAR OS CONTAINERS
 Vamos implantar (Deploy, adicionar) um container pelo próprio rancher.
 Vá em Default, active, botão deploy.
