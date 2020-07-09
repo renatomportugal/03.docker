@@ -52,19 +52,24 @@ Aguarde na tela de monitoramento que ficará pronta.
 
 __ADICIONAR OS CONTAINERS
 Vamos implantar (Deploy, adicionar) um container pelo próprio rancher.
-Vá em Default, active, botão deploy.
+Vá em Menu Cluster, cluster01, Default (active), botão deploy.
 Nome: php
 Docker Image: php:7.1.26-apache
 Add Port
 Port Mapping:
-Port Name: php.8001
+Port Name: php-8001
 Publish the container port: 80
 Protocol: TCP
 As a: HostPort
 On listening port: 8001
-Clica em Volumes, Add Volume (Bind-mount)
-Volume Name: php.vol
 Clicar em Launch
+
+_Testar depois com volume
+Clica em Volumes, Add Volume (Bind-mount)
+Volume Name: php-vol
+Mount Point: /var/www/html
+Clicar em Add Mount
+
 
 
 FUNCIONOU, ver se dá para mudar de porta.
