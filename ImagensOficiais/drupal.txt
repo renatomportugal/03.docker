@@ -4,17 +4,14 @@ docker pull drupal
 
 docker run \
   -d \
-  -p 80:80 \
-  --network mysql \
+  -p 8200:80 \
   --name drupal \
-  drupal
-
-e9
-
-docker run --name some-drupal -d drupal
-docker run --name some-drupal -p 8080:80 -d drupal
-http://localhost:8080
+  --network bridge.66.6 \
+  --ip 66.6.0.200 \
+  --restart=always \
+drupal
 
 
-  
-  mysql.5.7.wp
+
+__Configuração
+host mysql.5.7
