@@ -11,7 +11,8 @@ docker run \
   --restart=always \
 drupal
 
-
-
-__Configuração
-host mysql.5.7
+__Configuração (8.9.1)
+Escolha a língua: Português, Brasil, botão Save and continue
+Selecione o perfil de instalação, escolheremos DEMO para uma melhor primeiro contato, botão Salvar e continuar.
+MySQL, nome drupal, usuário root, senha my-password
+Configurações avançadas, servidor mysql.5.7, porta 3306, botão Salvar e continuar.
