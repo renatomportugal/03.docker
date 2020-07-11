@@ -1,0 +1,21 @@
+https://sempreupdate.com.br/como-instalar-o-onlyoffice-no-linux-ubuntu-debian-opensuse/
+
+wget http://download.onlyoffice.com/install/opensource-install.sh
+
+Tente instalar com o Docker porque se a arquitetura de tudo não for x64 não funciona. No Docker funciona bem.
+
+Se der o erro: Minimal requirements are not met: need at least 5500 MB of RAM
+Para instalar com memória menor que 5500 MB mude no arquivo abaixo e rode normalmente
+
+nano opensource-install.sh
+Para isso terá de baixar o arquivo install manualmente
+wget  http://download.onlyoffice.com/install/install.sh
+
+nano install.sh
+mude de 5500 para 2800 caso tenha 3GB de RAM.
+
+Comente as linhas de remoção também.
+
+
+Para rodar local
+bash opensource-install.sh -ims false
