@@ -1,5 +1,18 @@
 Baixar
 docker pull nextcloud
+
+docker run \
+  -d \
+  -p 8001:80 \
+  --network onlyoffice \
+  --name nextcloud \
+  nextcloud
+  
+usuario root
+senha my-secret-pw
+nome do banco nextcloud
+host 172.18.0.2
+  
 _______________________________________________________________________________
 __INSATALANDO COM MYSQL________________________________________________________
 Instale o MySQL e o PHPmyAdmin, veja em no arquivo deste mesmo diretório mysql.txt
