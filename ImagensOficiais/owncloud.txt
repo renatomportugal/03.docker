@@ -15,6 +15,72 @@ docker run \
   --name owncloud \
   owncloud
 
+__Configuração
+Escolha um usuário e senha
+Pasta de dados padrão: /var/www/html/data
+
+Escolha MySQL...
+Para saber o IP do host
+docker network inspect onlyoffice
+veja o nome "onlyoffice-mysql-server"
+
+usuario root
+senha my-secret-pw
+nome do banco owncloud
+host 172.18.0.2
+
+docker cp 8c57e21fdfae:/var/www/html/config/config.php config.php
+
+incluir:
+'onlyoffice' => array (
+    'verify_peer_off' => true
+)
+
+docker cp config.php 8c57e21fdfae:/var/www/html/config/config.php
+docker exec -it 8c57e21fdfae bash
+cd config
+ls -la
+chown www-data config.php
+
+
+I did not find the real solution, so I decided to simply remove the healthcheck in the NextCloud app.
+So I commented in
+
+docker exec -it 8c57e21fdfae bash
+cd /var/www/html/apps/onlyoffice/controller/
+ls -la
+
+docker cp 8c57e21fdfae:/var/www/html/apps/onlyoffice/controller/settingscontroller.php settingscontroller.php
+
+these lines
+
+249 /*$healthcheckResponse = $documentService->HealthcheckReques 249 t();
+250 * &if (!$healthcheckResponse) {
+251 *
+252 }*/
+
+Additionally I had to adjust
+/etc/nginx/includes/onlyoffice-communityserver-proxy-to-documentserver.conf
+and replaced
+proxy_pass {{DOCUMENT_SERVER_HOST_ADDR}};
+by
+proxy_pass http://127.0.0.1:80;
+
+Now it seems to work. At least until the next update of the OnlyOffice-App in Nextcloud.
+
+docker cp settingscontroller.php 8c57e21fdfae:/var/www/html/apps/onlyoffice/controller/settingscontroller.php
+chown www-data settingscontroller.php
+ls -la
+
+
+
+
+
+docker exec -it 6583aace0bf9 bash
+nano /etc/onlyoffice/documentserver/default.json
+de "rejectUnauthorized": true para "rejectUnauthorized": false
+Ctrl + O, Enter, Ctrl + X
+supervisorctl restart all
 
 _______________________________________________________________________________
 __Nova instalação MySQL________________________________________________________
