@@ -1,6 +1,21 @@
 Baixar
 docker pull owncloud
 
+Primeiro iremos instalar o onlyoffice, vá no arquivo https://github.com/renatomportugal/docker/blob/master/ImagensOficiais/onlyoffice-comunityserver.txt
+
+docker network ls
+
+veja que já existe a rede onlyoffice, e que há 3 containers.
+docker inspect onlyoffice
+
+docker run \
+  -d \
+  -p 8000:80 \
+  --network onlyoffice \
+  --name owncloud \
+  owncloud
+
+
 _______________________________________________________________________________
 __Nova instalação MySQL________________________________________________________
 Depois de rodar o container, acesse o local onde instalou, aqui estou no localhost.
