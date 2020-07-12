@@ -1,3 +1,8 @@
+Fazer em 12JUL20
+cd oo
+sudo bash opensource-install.sh -ims false
+
+
 https://sempreupdate.com.br/como-instalar-o-onlyoffice-no-linux-ubuntu-debian-opensuse/
 
 mkdir oo
