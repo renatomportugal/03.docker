@@ -1,6 +1,23 @@
 https://github.com/owncloud/richdocuments
+https://www.collaboraoffice.com/code/docker/
+https://www.collaboraoffice.com/code/quick-tryout-nextcloud-docker/
 
 docker pull collabora/code
+
+docker run -d -p 80:80 nextcloud
+
+docker run -t -d -p 9980:9980 -e "extra_params=--o:ssl.enable=false" collabora/code
+
+Set up the Collabora Online server in Nextcloud Settings – Collabora Online to http://192.168.100.20:9980
+
+
+
+
+
+
+docker run -t -d -p 127.0.0.1:9980:9980 -e "domain=<your-dot-escaped-domain>" \
+        -e "username=admin" -e "password=S3cRet" --restart always collabora/code
+
 
 docker run -t -d \
 -p 9980:9980 \
