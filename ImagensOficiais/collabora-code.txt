@@ -4,9 +4,70 @@ https://www.collaboraoffice.com/code/quick-tryout-nextcloud-docker/
 
 docker pull collabora/code
 
-docker run -d -p 80:80 nextcloud
+docker network ls
 
-docker run -t -d -p 9980:9980 -e "extra_params=--o:ssl.enable=false" collabora/code
+docker network create \
+  -d \
+  bridge \
+  --subnet 66.6.0.0/16 \
+  --gateway 66.6.0.1 \
+  bridge.66.6
+
+docker network ls
+
+docker network inspect bridge.66.6
+
+docker volume ls
+
+docker volume create mysql
+
+docker volume ls
+
+docker run \
+    -d \
+    -p 3306:3306 \
+    -e MYSQL_ROOT_PASSWORD=my-password \
+    -e MYSQL_USER=root \
+    -e MYSQL_PASSWORD=my-password \
+    -v mysql:/var/lib/mysql \
+    --network bridge.66.6 \
+    --name mysql.5.7 \
+    --ip 66.6.0.5 \
+    --restart=always \
+    mysql:5.7
+
+docker run \
+    -d \
+    -p 8080:80 \
+    -e PMA_HOST=mysql.5.7 \
+    --network bridge.66.6 \
+    --name phpmyadmin \
+    --ip 66.6.0.15 \
+    --restart=always \
+phpmyadmin/phpmyadmin
+
+
+
+docker run \
+  -d \
+  -p 80:80 \
+  -v nextcloud:/var/www/html \  
+  --network bridge.66.6 \
+  --name nextcloud\
+  --ip 66.6.0.20 \
+  --restart=always \
+nextcloud
+
+docker run \
+  -t \
+  -d \
+  -p 9980:9980 \
+  -e "extra_params=--o:ssl.enable=false" \
+  --network bridge.66.6 \
+  --name collabora\
+  --ip 66.6.0.21 \
+  --restart=always \
+collabora/code
 
 Set up the Collabora Online server in Nextcloud Settings – Collabora Online to http://192.168.100.20:9980
 
