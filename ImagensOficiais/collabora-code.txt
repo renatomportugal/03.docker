@@ -1,6 +1,9 @@
 docker run -d -p 80:80 --name nc2 nextcloud
 docker run -t -d -p 9980:9980 -e "extra_params=--o:ssl.enable=false" --name co2 collabora/code
 
+docker run -d -p 80:80 nextcloud
+docker run -t -d -p 9980:9980 -e "extra_params=--o:ssl.enable=false" collabora/code
+
 no nextcloud:
 docker exec -it nc2 bash
 apt-get update
