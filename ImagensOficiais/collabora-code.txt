@@ -1,3 +1,11 @@
+sudo su
+apt-get install apache2
+a2enmod proxy
+a2enmod proxy_wstunnel
+a2enmod proxy_http
+a2enmod ssl
+exit
+
 docker run -d -p 80:80 --name nc2 nextcloud
 docker run -t -d -p 9980:9980 -e "extra_params=--o:ssl.enable=false" --name co2 collabora/code
 
