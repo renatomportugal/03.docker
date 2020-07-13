@@ -46,17 +46,23 @@ docker run \
     --restart=always \
 phpmyadmin/phpmyadmin
 
+docker volume ls
 
+docker volume create nextcloud
+
+docker volume ls
 
 docker run \
   -d \
   -p 80:80 \
-  -v nextcloud:/var/www/html \  
+  -v nextcloud:/var/www/html \
   --network bridge.66.6 \
-  --name nextcloud\
+  --name nextcloud \
   --ip 66.6.0.20 \
   --restart=always \
 nextcloud
+
+Instale o nextcloud e adicione o app Collabora.
 
 docker run \
   -t \
@@ -69,7 +75,7 @@ docker run \
   --restart=always \
 collabora/code
 
-Set up the Collabora Online server in Nextcloud Settings – Collabora Online to http://192.168.100.20:9980
+Set up the Collabora Online server in Nextcloud Settings – Collabora Online to http://localhost:9980
 
 
 
