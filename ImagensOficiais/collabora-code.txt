@@ -25,6 +25,9 @@ Adicione o conteúdo:
 </VirtualHost>
 
 sudo systemctl restart httpd
+
+sudo yum install httpry
+sudo httpry -i wlp2s0
 _______________________
 No Ubuntu
 
