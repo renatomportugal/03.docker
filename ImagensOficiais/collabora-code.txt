@@ -1,3 +1,33 @@
+CentOS
+sudo yum install httpd -y
+sudo systemctl enable httpd && sudo systemctl start httpd
+
+yum install firewalld
+systemctl start firewalld
+systemctl status firewalld -l
+
+httpd -M | grep proxy
+
+sudo nano /etc/httpd/conf/httpd.conf
+Colocar no final
+LoadModule proxy_module modules/mod_proxy.so
+LoadModule proxy_http_module modules/mod_proxy_http.so
+
+sudo systemctl restart httpd
+sudo nano /etc/httpd/conf/httpd.conf
+
+Adicione o conteúdo:
+
+<VirtualHost *:80>
+  ProxyPreserveHost On
+  ProxyPass / http://localhost
+  ProxyPassReverse / http://localhost
+</VirtualHost>
+
+sudo systemctl restart httpd
+_______________________
+No Ubuntu
+
 sudo su
 apt-get install apache2
 a2enmod proxy
@@ -5,7 +35,7 @@ a2enmod proxy_wstunnel
 a2enmod proxy_http
 a2enmod ssl
 exit
-
+________________
 docker run -d -p 80:80 --name nc2 nextcloud
 docker run -t -d -p 9980:9980 -e "extra_params=--o:ssl.enable=false" --name co2 collabora/code
 
