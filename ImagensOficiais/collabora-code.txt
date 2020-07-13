@@ -1,6 +1,19 @@
 docker run -d -p 80:80 --name nc2 nextcloud
 docker run -t -d -p 9980:9980 -e "extra_params=--o:ssl.enable=false" --name co2 collabora/code
 
+no nextcloud:
+docker exec -it nc2 bash
+apt-get update
+apt install nano
+nano /var/www/html/config/config.php
+
+array (
+    0 => 'localhost',
+    1 => '192.168.1.115',
+  ),
+  
+
+
 https://github.com/owncloud/richdocuments
 https://www.collaboraoffice.com/code/docker/
 https://www.collaboraoffice.com/code/quick-tryout-nextcloud-docker/
