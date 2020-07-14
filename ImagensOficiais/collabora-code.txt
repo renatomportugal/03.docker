@@ -1,4 +1,4 @@
-CentOS (deu errado)
+CentOS (Funcionou mexendo no firewall)
 sudo yum install httpd -y
 sudo systemctl enable httpd && sudo systemctl start httpd
 
@@ -7,27 +7,6 @@ systemctl start firewalld
 systemctl status firewalld -l
 
 httpd -M | grep proxy
-
-sudo nano /etc/httpd/conf/httpd.conf
-Colocar no final
-LoadModule proxy_module modules/mod_proxy.so
-LoadModule proxy_http_module modules/mod_proxy_http.so
-
-sudo systemctl restart httpd
-sudo nano /etc/httpd/conf/httpd.conf
-
-Adicione o conteúdo:
-
-<VirtualHost *:80>
-  ProxyPreserveHost On
-  ProxyPass / http://localhost
-  ProxyPassReverse / http://localhost
-</VirtualHost>
-
-sudo systemctl restart httpd
-
-sudo yum install httpry
-sudo httpry -i wlp2s0
 _______________________
 No Ubuntu (funcionou)
 
