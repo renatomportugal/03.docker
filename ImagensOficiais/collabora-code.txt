@@ -1,4 +1,4 @@
-CentOS
+CentOS (deu errado)
 sudo yum install httpd -y
 sudo systemctl enable httpd && sudo systemctl start httpd
 
@@ -29,7 +29,7 @@ sudo systemctl restart httpd
 sudo yum install httpry
 sudo httpry -i wlp2s0
 _______________________
-No Ubuntu
+No Ubuntu (funcionou)
 
 sudo su
 apt-get install apache2
