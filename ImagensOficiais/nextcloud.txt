@@ -1,6 +1,39 @@
 Baixar
 docker pull nextcloud
 
+Para instalação do ambiente siga os passos em:
+https://github.com/renatomportugal/docker/blob/master/02.Producao.md#servidor-padr%C3%A3o
+
+__Configuração
+Coloque IP fixo no computador para que consiga usar o collabora.
+No meu pc é 192.168.1.115:8000
+Escolha o nome de usuário e senha do administrador.
+Em Armazenamento & banco de dados:
+Pasta de dados: /var/www/html/data
+Configurar o Banco de dados: MySQL/MariaDB
+usuário de banco de dados: root
+senha do banco de dados: my-password
+nome do banco de dados: nextcloud
+host do banco de dados: mysql.5.7
+Desmarque a opção Instalar aplicativos recomendados
+Aperte o botão Concluir configuração
+
+__Adicionar o Collabora
+Na engrenagem do lado direito, Aplicativos,
+Menu do lado esquerdo (ícone de 3 barras horizontais sobrepostas), Aplicativos em destaque, 
+ache o Collabora Online (3.7.3), botão Baixar e ativar.
+Na engrenagem do lado direito, Configurações,
+No lado esquedo, Collabora Online, 
+Selecione "Usar seu próprio servidor"
+Selecione "Desativar a verificação do certificado (inseguro)"
+Colque o endereço do serviço do Collabora online
+http://192.168.1.115:9980
+Botão Salvar... (se der erro adicione as portas 8000 e 9980 no firewall)
+Para testar abra um arquivo docx.
+
+
+_____________________
+
 docker run \
   -d \
   -p 8001:80 \
