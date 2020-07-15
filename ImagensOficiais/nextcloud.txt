@@ -1,3 +1,52 @@
+Instalar o app face recognition
+https://github.com/goodspb/pdlib
+
+docker exec -it 125 bash
+apt-get update
+apt-get install libbz2-dev
+apt-get update
+apt-get install libx11-dev
+apt-get update
+apt-get install libopenblas-dev liblapack-dev
+
+__Install Dlib as shared library
+cd /
+mkdir mylib
+cd mylib
+apt-get install git
+git clone https://github.com/davisking/dlib.git
+cd dlib/dlib
+mkdir build
+cd build
+apt-get install cmake
+cmake -DBUILD_SHARED_LIBS=ON ..
+make
+make install
+
+__Installation
+cd /
+mkdir mylib2
+cd mylib2
+git clone https://github.com/goodspb/pdlib.git
+cd pdlib
+phpize
+./configure --enable-debug
+make
+make install
+
+__Configure PHP installation
+nano youpath/php.ini
+
+__Append the content below into php.ini
+[pdlib]
+extension="pdlib.so"
+
+__Test
+apt-get install php-bz2
+make test
+
+
+
 Baixar
 docker pull nextcloud
 
