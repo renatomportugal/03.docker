@@ -4,12 +4,6 @@ docker pull nextcloud
 Para instalação do ambiente siga os passos em:
 https://github.com/renatomportugal/docker/blob/master/02.Producao.md#servidor-padr%C3%A3o
 
-
-
-_______________________________________________________________________________
-APLICATIVOS (que estou usando)
-__Collabora
-https://github.com/renatomportugal/docker/blob/master/ImagensOficiais/collabora-code.txt
 __Configuração
 Coloque IP fixo no computador para que consiga usar o collabora.
 No meu pc é 192.168.1.115:8000
@@ -24,7 +18,13 @@ host do banco de dados: mysql.5.7
 Desmarque a opção Instalar aplicativos recomendados
 Aperte o botão Concluir configuração
 
-__Adicionar o Collabora
+_______________________________________________________________________________
+APLICATIVOS (que estou usando)
+
+__Collabora
+https://github.com/renatomportugal/docker/blob/master/ImagensOficiais/collabora-code.txt
+
+__Adicionar
 Na engrenagem do lado direito, Aplicativos,
 Menu do lado esquerdo (ícone de 3 barras horizontais sobrepostas), Aplicativos em destaque, 
 ache o Collabora Online (3.7.3), botão Baixar e ativar.
@@ -37,6 +37,21 @@ http://192.168.1.115:9980
 Botão Salvar... (se der erro adicione as portas 8000 e 9980 no firewall)
 Para testar abra um arquivo docx.
 
+__Music
+Na engrenagem do lado direito, Aplicativos,
+Buscar, music, 
+
+__Draw.io
+
+__Mind Map
+
+__Quick Notes
+
+__Duplicate Finder
+
+__Quota Warning
+
+__Metadata
 _______________________________________________________________________________
 _______________________________________________________________________________
 APLICATIVOS (para testar)
@@ -44,46 +59,47 @@ Accessibility
 Activity
 Appointments
 Auditing / Logging
-Automated PDF conversion
+_Automated PDF conversion
 Brute-force settings
 Calendar
-Collabora Online
-Collaborative tags
 Comments
-Contacts
+_Contacts
 Contacts Interaction
-Cookbook
-Cospend
-Custom Properties
-Deck
-Deleted files
+_Cookbook
+_Cospend
+_Custom Properties
+_Deck
+_Deleted files
 Federation
+_File access control
 File sharing
 First run wizard
+_Flow upload
 Forms
-Group folders
+_Group folders
 Log Reader
-Mail
-Maps
+_Mail
+_Maps
 Monitoring
 Nextcloud announcements
-Notes
+_Notes
 Notifications
 Password policy
 PDF viewer
 Photos
 Privacy
 Recommendations
+_Retantion
 Right click
 Share by mail
 Support
-Talk
+_Talk
 Tasks
 Text
 Theming
 Update notification
 Usage survey
-User retention
+_User retention
 Versions
 Video player
 Workflow external scripts
