@@ -53,6 +53,12 @@ __Quota Warning
 
 __Metadata
 _______________________________________________________________________________
+APLICATIVOS REPROVADOS
+_Bookmarks
+Pontos bons: Etiquetas e Anotações. Preview para fotos e videos.
+Pontos Ruins: Não há como exportar nem importar.
+
+
 _______________________________________________________________________________
 APLICATIVOS (para testar)
 Accessibility
@@ -60,6 +66,7 @@ Activity
 Appointments
 Auditing / Logging
 _Automated PDF conversion
+
 Brute-force settings
 Calendar
 Comments
