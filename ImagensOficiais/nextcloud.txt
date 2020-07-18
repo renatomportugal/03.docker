@@ -147,12 +147,25 @@ cd mylib2
 git clone https://github.com/goodspb/pdlib.git
 cd pdlib
 phpize
+
+-irá retornar:
+Configuring for:
+PHP Api Version:         20190902
+Zend Module Api No:      20190902
+Zend Extension Api No:   320190902
+
 ./configure --enable-debug
 make
+
+-deu uns warnings, mas instalou.
+
 make install
 
 __Configure PHP installation
 nano youpath/php.ini
+
+apt-get install nano
+nano /usr/local/etc/php/php.ini
 
 __Append the content below into php.ini
 [pdlib]
@@ -160,6 +173,13 @@ extension="pdlib.so"
 
 __Test
 apt-get install php-bz2
+
+erro: Package 'php-bz2' has no installation candidate
+
+apt-get install software-properties-common
+apt-get update
+apt-get upgrade
+
 make test
 
 _______________________________________________________________________________
