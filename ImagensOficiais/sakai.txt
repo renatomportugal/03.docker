@@ -27,3 +27,18 @@ Register a new LMS application instance at https://hypothes.is/welcome and enter
 
 OUTRO
 https://github.com/sakaicontrib/docker-sakai
+export VIRTUALBOX_CPU_COUNT="2"
+export VIRTUALBOX_MEMORY_SIZE="2048"
+
+Copia as proximas linhas e execute:
+curl -L https://github.com/docker/machine/releases/download/v0.16.1/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine &&
+chmod +x /tmp/docker-machine &&
+sudo cp /tmp/docker-machine /usr/local/bin/docker-machine
+    
+sudo yum install kernel-devel kernel-devel-$(uname -r) kernel-headers kernel-headers-$(uname -r) make patch gcc
+sudo wget https://download.virtualbox.org/virtualbox/rpm/el/virtualbox.repo -P /etc/yum.repos.d
+sudo yum install VirtualBox-5.2
+systemctl status vboxdrv
+wget https://download.virtualbox.org/virtualbox/5.2.20/Oracle_VM_VirtualBox_Extension_Pack-5.2.20.vbox-extpack
+sudo VBoxManage extpack install  Oracle_VM_VirtualBox_Extension_Pack-5.2.20.vbox-extpack
+
