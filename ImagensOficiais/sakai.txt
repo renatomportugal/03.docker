@@ -1,0 +1,29 @@
+https://github.com/hypothesis/sakai-docker
+
+Não funcionou o comando abaixo
+git submodules update --init
+
+docker-compose up
+
+Acessar  http://localhost:8080/portal
+
+Installing the Hypothesis LTI tool
+To test an LTI tool, you will need to:
+
+Create a new "project site".
+Click "Worksite Setup" in the left navbar
+Select "Build your own site" => "project site"
+Click "Continue".
+Enter a title for the site and click "Continue".
+On the "Project Site Tools" page, check the "External Tool" option and click Continue.
+Click "Continue" on the Project Site Access page
+Click "Create Site" on the confirmation page.
+Select the new site in the list of sites. It should be displayed as active in the tabs at the top.
+Click the "External Tool" link in the left navbar and then click "Edit" to configure it.
+Register a new LMS application instance at https://hypothes.is/welcome and enter the launch URL, and consumer key and secret in Sakai.
+
+
+
+
+OUTRO
+https://github.com/sakaicontrib/docker-sakai
