@@ -114,6 +114,11 @@ Default encryption module
 External storage support
 LDAP user and group backend
 
+__APARENCIA
+Verificar como instalar a extensão Imagemagick do PHP, para transformar a imagem enviada em ícone.
+Configurações, Menu do lado esquerdo, Personalização, 
+
+
 __Testando... não faça ainda
 Instalar o app face recognition
 1. pdlib
