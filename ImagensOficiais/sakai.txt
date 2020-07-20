@@ -26,6 +26,7 @@ Register a new LMS application instance at https://hypothes.is/welcome and enter
 
 
 OUTRO
+https://wiki.centos.org/HowTos/Virtualization/VirtualBox
 https://github.com/sakaicontrib/docker-sakai
 export VIRTUALBOX_CPU_COUNT="2"
 export VIRTUALBOX_MEMORY_SIZE="2048"
