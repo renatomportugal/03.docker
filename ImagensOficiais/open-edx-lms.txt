@@ -1,3 +1,26 @@
+sudo apt-get update -y
+sudo apt-get upgrade -y
+sudo reboot
+
+sudo apt-get install make
+
+Instalar o Docker:
+https://github.com/renatomportugal/docker/blob/master/01.Install.md
+
+Instalar o Docker-Compose:
+https://github.com/renatomportugal/docker/blob/master/08.Docker-compose.md
+
+Instalar o Python:
+sudo apt update
+sudo apt install software-properties-common
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt install python3.7
+
+docker info | grep -i 'storage driver'
+Saída:
+ Storage Driver: overlay2
+WARNING: No swap limit support
+
 __Bitnami
 sudo su
 mkdir bitnami-edx
@@ -22,7 +45,20 @@ Installing
  0% ______________ 50% ______________ 100%
  #############
  
- __Tutor
+ Setup has finished installing Open edX powered by Bitnami on your computer.
+
+Info: In order to use CodeJail, additional configuration is required. Find more
+information at:
+https://docs.bitnami.com/installer/apps/edx/configuration/sandbox-codejail/
+Press [Enter] to continue:
+
+Info: To access the Open edX powered by Bitnami, go to
+http://127.0.0.1:80 from your browser.
+Press [Enter] to continue:
+
+Funcionou!!!
+ 
+ __Tutor (Não testado)
  https://docs.tutor.overhang.io/
  sudo curl -L "https://github.com/overhangio/tutor/releases/download/v10.0.11/tutor-$(uname -s)_$(uname -m)" -o /usr/local/bin/tutor
  sudo chmod 0755 /usr/local/bin/tutor
@@ -30,50 +66,3 @@ Installing
  
 __Modo Nativo
 https://openedx.atlassian.net/wiki/spaces/OpenOPS/pages/146440579/Native+Open+edX+platform+Ubuntu+16.04+64+bit+Installation
-sudo apt-get update -y
-sudo apt-get upgrade -y
-sudo reboot
-
-sudo apt-get install make
-
-Instalar o Docker:
-https://github.com/renatomportugal/docker/blob/master/01.Install.md
-
-Instalar o Docker-Compose:
-https://github.com/renatomportugal/docker/blob/master/08.Docker-compose.md
-
-Instalar o Python:
-sudo apt update
-sudo apt install software-properties-common
-sudo add-apt-repository ppa:deadsnakes/ppa
-sudo apt install python3.7
-
-docker info | grep -i 'storage driver'
-Saída:
- Storage Driver: overlay2
-WARNING: No swap limit support
-
-__
-
-
-Set the OPENEDX_RELEASE variable
-https://edx.readthedocs.io/projects/edx-developer-docs/en/latest/named_releases.html
-export OPENEDX_RELEASE=open-release/juniper.2
-
-Create a config.yml file.
-# The host names of LMS and Studio. Don't include the "https://" part:
-EDXAPP_LMS_BASE: "online.myeducation.org"
-EDXAPP_CMS_BASE: "studio.online.myeducation.org"
-
-Bootstrap the Ansible installation
-wget https://raw.githubusercontent.com/edx/configuration/$OPENEDX_RELEASE/util/install/ansible-bootstrap.sh -O - | sudo -E bash
-
-Randomize passwords.
-wget https://raw.githubusercontent.com/edx/configuration/$OPENEDX_RELEASE/util/install/generate-passwords.sh -O - | bash
-
-Install the Open edX software.
-wget https://raw.githubusercontent.com/edx/configuration/$OPENEDX_RELEASE/util/install/native.sh -O - | bash
-
-You will need to finish configuring your server, for example to set the LMS_ROOT_URL setting, before everything will work properly.
-
-__
