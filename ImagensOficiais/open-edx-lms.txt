@@ -59,6 +59,7 @@ Press [Enter] to continue:
 Funcionou!!!
  
  __Tutor (Não testado)
+ https://www.youtube.com/watch?v=so1rQQFkXNU
  https://docs.tutor.overhang.io/
  sudo su
  mkdir tutor
@@ -91,6 +92,12 @@ Funcionou!!!
  The default language code for the platform [en]:
  
  Vai rodar, baixar imagens, etc...
+ No video deu erro dizendo que já tinham portas que estavam sendo usadas.
+ 
+ sudo su
+ apt install net-tools
+ netstat -tlnp | grep 80
+ No meu caso não mostrou nada, mas caso tivesse alguma porta operando, basta digitar kill e o número do processo: kill 1103
  
  
  
