@@ -60,8 +60,38 @@ Funcionou!!!
  
  __Tutor (Não testado)
  https://docs.tutor.overhang.io/
+ sudo su
+ mkdir tutor
+ cd tutor
  sudo curl -L "https://github.com/overhangio/tutor/releases/download/v10.0.11/tutor-$(uname -s)_$(uname -m)" -o /usr/local/bin/tutor
  sudo chmod 0755 /usr/local/bin/tutor
+ sudo apt install python3 python3-pip libyaml-dev
+ apt-get update
+ apt install python3-pip
+ pip3 install tutor-openedx
+ git clone https://github.com/overhangio/tutor
+ cd tutor
+ pip3 install -e .
+ _TUTOR_COMPLETE=source tutor >> ~/.bashrc
+ _TUTOR_COMPLETE=source_zsh tutor >> ~/.zshrc
+ 
+ tutor --version
+ Saída:
+ 10.0.11
+ 
+ tutor local quickstart
+ _Configuração
+ Are you configuring a production platform? Type 'n' if you are just testing Tutor on your local computer [Y/n]: n
+ As you are not running this platform in production, we automatically set the following configuration values:
+    LMS_HOST = local.overhang.io
+    CMS_HOST = studio.local.overhang.io
+    ACTIVATE_HTTPS = False
+ Your platform name/title [My Open edX]:
+ Your public contact email address [contact@local.overhang.io]:
+ The default language code for the platform [en]:
+ 
+ Vai rodar, baixar imagens, etc...
+ 
  
  
 __Modo Nativo
