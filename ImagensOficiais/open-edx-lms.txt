@@ -1,3 +1,29 @@
+__Bitnami
+sudo su
+mkdir bitnami-edx
+cd bitnami-edx
+wget https://bitnami.com/redirect/to/1084950/bitnami-edx-ironwood.2-9-linux-x64-installer.run
+chmod +x ./bitnami-edx-ironwood.2-9-linux-x64-installer.run
+./bitnami-edx-ironwood.2-9-linux-x64-installer.run
+
+Demo course for Open edX [Y/n] :y
+Is the selection above correct? [Y/n]: Y
+Select a folder [/opt/edx-ironwood.2-9]:
+Your real name [User Name]:
+Email Address [user@example.com]:
+Login [user]:
+Password :
+Please confirm your password :
+Hostname [127.0.1.1]:192.168.1.106
+Do you want to configure mail support? [y/N]:N
+Do you want to continue? [Y/n]:Y
+
+Installing
+ 0% ______________ 50% ______________ 100%
+ #############
+ 
+ 
+
 https://openedx.atlassian.net/wiki/spaces/OpenOPS/pages/146440579/Native+Open+edX+platform+Ubuntu+16.04+64+bit+Installation
 sudo apt-get update -y
 sudo apt-get upgrade -y
@@ -8,11 +34,20 @@ sudo apt-get install make
 Instalar o Docker:
 https://github.com/renatomportugal/docker/blob/master/01.Install.md
 
+Instalar o Docker-Compose:
+https://github.com/renatomportugal/docker/blob/master/08.Docker-compose.md
+
 Instalar o Python:
 sudo apt update
 sudo apt install software-properties-common
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt install python3.7
+
+docker info | grep -i 'storage driver'
+Saída:
+ Storage Driver: overlay2
+WARNING: No swap limit support
+
 
 
 
