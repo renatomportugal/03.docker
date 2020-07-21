@@ -99,6 +99,22 @@ Funcionou!!!
  netstat -tlnp | grep 80
  No meu caso não mostrou nada, mas caso tivesse alguma porta operando, basta digitar kill e o número do processo: kill 1103
  
+ acesse o localhost
+ acesse o studio.localhost
+ 
+ tutor local stop
+ 
+ docker images
+ tutor images build openedx-dev
+ 
+ Ele construiu uma imagem, que após pesquisa no hub, vi o endereço:
+ https://hub.docker.com/r/overhangio/openedx
+ 
+ tutor dev runserver lms  
+ 
+ docker pull overhangio/openedx
+ 
+ 
  
  
 __Modo Nativo
