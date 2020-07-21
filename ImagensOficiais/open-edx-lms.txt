@@ -22,8 +22,13 @@ Installing
  0% ______________ 50% ______________ 100%
  #############
  
+ __Tutor
+ https://docs.tutor.overhang.io/
+ sudo curl -L "https://github.com/overhangio/tutor/releases/download/v10.0.11/tutor-$(uname -s)_$(uname -m)" -o /usr/local/bin/tutor
+ sudo chmod 0755 /usr/local/bin/tutor
  
-
+ 
+__Modo Nativo
 https://openedx.atlassian.net/wiki/spaces/OpenOPS/pages/146440579/Native+Open+edX+platform+Ubuntu+16.04+64+bit+Installation
 sudo apt-get update -y
 sudo apt-get upgrade -y
@@ -48,7 +53,7 @@ Saída:
  Storage Driver: overlay2
 WARNING: No swap limit support
 
-
+__
 
 
 Set the OPENEDX_RELEASE variable
@@ -71,3 +76,4 @@ wget https://raw.githubusercontent.com/edx/configuration/$OPENEDX_RELEASE/util/i
 
 You will need to finish configuring your server, for example to set the LMS_ROOT_URL setting, before everything will work properly.
 
+__
