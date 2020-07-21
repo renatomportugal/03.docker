@@ -1,0 +1,4 @@
+https://openedx.atlassian.net/wiki/spaces/OpenOPS/pages/146440579/Native+Open+edX+platform+Ubuntu+16.04+64+bit+Installation
+sudo apt-get update -y
+sudo apt-get upgrade -y
+sudo reboot
