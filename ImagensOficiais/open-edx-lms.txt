@@ -16,6 +16,13 @@ sudo apt install software-properties-common
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt install python3.7
 
+https://python.org.br/instalacao-linux/
+Instalar o Python no Centos 7:
+which python
+which python3
+sudo yum install python3
+sudo yum -y install python3-pip
+
 docker info | grep -i 'storage driver'
 Saída:
  Storage Driver: overlay2
