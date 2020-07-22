@@ -32,7 +32,7 @@ Na engrenagem do lado direito, Configurações,
 No lado esquedo, Collabora Online, 
 Selecione "Usar seu próprio servidor"
 Selecione "Desativar a verificação do certificado (inseguro)"
-Colque o endereço do serviço do Collabora online
+Colque o endereço do serviço do Collabora online (sem a barra no final)
 http://192.168.1.115:9980
 Botão Salvar... (se der erro adicione as portas 8000 e 9980 no firewall)
 Para testar abra um arquivo docx.
