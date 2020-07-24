@@ -1,0 +1,10 @@
+https://laravel.com/docs/7.x
+https://hub.docker.com/r/bitnami/laravel
+
+docker pull bitnami/laravel
+
+mkdir ~/myapp && cd ~/myapp
+curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-laravel/master/docker-compose.yml
+docker-compose up
+
+acesse localhost:30000
