@@ -1,17 +1,22 @@
 docker pull php:7.1.26-apache
 
-Instale o MySQL e o PHPmyAdmin, veja em no arquivo deste mesmo diretório mysql.txt
-
-cd php
+Instale o MySQL e o PHPmyAdmin, veja no arquivo https://github.com/renatomportugal/docker/blob/master/02.Producao.md
+mkdir app01
+cd app01
 
 docker run \
   -d \
   -p 80:80 \
-  --name App01 \
-  --network mysql \
   -v "$PWD":/var/www/html \
-  php:7.1.26-apache
-  
-3b0
+  --name app01 \
+  --network bridge.66.6 \
+  --ip 66.6.0.25 \
+  --restart=always \
+php:7.1.26-apache
 
-docker exec -it App01 bash
+crie um arquivo de index:
+code index.php
+Insira no arquivo:
+<?php phpinfo(); ?>
+
+Pronto, acesse o localhost, e todas as mudanças automaticamente refletirão.
