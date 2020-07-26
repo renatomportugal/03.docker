@@ -46,6 +46,7 @@ Password :
 Please confirm your password :
 Hostname [127.0.1.1]:192.168.1.106
 Do you want to configure mail support? [y/N]:N
+(Desmarque a opção para colocar na nuvem)
 Do you want to continue? [Y/n]:Y
 
 Installing
@@ -53,6 +54,14 @@ Installing
  #############
  
  Setup has finished installing Open edX powered by Bitnami on your computer.
+ 
+ __Para rodar...
+ sudo su
+ cd /opt/edx-ironwood.2-9
+ ./bitnami... manager
+ 
+ Acesse o endereço no browser...
+ 
 
 Info: In order to use CodeJail, additional configuration is required. Find more
 information at:
