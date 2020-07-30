@@ -1,0 +1,13 @@
+cd ~
+mkdir influxdb
+cd influxdb
+git clone https://github.com/EspenAlbert/tick-udemy
+cd tick-udemy/00_config/influx-only/
+docker-compose docker-compose.yml
+
+Abrir outro terminal
+docker ps
+a349f8a03b7c        influxdb:1.5.1      "/entrypoint.sh infl…"   11 minutes ago      Up 10 minutes       0.0.0.0:8086->8086/tcp   influx-only_influxdb_1
+
+Instale o Postman
+https://github.com/renatomportugal/docker/blob/master/17.InstallCentOS.md#postman
