@@ -118,6 +118,49 @@ __APARENCIA
 Verificar como instalar a extensão Imagemagick do PHP, para transformar a imagem enviada em ícone.
 Configurações, Menu do lado esquerdo, Personalização, 
 
+Apague os arquivos do diretório:
+docker exec -it id bash
+cd /var/www/html/core/skeleton
+rm -rf TodosArquivosEpastas
+
+Configurar Usuários
+__Adicionar grupo
+Na conta de administrador, Menu esquerdo, Adicionar Grupo, "Biblioteca", confirmar com a senha.
+Coloque o administrador no grupo criado, e selecione para ser administrador do novo grupo. Usuários, editar, adicione o grupo, Concluído.
+
+_______________________________________________________________________________
+Limitar a quantidade de espaço para cada usuário em 100MB.
+_______________________________________________________________________________
+Com a conta de administrador, clique no seu usuário, lado superior direito, Usuários, 
+Clique na engrenagem no lado inferior esquerdo, Quota padrão 100MB.
+Selecione as opções:
+Exibir o último login.
+
+Para o administrador dê a cota ilimitada para postar os arquivos.
+
+__Criar Usuários
+Na conta de administrador, Usuários. Menu esquerdo, Novo usuário: usuário: usuario01, Nome: Usuário 01, senha usuario01, grupo Biblioteca, Cota padrão, ok.
+
+__Configurar Compartilhamento__________________________________________________
+Com a conta de administrador, clique no seu usuário, lado superior direito, Configurações
+No lado esquerdo, Admin, Compartilhamento
+Permitir que aplicativos usem a API de Compartilhamento
+Permitir o compartilhamento com grupos
+Excluir grupos de compartilhamento
+ Biblioteca
+
+docker exec -it id bash
+apt-get update
+apt-get install nano
+cd config
+nano config.php
+
+Adicione no fim do arquivo: 
+'default_language' => 'pt_BR',
+'default_locale' => 'pt_BR',
+
+
+ 
 
 __Testando... não faça ainda
 Instalar o app face recognition
