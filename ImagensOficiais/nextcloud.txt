@@ -172,7 +172,12 @@ Adicione no fim do arquivo:
 'default_locale' => 'pt_BR',
 
 
- 
+__Configuração via occ
+su www-data -s /bin/bash
+php occ config:list
+php occ config:app:set theming slogan --value "Seu local de estudos"
+
+
 
 __Testando... não faça ainda
 Instalar o app face recognition
