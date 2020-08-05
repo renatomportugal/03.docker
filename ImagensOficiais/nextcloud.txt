@@ -121,7 +121,7 @@ Configurações, Menu do lado esquerdo, Personalização,
 Apague os arquivos do diretório:
 docker exec -it id bash
 cd /var/www/html/core/skeleton
-rm -rf TodosArquivosEpastas
+rm -rf *
 
 Configurar Usuários
 __Adicionar grupo
@@ -146,9 +146,10 @@ Contacts Interaction
 Federation
 Share by mail
 Comments
+First Run Wizard
 
 Baixar e Ativar
-File Access Control
+File access control
 
 __Configurar Compartilhamento__________________________________________________
 Com a conta de administrador, clique no seu usuário, lado superior direito, Configurações
@@ -157,9 +158,6 @@ Permitir que aplicativos usem a API de Compartilhamento
 _Permitir o compartilhamento com grupos
 Excluir grupos de compartilhamento
  Biblioteca
-
-
-
 
 docker exec -it id bash
 apt-get update
@@ -170,6 +168,9 @@ nano config.php
 Adicione no fim do arquivo: 
 'default_language' => 'pt_BR',
 'default_locale' => 'pt_BR',
+
+
+
 
 
 __Configuração via occ
