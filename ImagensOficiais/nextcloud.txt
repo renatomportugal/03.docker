@@ -142,7 +142,7 @@ _______________________________________________________________________________
 Limitar a quantidade de espaço para cada usuário em 100MB.
 _______________________________________________________________________________
 Com a conta de administrador, clique no seu usuário, lado superior direito, Usuários, 
-Clique na engrenagem no lado inferior esquerdo, Quota padrão 100MB.
+Clique na engrenagem no lado inferior esquerdo, Quota padrão 1 B.
 Selecione as opções:
 Exibir o último login.
 
@@ -155,6 +155,8 @@ Permitir que aplicativos usem a API de Compartilhamento
 Permitir o compartilhamento com grupos
 Excluir grupos de compartilhamento
  Biblioteca
+
+Compartilhe a pasta com o grupo Biblioteca, retirando todas as opções.
 
 docker exec -it id bash
 apt-get update
