@@ -49,3 +49,13 @@ docker ps
 docker stop 25 eb
 docker container prune -f
 docker ps -a
+________________________________
+https://www.katacoda.com/courses/docker/deploying-first-container
+
+docker run -d --name redisHostPort -p 6379:6379 redis:latest
+docker run -d --name redisDynamic -p 6379 redis:latest
+docker port redisDynamic 6379
+docker ps
+
+PERSISTENT DATA
+docker run -d --name redisMapped -v /opt/docker/data/redis:/data redis
