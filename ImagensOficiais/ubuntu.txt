@@ -1,0 +1,2 @@
+docker run ubuntu ps
+docker run -it ubuntu bash
