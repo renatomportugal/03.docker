@@ -55,8 +55,33 @@ __Dockerfile
 FROM nginx:alpine
 COPY . /usr/share/nginx/html
 
+__index.html
+<h1>Hello World</h1>
+
 Abra o terminal na pasta nginx e digite o comando
 docker build -t webserver-image:v1 .
 docker images
 docker run -d -p 80:80 webserver-image:v1
 curl docker
+
+https://www.katacoda.com/courses/docker/2
+
+nginx
+ |_Dockerfile
+ |_index.html
+
+__Dockerfile
+FROM nginx:1.11-alpine
+COPY index.html /usr/share/nginx/html/index.html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+
+__index.html
+<h1>Hello World</h1>
+
+Abra o terminal na pasta nginx e digite o comando
+docker build -t my-nginx-image:latest .
+docker images
+docker run -d -p 80:80 my-nginx-image:latest
+curl -i http://docker
+docker ps
