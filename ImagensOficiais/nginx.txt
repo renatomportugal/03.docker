@@ -44,3 +44,19 @@ docker ps
 
 acesse o nginx digitando localhost:8081 e verá a página que foi criada
 
+__________________________
+https://www.katacoda.com/courses/docker/create-nginx-static-web-server
+
+nginx
+ |_Dockerfile
+ |_index.html
+ 
+__Dockerfile
+FROM nginx:alpine
+COPY . /usr/share/nginx/html
+
+Abra o terminal na pasta nginx e digite o comando
+docker build -t webserver-image:v1 .
+docker images
+docker run -d -p 80:80 webserver-image:v1
+curl docker
