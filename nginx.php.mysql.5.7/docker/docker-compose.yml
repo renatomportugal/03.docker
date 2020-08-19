@@ -1,0 +1,61 @@
+version: '3'
+
+services:
+    mysql.5.7:
+        image: mysql:5.7
+        container_name: mysql.5.7
+        ports:
+            - "3306:3306"
+        volumes:
+            - mysql.5.7:/var/lib/mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=my-password
+        networks:
+            bridge.66.6:
+                ipv4_address: 66.6.0.5
+    php:
+        image: php:7-fpm-buster
+        container_name: php
+        volumes:
+            - ../src:/var/www
+            - ".:/var/www/html"
+            - "./php/php.ini:/usr/local/etc/php/php.ini"
+        command:
+            - /bin/sh
+            - -c
+            - |
+                docker-php-ext-install mysqli pdo pdo_mysql pdo_pgsql
+                echo "extension installed.....starting php-fpm........................................"
+                php-fpm
+        networks:
+            bridge.66.6:
+                ipv4_address: 66.6.0.10
+        depends_on:
+            - mysql.5.7
+
+    nginx:
+        container_name: nginx
+        ports:
+            - "8027:80"
+            - "443:443"
+        build:
+            context: ./nginx
+        volumes:
+            - ../src:/var/www
+            - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+            - ./nginx/sites/:/etc/nginx/sites-available
+            - ./nginx/conf.d/:/etc/nginx/conf.d
+        depends_on:
+            - php
+        networks:
+            bridge.66.6:
+                ipv4_address: 66.6.0.3
+
+networks:
+    bridge.66.6:
+        ipam:
+            driver: default
+            config:
+                - subnet: "66.6.0.0/16"
+volumes:
+    mysql.5.7:
