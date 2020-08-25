@@ -1,0 +1,66 @@
+For integrator:
+
+docker run -it \
+-p 8280:8280 \
+-p 8243:8243 \
+-p 9443:9443 \
+wso2/wso2ei-integrator
+
+For analytics dashboard:
+
+docker run -it \
+-p 9713:9713 \
+-p 9643:9643 \
+-p 9613:9613 \
+-p 7713:7713 \
+-p 7613:7613  \
+wso2/wso2ei-analytics-dashboard
+
+For analytics worker:
+
+docker run -it \
+-p 9091:9091 \
+-p 9444:9444 \
+-p 9712:9712 \
+-p 9612:9612 \
+-p 7712:7712 \
+-p 7612:7612 \
+-p 7070:7070 \
+-p 7443:7443 \ 
+wso2/wso2ei-analytics-worker
+
+For business process:
+
+docker run -it \
+-p 9445:9445 \
+wso2/wso2ei-business-process
+
+For broker:
+
+docker run -it \
+-p 5675:5675 \
+-p 9446:9446 \
+-p 8675:8675 \
+-p 1886:1886 \
+-p 8836:8836 \
+-p 7614:7614 \
+wso2/wso2ei-broker
+
+Once the container is started, access the management consoles of each profile via the following URLs on your favorite web browser using the credentials
+username: admin and password: admin.
+
+For integrator:
+
+https://localhost:9443/carbon
+
+For analytics dashboard:
+
+https://localhost:9643/portal
+
+For business process:
+
+https://localhost:9445/carbon
+
+For broker:
+
+https://localhost:9446/carbon
