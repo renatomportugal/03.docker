@@ -31,9 +31,3 @@ services:
             - "7612:7612"
             - "7070:7070"
             - "7443:7443"
-
-    business-process:
-        image: wso2/wso2ei-business-process
-        container_name: business-process
-        ports:
-            - "9445:9445"
