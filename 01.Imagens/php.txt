@@ -21,6 +21,13 @@ docker run \
   --name app01 \
 php:7.1.26-apache
 
+docker run \
+  -d \
+  -p 80:80 \
+  -v ./app01:/var/www/html \
+  --name app01 \
+php:7.1.26-apache
+
 crie um arquivo de index:
 code index.php
 Insira no arquivo:

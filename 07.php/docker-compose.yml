@@ -1,20 +1,21 @@
-version: '3'
-
+version: "3.8"
 services:
     php:
-        image: php:7.1.26-apache
-        container_name: php
+        build:
+            container_name: php
+            context: './php'
+            dockerfile: 'Dockerfile'
+            # image: webapp:tag
+            args:
+                buildno: 1
+            # target: dev
+
+        #     condition: on-failure
+            labels: 
+                description: "phhh"
+        env_file: .env
+        container_name: php_apache
         ports:
             - "80:80"
-        volumes: 
-            - ./app01:/var/www/html
-        networks:
-            bridge.66.6:
-                ipv4_address: 66.6.0.10
-
-networks:
-    bridge.66.6:
-        ipam:
-            driver: default
-            config:
-                - subnet: "66.6.0.0/16"
+        volumes:
+            - ./app01/:/var/www/html/
