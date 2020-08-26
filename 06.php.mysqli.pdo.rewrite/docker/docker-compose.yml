@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services:
     mysql.5.7:
@@ -14,40 +14,24 @@ services:
             bridge.66.6:
                 ipv4_address: 66.6.0.5
     php:
-        build: './php/'
-        image: php:7-fpm-buster
+        build: 
+            context: './php/'
+            dockerfile: 'Dockerfile'
+            args:
+                buildno: 1
+            labels: 
+                description: "phhh"
         container_name: php
+        ports:
+            - "80:80"
         volumes:
-            - "../app01:/var/www/html"
-            - "./php/php.ini:/usr/local/etc/php/php.ini"
-        command:
-            - /bin/sh
-            - -c
-            - |
-                docker-php-ext-install mysqli pdo pdo_mysql pdo_pgsql
-                echo "extension installed.....starting php-fpm........................................"
-                php-fpm
+            - ./app01/:/var/www/html/
+        env_file: .env
         networks:
             bridge.66.6:
                 ipv4_address: 66.6.0.10
         depends_on:
             - mysql.5.7
-
-    apache:
-        container_name: apache
-        volumes: 
-            - "../app01:/var/www/html"
-        ports:
-            - "8080:80"
-            - "443:443"
-        build:
-            context: ./apache
-
-        depends_on:
-            - php
-        networks:
-            bridge.66.6:
-                ipv4_address: 66.6.0.3
 
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
