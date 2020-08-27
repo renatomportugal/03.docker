@@ -15,3 +15,12 @@ https://localhost:9445/carbon<br>
 
 ### For broker:<br>
 https://localhost:9446/carbon<br>
+
+
+https://hub.docker.com/r/wso2/wso2am<br>
+```
+https://{DOCKER_HOST}:9443/carbon
+https://{DOCKER_HOST}:9443/publisher
+https://{DOCKER_HOST}:9443/devportal
+
+```
