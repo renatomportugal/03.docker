@@ -36,6 +36,16 @@ dnf --disablerepo="*" --enablerepo="epel" list available | wc -l
 dnf install docker-ce docker-ce-cli containerd.io --nobest
 docker -v
     Docker version 19.03.12, build 48a66213fe
+
+docker ps
+Deu o erro:
+Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
+
+
+
+
+
+
 dnf repolist -v
 usermod -aG docker root
 id root
