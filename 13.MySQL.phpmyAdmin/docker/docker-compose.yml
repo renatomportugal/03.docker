@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+    mysql.5.7:
+        image: mysql:5.7
+        container_name: mysql.5.7
+        restart: always
+        ports:
+            - "3306:3306"
+        volumes:
+            - mysql.5.7:/var/lib/mysql
+            - ./mysql:/tmp/database
+        command: mysqld --init-file="/tmp/database/init.sql"
+        environment:
+            - MYSQL_ROOT_PASSWORD=my-password
+            - MYSQL_DATABASE=redmine
+        networks:
+            new:
+                aliases:
+                - database
+            legacy:
+                aliases:
+                - mysql.5.7
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: phpmyadmin
+        restart: always
+        ports: 
+            - "8081:80"
+        environment:
+            - PMA_HOST=mysql.5.7
+        networks:
+            - legacy
+        depends_on:
+            - mysql.5.7
+        links:
+            - mysql.5.7
+
+networks:
+    new:
+    legacy:
+
+volumes:
+    mysql.5.7:
+    redmine:

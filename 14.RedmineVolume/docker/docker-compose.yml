@@ -9,18 +9,27 @@ services:
             - "3306:3306"
         volumes:
             - mysql.5.7:/var/lib/mysql
-            - ./mysql:/tmp/database
-        command: mysqld --init-file="/tmp/database/init.sql"
+            - ./mysql/sql-scripts:/tmp/database
+        command: mysqld --init-file="/tmp/database/redmine.sql"
         environment:
             - MYSQL_ROOT_PASSWORD=my-password
             - MYSQL_DATABASE=redmine
         networks:
-            new:
-                aliases:
-                - database
-            legacy:
-                aliases:
-                - mysql.5.7
+            - bd
+
+    redmine:
+        image: redmine
+        container_name: redmine
+        restart: always
+        ports:
+            - "80:3000"
+        volumes:
+            - redmine:/usr/src/redmine/files
+        env_file: .env
+        networks:
+            - bd
+        depends_on:
+            - mysql.5.7
 
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
@@ -31,16 +40,12 @@ services:
         environment:
             - PMA_HOST=mysql.5.7
         networks:
-            - legacy
+            - bd
         depends_on:
             - mysql.5.7
-        links:
-            - mysql.5.7
-
 
 networks:
-    new:
-    legacy:
+    bd:           
 
 volumes:
     mysql.5.7:
