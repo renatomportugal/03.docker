@@ -2,20 +2,15 @@ version: '3.8'
 
 services:
     mysql.5.7:
-        build:
-            context: './mysql/'
-            dockerfile: 'Dockerfile'
-            args:
-                buildno: 1
-            labels: 
-                description: "mysqlmysql"
+        image: mysql:5.7
         container_name: mysql.5.7
+        restart: always
         ports:
             - "3306:3306"
         volumes:
             - mysql.5.7:/var/lib/mysql
-            - ./mysql/sql-scripts:/tmp/database
-        command: mysqld --init-file="/tmp/database/redmine.sql"
+            - ./mysql:/tmp/database
+        command: mysqld --init-file="/tmp/database/init.sql"
         environment:
             - MYSQL_ROOT_PASSWORD=my-password
             - MYSQL_DATABASE=redmine

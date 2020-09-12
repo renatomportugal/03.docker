@@ -1,2 +1,6 @@
 docker run ubuntu ps
 docker run -it ubuntu bash
+
+
+FROM ubuntu
+RUN apt-get update && apt-get install tree

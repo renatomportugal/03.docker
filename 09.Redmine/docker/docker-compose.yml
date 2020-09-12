@@ -2,32 +2,20 @@ version: '3.8'
 
 services:
     mysql.5.7:
-        build:
-            context: './mysql/'
-            dockerfile: 'Dockerfile'
-            args:
-                buildno: 1
-            labels: 
-                description: "mysqlmysql"
+        image: mysql:5.7
         container_name: mysql.5.7
         ports:
             - "3306:3306"
         volumes:
             - mysql.5.7:/var/lib/mysql
-            - ./mysql/sql-scripts:/tmp/database
-        command: mysqld --init-file="/tmp/database/redmine.sql"
+            - ./mysql:/tmp/database
+        command: mysqld --init-file="/tmp/database/init.sql"
         environment:
             - MYSQL_ROOT_PASSWORD=my-password
             - MYSQL_DATABASE=redmine
 
     redmine:
-        build: 
-            context: './redmine/'
-            dockerfile: 'Dockerfile'
-            args:
-                buildno: 1
-            labels: 
-                description: "redred"
+        image: redmine
         container_name: redmine
         ports:
             - "80:3000"
@@ -39,7 +27,7 @@ services:
         image: phpmyadmin/phpmyadmin
         container_name: phpmyadmin
         ports: 
-            - "8081:80"
+            - "8080:80"
         environment:
             - PMA_HOST=mysql.5.7
         depends_on:

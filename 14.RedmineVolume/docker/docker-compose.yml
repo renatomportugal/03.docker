@@ -9,8 +9,8 @@ services:
             - "3306:3306"
         volumes:
             - mysql.5.7:/var/lib/mysql
-            - ./mysql/sql-scripts:/tmp/database
-        command: mysqld --init-file="/tmp/database/redmine.sql"
+            - ./mysql:/tmp/database
+        command: mysqld --init-file="/tmp/database/init.sql"
         environment:
             - MYSQL_ROOT_PASSWORD=my-password
             - MYSQL_DATABASE=redmine

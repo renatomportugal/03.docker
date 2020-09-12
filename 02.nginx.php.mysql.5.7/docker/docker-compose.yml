@@ -4,6 +4,7 @@ services:
     mysql.5.7:
         image: mysql:5.7
         container_name: mysql.5.7
+        restart: always
         ports:
             - "3306:3306"
         volumes:
@@ -16,6 +17,7 @@ services:
     php:
         image: php:7-fpm-buster
         container_name: php
+        restart: always
         volumes:
             - ../src:/var/www
             - ".:/var/www/html"
@@ -35,6 +37,7 @@ services:
 
     nginx:
         container_name: nginx
+        restart: always
         ports:
             - "8027:80"
             - "443:443"
@@ -53,6 +56,7 @@ services:
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         container_name: phpmyadmin
+        restart: always
         ports: 
             - "8080:80"
         environment:
