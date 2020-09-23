@@ -132,10 +132,14 @@ caso não consiga logar no repositório do WSO pelo servidor, alterar a tag para
 FROM wso2/wso2am-analytics-worker:3.2.0
 
 ________________________________________________________________________
-__Personalizando os CONF
+__2º Passo - Personalizando os CONF
+__PASTA apim
 Alterar o conf do APIMANAGER em docker-apim-3.2.x\docker-compose\apim-with-analytics\conf\apim\repository\conf
+cd docker-apim-master/docker-compose/apim-with-analytics/conf/apim/repository/conf
 
 editar o arquivo deployment.toml
+nano deployment.toml
+
 alterar todos os localhost para url do servidor
 seuDominio.com
 
@@ -158,25 +162,32 @@ username = "admin"
 password = "adminPower"
 create_admin_account = true
 
-ALTERAR O ARQUIVO DE CONFIGURAÇÃO DO ANALYTICS DASHBOARD
+__ALTERAR O ARQUIVO DE CONFIGURAÇÃO DO ANALYTICS DASHBOARD
+__Pasta apim-analytics-dashboard
+cd docker-apim-master/docker-compose/apim-with-analytics/conf/apim-analytics-dashboard/conf/dashboard
 docker-apim-3.2.x\docker-compose\apim-with-analytics\conf\apim-analytics-dashboard\conf\dashboard
+
 editar o arquivo deployment.yaml
+nano deployment.yaml
+
 alterar todos os localhost para url do servidor 
 seuDominio.com
 
 ALTERAR TODOS OS CAMPOS DE PASSWORD admin para adminPower
 de
 linha 340 password: admin
-linha 386 password: admin
-linha 391 password: admin
+linha 386 adminPassword: admin
+linha 391 kmPassword: admin
 para
 linha 340 password: adminPower
-linha 386 password: adminPower
-linha 391 password: adminPower
+linha 386 adminPassword: adminPower
+linha 391 kmPassword: adminPower
 
-ALTERAR O ARQUIVO DE CONFIGURAÇÃO DO ANALYTICS WORKER
+__ALTERAR O ARQUIVO DE CONFIGURAÇÃO DO ANALYTICS WORKER
+__Pasta apim-analytics-worker
 docker-apim-3.2.x\docker-compose\apim-with-analytics\conf\apim-analytics-worker\conf\worker
 editar o arquivo deployment.yaml
+
 alterar todos os localhost para url do servidor
 seuDominio.com
 
@@ -220,3 +231,8 @@ auth.configs:
             username: admin
             password: YWRtaW5Qb3dlcg==
             roles: 1
+
+
+cd docker-apim/docker-compose/apim-with-analytics
+
+docker-compose up --build
