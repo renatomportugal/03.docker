@@ -118,8 +118,7 @@ docker login docker.wso2.com
 caso não consiga logar no repositório do WSO pelo servidor, alterar a tag para chamar a imagem do Docker HUB https://hub.docker.com/r/wso2/wso2am-analytics-dashboard/tags
 FROM wso2/wso2am-analytics-dashboard:3.2.0-centos
 
-
-Alterar o Dockfile do API Manager Analytics Worker
+__Alterar o Dockfile do API Manager Analytics Worker
 docker-apim-3.2.x\docker-compose\apim-with-analytics\dockerfiles\apim-analytics-worker
 editar o Dockerfile na pasta
 Acessar o repositório oficial do API Manager em https://docker.wso2.com/tags.php?repo=wso2am-analytics-worker e ver a tag do centos 3.2
