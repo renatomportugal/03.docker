@@ -66,6 +66,41 @@ For broker:
 https://localhost:9446/carbon
 
 
+
+________________________________________________________________________
+__Instalação sem alterar nada
+https://github.com/wso2/docker-apim
+https://github.com/wso2/docker-apim/tree/master/docker-compose/apim-with-analytics
+
+docker-apim-3.2.x\docker-compose\apim-with-analytics\dockerfiles\apim\
+FROM wso2/wso2am:3.2.0-centos
+docker-apim-3.2.x\docker-compose\apim-with-analytics\dockerfiles\apim-analytics-dashboard
+FROM wso2/wso2am-analytics-dashboard:3.2.0-centos
+docker-apim-3.2.x\docker-compose\apim-with-analytics\dockerfiles\apim-analytics-worker
+FROM wso2/wso2am-analytics-worker:3.2.0
+
+docker-compose up --build
+
+Access the WSO2 API Manager web UIs using the below URLs via a web browser.
+https://localhost:9443/publisher
+https://localhost:9443/devportal
+https://localhost:9443/admin
+https://localhost:9443/carbon
+Login to the web UIs using following credentials.
+
+Username: admin
+Password: admin
+Please note that API Gateway will be available on following ports.
+
+https://localhost:8243
+https://localhost:8280
+Access the WSO2 API Manager Analytics web UIs using the below URL via a web browser.
+
+https://localhost:9643/analytics-dashboard
+Login to the web UIs using following credentials.
+Username: admin
+Password: admin
+
 ________________________________________________________________________
 __Instalação Personalizada
 
@@ -234,6 +269,9 @@ auth.configs:
 
 
 cd docker-apim/docker-compose/apim-with-analytics
+
+
+
 
 docker-compose up --build
 
