@@ -72,6 +72,11 @@ __Instalação sem alterar nada
 https://github.com/wso2/docker-apim
 https://github.com/wso2/docker-apim/tree/master/docker-compose/apim-with-analytics
 
+docker login docker.wso2.com
+git clone https://github.com/wso2/docker-apim
+cd docker-apim/docker-compose/apim-with-analytics
+docker-compose up --build
+
 docker-apim-3.2.x\docker-compose\apim-with-analytics\dockerfiles\apim\
 FROM wso2/wso2am:3.2.0-centos
 docker-apim-3.2.x\docker-compose\apim-with-analytics\dockerfiles\apim-analytics-dashboard
