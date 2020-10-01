@@ -301,3 +301,7 @@ Login to the web UIs using following credentials.
 
 Username: admin
 Password: admin
+
+
+ERROS:
+https://apim.docs.wso2.com/en/latest/troubleshooting/troubleshooting-invalid-callback-error/
