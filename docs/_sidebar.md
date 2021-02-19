@@ -1,2 +1,2 @@
 <!-- docs/_sidebar.md -->
-- [About](index.md)
+- [About](about.md)
