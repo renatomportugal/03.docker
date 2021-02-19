@@ -2,11 +2,11 @@
 
 - [HOME](./)
 
-- [Tutorials](./tutorials/index)
-  - [Tomcat](./tutorials/tomcat/index)
-  - [Cloud](./tutorials/cloud/index)
-  - [Java](./tutorials/java/index)
+- [Tutorials](./tutorials/index.md)
+  - [Tomcat](./tutorials/tomcat/index.md)
+  - [Cloud](./tutorials/cloud/index.md)
+  - [Java](./tutorials/java/index.md)
 
-- [About](./about/index)
+- [About](./about/index.md)
 
-- [Contact](./contact/index)
+- [Contact](./contact/index.md)
