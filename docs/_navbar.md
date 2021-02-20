@@ -1,13 +1,15 @@
-<!-- - [Home]()
+* Getting started
 
-- [Introduction](introduction.md)
+  * [Quick start](quickstart.md)
+  * [Writing more pages](more-pages.md)
+  * [Custom navbar](custom-navbar.md)
+  * [Cover page](cover.md)
 
-- [Configuration](configuration.md)
+* Configuration
+  * [Configuration](configuration.md)
+  * [Themes](themes.md)
+  * [Using plugins](plugins.md)
+  * [Markdown configuration](markdown.md)
+  * [Language highlight](language-highlight.md)
 
-- [Debug Bar](debug-bar.md)
-
-- [Debug Methods](debug-methods.md)
-
-- [Other Tools](other-tools.md)
-
-- [Donate](donate.md) -->
+* [:us:](/us/)

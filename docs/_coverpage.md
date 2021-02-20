@@ -1,12 +1,12 @@
-<!-- ![logo](https://cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/icons/docsify-darklight-theme-logo.png)
+![logo](img/logo.png)
 
-# docsify-darklight-theme-starter
+# docsify <small>3.5</small>
 
-> A magical documentation site generator with dark and light mode switch.
+> A magical documentation site generator.
 
-- Themes are customizable based on your color preferences.
-- Themes are remembered and retrieved from local storage.
-- Redesigned search box.
+- Simple and lightweight
+- No statically built html files
+- Multiple themes
 
-[Preview](https://boopathikumar018.github.io/docsify-darklight-theme)
-[Getting Started](#docsify) -->
+[GitHub](https://github.com/docsifyjs/docsify/)
+[Get Started](#Titulo1)
