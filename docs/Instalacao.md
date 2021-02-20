@@ -1,13 +1,13 @@
 # Instalação do Docker
 https://docs.docker.com/engine/install/ubuntu/<br>
 
-## Verificar se já está instalado
+## Verificar se já está instalado <!-- {docsify-ignore} -->
 ```
 docker -v
 ```
 
 ## No CentOS 7
-### Instalação do Sistema Operacional
+### Instalação do Sistema Operacional <!-- {docsify-ignore} -->
 Baixar a ISO<br>
 http://isoredirect.centos.org/centos/7/isos/x86_64/<br>
 
@@ -18,7 +18,7 @@ Bibliotecas de Compatibilidade<br>
 Ferramentas de Administração de Sistema<br>
 https://docs.docker.com/engine/install/centos/<br>
 
-### Passo 00
+### Passo 00 <!-- {docsify-ignore} -->
 Configuração do proxy para empresas que usam. Residencial e conexões comuns nem precisa.<br>
 ```
 sudo nano /etc/yum.conf
@@ -31,7 +31,7 @@ Ctrl+x
 
 ```
 
-### Passo 01
+### Passo 01 <!-- {docsify-ignore} -->
 Setup do repositório<br>
 ```
 sudo yum install -y yum-utils
@@ -41,7 +41,7 @@ sudo yum-config-manager \
     https://download.docker.com/linux/centos/docker-ce.repo
 ```
 
-### Passo 02
+### Passo 02 <!-- {docsify-ignore} -->
 Instalar Docker Engine<br>
 ```
 sudo yum install docker-ce docker-ce-cli containerd.io
@@ -50,23 +50,23 @@ Veja se a fingerprint está correta e aceite<br>
 ```
 060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35,
 ```
-### Passo 03
+### Passo 03 <!-- {docsify-ignore} -->
 Inicie o Docker<br>
 ```
 sudo systemctl start docker
 ```
-### Passo 04
+### Passo 04 <!-- {docsify-ignore} -->
 Inclua o usuário atual no grupo Docker<br>
 ```
 whoami
 sudo usermod -aG docker usuario
 ```
-### Passo 05
+### Passo 05 <!-- {docsify-ignore} -->
 Reiniciar o sistema.<br>
 ```
 reboot
 ```
-### Passo 06
+### Passo 06 <!-- {docsify-ignore} -->
 Fazer o Docker iniciar coma máquina:<br>
 Verificar se o serviço docker está iniciado:<br>
 ```
@@ -85,9 +85,9 @@ sudo systemctl enable docker
 sudo systemctl status docker
 ```
 
-## Passo07
+## Passo07 <!-- {docsify-ignore} -->
 Instalar o docker-compose<br>
-### Instalação Normal
+### Instalação Normal <!-- {docsify-ignore} --> 
 https://docs.docker.com/compose/install/<br>
 
 Run this command to download the current stable release of Docker Compose:<br>
@@ -107,13 +107,13 @@ Install command completion<br>
 cd /etc/bash_completion.d/
 sudo curl -L https://raw.githubusercontent.com/docker/compose/1.26.0/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
 ```
-#### Possíveis erros
+#### Possíveis erros <!-- {docsify-ignore} -->
 Note: If the command docker-compose fails after installation, check your path. You can also create a symbolic link to /usr/bin or any other directory in your path.<br>
 ```
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 ```
 
-### Instalação alternativa
+### Instalação alternativa <!-- {docsify-ignore} -->
 ```
 https://github.com/docker/compose/releases/
 
@@ -136,7 +136,7 @@ sudo cp docker-compose-completion /etc/bash_completion.d/docker-compose
 ```
 
 
-## Passo 08
+## Passo 08 <!-- {docsify-ignore} -->
 Configurar o proxy (se não usar não faça)<br>
 ```
 sudo nano /etc/sysconfig/docker
@@ -189,7 +189,7 @@ Verificar versão:<br>
 ```
 cat /etc/centos-release
 ```
-## Passo 01
+## Passo 01 <!-- {docsify-ignore} -->
 Preparar o proxy.<br>
 ```
 nano /etc/dnf/dnf.conf
@@ -210,7 +210,7 @@ sslverify=false
 ```
 Para gravar Ctrl+O, Enter, e para sair Ctrl+X<br>
 
-## Passo 02
+## Passo 02 <!-- {docsify-ignore} -->
 Update do sistema.<br>
 ```
 dnf update
@@ -218,7 +218,7 @@ dnf check-update
 dnf clean all
 ```
 
-## Passo 03
+## Passo 03 <!-- {docsify-ignore} -->
 Remover as versões anteriores.<br>
 ```
 dnf remove docker \
@@ -230,7 +230,7 @@ dnf remove docker \
     docker-logrotate \
     docker-engine
 ```
-## Passo 04
+## Passo 04 <!-- {docsify-ignore} -->
 Adicionar o repositório:<br>
 ```
 dnf -y install epel-release
@@ -248,19 +248,19 @@ dnf repolist
 dnf --disablerepo="*" --enablerepo="epel" list available | wc -l
 dnf repolist -v
 ```
-## Passo 05
+## Passo 05 <!-- {docsify-ignore} -->
 Instalar o Docker:<br>
 ```
 dnf install docker-ce docker-ce-cli containerd.io --nobest
 ```
 
-## Passo 06
+## Passo 06 <!-- {docsify-ignore} -->
 Verificar:<br>
 ```
 docker -v
 ```
 
-## Passo 07
+## Passo 07 <!-- {docsify-ignore} -->
 Colocar o usuário no grupo Docker:<br>
 ```
 whoami
@@ -271,7 +271,7 @@ Verificar:<br>
 id USER
 ```
 
-## Passo 08
+## Passo 08 <!-- {docsify-ignore} -->
 Iniciar com a máquina:<br>
 ```
 systemctl status docker
@@ -281,7 +281,7 @@ systemctl start docker
 systemctl status docker
 reboot
 ```
-## Passo 09
+## Passo 09 <!-- {docsify-ignore} -->
 Configurar o proxy (se não usar não faça)<br>
 ```
 nano /etc/sysconfig/docker
@@ -327,13 +327,13 @@ Para testar, deverá ter sucesso ao baixar:<br>
 docker pull alpine
 ```
 
-## Passo 10
+## Passo 10 <!-- {docsify-ignore} -->
 Instalar o docker-compose<br>
 ```
 sudo curl -L "https://github.com/docker/compose/releases/download/1.27.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 ```
-### Método alternativo
+### Método alternativo <!-- {docsify-ignore} -->
 ```
 wget https://github.com/docker/compose/releases/download/1.27.1/docker-compose-Linux-x86_64
 ```
@@ -354,14 +354,14 @@ Para testar:<br>
 ```
 docker-compose --help
 ```
-## Passo 11
+## Passo 11 <!-- {docsify-ignore} -->
 Desabilitar firewall (caso esteja ativo)<br>
 Este passo é para quem não precisa. Assim que possível pesquisarei sobre o assunto.<br>
 ```
 service firewalld stop
 systemctl disable firewalld
 ```
-## Passo 12
+## Passo 12 <!-- {docsify-ignore} -->
 Reiniciar serviços de Daemon e docker.<br>
 ```
 systemctl daemon-reload
@@ -369,13 +369,13 @@ systemctl restart docker
 ```
 
 ## No Ubuntu
-###  Passo 01
+###  Passo 01 <!-- {docsify-ignore} -->
 Atualizar o sistema<br>
 ```
 sudo apt-get update
 ```
   
-### Passo 02
+### Passo 02 <!-- {docsify-ignore} -->
 Copiar e colar todas essas linhas (-y aceita tudo por padrão)<br>
 ```
 sudo apt-get install \
@@ -386,13 +386,13 @@ sudo apt-get install \
     software-properties-common -y
 ```
 
-### Passo 03
+### Passo 03 <!-- {docsify-ignore} -->
 Adicionar a chave oficial do Docker<br>
 ```
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 ```
 
-### Passo 04
+### Passo 04 <!-- {docsify-ignore} -->
 Verificar a impressão digital<br>
 ```
 sudo apt-key fingerprint 0EBFCD88
@@ -405,7 +405,7 @@ uid           [ unknown] Docker Release (CE deb) <docker@docker.com>
 sub   rsa4096 2017-02-22 [S]
 ```
 
-### Passo 05
+### Passo 05 <!-- {docsify-ignore} -->
 Setup do repositório<br>
 ```
 sudo add-apt-repository \
@@ -414,26 +414,26 @@ sudo add-apt-repository \
    stable"
 ```
 
-### Passo 06
+### Passo 06 <!-- {docsify-ignore} -->
 Instalar o motor Docker<br>
 ```
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io
 ```
 
-### Passo 07
+### Passo 07 <!-- {docsify-ignore} -->
 Verificar se instalou<br>
 ```
 docker --help
 ```
 
-### Passo 08
+### Passo 08 <!-- {docsify-ignore} -->
 Rodar a imagem hello-world<br>
 ```
 sudo docker run hello-world
 ```
 
-### Passo 09
+### Passo 09 <!-- {docsify-ignore} -->
 Ver quais containers existem<br>
 ```
 docker ps
@@ -447,19 +447,19 @@ Colocaremos o usuário no grupo Docker.<br>
 sudo usermod -aG docker usuario
 ```
 
-### Passo 10
+### Passo 10 <!-- {docsify-ignore} -->
 Reiniciar o sistema.<br>
 ```
 reboot
 ```
 
-### Passo 11
+### Passo 11 <!-- {docsify-ignore} -->
 Verifica se o grupo foi adicionado ao usuário, aparecerá o grupo docker no final.<br>
 ```
 groups
 ```
 
-### Passo 12
+### Passo 12 <!-- {docsify-ignore} -->
 Fazer o Docker iniciar coma máquina:<br>
 Verificar se o serviço docker está iniciado:<br>
 ```
@@ -483,7 +483,8 @@ https://docs.docker.com/engine/install/debian/#install-using-the-convenience-scr
 ```
 Raspbian
 
-1. Install
+Install
+
 cd ~
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
