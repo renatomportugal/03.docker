@@ -1,6 +1,6 @@
-* Getting started
+* Básico
 
-  * [Quick start](quickstart.md)
+  * [Comandos Linux](ComandosLinux.md)
   * [Writing more pages](more-pages.md)
   * [Custom navbar](custom-navbar.md)
   * [Cover page](cover.md)
