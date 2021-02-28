@@ -1,0 +1,14 @@
+```
+Ubuntu server 20.01
+English
+Layout Portuguese Brasil, Variant Portuguese Brasil
+Done
+
+Coloque o cabo de rede
+subnet 192.168.1.0/24
+
+Não instalar snaps adicionais.
+
+
+
+```
