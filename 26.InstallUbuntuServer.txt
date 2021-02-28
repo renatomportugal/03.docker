@@ -50,7 +50,24 @@ Enter
 Ctrl+X
 
 sudo chmod 600 /etc/network/interfaces
-service networking restart
+service networking restart (não funcionou)
+
+sudo apt-get install wpasupplicant
+
+sudo nano /etc/wpa_supplicant.conf
+network={
+    ssid="ssid_name"
+    psk="password"
+}
+
+Ctrl+O
+Enter
+Ctrl+X
+
+sudo wpa_supplicant -B -i wlp3s0 -c /etc/wpa_supplicant.conf -D wext
+sudo dhclient -v <sua-interface-wi-fi>
+sudo dhclient -v wlp3s0
+
 
 
 ```
