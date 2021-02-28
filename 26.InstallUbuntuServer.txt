@@ -1,4 +1,5 @@
 ```
+Com o cabo de rede e com o Pendrive:
 Ubuntu server 20.01
 English
 Layout Portuguese Brasil, Variant Portuguese Brasil
@@ -9,6 +10,47 @@ subnet 192.168.1.0/24
 
 Não instalar snaps adicionais.
 
+Reboot
+
+De outro PC:
+Abra o Putty
+Acesse 192.168.1.108 na porta 22(veja seu IP)
+
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get update
+
+sudo nano /etc/network/interfaces
+
+iwconfig
+sudo apt install wireless-tools
+
+ifconfig
+sudo apt install net-tools
+
+iwlist scan
+wlp3s0    Failed to read scan data : Network is down
+enp0s4    Interface doesn't support scanning.
+
+iwlist wlp3s0 scan
+wlp3s0    Failed to read scan data : Network is down
+
+Veja o nome da rede em outro dispositivo
+iwconfig wlp3s0 essid <NOME-DA-REDE> mode managed
+
+sudo nano /etc/network/interfaces
+
+auto wlp3s0
+iface wlp3s0 inet dhcp
+wpa-ssid <NOME-DA-REDE>
+wpa-psk <SENHA>
+
+Ctrl+O
+Enter
+Ctrl+X
+
+sudo chmod 600 /etc/network/interfaces
+service networking restart
 
 
 ```
