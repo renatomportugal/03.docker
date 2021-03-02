@@ -369,6 +369,7 @@ systemctl restart docker
 ```
 
 ## No Ubuntu
+https://docs.docker.com/engine/install/ubuntu/<br>
 ###  Passo 01 <!-- {docsify-ignore} -->
 Atualizar o sistema<br>
 ```
@@ -476,6 +477,17 @@ Habilitar o docker com o início da máquina:<br>
 ```
 sudo systemctl enable docker
 sudo systemctl status docker
+```
+
+### Passo 13 <!-- {docsify-ignore} -->
+Instalar o Docker Compose<br>
+https://docs.docker.com/compose/install/<br>
+```
+sudo curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+sudo chmod +x /usr/local/bin/docker-compose
+
+docker-compose --version
 ```
 
 ## No Raspberry Pi 3
