@@ -1,3 +1,5 @@
+## elasticsearch
+```
 __Elasticsearch
 dentro da pasta containers
 cd /home/usuario/Desktop/containers
@@ -65,3 +67,4 @@ curl -XGET http://elasticsearch:9200/my-index/cities/1?pretty
 curl -XGET http://elasticsearch:9200/my-index/cities/2?pretty
 
 curl -XGET http://elasticsearch:9200/my-index/_search?q=city:new
+```

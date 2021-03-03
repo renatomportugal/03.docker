@@ -1,3 +1,5 @@
+## rancher-rancher
+```
 https://rancher.com/docs/rancher/v2.x/en/installation/other-installation-methods/single-node-docker/
 
 1.Baixar
@@ -120,5 +122,4 @@ docker run -d --restart=unless-stopped \
   -v /<CERT_DIRECTORY>/<PRIVATE_KEY.pem>:/etc/rancher/ssl/key.pem \
   -v /<CERT_DIRECTORY>/<CA_CERTS.pem>:/etc/rancher/ssl/cacerts.pem \
   rancher/rancher:latest
-  
-  
+```

@@ -1,3 +1,5 @@
+# redis
+```
 __REDIS
 docker run redis
 
@@ -59,3 +61,4 @@ docker ps
 
 PERSISTENT DATA
 docker run -d --name redisMapped -v /opt/docker/data/redis:/data redis
+```

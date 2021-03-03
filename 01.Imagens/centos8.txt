@@ -1,3 +1,4 @@
+## centos8
 ```
 docker pull centos:centos8
 docker run --name centos08.server -ti -d --privileged=true centos:8 "/sbin/init"
@@ -94,55 +95,7 @@ yum install docker-ce
 wget https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl.py -O /usr/local/bin/systemctl
 
 
-
-
-
-
 docker run hello-world
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 docker run -i -t centos:8 /bin/bash
 yum update
@@ -276,7 +229,5 @@ curl -L "https://github.com/docker/compose/releases/download/1.25.0/docker-compo
 chmod +x /usr/local/bin/docker-compose
 
 docker-compose -v
-
-
 
 ```

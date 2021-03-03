@@ -1,3 +1,5 @@
+## registry
+```
 https://hub.docker.com/_/registry
 
 docker pull registry
@@ -9,3 +11,4 @@ Now, use it from within Docker:
 $ docker pull ubuntu
 $ docker tag ubuntu localhost:5000/ubuntu
 $ docker push localhost:5000/ubuntu
+```

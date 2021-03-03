@@ -1,3 +1,5 @@
+## onlyoffice
+```
 Fazer em 12JUL20
 cd oo
 sudo bash opensource-install.sh -ims false
@@ -42,3 +44,4 @@ Ele baixará as imagens e ajustará conforme a necessidade.
 Ao terminar acesse localhost
 
 __Configuração
+```

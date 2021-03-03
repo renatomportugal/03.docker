@@ -1,3 +1,5 @@
+## nodejs
+```
 no terminal podemos ver que não há o nodejs instalado (no Sistema Operacional)
 node -v
 bem como o npm
@@ -174,3 +176,4 @@ mostrará o conteúdo (Hi)
 _____
 __Testar
 https://www.katacoda.com/courses/docker/3
+```

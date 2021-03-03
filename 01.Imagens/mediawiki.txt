@@ -1,3 +1,5 @@
+## mediawiki
+```
 https://hub.docker.com/_/mediawiki
 
 docker pull mediawiki
@@ -27,3 +29,4 @@ docker run \
   
   ## The protocol and server name to use in fully-qualified URLs
   $wgServer = "http://tecnocrata.ddns.net";
+```

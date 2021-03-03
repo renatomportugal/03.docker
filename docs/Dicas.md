@@ -1,4 +1,14 @@
 # Dicas
+# Reiniciar Automaticamente
+Fazer com que todos os containers reiniciem automaticamente<br>
+```
+docker inspect -f "{{ .HostConfig.RestartPolicy }}" $(docker ps -q)
+```
+Iniciar todos os Containers com o Docker<br>
+```
+docker update --restart=always $(docker ps -q)
+```
+
 # Acessar o container
 ```
 docker ps -a

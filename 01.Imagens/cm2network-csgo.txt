@@ -1,3 +1,5 @@
+## centos8
+```
 https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Dedicated_Servers
 
 docker run -d --net=host --name=csgo-dedicated -e SRCDS_TOKEN={YOURTOKEN} cm2network/csgo
@@ -112,20 +114,8 @@ Instalar o ping
 apt-get update
 apt-get install iputils-ping
 
-
-
-
-
-
-
-
-
-
-
-
-
 https://hub.docker.com/r/dorowu/ubuntu-desktop-lxde-vnc
 
-
-
 sudo dpkg --add-architecture i386; sudo apt update; sudo apt install mailutils postfix curl wget file tar bzip2 gzip unzip bsdmainutils python util-linux ca-certificates binutils bc jq tmux netcat lib32gcc1 lib32stdc++6 steamcmd
+
+```

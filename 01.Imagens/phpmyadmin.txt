@@ -1,3 +1,5 @@
+## phpmyadmin
+```
 __PHPMYDMIN
 docker pull phpmyadmin/phpmyadmin
 docker images
@@ -37,3 +39,4 @@ docker stop 3e
 docker container prune -f
 docker ps
 docker ps -a
+```

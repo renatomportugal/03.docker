@@ -1,3 +1,5 @@
+## wordpress
+```
 Instale o MySQL e o PHPmyAdmin, veja em no arquivo deste mesmo diretório mysql.txt
 
 docker pull wordpress:5.4
@@ -88,3 +90,4 @@ docker ps
 docker ps -a
 docker container prune -f
 docker ps -a
+```

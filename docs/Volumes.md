@@ -1,7 +1,7 @@
-# Como funciona
+# Volumes
 Ao criar um caontainer o docker cria um volume de nome aleatório<br>
 
-## Como saber onde estão meus dados
+# Onde estão meus dados
 O item Mounts.Source indica a pasta que os dados estão<br>
 ```
 docker inspect <id>

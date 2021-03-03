@@ -1,4 +1,5 @@
-# Comando
+# Raspberry
+## Comandos
 Verificar arquitetura do Raspberry<br>
 ```
 cat /proc/cpuinfo
@@ -12,22 +13,22 @@ Ver processamento<br>
 htop
 ```
 
-# Imagens
+## Imagens
 https://hub.docker.com/u/arm32v7<br>
 ```
 Por problemas de arquitetura nem todas as imagens funcionarão.
 ```
-## Hello-world
+### Hello-world
 ```
 docker run hello-world
 ```
-## Postgres
+### Postgres
 ```
 docker pull postgres:9.6.19
 docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres:9.6.19
 ```
 
-## arm32v7/php:7.4-cli
+### arm32v7/php:7.4-cli
 https://hub.docker.com/r/arm32v7/php<br>
 ```
 docker pull arm32v7/php:7.4-cli

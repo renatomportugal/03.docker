@@ -1,3 +1,5 @@
+## docker
+```
 docker pull docker
 
 docker network create \
@@ -41,5 +43,4 @@ docker run --privileged --name some-docker -d \
 
 Where to store data
 docker run --privileged --name some-docker -v /my/own/var-lib-docker:/var/lib/docker -d docker:dind
-
-
+```

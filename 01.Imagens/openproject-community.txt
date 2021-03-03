@@ -1,3 +1,5 @@
+## openproject
+```
 admin/admin
 https://hub.docker.com/r/openproject/community
 
@@ -29,4 +31,4 @@ docker run -d -p 8080:80 --name openproject -e SECRET_KEY_BASE=secret \
   Since we named the container, you can now stop it by running:
   docker stop openproject
   docker start openproject
-  
+  ```

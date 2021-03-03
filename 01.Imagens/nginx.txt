@@ -1,3 +1,5 @@
+## nginx
+```
 docker pull nginx
 docker images
 docker run nginx
@@ -85,3 +87,4 @@ docker images
 docker run -d -p 80:80 my-nginx-image:latest
 curl -i http://docker
 docker ps
+```

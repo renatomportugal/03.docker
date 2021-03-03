@@ -1,3 +1,5 @@
+## mysql
+```
 docker pull mysql:5.7
 docker pull phpmyadmin/phpmyadmin
 
@@ -170,3 +172,4 @@ docker ps
 
 verifique se a variável foi atribuída
 docker exec 09 env
+```

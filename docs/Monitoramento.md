@@ -1,8 +1,83 @@
-# grafana-fundamentals
+# Monitoramento
+
+# Instalação CentOS
+## Git
+```
+sudo yum install git
+```
+
+Caso ainda não tenha instalado o docker:<br>
+```
+curl -fsSL https://get.docker.com | bash
+```
+### Clonar o projeto
+```
+git clone https://github.com/badtuxx/giropops-monitoring.git
+```
+### Ajustar a interação com o Slack
+```
+vim conf/alertmanager/config.yml
+```
+Preencha:<br>
+username(usuario), channel (#algumaCoisa), api_url(webhook... algo como https://hooks.slack.com/services/.../...)<br>
+
+## Netdata
+```
+bash <(curl -Ss https://my-netdata.io/kickstart.sh)
+```
+Agora acesse o localhost:19999<br>
+
+## Prometheus
+### Configurar
+```
+vim conf/prometheus/prometheus.yml
+```
+Na última linha em static_configs: -targets:[localhost:19999]
+
+## Docker Composer
+### Fazer o Deploy
+```
+docker swarm init
+cat docker-compose.yml
+docker stack deploy -c docker-compose.yml giropops
+```
+
+### Verifica se subiu
+```
+docker service ls
+```
+Acessar o prometheus em localhost:9090<br>
+Acessar o alert manager em localhost:9093<br>
+Acessar o alert grafana em localhost:3000, user admin, senha giropops<br>
+Acessar o alert node exporter em localhost:9100/metrics<br>
+
+### Iniciando o docker swarm
+```
+docker swarm init
+```
+
+## Alerts
+```
+cat conf/prometheus/alert.rules
+```
+
+
+Verficar<br>
+```
+watch -n 2 'docker ps --format "table {{.ID}}\t {{.Image}}\t {{.Status}}"'
+```
+
+# Logs
+Veja os últimos 1000 erros com o comando:<br>
+```
+docker logs <id> --tail 1000
+```
+
+# Grafana
 ```
 https://grafana.com/tutorials/
 ```
-## Introduction
+## 1. Introduction
 https://grafana.com/tutorials/grafana-fundamentals/#1<br>
 
 Prerequisites<br>
@@ -11,7 +86,7 @@ https://docs.docker.com/install/
 https://docs.docker.com/compose/
 https://git-scm.com/
 ```
-## Set up the sample application
+## 2. Set up the sample application
 https://grafana.com/tutorials/grafana-fundamentals/#2<br>
 ```
 cd ~
@@ -23,17 +98,17 @@ docker ps
 docker-compose up -d
 docker-compose ps
 ```
-### Acessar a porta 8081
+### 2.1. Acessar a porta 8081
 ```
 http://localhost:8081
 Title = Example.
 URL= https://example.com.
 Submit
 ```
-## Login no Grafana
+## 3. Login no Grafana
 https://grafana.com/tutorials/grafana-fundamentals/#3<br>
 
-### Acessar a porta 3000
+### 3.1. Acessar a porta 3000
 ```
 Abrir outra aba
 localhost:3000
@@ -46,7 +121,7 @@ Mude o password para admin2
 Confirme o password para admin2
 Salvar
 ```
-## Adicionar fonte de dados para métricas
+## 4. Adicionar fonte de dados para métricas
 https://grafana.com/tutorials/grafana-fundamentals/#4<br>
 ```
 Na barra vertical lateral esquerda, vá em Configurações (ícone engrenagem) e clique em Data Sources.
@@ -57,7 +132,7 @@ http://prometheus:9090
 Vá em baixo, clique no Botão Save & Test.
 Vai aparecer uma notificação "Data Source is Working"
 ```
-## Explorando as métricas
+### 4.1. Explorando as métricas
 https://grafana.com/tutorials/grafana-fundamentals/#5<br>
 ```
 Na barra vertical lateral esquerda, vá em Explore (ícone bússola).
@@ -83,7 +158,7 @@ No canto superior direito selecione o tempo "Last 5 minutes" (ícone de relógio
 Clique na legenda para selecionar por rota.
 ```
 
-## Adicionar uma fonte de log
+## 5. Adicionar uma fonte de log
 https://grafana.com/tutorials/grafana-fundamentals/#6<br>
 ```
 Na barra vertical lateral esquerda, vá em Configurações (ícone engrenagem) e clique em Data Sources.
@@ -96,7 +171,7 @@ Vá em baixo, clique no Botão Save & Test.
 Vai aparecer uma notificação "Data Source connected and labels found"
 
 ```
-## Explorando os logs
+## 6. Explorando os logs
 https://grafana.com/tutorials/grafana-fundamentals/#7<br>
 ```
 Na barra vertical lateral esquerda, vá em Explore (ícone bússola).
@@ -126,7 +201,7 @@ Clique na linha onde diz level=error msg="empty url" para visualizar informaçõ
 Logs são úteis para entender o que está errado. 
 ```
 
-## Construindo um dashboard
+## 7. Construindo um dashboard
 https://grafana.com/tutorials/grafana-fundamentals/#8<br>
 ```
 O dashboard nos dá uma visão melhor e permite rastrear metricas de diferentes visualizações.
@@ -150,7 +225,7 @@ Clique no ícode de disquete para salvar o dashboard.
 Coloque o nome "Dashboard Traffic" e clique no botão Save.
 ```
 
-# Annotate events
+## 8. Annotate events
 https://grafana.com/tutorials/grafana-fundamentals/#9<br>
 ```
 Quando as coisas vão mal, é necessário enender o contexto da falha. Tempo da última implantação, mudanças de sistemas, ou migração de bases de dados podem oferecer uma visão sobre o que pode ter causado uma interrupção. As anotações permitem que você represente tais eventos diretamente em seus gráficos.
@@ -194,7 +269,7 @@ As linhas de registro retornadas por sua consulta agora são exibidas como anota
 Ser capaz de combinar dados de várias fontes de dados em um gráfico permite correlacionar informações do Prometheus e do Loki.
 ```
 
-# Configure um alerta
+## 9. Configure um alerta
 ```
 Os alertas permitem que você identifique problemas em seu sistema momentos após eles ocorrerem. Ao identificar rapidamente mudanças não intencionais em seu sistema, você pode minimizar interrupções em seus serviços.
 
@@ -204,7 +279,7 @@ Canal de notificação - Como o alerta é entregue. Quando as condições de uma
 Regras de alerta - quando o alerta é acionado. As regras de alerta são definidas por uma ou mais condições que são avaliadas regularmente pela Grafana.
 ```
 
-# Configure um canal de notificação
+## 10. Configure um canal de notificação
 ```
 Nesta etapa, você enviará alertas usando web hooks. Para testar seus alertas, primeiro você precisa ter um local para enviá-los.
 
@@ -234,7 +309,7 @@ Acesse a aba do endpoint e veja que haberá uma entrada de POST.
 Click Save.
 ```
 
-# Configure an alert rule
+## 11. Configure an alert rule
 ```
 Now that Grafana knows how to notify you, it’s time to set up an alert rule:
 
@@ -278,7 +353,7 @@ When Grafana triggers the alert, it sends a request to the web hook you set up e
 Browse to the Request Bin you created earlier, to inspect the alert notification.
 ```
 
-# Pause an alert
+## 12. Pause an alert
 ```
 Once you’ve acknowledged an alert, consider pausing it. This can be useful to avoid sending subsequent alerts, while you work on a fix.
 

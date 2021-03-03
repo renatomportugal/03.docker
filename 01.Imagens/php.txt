@@ -1,3 +1,5 @@
+## php
+```
 docker pull php:7.1.26-apache
 
 Instale o MySQL e o PHPmyAdmin, veja no arquivo https://github.com/renatomportugal/docker/blob/master/02.Producao.md
@@ -34,3 +36,4 @@ Insira no arquivo:
 <?php phpinfo(); ?>
 
 Pronto, acesse o localhost, e todas as mudanças automaticamente refletirão.
+```

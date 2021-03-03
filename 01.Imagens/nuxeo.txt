@@ -1,3 +1,5 @@
+## nuxeo
+```
 https://hub.docker.com/_/nuxeo
 
 docker pull nuxeo
@@ -56,5 +58,4 @@ NUXEO_ES_CLUSTER_NAME=dockerCluster
 NUXEO_ES_INDEX_NAME=nuxeo1
 NUXEO_ES_REPLICAS=0
 NUXEO_ES_SHARDS=5
-
-
+```

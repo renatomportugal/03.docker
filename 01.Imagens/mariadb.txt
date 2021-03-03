@@ -1,3 +1,5 @@
+## mariadb
+```
 https://hub.docker.com/_/mariadb
 
 docker pull mariadb
@@ -24,4 +26,4 @@ Many configuration options can be passed as flags to mysqld. This will give you 
 docker run --name some-mariadb -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mariadb:tag --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 
 docker run -it --rm mariadb:tag --verbose --help
-
+```
