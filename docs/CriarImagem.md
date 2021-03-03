@@ -1,4 +1,6 @@
-# php:7.1.26-apache
+# Criar Imagem
+
+## php:7.1.26-apache
 Baixar a imagem<br>
 ```
 docker pull php:7.1.26-apache
@@ -59,7 +61,8 @@ Rodar a imagem<br>
 ```
 docker run -p 80:80 minha_imagem
 ```
-# Ubuntu
+
+## Ubuntu
 Criando uma imagem docker<br>
 ```
 mkdir imgUbuntu
@@ -81,14 +84,17 @@ docker run -it --rm demo_tree
 Substitua o Dockerfile para:<br>
 ```
 FROM ubuntu
+```
 
+Criar Imagem<br>
+```
 RUN apt-get update && apt-get install tree
 ```
 Criar a imagem (cria com a etiqueta latest)<br>
 ```
 docker build -t demo_tree .
 ```
-Rodar a imagem. Use --rm para substituir caso exista.<br>
+Rodar a imagem. Use --rm para substituir caso exista<br>
 ```
 docker run -it --rm demo_tree
 ```

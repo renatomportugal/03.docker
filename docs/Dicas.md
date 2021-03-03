@@ -1,3 +1,10 @@
+# Dicas
+# Acessar o container
+```
+docker ps -a
+docker exec -it id_do_container bash
+```
+
 # Remover
 ## Remover todos os containers parados
 ```

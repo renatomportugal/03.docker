@@ -1,3 +1,74 @@
+# Instalação de Sistemas Operacionais Linux
+# Ubuntu
+
+## Programas
+### Terminal
+#### Nano
+```
+sudo su
+apt-get update
+apt-get install nano
+```
+#### Acesso Remoto via SSH (acesso ao terminal)
+Digite no terminal:<br>
+```
+apt-get install openssh-server
+service ssh status
+apt-get install nano
+nano /etc/ssh/sshd_config
+service ssh restart
+```
+#### Caso queira mexer nas configurações...
+```
+nano /etc/ssh/sshd_config
+service ssh restart
+```
+##### Como acessar de outro PC
+Especificando o usuário<br>
+```
+ssh ip -l usuario
+```
+Especificando a porta<br>
+```
+ssh ip -l usuario -p 22
+```
+#### Instalando o Docker
+Caso ainda náo tenha instalado o Docker, acesse o link abaixo?<br>
+https://github.com/renatomportugal/docker/blob/master/01.Install.md#no-ubuntu<br>
+
+##### Testar
+Instale o Container abaixo e acesse o seu endere;o na internet. Verá que funcionou...<br>
+```
+docker run -d -p 80:80 --restart=always nginx
+```
+
+#### Desinstalar programas
+```
+dpkg --list
+sudo apt-get --purge remove nome-do-programa
+sudo aptitude remove program
+```
+### GUI
+#### Chrome
+```
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt install ./google-chrome-stable_current_amd64.deb
+```
+#### Notepad++
+```
+sudo apt-get update
+sudo apt-get install notepadqq
+```
+#### Visual Studio Code
+```
+sudo apt-get update
+sudo apt-get install code 
+sudo apt-get update code
+```
+#### Veracrypt
+https://www.veracrypt.fr/en/Downloads.html<br>
+
+# Ubuntu Server
 ```
 1. INSTALAÇÃO
 Com o cabo de rede e com o Pendrive:
@@ -308,4 +379,144 @@ sudo chmod 755 /etc/init.d/meuscript
 
 sudo update-rc.d meuscript defaults
 
+```
+
+# CentOS
+
+## Gravar ISO no pendrive
+
+## Instalar
+
+### Mudar o ip da máquina (provisoriamente)
+```
+ip -c a
+```
+Minha placa de rede sem fio está no wlp2s0<br>
+Traduzindo: Adicionar (add) o endereço (a) ip (ip) 192.168.1.105 no dispositivo (dev) wlp2s0.
+```
+ip a add 192.168.1.105 dev wlp2s0
+```
+Reinicie a placa de rede<br>
+```
+ip link set dev wlp2s0 down
+ip link set dev wlp2s0 up
+```
+## Programas
+
+### Chrome
+```
+echo "You are using $(getconf LONG_BIT) bit Linux distro."
+uname -m
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+sudo yum install ./google-chrome-stable_current_*.rpm 
+google-chrome &
+```
+
+### VSCode
+```
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+sudo nano /etc/yum.repos.d/vscode.repos
+
+[code]
+name=Visual Studio Code
+baseurl=https://packages.microsoft.com/yumrepos/vscode
+enabled=1
+gpgcheck=1
+gpgkey=https://packages.microsoft.com/keys/microsoft.asc
+
+Ctrl+O, Enter, Ctrl+X
+
+sudo yum install code
+
+Não achará o pacote, então...
+sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+
+yum check-update
+sudo yum install code
+
+```
+#### Extensão Sync
+```
+Instale a extensão sync, de Shan Khan, atualmente na versão 3.4.3
+Vai precisar fazer o login no Chrome, na página do github antes...
+Ctrl+P, digite ">Sync: Download Settings" caso tenha alguma informação no Gist do Github.
+Se for a primeira vez, instale todas as extensões que quiser...
+Ctrl+P, digite ">Sync: Update/Upload Settings"
+```
+
+### Git
+Veja se tem instalado:<br>
+```
+git --version
+```
+Se for a versão 1.8.3.1 ou outra abaixo de 2.0, remova:<br>
+```
+sudo yum remove git*
+```
+
+Aponte para o repositório:<br>
+```
+sudo yum -y install https://packages.endpoint.com/rhel/7/os/x86_64/endpoint-repo-1.7-1.x86_64.rpm
+```
+Se tiver problema com proxy, tente este comando:<br>
+```
+sudo yum install git-all
+```
+
+Instale a nova versão:<br>
+```
+sudo yum install git
+```
+Veja se deu certo:<br>
+```
+git --version
+```
+Saída: git version 2.24.1<br>
+
+### Zoom
+https://support.zoom.us/hc/en-us/articles/204206269-Installing-or-updating-Zoom-on-Linux#h_b6ce9fba-dd38-4448-80c0-ac2e58db3acc<br>
+Download:<br>
+https://zoom.us/download?os=linux<br>
+```
+cd Downloads
+sudo yum localinstall zoom_x86_64.rpm
+zoom
+```
+### Postman
+https://www.postman.com/downloads/<br>
+```
+Baixar manualmente na pasta Downloads
+cd ~
+cd Downloads
+ls
+
+retorna o arquivo Postman-linux-x64-7.29.1.tar.gz
+sudo tar -xzf Postman-linux-x64-7.29.1.tar.gz -C /opt
+sudo ln -s /opt/Postman/Postman /usr/bin/postman
+
+A linha de baixo é se fer erro.
+sudo yum install libXScrnSaver-1.2.2-6.1.el7.x86_64
+
+Para abrir digite
+postman
+```
+### DBeaver
+https://computingforgeeks.com/install-and-configure-dbeaver-on-fedora-centos/<br>
+#### Install Java
+```
+curl -O https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bin.tar.gz
+tar zxvf openjdk-11.0.2_linux-x64_bin.tar.gz
+sudo mv jdk-11.0.2/ /usr/local/
+sudo nano /etc/profile.d/jdk11.sh
+Ctrl+O, Enter, Ctrl+X
+source /etc/profile.d/jdk11.sh
+java -version
+wich java
+```
+#### Download and Install DBeaver
+```
+sudo yum -y install wget
+wget https://dbeaver.io/files/dbeaver-ce-latest-stable.x86_64.rpm
+sudo rpm -Uvh ./dbeaver-ce-latest-stable.x86_64.rpm
+dbeaver
 ```
