@@ -393,6 +393,28 @@ Adicionar a chave oficial do Docker<br>
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 ```
 
+#### Método alternativo <!-- {docsify-ignore} -->
+Baixar o arquivo (https://download.docker.com/linux/ubuntu/gpg) no Browser ou em outro computador.<br>
+Instalar o programa WinSCP (https://winscp.net/eng/download.php)<br>
+Conectar via FTP no PC. Transferir o arquivo para a pasta do usuario que está usando.<br>
+```
+cd ~
+sudo apt-key add gpg
+```
+Acho que esssa parte de baixo não precisa. Próxima vez tentarei sem ela.
+```
+gpg --list-keys
+gpg --import gpg
+gpg --list-keys
+
+Aparecerá
+------------------------------
+pub   rsa4096 2017-02-22 [SCEA]
+      9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+uid           [ unknown] Docker Release (CE deb) <docker@docker.com>
+sub   rsa4096 2017-02-22 [S]
+```
+
 ### Passo 04 <!-- {docsify-ignore} -->
 Verificar a impressão digital<br>
 ```
@@ -429,12 +451,6 @@ docker --help
 ```
 
 ### Passo 08 <!-- {docsify-ignore} -->
-Rodar a imagem hello-world<br>
-```
-sudo docker run hello-world
-```
-
-### Passo 09 <!-- {docsify-ignore} -->
 Ver quais containers existem<br>
 ```
 docker ps
@@ -446,6 +462,38 @@ whoami
 Colocaremos o usuário no grupo Docker.<br>
 ```
 sudo usermod -aG docker usuario
+```
+
+### Passo 09 <!-- {docsify-ignore} -->
+Fazer o Docker iniciar coma máquina:<br>
+Verificar se o serviço docker está iniciado:<br>
+```
+sudo systemctl status docker
+Vai retornar:
+
+● docker.service - Docker Application Container Engine
+     Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
+     Active: active (running) since Wed 2021-03-03 14:23:22 UTC; 8min ago
+TriggeredBy: ● docker.socket
+       Docs: https://docs.docker.com
+   Main PID: 2710 (dockerd)
+      Tasks: 8
+     Memory: 41.0M
+     CGroup: /system.slice/docker.service
+             └─2710 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+A cor verde da bolinha ou a indicação da terceira linha (Active: active runnung) indica que o serviço está ativo, e a palavra enabled na linha Loaded (segunda linha) indica que está habilitado para iniciar com o Sistema..
+```
+Caso o serviço esteja parado:<br>
+Iniciar o serviço:<br>
+```
+sudo systemctl start docker
+sudo systemctl status docker
+```
+Caso o serviço não esteja habilitadoÇ<br>
+Habilitar o docker com o início da máquina:<br>
+```
+sudo systemctl enable docker
+sudo systemctl status docker
 ```
 
 ### Passo 10 <!-- {docsify-ignore} -->
@@ -461,34 +509,8 @@ groups
 ```
 
 ### Passo 12 <!-- {docsify-ignore} -->
-Fazer o Docker iniciar coma máquina:<br>
-Verificar se o serviço docker está iniciado:<br>
-```
-sudo systemctl status docker
-```
-
-Iniciar o serviço:<br>
-```
-sudo systemctl start docker
-sudo systemctl status docker
-docker ps
-```
-Habilitar o docker com o início da máquina:<br>
-```
-sudo systemctl enable docker
-sudo systemctl status docker
-```
-
-### Passo 13 <!-- {docsify-ignore} -->
 Instalar o Docker Compose<br>
-https://docs.docker.com/compose/install/<br>
-```
-sudo curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-
-sudo chmod +x /usr/local/bin/docker-compose
-
-docker-compose --version
-```
+[Docker Compose](#docker-compose)
 
 ## No Raspberry Pi 3
 https://docs.docker.com/engine/install/debian/#install-using-the-convenience-script<br>
@@ -540,12 +562,13 @@ docker images
 
 ```
 
-## Docker Compose
+## Docker-Compose
 https://docs.docker.com/compose/install/<br>
 
 Run this command to download the current stable release of Docker Compose:<br>
+Verifique a versão que está sendo utilizada no link acima. Hoje é dia 03 de março de 2021.
 ```
-sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 ```
 Apply executable permissions to the binary:<br>
 ```
@@ -558,9 +581,9 @@ docker-compose --version
 Install command completion<br>
 ```
 cd /etc/bash_completion.d/
-sudo curl -L https://raw.githubusercontent.com/docker/compose/1.26.0/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
+sudo curl -L https://raw.githubusercontent.com/docker/compose/1.28.5/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
 ```
-### Possíveis erros
+### Possíveis erros <!-- {docsify-ignore} -->
 Note: If the command docker-compose fails after installation, check your path. You can also create a symbolic link to /usr/bin or any other directory in your path.<br>
 ```
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
@@ -570,11 +593,12 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 https://docs.docker.com/compose/reference/<br>
 
-### Instalação alternativa
+### Instalação alternativa <!-- {docsify-ignore} -->
 ```
-https://github.com/docker/compose/releases/
+Acesse o site https://github.com/docker/compose/releases/, baixe o arquivo docker-compose-Linux-x86_64.<br>
 
-Estando na pasta, copie para /usr/local/bin/docker-compose
+Copie via FTP para a pasta do usuário.
+Estando na pasta do usuário, copie para /usr/local/bin/docker-compose utilizando o código abaixo:
 sudo cp ./docker-compose-Linux-x86_64 /usr/local/bin/docker-compose
 ```
 Apply executable permissions to the binary:<br>
@@ -587,7 +611,17 @@ docker-compose --version
 ```
 
 Install command completion<br>
+https://docs.docker.com/compose/install/
 ```
-Acesse https://raw.githubusercontent.com/docker/compose/1.27.3/contrib/completion/bash/docker-compose e salve como docker-compose-completion em qualquer pasta.
-sudo cp docker-compose-completion /etc/bash_completion.d/docker-compose
+
+Hoje é dia 03 de março de 2021, atualize a versão, atualmente na 1.28.5
+
+Acesse https://raw.githubusercontent.com/docker/compose/1.28.5/contrib/completion/bash/docker-compose e  baixe o arquivo como docker-compose-completion.txt.
+Copie via FTP para a pasta do usuário.
+Estando na pasta do usuário, copie utilizando o código abaixo:
+sudo cp docker-compose-completion.txt /etc/bash_completion.d/docker-compose
+
+Não retornará nenhuma mensagem, mas deu certo. Para ter certeza abra pra editar:
+sudo nano /etc/bash_completion.d/docker-compose
+Ctrl+X para sair, sem alterar.
 ```
