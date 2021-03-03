@@ -1,9 +1,0 @@
-## plone
-```
-https://hub.docker.com/_/plone
-docker pull plone
-
-docker run -p 80:8080 plone
-
-Funcionou
-```

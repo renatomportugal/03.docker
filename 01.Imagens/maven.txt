@@ -1,5 +1,0 @@
-## maven
-```
-docker pull maven
-docker pull maven:3.6-alpine
-```

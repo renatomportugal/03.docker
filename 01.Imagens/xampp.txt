@@ -1,4 +1,0 @@
-## xampp
-```
-docker pull xampp/app:7.1
-```
