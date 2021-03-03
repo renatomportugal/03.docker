@@ -509,6 +509,41 @@ groups
 ```
 
 ### Passo 12 <!-- {docsify-ignore} -->
+Configuração do proxy. Se sua empresa não usar proxy, não precisa fazer isso.
+```
+sudo mkdir /etc/sysconfig/
+sudo nano /etc/sysconfig/docker
+
+HTTP_PROXY=http://USUARIO:SENHA@proxy.DOMINIO:PORTA
+HTTPS_PROXY=https://USUARIO:SENHA@proxy.DOMINIO:PORTA
+NO_PROXY=localhost, 127.0.0.1, localaddress,.localdomain.com
+
+Ctrl+O, Enter, Ctrl+X
+
+Criar a pasta docker.service.d e o arquivo http-proxy.conf
+cd /etc/systemd/system
+sudo mkdir docker.service.d
+cd docker.service.d
+sudo nano http-proxy.conf
+
+[Service]
+Environment="HTTP_PROXY=http://USUARIO:SENHA@proxy.DOMINIO:PORTA"
+
+Ctrl+O, Enter, Ctrl+X
+
+Reiniciar os serviços:
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+
+Para verificar se está tudo em ordem:
+systemctl show --property=Environment docker
+
+Para testar, deverá ter sucesso ao baixar:
+docker pull alpine
+
+```
+
+### Passo 13 <!-- {docsify-ignore} -->
 Instalar o Docker Compose<br>
 [Docker Compose](#docker-compose)
 
