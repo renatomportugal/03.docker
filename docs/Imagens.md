@@ -4363,19 +4363,22 @@ username: admin and password: admin.
 For integrator:
 
 https://localhost:9443/carbon
+admin, admin
 
 For analytics dashboard:
 
 https://localhost:9643/portal
+admin, admin
 
 For business process:
 
 https://localhost:9445/carbon
+admin, admin
 
 For broker:
 
 https://localhost:9446/carbon
-
+admin, admin
 
 
 ________________________________________________________________________
