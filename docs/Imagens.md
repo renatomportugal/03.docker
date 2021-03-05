@@ -4393,7 +4393,7 @@ https://github.com/wso2/docker-apim/tree/master/docker-compose/apim-with-analyti
 
 docker login docker.wso2.com
 
-problema: máquina virtual não acessa o login
+problema: máquina virtual não acessa o login (numa conexõão sem prxy funcionou normal)
 curl -sS https://github.com/wso2/docker-apim
 curl: (7) Failed to connect to github.com port 443: Connection refused
 
@@ -4408,7 +4408,7 @@ cd github/docker-apim-master/docker-compose/apim-with-analytics/
 
 docker-compose up --build
 
-Deu erro porque não consegui fazer o hanshake (logar)
+Deu erro porque não consegui fazer o hanshake (logar) (numa conexõão sem prxy funcionou normal)
 
 docker-apim-3.2.x\docker-compose\apim-with-analytics\dockerfiles\apim\
 FROM wso2/wso2am:3.2.0-centos
