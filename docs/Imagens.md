@@ -4309,8 +4309,14 @@ docker ps -a
 
 ## wso2
 ```
+Testado em 05MAR21.
 For integrator:
 
+Sem Iteração (considere fazer com interação se for novato ou se não conhecer a máquina que está trabalhando). Mesmo assim será necessário abrir outra janela quando terminar.
+
+docker run -p 8280:8280 -p 8243:8243 -p 9443:9443 wso2/wso2ei-integrator & docker run -p 9713:9713 -p 9643:9643 -p 9613:9613 -p 7713:7713 -p 7613:7613  wso2/wso2ei-analytics-dashboard & docker run -p 9091:9091 -p 9444:9444 -p 9712:9712 -p 9612:9612 -p 7712:7712 -p 7612:7612 -p 7070:7070 -p 7443:7443 wso2/wso2ei-analytics-worker & docker run -p 9445:9445 wso2/wso2ei-business-process & docker run -p 5675:5675 -p 9446:9446 -p 8675:8675 -p 1886:1886 -p 8836:8836 -p 7614:7614 wso2/wso2ei-broker &
+
+Com Interação (Será necessário uma janela para cada instalação, bom para ver os erros, principalmente se for a primeira vez)
 docker run -it \
 -p 8280:8280 \
 -p 8243:8243 \
@@ -4337,7 +4343,7 @@ docker run -it \
 -p 7712:7712 \
 -p 7612:7612 \
 -p 7070:7070 \
--p 7443:7443 \ 
+-p 7443:7443 \
 wso2/wso2ei-analytics-worker
 
 For business process:
@@ -4380,16 +4386,29 @@ For broker:
 https://localhost:9446/carbon
 admin, admin
 
-
 ________________________________________________________________________
-__Instalação sem alterar nada
+__Instalação sem alterar nada (Testar para ver se está atualizado)
 https://github.com/wso2/docker-apim
 https://github.com/wso2/docker-apim/tree/master/docker-compose/apim-with-analytics
 
 docker login docker.wso2.com
+
+problema: máquina virtual não acessa o login
+curl -sS https://github.com/wso2/docker-apim
+curl: (7) Failed to connect to github.com port 443: Connection refused
+
 git clone https://github.com/wso2/docker-apim
 cd docker-apim/docker-compose/apim-with-analytics
+
+Método alternativo
+Baixar o repositório https://github.com/wso2/docker-apim/
+Passe via FTP para a máquina remota.
+Acesse a pasta apim-with-analytics, veja seu caminho.
+cd github/docker-apim-master/docker-compose/apim-with-analytics/
+
 docker-compose up --build
+
+Deu erro porque não consegui fazer o hanshake (logar)
 
 docker-apim-3.2.x\docker-compose\apim-with-analytics\dockerfiles\apim\
 FROM wso2/wso2am:3.2.0-centos

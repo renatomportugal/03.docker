@@ -1,5 +1,17 @@
 # Comandos Linux
 
+# Comandos em sequencia
+Parar, remover e mostrar todos os containers, inclusive os desligados.<br>
+```
+docker stop $(docker ps -q);docker rm $(docker ps -aq);docker ps -a
+```
+
+# Processos
+Mostrará todos os processos, a porcentagem de processamento e memória utilizados. <br>
+```
+top
+```
+
 # Sistema Operacional
 Saber arquitetura:<br>
 ```
