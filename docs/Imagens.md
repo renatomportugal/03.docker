@@ -4308,6 +4308,9 @@ docker ps -a
 ```
 
 ## wso2
+
+### Instalação Separada
+
 ```
 Testado em 05MAR21.
 For integrator:
@@ -4385,7 +4388,9 @@ For broker:
 
 https://localhost:9446/carbon
 admin, admin
-
+```
+### Com Docker Composer
+```
 ________________________________________________________________________
 __Instalação sem alterar nada (Testar para ver se está atualizado)
 https://github.com/wso2/docker-apim
@@ -4393,7 +4398,7 @@ https://github.com/wso2/docker-apim/tree/master/docker-compose/apim-with-analyti
 
 docker login docker.wso2.com
 
-problema: máquina virtual não acessa o login (numa conexõão sem prxy funcionou normal)
+problema: máquina virtual não acessa o login (numa conexõão sem proxy funcionou normal)
 curl -sS https://github.com/wso2/docker-apim
 curl: (7) Failed to connect to github.com port 443: Connection refused
 
