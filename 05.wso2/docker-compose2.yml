@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+    integrator:
+        image: wso2/wso2ei-integrator
+        container_name: integrator
+        ports:
+            - "8280:8280"
+            - "8243:8243"
+            - "9763:9763"
+            - "9443:9443"
+            - "9099:9099"
+            - "5672:5672"
+            - "9711:9711"
+            - "9611:9611"
+            - "7711:7711"
+            - "7611:7611"
+            - "10397:10397"
+            
+        build:
+            context: ./wso2carbon

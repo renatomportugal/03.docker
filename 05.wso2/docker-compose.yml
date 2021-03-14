@@ -7,15 +7,74 @@ services:
         ports:
             - "8280:8280"
             - "8243:8243"
-            - "9763:9763"
             - "9443:9443"
-            - "9099:9099"
-            - "5672:5672"
-            - "9711:9711"
-            - "9611:9611"
-            - "7711:7711"
-            - "7611:7611"
-            - "10397:10397"
-            
-        build:
-            context: ./wso2carbon
+        networks:
+            bridge.66.6:
+                ipv4_address: 66.6.0.10
+
+    analytics-dashboard:
+        image: wso2/wso2ei-analytics-dashboard
+        container_name: analytics-dashboard
+        ports:
+            - "9713:9713"
+            - "9643:9643"
+            - "9613:9613"
+            - "7713:7713"
+            - "7613:7613"
+        networks:
+            bridge.66.6:
+                ipv4_address: 66.6.0.11
+        depends_on:
+            - integrator
+    
+    analytics-worker:
+        image: wso2/wso2ei-analytics-worker
+        container_name: analytics-worker
+        ports:
+            - "9091:9091"
+            - "9444:9444"
+            - "9712:9712"
+            - "9612:9612"
+            - "7712:7712"
+            - "7612:7612"
+            - "7070:7070"
+            - "7443:7443"
+        networks:
+            bridge.66.6:
+                ipv4_address: 66.6.0.12
+        depends_on:
+            - integrator
+
+    business-process:
+        image: wso2/wso2ei-business-process
+        container_name: business-process
+        ports:
+            - "9445:9445"
+        networks:
+            bridge.66.6:
+                ipv4_address: 66.6.0.13
+        depends_on:
+            - integrator
+
+    broker:
+        image: wso2/wso2ei-broker
+        container_name: broker
+        ports:
+            - "5675:5675"
+            - "9446:9446"
+            - "8675:8675"
+            - "1886:1886"
+            - "8836:8836"
+            - "7614:7614"
+        networks:
+            bridge.66.6:
+                ipv4_address: 66.6.0.14
+        depends_on:
+            - integrator
+
+networks:
+    bridge.66.6:
+        ipam:
+            driver: default
+            config:
+                - subnet: "66.6.0.0/16"

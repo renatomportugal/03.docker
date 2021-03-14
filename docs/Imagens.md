@@ -4390,40 +4390,46 @@ https://localhost:9446/carbon
 admin, admin
 ```
 ### Com Docker Composer
+
 ```
 ________________________________________________________________________
-__Instalação sem alterar nada (Testar para ver se está atualizado)
-https://github.com/wso2/docker-apim
-https://github.com/wso2/docker-apim/tree/master/docker-compose/apim-with-analytics
-
-docker login docker.wso2.com
-
-problema: máquina virtual não acessa o login (numa conexõão sem proxy funcionou normal)
-curl -sS https://github.com/wso2/docker-apim
-curl: (7) Failed to connect to github.com port 443: Connection refused
-
-git clone https://github.com/wso2/docker-apim
-cd docker-apim/docker-compose/apim-with-analytics
-
-Método alternativo
-Baixar o repositório https://github.com/wso2/docker-apim/
+__Instalação sem alterar nada
+Fazer o downloado do código (https://github.com/wso2/docker-apim)
 Passe via FTP para a máquina remota.
+Descompacte a pasta em home/SeuUsuario/github
 Acesse a pasta apim-with-analytics, veja seu caminho.
 cd github/docker-apim-master/docker-compose/apim-with-analytics/
 
-docker-compose up --build
-
-Deu erro porque não consegui fazer o hanshake (logar) (numa conexõão sem prxy funcionou normal)
-
+Altere nos arquivos Dockerfile:
+```
+#### CentOS:
+```
 docker-apim-3.2.x\docker-compose\apim-with-analytics\dockerfiles\apim\
 FROM wso2/wso2am:3.2.0-centos
+
 docker-apim-3.2.x\docker-compose\apim-with-analytics\dockerfiles\apim-analytics-dashboard
 FROM wso2/wso2am-analytics-dashboard:3.2.0-centos
+
+docker-apim-3.2.x\docker-compose\apim-with-analytics\dockerfiles\apim-analytics-worker
+FROM wso2/wso2am-analytics-worker:3.2.0-centos
+```
+#### Ubuntu
+```
+docker-apim-3.2.x\docker-compose\apim-with-analytics\dockerfiles\apim\
+FROM wso2/wso2am:3.2.0
+
+docker-apim-3.2.x\docker-compose\apim-with-analytics\dockerfiles\apim-analytics-dashboard
+FROM wso2/wso2am-analytics-dashboard:3.2.0
+
 docker-apim-3.2.x\docker-compose\apim-with-analytics\dockerfiles\apim-analytics-worker
 FROM wso2/wso2am-analytics-worker:3.2.0
-
+```
+Compilar<br>
+```
 docker-compose up --build
-
+```
+Acessar<br>
+```
 Access the WSO2 API Manager web UIs using the below URLs via a web browser.
 https://localhost:9443/publisher
 https://localhost:9443/devportal
@@ -4443,9 +4449,9 @@ https://localhost:9643/analytics-dashboard
 Login to the web UIs using following credentials.
 Username: admin
 Password: admin
-
-________________________________________________________________________
-__Instalação Personalizada
+```
+### Instalação Personalizada
+```
 
 https://github.com/wso2/docker-apim
 https://github.com/wso2/docker-apim/tree/master/docker-compose/apim-with-analytics
