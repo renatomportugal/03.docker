@@ -4592,10 +4592,10 @@ https://localhost:9443/publisher
 https://localhost:9443/devportal
 https://localhost:9443/admin
 https://localhost:9443/carbon
-Login to the web UIs using following credentials.
 
+Login to the web UIs using following credentials.
 Username: admin
-Password: admin
+Password: adminPower
 Please note that API Gateway will be available on following ports.
 
 https://localhost:8243
@@ -4606,7 +4606,7 @@ https://localhost:9643/analytics-dashboard
 Login to the web UIs using following credentials.
 
 Username: admin
-Password: admin
+Password: adminPower
 
 
 ERROS:
@@ -4767,15 +4767,9 @@ https://apim.docs.wso2.com/en/latest/troubleshooting/troubleshooting-invalid-cal
 
 ______________________________________________________________________________________________
 
-
 https://wso2.com/api-management/install/docker/get-started/
-docker login docker.wso2.com
 
-docker run -it \
-   -p 9443:9443 \
-   -p 8243:8243 \
-   -p 8280:8280 \
-   docker.wso2.com/wso2am
+docker run -it -p 9443:9443 -p 8243:8243 -p 8280:8280 wso2/wso2am:3.2.0
    
    Once the container is started, access the following URLs on your favorite web browser using the credentials username: admin and password: admin.
 
