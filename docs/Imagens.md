@@ -4399,11 +4399,10 @@ Passe via FTP para a máquina remota.
 Descompacte a pasta em home/SeuUsuario/github
 Acesse a pasta apim-with-analytics, veja seu caminho.
 cd github/docker-apim-master/docker-compose/apim-with-analytics/
-
-Altere nos arquivos Dockerfile:
 ```
 #### CentOS:
 ```
+Altere nos arquivos Dockerfile:
 docker-apim-3.2.x\docker-compose\apim-with-analytics\dockerfiles\apim\
 FROM wso2/wso2am:3.2.0-centos
 
@@ -4415,6 +4414,7 @@ FROM wso2/wso2am-analytics-worker:3.2.0-centos
 ```
 #### Ubuntu
 ```
+Altere nos arquivos Dockerfile:
 docker-apim-3.2.x\docker-compose\apim-with-analytics\dockerfiles\apim\
 FROM wso2/wso2am:3.2.0
 
@@ -4452,68 +4452,182 @@ Password: admin
 ```
 ### Instalação Personalizada
 ```
+Fazer o downloado do código (https://github.com/wso2/docker-apim)
+Descompacte para docker-apim-master
+Com o WinSCP, passe via FTP para a máquina remota (na pasta home do usuário).
+Acesse com Putty ou via SSH
 
-https://github.com/wso2/docker-apim
-https://github.com/wso2/docker-apim/tree/master/docker-compose/apim-with-analytics
-
-git clone https://github.com/wso2/docker-apim
-Criar conta no WSO em https://wso2.com/ para acessar o respositório docker oficial https://docker.wso2.com/
-
+```
+#### Ubuntu:
+```
 1º Passo - Alterar os Dockfiles para baixar a versão CENTOS dos containers
-__Alterar o Dockfile do API Manager
-cd docker-apim-3.2.x\docker-compose\apim-with-analytics\dockerfiles
-ou
-cd docker-apim-master/docker-compose/apim-with-analytics/dockerfiles/apim
-ls
-nano Dockerfile
+1. Altere nos arquivos Dockerfile:
 
-docker-apim-3.2.x\docker-compose\apim-with-analytics\dockerfiles\apim\
-editar o Dockerfile na pasta
-Acessar o repositório oficial do API Manager em https://docker.wso2.com/tags.php?repo=wso2am e ver a tag do centos 3.2
+cd ~
+sudo nano docker-apim-master/docker-compose/apim-with-analytics/dockerfiles/apim/Dockerfile
+FROM wso2/wso2am:3.2.0
+Ctrl+O, Enter, Ctrl+X
 
-alterar a linha 20
-FROM docker.wso2.com/wso2am:3.2.0
+sudo nano docker-apim-master/docker-compose/apim-with-analytics/dockerfiles/apim-analytics-dashboard/Dockerfile
+FROM wso2/wso2am-analytics-dashboard:3.2.0
+
+sudo nano docker-apim-master/docker-compose/apim-with-analytics/dockerfiles/apim-analytics-worker/Dockerfile
+FROM wso2/wso2am-analytics-worker:3.2.0
+
+________________________________________________________________________
+__2º Passo - Personalizando os CONF
+__PASTA apim
+Alterar o conf do APIMANAGER
+sudo nano docker-apim-master/docker-compose/apim-with-analytics/conf/apim/repository/conf/deployment.toml
+
+Alterar todos os localhost para url do servidor
+Para procurar, pressione Ctrl+W, digite localhost, Enter
+Troque todas as ocorrências para seuDominio.com
+
+Se tiver IP fixo, altere...
+
+pode alterar também a linha 3
+de
+node_ip = "127.0.0.1"
+para 
+node_ip = "SeuIPdoDominio"
+
+alterar a senha de admin para adminPower
+de
+[super_admin]
+username = "admin"
+password = "admin"
+create_admin_account = true
+
 para
-FROM docker.wso2.com/wso2am:3.2.0-centos7
+[super_admin]
+username = "admin"
+password = "adminPower"
+create_admin_account = true
 
 Ctrl+O, Enter, Ctrl+X
- 
-caso não consiga logar no repositório do WSO pelo servidor, alterar a tag para chamar a imagem do Docker HUB https://hub.docker.com/r/wso2/wso2am/tags
+
+__ALTERAR O ARQUIVO DE CONFIGURAÇÃO DO ANALYTICS DASHBOARD
+__Pasta apim-analytics-dashboard
+sudo nano docker-apim-master/docker-compose/apim-with-analytics/conf/apim-analytics-dashboard/conf/dashboard/deployment.yaml
+
+Alterar todos os localhost para url do servidor
+Para procurar, pressione Ctrl+W, digite localhost, Enter
+Troque todas as ocorrências para seuDominio.com
+
+ALTERAR TODOS OS CAMPOS DE PASSWORD admin para adminPower
+Ctrl+-, 340
+de
+linha 340 password: admin
+linha 386 adminPassword: admin
+linha 391 kmPassword: admin
+para
+linha 340 password: adminPower
+linha 386 adminPassword: adminPower
+linha 391 kmPassword: adminPower
+
+Ctrl+O, Enter, Ctrl+X
+
+__ALTERAR O ARQUIVO DE CONFIGURAÇÃO DO ANALYTICS WORKER
+sudo nano docker-apim-master/docker-compose/apim-with-analytics/conf/apim-analytics-worker/conf/worker/deployment.yaml
+
+alterar todos os localhost para url do servidor
+seuDominio.com
+
+SÓ TERA UM LOCALHOST PARA ALTERAR (linha 440)
+grpc://localhost:9806/org.wso2.analytics.mgw.grpc.service.AnalyticsSendService/sendAnalytics
+para
+grpc://seuDominio.com:9806/org.wso2.analytics.mgw.grpc.service.AnalyticsSendService/sendAnalytics
+
+
+Alterar a senha (está codificada em BASE64)
+https://www.base64encode.org/
+
+
+Ctrl+-, 503
+senha admin = YWRtaW4=
+senha adminPower = YWRtaW5Qb3dlcg==
+
+Vai ficar assim:
+
+de
+# Authentication configuration
+
+auth.configs:
+  type: 'local'        # Type of the IdP client used
+  userManager:
+    adminRole: admin   # Admin role which is granted all permissions
+    userStore:         # User store
+      users:
+        -
+          user:
+            username: admin
+            password: YWRtaW4=
+            roles: 1
+            
+para
+# Authentication configuration
+
+auth.configs:
+  type: 'local'        # Type of the IdP client used
+  userManager:
+    adminRole: admin   # Admin role which is granted all permissions
+    userStore:         # User store
+      users:
+        -
+          user:
+            username: admin
+            password: YWRtaW5Qb3dlcg==
+            roles: 1
+
+Ctrl+O, Enter, Ctrl+X
+
+cd docker-apim-master/docker-compose/apim-with-analytics/
+
+docker-compose up --build
+
+Access the WSO2 API Manager web UIs using the below URLs via a web browser.
+
+https://localhost:9443/publisher
+https://localhost:9443/devportal
+https://localhost:9443/admin
+https://localhost:9443/carbon
+Login to the web UIs using following credentials.
+
+Username: admin
+Password: admin
+Please note that API Gateway will be available on following ports.
+
+https://localhost:8243
+https://localhost:8280
+Access the WSO2 API Manager Analytics web UIs using the below URL via a web browser.
+
+https://localhost:9643/analytics-dashboard
+Login to the web UIs using following credentials.
+
+Username: admin
+Password: admin
+
+
+ERROS:
+https://apim.docs.wso2.com/en/latest/troubleshooting/troubleshooting-invalid-callback-error/
+
+```
+#### CentOS:
+```
+1º Passo - Alterar os Dockfiles para baixar a versão CENTOS dos containers
+1. Altere nos arquivos Dockerfile:
+
+cd ~
+sudo nano docker-apim-master/docker-compose/apim-with-analytics/dockerfiles/apim/Dockerfile
 FROM wso2/wso2am:3.2.0-centos
-
-__Alterar o Dockfile do API Manager Analytics Dashboard
-cd ..
-cd apim-analytics-dashboard
-nano Dockerfile
-
-docker-apim-3.2.x\docker-compose\apim-with-analytics\dockerfiles\apim-analytics-dashboard
-editar o Dockerfile na pasta
-Acessar o repositório oficial do API Manager em https://docker.wso2.com/tags.php?repo=wso2am-analytics-dashboard e ver a tag do centos 3.2
-
-alterar a linha 20
-FROM docker.wso2.com/wso2am-analytics-dashboard:3.2.0
-para
-FROM docker.wso2.com/wso2am-analytics-dashboard:3.2.0-centos
-
 Ctrl+O, Enter, Ctrl+X
 
-docker login docker.wso2.com
-
-caso não consiga logar no repositório do WSO pelo servidor, alterar a tag para chamar a imagem do Docker HUB https://hub.docker.com/r/wso2/wso2am-analytics-dashboard/tags
+sudo nano docker-apim-master/docker-compose/apim-with-analytics/dockerfiles/apim-analytics-dashboard/Dockerfile
 FROM wso2/wso2am-analytics-dashboard:3.2.0-centos
 
-__Alterar o Dockfile do API Manager Analytics Worker
-docker-apim-3.2.x\docker-compose\apim-with-analytics\dockerfiles\apim-analytics-worker
-editar o Dockerfile na pasta
-Acessar o repositório oficial do API Manager em https://docker.wso2.com/tags.php?repo=wso2am-analytics-worker e ver a tag do centos 3.2
-
-alterar a linha 20
-FROM docker.wso2.com/wso2am-analytics-worker:3.2.0
-para
-FROM docker.wso2.com/wso2am-analytics-worker:3.2.0-centos
-
-caso não consiga logar no repositório do WSO pelo servidor, alterar a tag para chamar a imagem do Docker HUB https://hub.docker.com/r/wso2/wso2am-analytics-worker
-FROM wso2/wso2am-analytics-worker:3.2.0
+sudo nano docker-apim-master/docker-compose/apim-with-analytics/dockerfiles/apim-analytics-worker/Dockerfile
+FROM wso2/wso2am-analytics-worker:3.2.0-centos
 
 ________________________________________________________________________
 __2º Passo - Personalizando os CONF
