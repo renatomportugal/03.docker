@@ -1953,6 +1953,11 @@ __Baixar
 docker pull mongo
 _______________________________________________________________
 __Rodar
+Sem rede
+docker run -d -p 27017:27017 --name mongo mongo
+
+Com rede
+
 docker run \
     -d \
     -p 27017:27017 \
@@ -1960,6 +1965,9 @@ docker run \
     --name mongo \
     mongo
 d31
+
+docker run -d -p 27017:27017 --network mysql --name mongo mongo
+
 _______________________________________________________________
 __Executar
 docker exec -it d31 bash
