@@ -12,4 +12,3 @@
 * [Personalizando](Personalizando.md)
 * [Testes](Testes.md)
 * [Swarm](Swarm.md)
-* [Raspberry](Raspberry.md)
