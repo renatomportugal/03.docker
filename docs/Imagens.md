@@ -4594,16 +4594,75 @@ cd docker-apim-master/docker-compose/apim-with-analytics/
 
 docker-compose up --build
 ```
-#### Mudar a memória
+#### Se o PC for fraco
 ```
-Com o Build, serão criados 4 Containers: Api Manager, Analytics, Worker e MySQL.
-É possível que tenha dado um erro caso o PC seja muito fraco:
-ERROR: Encountered errors while bringing up the project.
-Vamos investigar este erro.
-1. Tentaremos mudar a memória. Entre no Container do Api Manager.
-docker exec -it IdDoContainerApiManager bash
-vi wso2am-3.2.0/bin/wso2server.sh
+Comente as linhas no docker-compose:
+47 a 49
+    #depends_on:
+      #mysql:
+        #condition: service_healthy
 
+59 a 63
+    #depends_on:
+      #mysql:
+        #condition: service_healthy
+      #am-analytics-worker:
+        #condition: service_healthy
+
+79 a 83
+    #depends_on:
+      #mysql:
+        #condition: service_healthy
+      #api-manager:
+        #condition: service_healthy
+
+Com o Build, serão criados 4 Containers: Api Manager, Analytics, Worker e MySQL.
+```
+#### Ajustar a memória
+```
+Mudar a memória. Entre no Container do Api Manager.
+Aperte Ctrl+C para parar de rodar o container.
+
+Suponhamos que só existam os 4 containers que criamos...
+docker ps -a
+Vai aparecer todos os containers que foram parados...
+f7336cbab40b   wso2_am-analytics-worker      "/home/wso2carbon/do…"            wso2_am-analytics-worker_1
+ae410d5f8e61   wso2_am-analytics-dashboard   "/home/wso2carbon/do…"            wso2_am-analytics-dashboard_1
+f3652a678f82   wso2_api-manager              "/home/wso2carbon/do…"            wso2_api-manager_1
+e7b64f9cb3f7   mysql:5.7.31                  "docker-entrypoint.s…"            wso2_mysql_1
+
+Reinicie o container para editar
+docker start f3652a678f82
+
+docker exec -it IdDoContainerApiManager bash
+
+Entrar como Root
+docker exec -it -u 0 f3652a678f82 bash
+apt-get update
+apt-get install nano
+
+Edite o arquivo
+nano wso2am-3.2.0/bin/wso2server.sh
+
+Encontrar essa parte e incrementar os valores deixando como está abaixo: 
+
+Procurar por $JVM_MEM_OPTS com Ctrl+W ou Ctrl+-, 294
+
+
+if [ -z "$JVM_MEM_OPTS" ]; then 
+   java_version=$("$JAVACMD" -version 2>&1 | awk -F '"' '/version/ {print $2}') 
+   JVM_MEM_OPTS="-Xms512m -Xmx1024m" 
+   if [ "$java_version" \< "1.8" ]; then 
+      JVM_MEM_OPTS="$JVM_MEM_OPTS -XX:MaxPermSize=512m" 
+
+Ctrl+O, Enter, Ctrl+X
+
+Sair do container
+exit
+
+Parar o container e subir todos.
+docker stop $(docker ps -q)
+docker start $(docker ps -aq)
 
 
 Access the WSO2 API Manager web UIs using the below URLs via a web browser.
