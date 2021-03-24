@@ -4593,6 +4593,18 @@ Ctrl+O, Enter, Ctrl+X
 cd docker-apim-master/docker-compose/apim-with-analytics/
 
 docker-compose up --build
+```
+#### Mudar a memória
+```
+Com o Build, serão criados 4 Containers: Api Manager, Analytics, Worker e MySQL.
+É possível que tenha dado um erro caso o PC seja muito fraco:
+ERROR: Encountered errors while bringing up the project.
+Vamos investigar este erro.
+1. Tentaremos mudar a memória. Entre no Container do Api Manager.
+docker exec -it IdDoContainerApiManager bash
+vi wso2am-3.2.0/bin/wso2server.sh
+
+
 
 Access the WSO2 API Manager web UIs using the below URLs via a web browser.
 
