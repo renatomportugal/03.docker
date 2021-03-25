@@ -4833,8 +4833,6 @@ e7b64f9cb3f7   mysql:5.7.31                  "docker-entrypoint.s…"           
 Reinicie o container para editar
 docker start f3652a678f82
 
-docker exec -it IdDoContainerApiManager bash
-
 Entrar como Root
 docker exec -it -u 0 f3652a678f82 bash
 apt-get update
