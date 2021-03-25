@@ -32,7 +32,7 @@ services:
       test: ["CMD", "mysqladmin" ,"ping", "-uroot", "-proot"]
       interval: 30s
       timeout: 60s
-      retries: 5
+      retries: 500
       start_period: 80s
   am-analytics-worker:
     build: ./dockerfiles/apim-analytics-worker
@@ -43,10 +43,10 @@ services:
       test: ["CMD", "nc", "-z","localhost", "9444"]
       interval: 10s
       start_period: 20s
-      retries: 5
-    #depends_on:
-      #mysql:
-        #condition: service_healthy
+      retries: 500
+    depends_on:
+      mysql:
+        condition: service_healthy
     volumes:
       - ./conf/apim-analytics-worker:/home/wso2carbon/wso2-config-volume
   api-manager:
@@ -55,12 +55,12 @@ services:
       test: ["CMD", "nc", "-z","localhost", "9443"]
       interval: 10s
       start_period: 180s
-      retries: 20
-    #depends_on:
-      #mysql:
-        #condition: service_healthy
-      #am-analytics-worker:
-        #condition: service_healthy
+      retries: 200
+    depends_on:
+      mysql:
+        condition: service_healthy
+      am-analytics-worker:
+        condition: service_healthy
     volumes:
       - ./conf/apim:/home/wso2carbon/wso2-config-volume
     ports:
@@ -74,12 +74,12 @@ services:
     healthcheck:
       test: ["CMD", "nc", "-z","localhost", "9643"]
       interval: 10s
-      retries: 5
+      retries: 500
       start_period: 20s
-    #depends_on:
-      #mysql:
-        #condition: service_healthy
-      #api-manager:
-        #condition: service_healthy
+    depends_on:
+      mysql:
+        condition: service_healthy
+      api-manager:
+        condition: service_healthy
     volumes:
       - ./conf/apim-analytics-dashboard:/home/wso2carbon/wso2-config-volume

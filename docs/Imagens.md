@@ -4866,16 +4866,14 @@ c:\windows\system32\drivers\etc\hosts
 Insira no final do arquivo (substitua pelos seus dados):
 192.168.1.109	tcnct-philco
 
-Vamos ajustar todos os arquivos trocando localhost pelo tcnct-philco.
-
-
-
+Vamos ajustar todos os arquivos trocando localhost pelo tcnct-philco (dentro da pasta conf, 3 arquivos).
 
 Admin console - https://tcnct-philco:9443/admin
 Publisher - https://tcnct-philco:9443/publisher
 Store - https://tcnct-philco:9443/devportal
 Carbon console - https://tcnct-philco:9443/carbon
 
+Parei o teste aqui. Vou tentar amanhã.
 
 
 Então vá até https://192.168.1.109:9443/carbon
