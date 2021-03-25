@@ -4861,12 +4861,22 @@ docker start $(docker ps -aq)
 ```
 https://apim.docs.wso2.com/en/latest/troubleshooting/troubleshooting-invalid-callback-error/
 
+Temos um problema de callback quando usa-se apenas o IP da máquina. Para tentar contornar trocaremos localhost pelo nome da máquina. E para cada máquina que for acessar iremos registrar o IP no arquivo de hosts. No windows acesse como administrador (use o Notepad++):
+c:\windows\system32\drivers\etc\hosts
+Insira no final do arquivo (substitua pelos seus dados):
+192.168.1.109	tcnct-philco
 
-Faça o login em todos os endereços abaixo e com muita insistência mude o localhost pelo IP na barra de endereço sempre que aparecer. Logar até aparecer a tela de admin.
-Admin console - https://192.168.1.109:9443/admin
-Publisher - https://192.168.1.109:9443/publisher
-Store - https://192.168.1.109:9443/devportal
-Carbon console - https://192.168.1.109:9443/carbon
+Vamos ajustar todos os arquivos trocando localhost pelo tcnct-philco.
+
+
+
+
+Admin console - https://tcnct-philco:9443/admin
+Publisher - https://tcnct-philco:9443/publisher
+Store - https://tcnct-philco:9443/devportal
+Carbon console - https://tcnct-philco:9443/carbon
+
+
 
 Então vá até https://192.168.1.109:9443/carbon
 Navigate to service providers list
