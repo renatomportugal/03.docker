@@ -4488,13 +4488,12 @@ __PASTA apim
 Alterar o conf do APIMANAGER
 sudo nano docker-apim-master/docker-compose/apim-with-analytics/conf/apim/repository/conf/deployment.toml
 
-Alterar todos os localhost para url do servidor
+Alterar todos os localhost para url do servidor (no meu caso é tcnct-philco)
 Para procurar, pressione Ctrl+W, digite localhost, Enter
-Troque todas as ocorrências para seuDominio.com
+Troque todas as ocorrências para seuDominio.com (no meu caso é tcnct-philco)
 
-Se tiver IP fixo, altere...
+Se tiver IP fixo, altere... (no meu caso é 192.168.1.109)
 
-pode alterar também a linha 3
 de
 node_ip = "127.0.0.1"
 para 
@@ -4519,9 +4518,9 @@ __ALTERAR O ARQUIVO DE CONFIGURAÇÃO DO ANALYTICS DASHBOARD
 __Pasta apim-analytics-dashboard
 sudo nano docker-apim-master/docker-compose/apim-with-analytics/conf/apim-analytics-dashboard/conf/dashboard/deployment.yaml
 
-Alterar todos os localhost para url do servidor
+Alterar todos os localhost para url do servidor (no meu caso é tcnct-philco)
 Para procurar, pressione Ctrl+W, digite localhost, Enter
-Troque todas as ocorrências para seuDominio.com
+Troque todas as ocorrências para seuDominio.com (no meu caso é tcnct-philco)
 
 ALTERAR TODOS OS CAMPOS DE PASSWORD admin para adminPower
 Ctrl+-, 340
@@ -4546,6 +4545,7 @@ SÓ TERA UM LOCALHOST PARA ALTERAR (linha 440)
 grpc://localhost:9806/org.wso2.analytics.mgw.grpc.service.AnalyticsSendService/sendAnalytics
 para
 grpc://seuDominio.com:9806/org.wso2.analytics.mgw.grpc.service.AnalyticsSendService/sendAnalytics
+(no meu caso é tcnct-philco, então fica grpc://tcnct-philco:9806/org.wso2.analytics.mgw.grpc.service.AnalyticsSendService/sendAnalytics)
 
 
 Alterar a senha (está codificada em BASE64)
@@ -4596,6 +4596,12 @@ docker-compose up --build
 ```
 #### Se o PC for fraco
 ```
+Quando o PC é fraco demora mais para tratas as informações, portanto devemos aumentar as tentativas de verificação de saúde do container.
+Veja que no arquivo do docker-compose, em cada serviço, mais precisamente em healthcheck, no parâmetro retries. Multiplique por 100. Por exemplo: se está 5 coloque 500.
+Isso dará tempo para que o processador mai antigo realize todas as operações. No meu caso estou com um Core2duo, 4GB de RAM, e demora uns 30 minutos para terminar o build.
+
+(Não mais necessário, funcionou bem aumentando as retries)
+Esta é uma forma mais radical, não indicada:
 Comente as linhas no docker-compose:
 47 a 49
     #depends_on:
@@ -4616,6 +4622,7 @@ Comente as linhas no docker-compose:
       #api-manager:
         #condition: service_healthy
 
+
 Com o Build, serão criados 4 Containers: Api Manager, Analytics, Worker e MySQL.
 Access the WSO2 API Manager web UIs using the below URLs via a web browser.
 
@@ -4624,6 +4631,13 @@ https://localhost:9443/devportal
 https://localhost:9443/admin
 https://localhost:9443/carbon
 
+no meu caso:
+https://tcnct-philco:9443/publisher
+https://tcnct-philco:9443/devportal
+https://tcnct-philco:9443/admin
+https://tcnct-philco:9443/carbon
+
+
 Login to the web UIs using following credentials.
 Username: admin
 Password: adminPower
@@ -4631,6 +4645,12 @@ Please note that API Gateway will be available on following ports.
 
 https://localhost:8243
 https://localhost:8280
+
+no meu caso:
+https://tcnct-philco:8243
+https://tcnct-philco:8280
+
+
 Access the WSO2 API Manager Analytics web UIs using the below URL via a web browser.
 
 https://localhost:9643/analytics-dashboard
@@ -4866,7 +4886,7 @@ c:\windows\system32\drivers\etc\hosts
 Insira no final do arquivo (substitua pelos seus dados):
 192.168.1.109	tcnct-philco
 
-Vamos ajustar todos os arquivos trocando localhost pelo tcnct-philco (dentro da pasta conf, 3 arquivos).
+Vamos ajustar todos os arquivos de configuração trocando localhost pelo tcnct-philco (dentro da pasta conf, 3 arquivos).
 
 Admin console - https://tcnct-philco:9443/admin
 Publisher - https://tcnct-philco:9443/publisher
