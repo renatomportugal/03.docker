@@ -4617,54 +4617,6 @@ Comente as linhas no docker-compose:
         #condition: service_healthy
 
 Com o Build, serão criados 4 Containers: Api Manager, Analytics, Worker e MySQL.
-```
-#### Ajustar a memória
-```
-Mudar a memória. Entre no Container do Api Manager.
-Aperte Ctrl+C para parar de rodar o container.
-
-Suponhamos que só existam os 4 containers que criamos...
-docker ps -a
-Vai aparecer todos os containers que foram parados...
-f7336cbab40b   wso2_am-analytics-worker      "/home/wso2carbon/do…"            wso2_am-analytics-worker_1
-ae410d5f8e61   wso2_am-analytics-dashboard   "/home/wso2carbon/do…"            wso2_am-analytics-dashboard_1
-f3652a678f82   wso2_api-manager              "/home/wso2carbon/do…"            wso2_api-manager_1
-e7b64f9cb3f7   mysql:5.7.31                  "docker-entrypoint.s…"            wso2_mysql_1
-
-Reinicie o container para editar
-docker start f3652a678f82
-
-docker exec -it IdDoContainerApiManager bash
-
-Entrar como Root
-docker exec -it -u 0 f3652a678f82 bash
-apt-get update
-apt-get install nano
-
-Edite o arquivo
-nano wso2am-3.2.0/bin/wso2server.sh
-
-Encontrar essa parte e incrementar os valores deixando como está abaixo: 
-
-Procurar por $JVM_MEM_OPTS com Ctrl+W ou Ctrl+-, 294
-
-
-if [ -z "$JVM_MEM_OPTS" ]; then 
-   java_version=$("$JAVACMD" -version 2>&1 | awk -F '"' '/version/ {print $2}') 
-   JVM_MEM_OPTS="-Xms512m -Xmx1024m" 
-   if [ "$java_version" \< "1.8" ]; then 
-      JVM_MEM_OPTS="$JVM_MEM_OPTS -XX:MaxPermSize=512m" 
-
-Ctrl+O, Enter, Ctrl+X
-
-Sair do container
-exit
-
-Parar o container e subir todos.
-docker stop $(docker ps -q)
-docker start $(docker ps -aq)
-
-
 Access the WSO2 API Manager web UIs using the below URLs via a web browser.
 
 https://localhost:9443/publisher
@@ -4863,6 +4815,124 @@ https://localhost:8243
 http://localhost:8280
 
 https://apim.docs.wso2.com/en/latest/getting-started/quick-start-guide/
+
+```
+### Ajustar a memória
+```
+Mudar a memória. Entre no Container do Api Manager.
+Aperte Ctrl+C para parar de rodar o container.
+
+Suponhamos que só existam os 4 containers que criamos...
+docker ps -a
+Vai aparecer todos os containers que foram parados...
+f7336cbab40b   wso2_am-analytics-worker      "/home/wso2carbon/do…"            wso2_am-analytics-worker_1
+ae410d5f8e61   wso2_am-analytics-dashboard   "/home/wso2carbon/do…"            wso2_am-analytics-dashboard_1
+f3652a678f82   wso2_api-manager              "/home/wso2carbon/do…"            wso2_api-manager_1
+e7b64f9cb3f7   mysql:5.7.31                  "docker-entrypoint.s…"            wso2_mysql_1
+
+Reinicie o container para editar
+docker start f3652a678f82
+
+docker exec -it IdDoContainerApiManager bash
+
+Entrar como Root
+docker exec -it -u 0 f3652a678f82 bash
+apt-get update
+apt-get install nano
+
+Edite o arquivo
+nano wso2am-3.2.0/bin/wso2server.sh
+
+Encontrar essa parte e incrementar os valores deixando como está abaixo: 
+
+Procurar por $JVM_MEM_OPTS com Ctrl+W ou Ctrl+-, 294
+
+
+if [ -z "$JVM_MEM_OPTS" ]; then 
+   java_version=$("$JAVACMD" -version 2>&1 | awk -F '"' '/version/ {print $2}') 
+   JVM_MEM_OPTS="-Xms512m -Xmx1024m" 
+   if [ "$java_version" \< "1.8" ]; then 
+      JVM_MEM_OPTS="$JVM_MEM_OPTS -XX:MaxPermSize=512m" 
+
+Ctrl+O, Enter, Ctrl+X
+
+Sair do container
+exit
+
+Parar o container e subir todos.
+docker stop $(docker ps -q)
+docker start $(docker ps -aq)
+
+```
+### Importar APIs
+```
+Criar uma pasta chamada importada em /home 
+
+cd /home 
+mkdir importada 
+
+Baixar e Copiar a aplicação apictl para dentro do container do Api Manager 
+https://apim.docs.wso2.com/en/latest/learn/api-controller/getting-started-with-wso2-api-controller/ 
+
+Colocar na pasta apictl
+/home/dpapi/apictl-3.2.1/apictl/apictl 
+
+Execute o comando abaixo para copiar o arquivo para dentro do container do Api Manager 
+
+docker cp /home/dpapi/apictl-3.2.1/apictl/apictl 5b74af90382b:/home/ 
+
+Entrar no container como usuário ROOT 
+docker exec -it -u 0 IDCONTAINER bash 
+
+Alterar propriedade
+
+
+$cd /home 
+
+Dentro do container 
+chown wso2carbon:wso2 apictl   
+
+chmod 777 apictl 
+
+exit
+
+Copiar todas as APIs para a pasta /home/importada
+docker cp NOMEAPI IDCONTAINER:/home/importada 
+
+Importas as API para loja
+
+Entrar no container Api Manager como usuário padrão 
+docker exec -it IDCONTAINER bash 
+
+cd /home
+
+Instala o apictl
+./apictl
+
+Define o modo de execução
+./apictl set mode default
+
+Criar um ambiente de trabalho para importar as API (posteriormente escreverei sobre isso)
+./apictl add-env -e prod --apim https://192.168.1.109 --token https://192.168.1.109:8243/token
+
+Lista o ambiente criado
+./apictl list envs
+
+Entrar no ambiente com senha padrão
+./apictl login prod -u admin -k
+
+Listar as primeiras 120 APIS
+./apictl list apis -e prod -k --limit 120 --insecure
+
+Outros comandos
+Remover ambiente
+
+./apictl remove env prod
+./apictl logout prod
+
+Importar as apis com o comando
+./apictl import-api -f importada/SuaAPI_v1.zip -e prod -k
+
 ```
 
 ## xampp
