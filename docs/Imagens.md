@@ -4791,11 +4791,6 @@ Login to the web UIs using following credentials.
 Username: admin
 Password: admin
 
-
-ERROS:
-https://apim.docs.wso2.com/en/latest/troubleshooting/troubleshooting-invalid-callback-error/
-
-
 ______________________________________________________________________________________________
 
 https://wso2.com/api-management/install/docker/get-started/
@@ -4856,6 +4851,33 @@ Ctrl+O, Enter, Ctrl+X
 
 Sair do container
 exit
+
+Parar o container e subir todos.
+docker stop $(docker ps -q)
+docker start $(docker ps -aq)
+
+```
+### Erro de callback
+```
+https://apim.docs.wso2.com/en/latest/troubleshooting/troubleshooting-invalid-callback-error/
+
+
+Faça o login em todos os endereços abaixo e com muita insistência mude o localhost pelo IP na barra de endereço sempre que aparecer. Logar até aparecer a tela de admin.
+Admin console - https://192.168.1.109:9443/admin
+Publisher - https://192.168.1.109:9443/publisher
+Store - https://192.168.1.109:9443/devportal
+Carbon console - https://192.168.1.109:9443/carbon
+
+Então vá até https://192.168.1.109:9443/carbon
+Navigate to service providers list
+Clique em editar de cada provedor que aparecer (faça o login para aparecer)
+Navigate to Inbound Authentication Configuration > OAuth/OpenID Connect Configuration and click on OAuth application edit button.
+
+See the Callback Url regex value configured under Application Settings. You will observe that the callback URL value is having a different hostname(localhost or previous hostname which was configured before the hostname change).
+
+Troque localhost por 192.168.1.109
+Update, update.
+Repita para cada provedor.
 
 Parar o container e subir todos.
 docker stop $(docker ps -q)
