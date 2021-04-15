@@ -2,9 +2,21 @@
 	"folders": [
 		{
 			"path": "C:\\GitHub\\docker"
+		},
+		{
+			"name": "SSH FS - 109",
+			"uri": "ssh://109/"
 		}
 	],
 	"settings": {
-		"liveServer.settings.root": "/docs"
+		"liveServer.settings.root": "/docs",
+		"sshfs.configs": [
+			{
+				"name": "109",
+				"root": "/home/tcnct",
+				"username": "tcnct",
+				"host": "192.168.1.109"
+			}
+		]
 	}
 }
