@@ -1,7 +1,7 @@
 # Conectar
 ## Putty
 
-![Conectar_01](img/Conectar/Conectar_01.png)
+![Conectar_01](img/Conectar/Conectar_01.jpg)
 
 https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html<br>
 
@@ -9,7 +9,7 @@ https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html<br>
 Digitar o IP, porta (normalmente a 22)
 ```
 
-![Conectar_02](img/Conectar/Conectar_02.png)
+![Conectar_02](img/Conectar/Conectar_02.jpg)
 ![Conectar_03](img/Conectar/Conectar_03.jpg)
 
 ## VSCode

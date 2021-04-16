@@ -17,6 +17,7 @@
 				"username": "tcnct",
 				"host": "192.168.1.109"
 			}
-		]
+		],
+		"liveServer.settings.multiRootWorkspaceName": "docker"
 	}
 }
