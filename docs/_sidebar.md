@@ -1,5 +1,4 @@
 * [Home](/)
-* [Instalação](Instalacao.md)
 * [Produção](Producao.md)
 * [Criar Imagem](CriarImagem.md)
 * [Dicas](Dicas.md)
