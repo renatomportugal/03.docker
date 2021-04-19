@@ -1,4 +1,33 @@
-## Adminer
+# Imagens_Desktop
+
+## Servidor de Arquivos
+
+### Seafile
+```
+docker pull seafileltd/seafile
+docker run -p 80:80 --name seafile -d seafileltd/seafile
+docker ps
+docker exec -it <id-do-container> bash
+
+docker exec -it 6bd781b5664f bash
+cd seafile-server-6.3.4/
+bash reset-admin.sh
+
+Cadastre um email e um senha
+
+exit
+
+acesse o localhost
+
+Download do cliente
+https://www.seafile.com/en/download/
+
+```
+
+## Outros
+
+### Adminer
+
 ```
 https://hub.docker.com/_/adminer
 
@@ -18,7 +47,7 @@ docker run \
   docker run --link some_database:db -p 8080:8080 adminer
 ```
 
-## Alpine
+### Alpine
 ```
 docker pull alpine
 
@@ -34,7 +63,7 @@ verá que no alpine existem links para a busybox container
 ls -la bin
 ```
 
-## Backdrop
+### Backdrop
 ```
 https://hub.docker.com/_/backdrop
 
@@ -83,13 +112,13 @@ docker run --name some-backdrop \
   -d backdrop
 ```
 
-## bitnami-docker-phabricator
+### bitnami-docker-phabricator
 ```
 https://github.com/bitnami/bitnami-docker-phabricator
 https://bitnami.com/stack/phabricator/containers
 ```
 
-## bitnami-edx
+### bitnami-edx
 ```
 sudo apt-get update -y
 sudo apt-get upgrade -y
@@ -171,7 +200,7 @@ __Modo Nativo (Não testado)
 https://openedx.atlassian.net/wiki/spaces/OpenOPS/pages/146440579/Native+Open+edX+platform+Ubuntu+16.04+64+bit+Installation
 ```
 
-## bitnami-laravel
+### bitnami-laravel
 ```
 https://laravel.com/docs/7.x
 https://hub.docker.com/r/bitnami/laravel
@@ -185,7 +214,7 @@ docker-compose up
 acesse localhost:30000
 ```
 
-## bitnami-moodle
+### bitnami-moodle
 ```
 docker pull bitnami/moodle
 https://hub.docker.com/r/bitnami/moodle/
@@ -285,7 +314,7 @@ $ docker run -d -p 80:80 -p 443:443 --name moodle \
  bitnami/moodle:latest
 ```
 
-## bogem-ftp
+### bogem-ftp
 ```
 https://hub.docker.com/r/bogem/ftp
 
@@ -306,7 +335,7 @@ docker run \
 bogem/ftp
 ```
 
-## bonita
+### bonita
 ```
 https://hub.docker.com/_/bonita
 _______________________________________________________________________________
@@ -365,7 +394,7 @@ docker run --name=bonita -e "TENANT_LOGIN=tech_user" -e "TENANT_PASSWORD=secret"
 Now you can access the Bonita Portal on localhost:8080/bonita and login using: tech_user / secret
 ```
 
-## busybox
+### busybox
 ```
 docker run busybox
 
@@ -387,7 +416,7 @@ touch file.txt
 ls
 ```
 
-## centos8
+### centos8
 ```
 docker pull centos:centos8
 docker run --name centos08.server -ti -d --privileged=true centos:8 "/sbin/init"
@@ -621,7 +650,7 @@ docker-compose -v
 
 ```
 
-## centos8
+### centos8
 ```
 https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Dedicated_Servers
 
@@ -743,7 +772,7 @@ sudo dpkg --add-architecture i386; sudo apt update; sudo apt install mailutils p
 
 ```
 
-## centos8
+### centos8
 ```
 CentOS (Funcionou mexendo no firewall)
 sudo yum install httpd -y
@@ -1432,7 +1461,7 @@ Access Collabora Admin at http://[your-host-public-ip]:9980/loleaflet/dist/admin
 and set in Settings -> Admin -> Additional -> Collabora Online server -> http://[your-host-public-ip]:9980
 ```
 
-## docker
+### docker
 ```
 docker pull docker
 
@@ -1479,7 +1508,7 @@ Where to store data
 docker run --privileged --name some-docker -v /my/own/var-lib-docker:/var/lib/docker -d docker:dind
 ```
 
-## drupal
+### drupal
 ```
 https://hub.docker.com/_/drupal
 
@@ -1501,7 +1530,7 @@ MySQL, nome drupal, usuário root, senha my-password
 Configurações avançadas, servidor mysql.5.7, porta 3306, botão Salvar e continuar.
 ```
 
-## elasticsearch
+### elasticsearch
 ```
 __Elasticsearch
 dentro da pasta containers
@@ -1572,7 +1601,7 @@ curl -XGET http://elasticsearch:9200/my-index/cities/2?pretty
 curl -XGET http://elasticsearch:9200/my-index/_search?q=city:new
 ```
 
-## friendica
+### friendica
 ```
 https://hub.docker.com/_/friendica
 
@@ -1678,7 +1707,7 @@ MYSQL_DATABASE Name of the database using mysql / mariadb.
 MYSQL_HOST Hostname of the database server using mysql / mariadb.
 ```
 
-## ghost
+### ghost
 ```
 docker pull ghost
 
@@ -1700,7 +1729,7 @@ Parece que esse de cima funcionou mas não sei usar.
 If all goes well, you'll be able to access your new site on http://localhost:3001 and http://localhost:3001/ghost to access Ghost Admin (or http://host-ip:3001 and http://host-ip:3001/ghost, respectively).
 ```
 
-## grafana
+### grafana
 ```
 docker pull grafana/grafana
 
@@ -1709,7 +1738,7 @@ https://hub.docker.com/r/grafana/grafana/
 docker run -d --name=grafana -p 3000:3000 grafana/grafana
 ```
 
-## grav
+### grav
 ```
 https://getgrav.org/
 https://github.com/getgrav/docker-grav
@@ -1721,7 +1750,7 @@ docker run -p 8000:80 grav:latest
 docker run -d -p 8000:80 --restart always -v grav_data:/var/www/html grav:latest
 ```
 
-## httpd
+### httpd
 ```
 docker pull httpd
 
@@ -1734,7 +1763,7 @@ docker stop a5
 docker rm a5
 ```
 
-## influx
+### influx
 ```
 cd ~
 mkdir influxdb
@@ -1751,14 +1780,14 @@ Instale o Postman
 https://github.com/renatomportugal/docker/blob/master/17.InstallCentOS.md#postman
 ```
 
-## jekyll
+### jekyll
 ```
 docker pull jekyll/jekyll
 
 https://hub.docker.com/r/jekyll/jekyll/
 ```
 
-## jenkins
+### jenkins
 ```
 docker pull jenkins/jenkins
 
@@ -1779,7 +1808,7 @@ Select Plugins to install, None, Install
 Crie o usuario admin, senha admin, Nome completo Admin, Save and continue, Save and Finish, Start using Jenkins
 ```
 
-## joomla
+### joomla
 ```
 https://hub.docker.com/_/joomla
 
@@ -1824,7 +1853,7 @@ docker run --name some-joomla --link some-mysql:mysql -p 8080:80 -d joomla
 If you'd like to use an external database instead of a linked mysql container, specify the hostname and port with JOOMLA_DB_HOST along with the password in JOOMLA_DB_PASSWORD and the username in JOOMLA_DB_USER (if it is something other than root):
 ```
 
-## known
+### known
 ```
 
 https://hub.docker.com/_/known
@@ -1868,7 +1897,7 @@ docker run --name some-known -e KNOWN_DB_HOST=10.1.2.3:3306 \
     -e KNOWN_DB_USER=... -e KNOWN_DB_PASSWORD=... -d known 
 ```
 
-## lightstreamer
+### lightstreamer
 ```
 https://hub.docker.com/_/lightstreamer
 docker pull lightstreamer
@@ -1878,7 +1907,7 @@ docker run --name ls-server -d -p 80:8080 lightstreamer
 4da
 ```
 
-## mariadb
+### mariadb
 ```
 https://hub.docker.com/_/mariadb
 
@@ -1908,13 +1937,13 @@ docker run --name some-mariadb -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mariadb:ta
 docker run -it --rm mariadb:tag --verbose --help
 ```
 
-## maven
+### maven
 ```
 docker pull maven
 docker pull maven:3.6-alpine
 ```
 
-## mediawiki
+### mediawiki
 ```
 https://hub.docker.com/_/mediawiki
 
@@ -1943,11 +1972,11 @@ docker run \
   docker exec -it 49 bash
   ls
   
-  ## The protocol and server name to use in fully-qualified URLs
+  ### The protocol and server name to use in fully-qualified URLs
   $wgServer = "http://tecnocrata.ddns.net";
 ```
 
-## mongodb
+### mongodb
 ```
 __Baixar
 docker pull mongo
@@ -2141,7 +2170,7 @@ docker run \
 _______________________________________________________________
 ```
 
-## mysql
+### mysql
 ```
 docker pull mysql:5.7
 docker pull phpmyadmin/phpmyadmin
@@ -2317,7 +2346,7 @@ verifique se a variável foi atribuída
 docker exec 09 env
 ```
 
-## nextcloud
+### nextcloud
 ```
 Baixar
 docker pull nextcloud
@@ -2814,7 +2843,7 @@ $ docker run -d \
     nextcloud
 ```
 
-## nginx
+### nginx
 ```
 docker pull nginx
 docker images
@@ -2905,7 +2934,7 @@ curl -i http://docker
 docker ps
 ```
 
-## nodejs
+### nodejs
 ```
 no terminal podemos ver que não há o nodejs instalado (no Sistema Operacional)
 node -v
@@ -3085,7 +3114,7 @@ __Testar
 https://www.katacoda.com/courses/docker/3
 ```
 
-## nuxeo
+### nuxeo
 ```
 https://hub.docker.com/_/nuxeo
 
@@ -3147,7 +3176,7 @@ NUXEO_ES_REPLICAS=0
 NUXEO_ES_SHARDS=5
 ```
 
-## odoo
+### odoo
 ```
 https://hub.docker.com/_/odoo
 
@@ -3156,7 +3185,7 @@ docker pull odoo
 testar com postgres:10
 ```
 
-## onlyoffice community Server 5.5
+### onlyoffice community Server 5.5
 ```
 Fazer em 12JUL20
 cd oo
@@ -3204,7 +3233,7 @@ Ao terminar acesse localhost
 __Configuração
 ```
 
-## onlyoffice documentserver
+### onlyoffice documentserver
 ```
 https://hub.docker.com/r/onlyoffice/documentserver
 docker pull onlyoffice/documentserver:5.5
@@ -3258,13 +3287,13 @@ pwd
 cd apps/
 ```
 
-## openjdk
+### openjdk
 ```
 docker pull openjdk
 docker pull openjdk:8-alpine
 ```
 
-## openproject-community
+### openproject-community
 ```
 admin/admin
 https://hub.docker.com/r/openproject/community
@@ -3299,7 +3328,7 @@ docker run -d -p 8080:80 --name openproject -e SECRET_KEY_BASE=secret \
   docker start openproject
   ```
 
-## ownCloud
+### ownCloud
 ```
 Baixar
 docker pull owncloud
@@ -3666,7 +3695,7 @@ services:
 Run docker stack deploy -c stack.yml owncloud (or docker-compose -f stack.yml up), wait for it to initialize completely, and visit http://swarm-ip:8080/, http://localhost:8080/, or http://host-ip:8080 (as appropriate).
 ```
 
-## php
+### php
 ```
 docker pull php:7.1.26-apache
 
@@ -3706,7 +3735,7 @@ Insira no arquivo:
 Pronto, acesse o localhost, e todas as mudanças automaticamente refletirão.
 ```
 
-## phpmyadmin
+### phpmyadmin
 ```
 __PHPMYDMIN
 docker pull phpmyadmin/phpmyadmin
@@ -3749,7 +3778,7 @@ docker ps
 docker ps -a
 ```
 
-## plone
+### plone
 ```
 https://hub.docker.com/_/plone
 docker pull plone
@@ -3759,7 +3788,7 @@ docker run -p 80:8080 plone
 Funcionou
 ```
 
-## portainer
+### portainer
 ```
 docker pull portainer/portainer
 
@@ -3777,7 +3806,7 @@ No swarm
 docker run -d -p 9001:9001 --name portainer_agent --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /var/lib/docker/volumes:/var/lib/docker/volumes portainer/agent
 ```
 
-## postgres
+### postgres
 ```
 https://hub.docker.com/_/postgres
 
@@ -3801,14 +3830,14 @@ docker exec -it ab9 bash
 psql -d docker_db -U docker_user
 ```
 
-## prometheus
+### prometheus
 ```
 docker pull prom/prometheus
 
 https://hub.docker.com/r/prom/prometheus/
 ```
 
-## pythom
+### pythom
 ```
 docker pull python
 
@@ -3866,7 +3895,7 @@ vamos criar o container
 docker run -it -v $PWD:/app -w /app python python3 calendar-app.py
 ```
 
-## rancher-nginx
+### rancher-nginx
 ```
 https://hub.docker.com/r/rancher/nginx
 
@@ -3882,7 +3911,7 @@ docker run \
 Não funcionou
 ```
 
-## rancher-rancher
+### rancher-rancher
 ```
 https://rancher.com/docs/rancher/v2.x/en/installation/other-installation-methods/single-node-docker/
 
@@ -4008,7 +4037,7 @@ docker run -d --restart=unless-stopped \
   rancher/rancher:latest
 ```
 
-## rancher-server
+### rancher-server
 ```
 https://hub.docker.com/r/rancher/server/
 https://rancher.com/docs/rancher/v1.6/en/
@@ -4039,7 +4068,7 @@ docker run \
   rancher/server
 ```
 
-## redis
+### redis
 ```
 __REDIS
 docker run redis
@@ -4104,7 +4133,7 @@ PERSISTENT DATA
 docker run -d --name redisMapped -v /opt/docker/data/redis:/data redis
 ```
 
-## redmine
+### redmine
 ```
 https://hub.docker.com/_/redmine
 
@@ -4132,7 +4161,7 @@ Crie conta para o admin aprovar.
 Funcionou.
 ```
 
-## registry
+### registry
 ```
 https://hub.docker.com/_/registry
 
@@ -4147,7 +4176,7 @@ $ docker tag ubuntu localhost:5000/ubuntu
 $ docker push localhost:5000/ubuntu
 ```
 
-## sakai
+### sakai
 ```
 https://github.com/hypothesis/sakai-docker
 
@@ -4198,7 +4227,7 @@ docker-machine create -d virtualbox dev
 eval $(docker-machine env dev)
 ```
 
-## teamspeak
+### teamspeak
 ```
 https://hub.docker.com/_/teamspeak
 
@@ -4211,7 +4240,7 @@ docker run -p 9987:9987/udp -p 10011:10011 -p 30033:30033 -e TS3SERVER_LICENSE=a
 docker exec -it some-teamspeak sh
 ```
 
-## ubuntu
+### ubuntu
 ```
 docker run ubuntu ps
 docker run -it ubuntu bash
@@ -4221,7 +4250,7 @@ FROM ubuntu
 RUN apt-get update && apt-get install tree
 ```
 
-## wordpress
+### wordpress
 ```
 Instale o MySQL e o PHPmyAdmin, veja em no arquivo deste mesmo diretório mysql.txt
 
@@ -4315,9 +4344,9 @@ docker container prune -f
 docker ps -a
 ```
 
-## wso2
+### wso2
 
-### Instalação Separada
+#### Instalação Separada
 
 ```
 Testado em 05MAR21.
@@ -4397,7 +4426,7 @@ For broker:
 https://localhost:9446/carbon
 admin, admin
 ```
-### Com Docker Composer
+#### Com Docker Composer
 
 ```
 ________________________________________________________________________
@@ -4408,7 +4437,7 @@ Descompacte a pasta em home/SeuUsuario/github
 Acesse a pasta apim-with-analytics, veja seu caminho.
 cd github/docker-apim-master/docker-compose/apim-with-analytics/
 ```
-#### CentOS:
+##### CentOS:
 ```
 Altere nos arquivos Dockerfile:
 docker-apim-3.2.x\docker-compose\apim-with-analytics\dockerfiles\apim\
@@ -4420,7 +4449,7 @@ FROM wso2/wso2am-analytics-dashboard:3.2.0-centos
 docker-apim-3.2.x\docker-compose\apim-with-analytics\dockerfiles\apim-analytics-worker
 FROM wso2/wso2am-analytics-worker:3.2.0-centos
 ```
-#### Ubuntu
+##### Ubuntu
 ```
 Altere nos arquivos Dockerfile:
 docker-apim-3.2.x\docker-compose\apim-with-analytics\dockerfiles\apim\
@@ -4458,7 +4487,7 @@ Login to the web UIs using following credentials.
 Username: admin
 Password: admin
 ```
-### Instalação Personalizada
+#### Instalação Personalizada
 ```
 Fazer o downloado do código (https://github.com/wso2/docker-apim)
 Descompacte para docker-apim-master
@@ -4466,7 +4495,7 @@ Com o WinSCP, passe via FTP para a máquina remota (na pasta home do usuário).
 Acesse com Putty ou via SSH
 
 ```
-#### Ubuntu:
+##### Ubuntu:
 ```
 1º Passo - Alterar os Dockfiles para baixar a versão CENTOS dos containers
 1. Altere nos arquivos Dockerfile:
@@ -4594,7 +4623,7 @@ cd docker-apim-master/docker-compose/apim-with-analytics/
 
 docker-compose up --build
 ```
-#### Se o PC for fraco
+##### Se o PC for fraco
 ```
 Quando o PC é fraco demora mais para tratas as informações, portanto devemos aumentar as tentativas de verificação de saúde do container.
 Veja que no arquivo do docker-compose, em cada serviço, mais precisamente em healthcheck, no parâmetro retries. Multiplique por 100. Por exemplo: se está 5 coloque 500.
@@ -4664,7 +4693,7 @@ ERROS:
 https://apim.docs.wso2.com/en/latest/troubleshooting/troubleshooting-invalid-callback-error/
 
 ```
-#### CentOS:
+##### CentOS:
 ```
 1º Passo - Alterar os Dockfiles para baixar a versão CENTOS dos containers
 1. Altere nos arquivos Dockerfile:
@@ -4832,7 +4861,7 @@ http://localhost:8280
 https://apim.docs.wso2.com/en/latest/getting-started/quick-start-guide/
 
 ```
-### Ajustar a memória
+#### Ajustar a memória
 ```
 Mudar a memória. Entre no Container do Api Manager.
 Aperte Ctrl+C para parar de rodar o container.
@@ -4877,7 +4906,7 @@ docker stop $(docker ps -q)
 docker start $(docker ps -aq)
 
 ```
-### Erro de callback
+#### Erro de callback
 ```
 https://apim.docs.wso2.com/en/latest/troubleshooting/troubleshooting-invalid-callback-error/
 
@@ -4912,7 +4941,7 @@ docker stop $(docker ps -q)
 docker start $(docker ps -aq)
 
 ```
-### Importar APIs
+#### Importar APIs
 ```
 Criar uma pasta chamada importada em /home 
 
@@ -4983,12 +5012,12 @@ Importar as apis com o comando
 
 ```
 
-## xampp
+### xampp
 ```
 docker pull xampp/app:7.1
 ```
 
-## xwiki
+### xwiki
 ```
 https://hub.docker.com/_/xwiki
 
