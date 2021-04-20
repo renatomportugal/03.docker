@@ -1,11 +1,16 @@
 # Servidor Padrão
-## Rede
-Verifica se ter a rede bridge.66.6<br>
-```
+
+## Rede_666
+
+Verifica se ter a rede bridge.66.6
+
+```CMD
 docker network ls
 ```
-Se não tiver, crie<br>
-```
+
+Se não tiver, crie
+
+```CMD
 docker network create \
   -d \
   bridge \
@@ -13,12 +18,16 @@ docker network create \
   --gateway 66.6.0.1 \
   bridge.66.6
 ```
-Verifique quais IPs estão vagos<br>
-```
+
+Verifique quais IPs estão vagos (Todos que não aparecem estão vagos)
+
+```CMD
 docker network inspect bridge.66.6
 ```
-Estou vendo uma forma de melhorar a apresentação dos dados:<br>
-```
+
+Estou vendo uma forma de melhorar a apresentação dos dados:
+
+```CMD
 docker network inspect bridge.66.6 -f {{.Containers}}
 ```
 
