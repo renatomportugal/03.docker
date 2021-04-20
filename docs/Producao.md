@@ -1,5 +1,17 @@
 # Producao
 
+## Tabela_de_IP
+
+Aplicação | PORTA | IP          | NOME
+--------- | ---- | ----------- | ----
+Rede      | ---- | bridge.66.6 | ----
+Subnet    | ---- | 66.6.0.0/16 | ----
+Gateway   | ---- | 66.6.0.1    | ----
+phpmyadmin| 8080 | 66.6.0.14   | ----
+MySQL     | 3306 | 66.6.0.5    | ----
+colabora  | 9980 | 66.6.0.15   | ----
+nc-mib    | 777  | 66.6.0.20   | ----
+
 ## Rede_666
 
 Verifica se ter a rede bridge.66.6
@@ -32,25 +44,33 @@ docker network inspect bridge.66.6 -f {{.Containers}}
 ```
 
 ## Volumes
-Verifique quais volumes existem:<br>
-```
+
+Verifique quais volumes existem:
+
+```CMD
 docker volume ls
 ```
-Crie o volume para a aplicação (caso saiba qual pasta deseja persistir os dados)<br>
-```
-docker volume create mysql
+
+Crie o volume para a aplicação (caso saiba qual pasta deseja persistir os dados)
+
+```CMD
+docker volume create mysql.5.7
 docker volume create nextcloud
 ```
-Verifique se foi criado<br>
-```
+
+Verifique se foi criado:
+
+```CMD
 docker volume ls
 ```
 
 ## Iniciar o Container com o Docker
-Rode a imagem que deseja que seja iniciada com o sistema<br>
 
-Liste a imagem para ver o id<br>
-```
+Rode a imagem que deseja que seja iniciada com o sistema
+
+Liste a imagem para ver o id
+
+```CMD
 docker ps
 ```
 Vamos suport que o id inicie com 98...<br>

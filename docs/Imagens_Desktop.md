@@ -13,7 +13,7 @@ docker run \
     -e PMA_HOST=mysql.5.7 \
     --network bridge.66.6 \
     --name phpmyadmin \
-    --ip 66.6.0.15 \
+    --ip 66.6.0.14 \
     --restart=always \
 phpmyadmin/phpmyadmin
 ```
@@ -27,15 +27,12 @@ docker run \
     -e MYSQL_ROOT_PASSWORD=my-password \
     -e MYSQL_USER=root \
     -e MYSQL_PASSWORD=my-password \
-    -v mysql:/var/lib/mysql \
+    -v mysql.5.7:/var/lib/mysql \
     --network bridge.66.6 \
     --name mysql.5.7 \
     --ip 66.6.0.5 \
-    --restart=always \
     mysql:5.7
 ```
-
-
 
 ## Blog
 
@@ -69,8 +66,7 @@ docker run \
   -e "domain=192.168.1.106" \
   --network bridge.66.6 \
   --name collabora\
-  --ip 66.6.0.21 \
-  --restart=always \
+  --ip 66.6.0.15 \
 collabora/code
 
 Direcione a configuração do Nextcloud para http://192.168.1.106:9980
@@ -196,13 +192,14 @@ cd apps/
 ```
 
 ## Servidor de Arquivos
-Qual é o melhor? Por que?<br>
+
+Qual é o melhor? Por que?
+Encontrei na internet que o NextCloud (Sem limitações) é uma continuação do OwnCloud(Features Pagas)
 
 ### nextcloud
 
 ```CMD
-
-777, nextcloud-mib, nc-mib, ip 66.6.0.20
+777,  nextcloud-mib, nc-mib, ip 66.6.0.20
 8000, nextcloud-estudo, nc-estudo, ip 66.6.0.21
 8001, nextcloud-media, nc-media, ip 66.6.0.22
 8002, nextcloud-sp, nc-sp, ip 66.6.0.23
@@ -217,7 +214,7 @@ docker run \
   -v nextcloud:/var/www/html \
   --network bridge.66.6 \
   --name nextcloud \
-  --ip 66.6.0.18 \
+  --ip 66.6.0.20 \
   --restart=always \
 nextcloud
 
@@ -238,37 +235,34 @@ Aperte o botão Concluir configuração
 _______________________________________________________________________________
 APLICATIVOS (que estou usando)
 
-__Collabora
-https://github.com/renatomportugal/docker/blob/master/ImagensOficiais/collabora-code.txt
 
-__Adicionar
-Na engrenagem do lado direito, Aplicativos,
-Menu do lado esquerdo (ícone de 3 barras horizontais sobrepostas), Aplicativos em destaque, 
-ache o Collabora Online (3.7.3), botão Baixar e ativar.
-Na engrenagem do lado direito, Configurações,
-No lado esquedo, Collabora Online, 
+__Collabora Online (4.0.4)
+Clique em sua foto, "Mais Aplicativos", busque por Collabora Online (4.0.4), botão Baixar e ativar.
+Clique em sua foto, Configurações.
+Vá ao lado esquedo, Collabora Online, 
 Selecione "Usar seu próprio servidor"
 Selecione "Desativar a verificação do certificado (inseguro)"
 Colque o endereço do serviço do Collabora online (sem a barra no final)
-http://192.168.1.115:9980
+http://192.168.1.106:9980
 Botão Salvar... (se der erro adicione as portas 8000 e 9980 no firewall)
 Para testar abra um arquivo docx.
 
-__Music
-Na engrenagem do lado direito, Aplicativos,
-Buscar, music, 
+__Music (1.1.0)
+Clique em sua foto, "Mais Aplicativos", busque por music, 
 
-__Draw.io
+__Draw.io (1.0.0)
 
-__Mind Map
+__Mind Map (0.0.24)
 
-__Quick Notes
+__Quick Notes (0.7.1)
 
-__Duplicate Finder
+__Duplicate Finder (0.0.6)
 
-__Quota Warning
+__Quota Warning (1.10.0)
 
-__Metadata
+__Metadata (0.13.0)
+
+__File access control (1.11.0)
 _______________________________________________________________________________
 APLICATIVOS REPROVADOS
 _Bookmarks
@@ -333,7 +327,10 @@ LDAP user and group backend
 
 __APARENCIA
 Verificar como instalar a extensão Imagemagick do PHP, para transformar a imagem enviada em ícone.
-Configurações, Menu do lado esquerdo, Personalização, 
+Configurações, Menu do lado esquerdo, Personalização...
+Nome: QualquerUm
+Link web: http://192.168.1.106
+Slogan: Seus Dados estão Ocultos
 
 Apague os arquivos do diretório:
 docker exec -it id bash
@@ -352,14 +349,11 @@ Share by mail
 Comments
 First Run Wizard
 
-Baixar e Ativar
-File access control
-
 _______________________________________________________________________________
 Limitar a quantidade de espaço para cada usuário em 100MB.
 _______________________________________________________________________________
 Com a conta de administrador, clique no seu usuário, lado superior direito, Usuários, 
-Clique na engrenagem no lado inferior esquerdo, Quota padrão 1 B.
+Clique na engrenagem no lado inferior esquerdo, Quota padrão 1 B (Digite Enter).
 Selecione as opções:
 Exibir o último login.
 

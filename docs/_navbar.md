@@ -9,7 +9,7 @@
   * [Comandos](ComandosLinux.md)
 
 * Outros
-  * [Img Desktop](Imagens.md)
+  * [Img Desktop](Imagens_Desktop.md)
   * [Img Rapberry Pi](Raspberry.md)
   * [GitHub](GitHub.md)
   * [MongoDB](MongoDB.md)
