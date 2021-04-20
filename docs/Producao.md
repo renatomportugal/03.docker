@@ -1,4 +1,4 @@
-# Servidor Padrão
+# Producao
 
 ## Rede_666
 
@@ -31,7 +31,7 @@ Estou vendo uma forma de melhorar a apresentação dos dados:
 docker network inspect bridge.66.6 -f {{.Containers}}
 ```
 
-## Volume
+## Volumes
 Verifique quais volumes existem:<br>
 ```
 docker volume ls
@@ -45,81 +45,8 @@ Verifique se foi criado<br>
 ```
 docker volume ls
 ```
-## Banco de dados
-### MySQL
-```
-docker run \
-    -d \
-    -p 3306:3306 \
-    -e MYSQL_ROOT_PASSWORD=my-password \
-    -e MYSQL_USER=root \
-    -e MYSQL_PASSWORD=my-password \
-    -v mysql:/var/lib/mysql \
-    --network bridge.66.6 \
-    --name mysql.5.7 \
-    --ip 66.6.0.5 \
-    --restart=always \
-    mysql:5.7
-```
-### phpmyadmin
-```
-docker run \
-    -d \
-    -p 8080:80 \
-    -e PMA_HOST=mysql.5.7 \
-    --network bridge.66.6 \
-    --name phpmyadmin \
-    --ip 66.6.0.15 \
-    --restart=always \
-phpmyadmin/phpmyadmin
-```
 
-### nextcloud
-```
-docker run \
-  -d \
-  -p 8000:80 \
-  -v nextcloud:/var/www/html \
-  --network bridge.66.6 \
-  --name nextcloud \
-  --ip 66.6.0.20 \
-  --restart=always \
-nextcloud
-```
-### nextcloud
-```
-777, nextcloud-mib, nc-mib, ip 66.6.0.20
-8000, nextcloud-estudo, nc-estudo, ip 66.6.0.21
-8001, nextcloud-media, nc-media, ip 66.6.0.22
-8002, nextcloud-sp, nc-sp, ip 66.6.0.23
-8003, nextcloud-code, nc-code, ip 66.6.0.25
-8004, nextcloud-ha, nc-ha, ip 66.6.0.26
-```
-### collabora
-```
-sudo su
-apt-get install apache2
-a2enmod proxy
-a2enmod proxy_wstunnel
-a2enmod proxy_http
-a2enmod ssl
-systemctl restart apache2
-exit
-
-docker run \
-  -t \
-  -d \
-  -p 9980:9980 \
-  -e "extra_params=--o:ssl.enable=false" \
-  --network bridge.66.6 \
-  --name collabora\
-  --ip 66.6.0.24 \
-  --restart=always \
-collabora/code
-
-```
-
-# Iniciar o Container com o Docker
+## Iniciar o Container com o Docker
 Rode a imagem que deseja que seja iniciada com o sistema<br>
 
 Liste a imagem para ver o id<br>
@@ -152,6 +79,18 @@ docker inspect -f "{{ .RestartCount }}" <container_id>
 docker inspect -f "{{ .State.StartedAt }}" <container_id>
 ```
 
+Verificar todos os containers:
+
+```CMD
+docker inspect -f "{{ .HostConfig.RestartPolicy }}" $(docker ps -q)
+```
+
+Iniciar todos os Containers com o Docker:
+
+```CMD
+docker update --restart=always $(docker ps -q)
+```
+
 Lista de todos os containers com id, status de restart e quantidadede (de restart) (que estão rodando)<br>
 ```
 docker inspect -f "{{.Id}} {{.HostConfig.RestartPolicy.Name}} {{.RestartCount}}" $(docker container ls -q)
@@ -160,33 +99,37 @@ docker inspect -f "{{.Id}} {{.HostConfig.RestartPolicy.Name}} {{.RestartCount}}"
 Lista de todos os containers com id, status de restart e quantidadede (de restart) (incluindo os que não estão rodando)<br>
 docker inspect -f "{{.Id}} {{.HostConfig.RestartPolicy.Name}} {{.RestartCount}}" $(docker container ps -a -q)
 
+Explicando:
+Este comando lista todos os ids dos containers que estão rodando. Para incluir todos adicione -a.
 
-Explicando:<br>
-Este comando lista todos os ids dos containers que estão rodando. Para incluir todos adicione -a.<br>
-```
+```CMD
 $(docker container ls -a -q)
 ```
 
-# Formatando a saída
-https://docs.docker.com/config/formatting/<br>
-Use aspas simples externamente, internamente use aspas duplas como no exemplo a seguir:<br>
-Este exemplo separa o id quando encontra a letra "e".<br>
-Entrada c81e8baea8<br>
-Saída c81 8ba a8<br>
-```
-docker inspect -f '{{split .Id "e"}} {{.HostConfig.RestartPolicy.Name}} {{.RestartCount}}' $(docker container ls -q)
-```
-Tamanho do campo<br>
-```
-docker inspect -f '{{len .Id}} {{.HostConfig.RestartPolicy.Name}} {{.RestartCount}}' $(docker container ls -q)
+## Entrar no container
+
+```CMD
+docker ps -a
+docker exec -it id_do_container bash
 ```
 
-# Rancher
-80,443   - Rancher - Server<br>
-8001     - Rancher - php:7.1.26-apache<br>
+## Remover
 
-## Containers
-20,21,47400-47470 - bogem/ftp
-3306 - mysql:5.7
-8080 - phpmyadmin/phpmyadmin
-8200 - 
+### Remover todos os containers parados
+
+```CMD
+CUIDADO!!!!!!!!
+docker rm -v $(docker ps -a -q -f status=exited)
+```
+
+## Parar o container
+
+```CMD
+docker stop <id>
+```
+
+### Parar todos os containers
+
+```CMD
+docker stop $(docker ps -q)
+```

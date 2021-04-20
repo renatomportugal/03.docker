@@ -144,3 +144,46 @@ Placeholder	Description
 .Mounts	    Names of the volumes mounted in this container.
 .Networks	Names of the networks attached to this container.
 ```
+
+Split
+
+[https://docs.docker.com/config/formatting/](https://docs.docker.com/config/formatting/)
+
+Use aspas simples externamente, internamente use aspas duplas como no exemplo a seguir:<br>
+Este exemplo separa o id quando encontra a letra "e".<br>
+Entrada c81e8baea8<br>
+Saída c81 8ba a8<br>
+
+```CMD
+docker inspect -f '{{split .Id "e"}} {{.HostConfig.RestartPolicy.Name}} {{.RestartCount}}' $(docker container ls -q)
+```
+
+Tamanho do campo<br>
+
+```CMD
+docker inspect -f '{{len .Id}} {{.HostConfig.RestartPolicy.Name}} {{.RestartCount}}' $(docker container ls -q)
+```
+
+Mostrar todos os containers parados
+
+```CMD
+docker ps -a -f status=exited
+```
+
+Ordenar pelas portas
+
+```CMD
+docker ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}" | (read -r; printf "%s\n" "$REPLY"; sort -k 3 )
+```
+
+Ordenar pelos nomes
+
+```CMD
+docker ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}" | (read -r; printf "%s\n" "$REPLY"; sort -k 2 )
+```
+
+Ordenar pelos ids
+
+```CMD
+docker ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}" | (read -r; printf "%s\n" "$REPLY"; sort -k 1 )
+```
