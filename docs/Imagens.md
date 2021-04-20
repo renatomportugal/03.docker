@@ -1052,6 +1052,17 @@ https://www.seafile.com/en/download/
 
 ### teste
 
+## Blog
+
+### Ghost
+
+[https://hub.docker.com/_/ghost](https://hub.docker.com/_/ghost)
+
+```CMD
+docker run -d --name some-ghost -e url=http://192.168.1.106:3001 -p 3001:2368 ghost
+```
+
+
 ## Outros
 
 ### Adminer
