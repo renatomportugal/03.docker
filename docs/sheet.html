@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- _JQUERY -->
+     <script type="text/javascript" src="core/js/jquery.min.js"></script>
+    <title>sheet</title>
+</head>
+<body>
+    <script>
+        // Destruir Sessao
+        function sheet(){
+            $.get('https://spreadsheets.google.com/feeds/list/1aWRsYnnjHxty34lRo3a5p2IOjGJVLQJQv3hEtA1-_ow/1/public/values?alt=json',
+            function(result) {
+                console.log(result);
+            }
+        );
+        }
+    </script>
+</body>
+</html>
