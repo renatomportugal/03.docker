@@ -32,15 +32,6 @@ Especificando a porta<br>
 ```
 ssh ip -l usuario -p 22
 ```
-#### Instalando o Docker
-Caso ainda náo tenha instalado o Docker, acesse o link abaixo?<br>
-https://github.com/renatomportugal/docker/blob/master/01.Install.md#no-ubuntu<br>
-
-##### Testar
-Instale o Container abaixo e acesse o seu endere;o na internet. Verá que funcionou...<br>
-```
-docker run -d -p 80:80 --restart=always nginx
-```
 
 #### Desinstalar programas
 ```
