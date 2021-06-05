@@ -288,88 +288,8 @@ Solução: Desligar no botão e ligar novamente.
 
 5. Para fazer desligar a tela
 ___
-Não funcionou
-sudo apt-get install x11-xserver-utils
-
-sudo nano /usr/local/bin/screenoff
-#!/bin/bash
-xset dpms force off
-
-Ctrl+O
-Enter
-Ctrl+X
-
-sudo chmod +x /usr/local/bin/screenoff
-
-Outra tentativa
-sudo apt-get install vbetool
-sudo vbetool dpms off
-
-Esta funcionou no teclado do note
+Digitar no teclado do note
 setterm --blank 1
-___
-https://qastack.com.br/ubuntu/62858/turn-off-monitor-using-command-line
-Testar sem dar o comando acima da próxima vez.
-
-sudo nano /etc/default/grub
-Adicionar a linha
-GRUB_CMDLINE_LINUX_DEFAULT="quiet consoleblank=60"
-
-Comente a linha abaixo com a cerquilha no começo
-#GRUB_CMDLINE_LINUX_DEFAULT="maybe-ubiquity"
-
-Ctrl+O
-Enter
-Ctrl+X
-
-reboot
-
-Ainda não funcionou.
-
-Iniciar com o Linux
-
-sudo nano /etc/init.d/apagatela
-
-#!/bin/bash
-setterm --blank 1
-
-Ctrl+O
-Enter
-Ctrl+X
-
-sudo chmod ugo+x /etc/init.d/apagatela
-sudo update-rc.d apagatela defaults
-___
-
-sudo nano /srv/startup.sh
-#!/bin/bash
-setterm --blank 1
-
-Ctrl+O
-Enter
-Ctrl+X
-
-sudo nano /etc/init/apagatela.conf
-
-
-
-description "Apagando a Tela..."
-start on startup
-task
-exec /srv/startup.sh
-
-Ctrl+O
-Enter
-Ctrl+X
-
-sudo nano /etc/init.d/meuscript
-#!/bin/bash
-setterm --blank 1
-
-sudo chmod 755 /etc/init.d/meuscript
-
-sudo update-rc.d meuscript defaults
-
 ```
 
 # CentOS
