@@ -288,7 +288,9 @@ Solução: Desligar no botão e ligar novamente.
 
 5. Para fazer desligar a tela
 ___
-Não funcionou
+Nenhum deles funcionou, e a cada vez que ligo a máquina tenho de digitar "setterm --blank 1" no teclado para ele desligar a tela.
+
+Testando...
 sudo apt-get install x11-xserver-utils
 
 sudo nano /usr/local/bin/screenoff
@@ -300,8 +302,9 @@ Enter
 Ctrl+X
 
 sudo chmod +x /usr/local/bin/screenoff
+___
 
-Outra tentativa
+Testando...
 sudo apt-get install vbetool
 sudo vbetool dpms off
 
@@ -349,6 +352,10 @@ Ctrl+O
 Enter
 Ctrl+X
 
+sudo chmod ugo+x /srv/startup.sh
+
+
+___
 sudo nano /etc/init/apagatela.conf
 
 
@@ -362,6 +369,11 @@ Ctrl+O
 Enter
 Ctrl+X
 
+sudo chmod ugo+x /etc/init/apagatela.conf
+
+
+
+___
 sudo nano /etc/init.d/meuscript
 #!/bin/bash
 setterm --blank 1

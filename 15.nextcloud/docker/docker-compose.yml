@@ -46,7 +46,22 @@ services:
             - mysql.5.7
         links:
             - mysql.5.7
-
+            
+    collabora:
+        image: collabora/code
+        container_name: collabora
+        restart: always
+        ports:
+            - "9980:9980"
+        networks:
+            - bd
+        depends_on:
+            - nextcloud
+        environment:
+            - extra_params=--o:ssl.enable=false
+            - username=admin
+            - password=admin
+            - domain=192.168.1.109
 networks:
     bd:
 

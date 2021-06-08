@@ -83,6 +83,23 @@ Copiar arquivos para fora do container. Copiará para a pasta que estiver. Use p
 docker cp id_do_container:/var/www/html/config/config.php config.php
 ```
 
+# Copiar_dados
+
+```CMD
+Copiar do container para a pasta.
+docker cp id_do_container:/pasta pasta
+
+Copiar da pasta para o container.
+Estando num nível acima da pasta...
+ls
+docker cp data 824ef00007a6:/
+
+Copiar a pasta data do container para o diretório raiz.
+docker cp af006d151ffc:/data ./
+
+
+```
+
 # Busca de Containers
 ```
 docker search redis
