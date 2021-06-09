@@ -14,5 +14,7 @@
   * [GitHub](GitHub.md)
   * [MongoDB](MongoDB.md)
   * [No-IP](no_ip.md)
+  * [SSL](ssl.md)
+  * [nginx](nginx.md)
 
 * [:us:](/us/)
