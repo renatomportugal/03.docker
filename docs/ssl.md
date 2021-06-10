@@ -98,3 +98,22 @@ sudo systemctl start nginx
 sudo systemctl restart ngix
 
 ```
+
+## Certificado
+
+```CMD
+Logar via SSH
+sudo su
+cd /etc
+ls | grep lets
+cp -r letsencrypt/ lets/
+mv -f lets/ /home/user
+cd /home/user
+ls
+cd lets
+ls -la
+chown -Rc user:user * 
+ls -la
+
+Utilize um programa de FTP para retirar do servidor
+```
