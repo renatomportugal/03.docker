@@ -236,7 +236,7 @@ _______________________________________________________________________________
 APLICATIVOS (que estou usando)
 
 
-__Collabora Online (4.0.4)
+__Collabora Online (4.1.1)
 Clique em sua foto, "Mais Aplicativos", busque por Collabora Online (4.1.1), botão Baixar e ativar.
 Clique em sua foto, Configurações.
 Vá ao lado esquedo, Administração, Collabora Online, 
@@ -247,7 +247,7 @@ http://192.168.1.106:9980
 Botão Salvar... (se der erro adicione as portas 8000 e 9980 no firewall)
 Para testar abra um arquivo docx.
 
-__Music (1.1.0)
+__Music (1.2.0)
 Clique em sua foto, "Mais Aplicativos", busque por music, 
 
 __Draw.io (1.0.0)
@@ -256,7 +256,7 @@ __Mind Map (0.0.24)
 
 __Quick Notes (0.7.1)
 
-__Duplicate Finder (0.0.6)
+__Duplicate Finder (0.0.8)
 
 __Quota Warning (1.10.0)
 
