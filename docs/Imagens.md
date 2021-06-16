@@ -241,24 +241,24 @@ Clique em sua foto, "Mais Aplicativos", busque por Collabora Online (4.1.1), bot
 Clique em sua foto, Configurações.
 Vá ao lado esquedo, Administração, Collabora Online, 
 Selecione "Usar seu próprio servidor"
-Selecione "Desativar a verificação do certificado (inseguro)"
 Colque o endereço do serviço do Collabora online (sem a barra no final)
 http://192.168.1.106:9980
+Selecione "Desativar a verificação do certificado (inseguro)"
 Botão Salvar... (se der erro adicione as portas 8000 e 9980 no firewall)
-Para testar abra um arquivo docx.
+Posteriormente, para testar abra um arquivo docx.
 
 __Music (1.2.0)
 Clique em sua foto, "Mais Aplicativos", busque por music, 
 
 __Draw.io (1.0.0)
 
-__Mind Map (0.0.24)
+Timeout__Mind Map (0.0.24)
 
 __Quick Notes (0.7.1)
 
 __Duplicate Finder (0.0.8)
 
-__Quota Warning (1.10.0)
+Não...__Quota Warning (1.10.0)
 
 __Metadata (0.13.0)
 
