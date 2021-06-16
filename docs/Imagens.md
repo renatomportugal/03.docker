@@ -260,9 +260,9 @@ __Duplicate Finder (0.0.8)
 
 Não...__Quota Warning (1.10.0)
 
-__Metadata (0.13.0)
+__ Metadata (0.13.0)
 
-__File access control (1.11.0)
+__ File access control (1.11.0)
 _______________________________________________________________________________
 APLICATIVOS REPROVADOS
 _Bookmarks
@@ -343,11 +343,11 @@ Na conta de administrador, Menu esquerdo, Adicionar Grupo, "Biblioteca", confirm
 Coloque o administrador no grupo criado, e selecione para ser administrador do novo grupo. Usuários, editar, adicione o grupo, Concluído.
 
 Desabilitar App
+Comments
 Contacts Interaction
 Federation
-Share by mail
-Comments
 First Run Wizard
+Share by mail
 
 _______________________________________________________________________________
 Limitar a quantidade de espaço para cada usuário em 100MB.
