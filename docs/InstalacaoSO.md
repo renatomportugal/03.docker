@@ -56,6 +56,13 @@ sudo apt-get update
 sudo apt-get install code 
 sudo apt-get update code
 ```
+
+#### VLC
+```CMD
+sudo apt-get install vlc
+
+```
+
 #### Veracrypt
 https://www.veracrypt.fr/en/Downloads.html<br>
 
