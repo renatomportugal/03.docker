@@ -66,6 +66,14 @@ sudo apt-get install vlc
 #### Veracrypt
 https://www.veracrypt.fr/en/Downloads.html<br>
 
+#### Github_Desktop
+```CMD
+sudo wget https://github.com/shiftkey/desktop/releases/download/release-2.6.3-linux1/GitHubDesktop-linux-2.6.3-linux1.deb
+sudo apt-get install gdebi-core
+sudo gdebi /home/your_username/GitHubDesktop-linux-2.6.3-linux1.deb
+```
+
+
 # Ubuntu Server
 ```
 1. INSTALAÇÃO
