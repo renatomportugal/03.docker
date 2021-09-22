@@ -36,5 +36,13 @@ array(
     1 => 'seuSite.com'
 )
 
+_______________________________________________________________________________
+__PROBLEMAS____________________________________________________________________
+localhost:8080/index.php?route=/server/variables
+
+Edite para 512000
+sort buffer size
+https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_sort_buffer_size
+
 
 ```
