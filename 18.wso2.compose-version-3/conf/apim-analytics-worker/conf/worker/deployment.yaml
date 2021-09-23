@@ -437,7 +437,7 @@ siddhi:
         name: 'grpcSource'
         type: 'grpc'
         properties:
-          receiver.url : grpc://tcnct-philco:9806/org.wso2.analytics.mgw.grpc.service.AnalyticsSendService/sendAnalytics
+          receiver.url : grpc://lab-106:9806/org.wso2.analytics.mgw.grpc.service.AnalyticsSendService/sendAnalytics
   extensions:
     -
       extension:
@@ -517,9 +517,9 @@ auth.configs:
   #deployment.config:
   #  type: ha
   #  eventSyncServer:
-  #    host: tcnct-philco
+  #    host: lab-106
   #    port: 9893
-  #    advertisedHost: tcnct-philco
+  #    advertisedHost: lab-106
   #    advertisedPort: 9893
   #    bossThreads: 10
   #    workerThreads: 10
