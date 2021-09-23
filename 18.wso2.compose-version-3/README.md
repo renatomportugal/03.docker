@@ -30,6 +30,11 @@ Procure e altere
 Procure e altere
 #    advertisedHost: lab-106
 
+Acesse
+https://lab-106:9443/publisher
+https://lab-106:9443/devportal
+https://lab-106:9443/admin
+https://lab-106:9443/carbon
 
 
 ```
