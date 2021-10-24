@@ -6,14 +6,29 @@
 docker pull node
 ```
 
-## Rodar_Imagem
+## Estrutura
 
 ```CMD
-docker run -d -p 8000:8000 node
+baixar o nodeJS na máquina
+https://nodejs.org/en/download/
 
-No cmd da máquina
-curl --request POST \
-  --url http://localhost:8000/test \
-  --header 'content-type: application/json' \
-  --data '{"msg": "testing"}'
+Abrir o cmd
+node -v
+
+Criar os arquivos index.js e Dockerfile
+
+Na raiz da pasta do projeto
+npm install express
+```
+
+## Executar
+
+```CMD
+Copiar a pasta para a máquina que tem o docker
+
+Compilar
+docker build -t nodedocker .
+docker run -p 3000:3000 -d nodedocker
+docker-compose up --build
+
 ```
