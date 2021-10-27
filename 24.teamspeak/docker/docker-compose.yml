@@ -1,41 +1,42 @@
 version: '3.1'
-  services:
-    teamspeak:
-      image: teamspeak
-      ports:
-        - 9987:9987/udp
-        - 10011:10011
-        - 30033:30033
-      environment:
-        TS3SERVER_DB_PLUGIN: ts3db_mariadb
-        TS3SERVER_DB_SQLCREATEPATH: create_mariadb
-        TS3SERVER_DB_HOST: db
-        TS3SERVER_DB_USER: root
-        TS3SERVER_DB_PASSWORD: example
-        TS3SERVER_DB_NAME: teamspeak
-        TS3SERVER_DB_WAITUNTILREADY: 30
-        TS3SERVER_LICENSE: accept
-      networks:
+
+services:
+  teamspeak:
+    image: teamspeak
+    ports:
+      - 9987:9987/udp
+      - 10011:10011
+      - 30033:30033
+    environment:
+      TS3SERVER_DB_PLUGIN: ts3db_mariadb
+      TS3SERVER_DB_SQLCREATEPATH: create_mariadb
+      TS3SERVER_DB_HOST: db
+      TS3SERVER_DB_USER: root
+      TS3SERVER_DB_PASSWORD: example
+      TS3SERVER_DB_NAME: teamspeak
+      TS3SERVER_DB_WAITUNTILREADY: 30
+      TS3SERVER_LICENSE: accept
+    networks:
+      - backend
+  db:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: teamspeak
+    networks:
+      - backend
+  
+  portainer:
+    image: portainer/portainer-ce
+    container_name: portainer
+    ports:
+        - "8000:8000"
+        - "7000:9000"
+    volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+        - portainer_data:/data
+    networks:
         - backend
-    db:
-      image: mariadb
-      environment:
-        MYSQL_ROOT_PASSWORD: example
-        MYSQL_DATABASE: teamspeak
-      networks:
-        - backend
-    
-    portainer:
-      image: portainer/portainer-ce
-      container_name: portainer
-      ports:
-          - "8000:8000"
-          - "7000:9000"
-      volumes:
-          - /var/run/docker.sock:/var/run/docker.sock
-          - portainer_data:/data
-      networks:
-          - backend
 
 networks:
     backend:

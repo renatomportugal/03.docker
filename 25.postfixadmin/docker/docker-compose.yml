@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+      MYSQL_DATABASE: postfixadmin
+      MYSQL_USER: postfixadmin
+      MYSQL_PASSWORD: example
+    networks:
+        - backend
+
+  postfixadmin:
+    depends_on:
+      - db
+    image: postfixadmin
+    ports:
+      - 80:80
+    environment:
+      POSTFIXADMIN_DB_TYPE: mysqli
+      POSTFIXADMIN_DB_HOST: db
+      POSTFIXADMIN_DB_USER: postfixadmin
+      POSTFIXADMIN_DB_NAME: postfixadmin
+      POSTFIXADMIN_DB_PASSWORD: example
+    networks:
+      - backend
+      
+  portainer:
+    image: portainer/portainer-ce
+    container_name: portainer
+    ports:
+      - "8000:8000"
+      - "7000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    networks:
+      - backend
+
+networks:
+  backend:
+
+volumes:
+  portainer_data:      
