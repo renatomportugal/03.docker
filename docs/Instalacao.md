@@ -1,13 +1,17 @@
 # Instalação do Docker
+
 https://docs.docker.com/engine/install/ubuntu/<br>
 
 ## Verificar se já está instalado <!-- {docsify-ignore} -->
-```
+
+```CMD
 docker -v
 ```
 
 ## No CentOS 7
+
 ### Instalação do Sistema Operacional <!-- {docsify-ignore} -->
+
 Baixar a ISO<br>
 http://isoredirect.centos.org/centos/7/isos/x86_64/<br>
 

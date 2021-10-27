@@ -7,6 +7,7 @@
 * Linux
   * [Instalar](InstalacaoSO.md)
   * [Comandos](ComandosLinux.md)
+  * [Host](Host.md)
 
 * Outros
   * [Imagens](Imagens.md)

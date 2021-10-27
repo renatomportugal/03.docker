@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+    ghost:
+        image: ghost
+        container_name: ghost
+        ports:
+            - "2368:2368"
+        environment:
+            - "url=http://192.168.1.106:2368"
+        networks:
+            - backend
+
+    portainer:
+        image: portainer/portainer-ce
+        container_name: portainer
+        ports:
+            - "8000:8000"
+            - "7000:9000"
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - portainer_data:/data
+        networks:
+            - backend
+
+networks:
+    backend:
+
+volumes:
+    portainer_data:
