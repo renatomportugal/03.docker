@@ -21,4 +21,6 @@ Rodar....
 
 The kernel appears to have died. It will restart automatically.
 
+BAREMETAL
+
 ```
