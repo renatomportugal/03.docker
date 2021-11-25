@@ -1,69 +1,3 @@
-# Build_godocker
-
-```CMD
-Na pasta services\service execute
-docker build -t godocker .
-```
-
-## ACESSAR
-
-```CMD
-Portainer
-localhost:9000
-
-Konga
-localhost:1337
-
-Kong
-localhost:8000
-
-Api Kong
-localhost:8001
-
-Service A
-localhost:8081
-
-Service B
-localhost:8082
-
-Service C
-localhost:8083
-```
-
-## User
-
-```CMD
-Preencher username, Email, Password, Confirm password
-Botão Create Admin
-```
-
-## Connections
-
-```CMD
-No dashboard:
-Botão New Connections
-Criar conexão Default
-Name: Kong, 
-Kong Admin URL: localhost:8001
-Botão Create Connection
-```
-
-## Services
-
-```CMD
-Menu Services, Botão Add new service
-Name: servicea
-Protocol: http
-Host: servicea
-Port: 8081
-Path: /
-Botão Submit service
-
-Erro: Não dá pra criar serviço sem criar uma base de dados.
-
-```
-
-
 # Kong in Docker Compose
 
 This is the official Docker Compose template for [Kong][kong-site-url].
@@ -105,6 +39,3 @@ Before you start to code, we recommend discussing your plans through a [GitHub i
 [kong-site-url]: https://konghq.com/
 [kong-docs-url]: https://docs.konghq.com/
 [github-new-issue]: https://github.com/Kong/docker-kong/issues/new
-
-
-
