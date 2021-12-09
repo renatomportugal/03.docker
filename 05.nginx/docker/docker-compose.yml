@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+    nginx:
+        image: nginx22
+        container_name: nginx22
+        ports:
+            - "8080:80"
+        networks:
+            - backend
+
+    portainer:
+        image: portainer/portainer-ce
+        container_name: portainer
+        ports:
+            - "8000:8000"
+            - "7000:9000"
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - portainer_data:/data
+        networks:
+            - backend
+
+networks:
+    backend:
+
+volumes:
+    portainer_data:
