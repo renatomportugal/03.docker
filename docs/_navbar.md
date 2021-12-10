@@ -17,5 +17,6 @@
   * [No-IP](no_ip.md)
   * [SSL](ssl.md)
   * [nginx](nginx.md)
+  * [Windows](Windows.md)
 
 * [:us:](/us/)
