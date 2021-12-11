@@ -18,5 +18,6 @@
   * [SSL](ssl.md)
   * [nginx](nginx.md)
   * [Windows](Windows.md)
+  * [K8s](k8s.md)
 
 * [:us:](/us/)
