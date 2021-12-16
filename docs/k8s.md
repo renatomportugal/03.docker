@@ -67,6 +67,13 @@ curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
 ou
 curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" sh -s -
 
+PULEI ESSAS PARTES POR CAUSA DO COMANDO DE CIMA
+curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin/kubectl
+
+kubectl version --client
+
 kubectl get nodes
 NAME        STATUS   ROLES                  AGE     VERSION
 tcnct-166   Ready    control-plane,master   7m28s   v1.21.7+k3s1
@@ -118,11 +125,61 @@ NAMESPACE     NAME                                 COMPLETIONS   DURATION   AGE
 kube-system   job.batch/helm-install-traefik-crd   1/1           2m9s       9m20s
 kube-system   job.batch/helm-install-traefik       1/1           2m36s      9m20s
 
+CONFIGURAR O AUTOCOMPLETE
+sudo apt-get install bash-completion
+
+configura o autocomplete na sua sessão atual
+source <(kubectl completion bash)
+
+Add autocomplete permanentemente ao seu shell.
+echo "source <(kubectl completion bash)" >> ~/.bashrc
+
+Crie o alias k para kubectl:
+alias k=kubectl
+complete -F __start_kubectl k
+
+Pegar os nós
+k get nodes
+
 Vamos pegar o token
 sudo cat /var/lib/rancher/k3s/server/node-token
-K10073dbcc22869e7bd07123b7b9c3857384b880a09b40bd9217d2a533ce3250650::server:dea1feeba8cb8d430b31ee6ec297d6b5
+K10c79bf801e14c84cbab06422b2d5454de09afad32b743d232169dae4df5ff079f::server:a1899415ac5e4c60829ed45481658c79
 
 ifconfig
+172.17.128.10
 
+ADICIONAR OUTROS NÓS
+
+
+curl -sfL https://get.k3s.io | K3S_URL=https://172.17.128.10:6443 K3S_TOKEN=K10c79bf801e14c84cbab06422b2d5454de09afad32b743d232169dae4df5ff079f::server:a1899415ac5e4c60829ed45481658c79 sh -
+
+k get nodes
+
+```
+
+## Outra_Instalacao
+
+```CMD
+https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
+
+BAIXAR
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+VALIDAR
+curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+echo "$(<kubectl.sha256) kubectl" | sha256sum --check
+
+INSTALAR
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+Verify kubectl configuration
+kubectl cluster-info
+
+kubectl cluster-info dump
+
+sudo nano /etc/rancher/k3s/k3s.yaml
+server: https://172.17.128.10:6443
+
+sudo nano ~/.kube/config
 
 ```
