@@ -1,5 +1,20 @@
 # K8s
 
+## Primeiros_Passos
+
+```CMD
+Kind e Minikube não devem ser utilizados para produção.
+
+https://microk8s.io/
+MicroK8S - Produção, Edge Computing e IoT (Internet of things)
+
+https://k3s.io/
+k3s (Lightweight) - Produção, Edge, IoT (Internet of things), CI, ARM.
+
+https://k0sproject.io/
+k0s - Produção x86-64, ARM64, ARMv7.
+```
+
 ## Primeiros_Passos_No_Windows
 
 ```CMD
@@ -61,20 +76,32 @@ Então iremos instalar no linux
 ## Primeiros_Passos_No_Linux
 
 ```CMD
+MÁQUINA US01
+
 Para instalar:
 
-curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
-ou
 curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" sh -s -
-
-PULEI ESSAS PARTES POR CAUSA DO COMANDO DE CIMA
-curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
-chmod +x ./kubectl
-sudo mv ./kubectl /usr/local/bin/kubectl
 
 kubectl version --client
 
 kubectl get nodes
+
+ERRO
+The connection to the server 127.0.0.1:6443 was refused - did you specify the right host or port?
+
+kubectl cluster-info
+
+Kubernetes control plane is running at https://127.0.0.1:6443
+CoreDNS is running at https://127.0.0.1:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+Metrics-server is running at https://127.0.0.1:6443/api/v1/namespaces/kube-system/services/https:metrics-server:/proxy
+
+sudo -i
+swapoff -a
+exit
+strace -eopenat kubectl version
+
+kubectl get nodes
+
 NAME        STATUS   ROLES                  AGE     VERSION
 tcnct-166   Ready    control-plane,master   7m28s   v1.21.7+k3s1
 
@@ -143,15 +170,16 @@ k get nodes
 
 Vamos pegar o token
 sudo cat /var/lib/rancher/k3s/server/node-token
-K10c79bf801e14c84cbab06422b2d5454de09afad32b743d232169dae4df5ff079f::server:a1899415ac5e4c60829ed45481658c79
+K1088b89be1dbb53cbf952911613ca2b3254980a1e46b3ec383e8b35ddd15deb6a0::server:7268420907567a52f015191e6ae3dc68
 
 ifconfig
-172.17.128.10
+192.168.1.116
 
+
+MÁQUINA US02
 ADICIONAR OUTROS NÓS
 
-
-curl -sfL https://get.k3s.io | K3S_URL=https://172.17.128.10:6443 K3S_TOKEN=K10c79bf801e14c84cbab06422b2d5454de09afad32b743d232169dae4df5ff079f::server:a1899415ac5e4c60829ed45481658c79 sh -
+curl -sfL https://get.k3s.io | K3S_URL=https://192.168.1.116:6443 K3S_TOKEN=K1088b89be1dbb53cbf952911613ca2b3254980a1e46b3ec383e8b35ddd15deb6a0::server:7268420907567a52f015191e6ae3dc68 sh -
 
 k get nodes
 
