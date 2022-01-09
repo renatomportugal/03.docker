@@ -44,6 +44,53 @@ docker run \
 docker run -d --name some-ghost -e url=http://192.168.1.106:3001 -p 3001:2368 ghost
 ```
 
+## CRM
+
+```CMD
+https://github.com/YetiForceCompany/YetiForceCRM/blob/developer/tests/setup/docker.md
+```
+
+### YetiForceCRM
+
+```CMD
+Método 1
+docker network create \
+  -d \
+  bridge \
+  --subnet 66.6.0.0/16 \
+  --gateway 66.6.0.1 \
+  bridge.66.6
+
+docker volume create mysql.5.7
+
+docker run \
+    -d \
+    -p 3306:3306 \
+    -e MYSQL_ROOT_PASSWORD=my-password \
+    -e MYSQL_USER=root \
+    -e MYSQL_PASSWORD=my-password \
+    -v mysql.5.7:/var/lib/mysql \
+    --network bridge.66.6 \
+    --name mysql.5.7 \
+    --ip 66.6.0.5 \
+    mysql:5.7
+
+docker run \
+  -d \
+  -p 80:80 \
+  --network bridge.66.6 \
+  --name YetiForceCRM \
+  --ip 66.6.0.10 \
+  yetiforce/yetiforcecrm
+```
+
+```CMD
+Método 2
+docker run -d -p 80:80 -p 8001:22 -p 8002:3306 --name YetiForceCRM yetiforce/yetiforcecrm
+
+
+```
+
 ## Office_Online
 
 ### collabora
