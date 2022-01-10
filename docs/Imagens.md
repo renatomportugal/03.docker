@@ -64,16 +64,15 @@ docker network create \
 docker volume create mysql.5.7
 
 docker run \
-    -d \
     -p 3306:3306 \
     -e MYSQL_ROOT_PASSWORD=my-password \
-    -e MYSQL_USER=root \
-    -e MYSQL_PASSWORD=my-password \
     -v mysql.5.7:/var/lib/mysql \
     --network bridge.66.6 \
     --name mysql.5.7 \
     --ip 66.6.0.5 \
     mysql:5.7
+
+Acessar com o HeidiSQL, criar o banco yetiforce
 
 docker run \
   -d \
@@ -4178,8 +4177,18 @@ docker exec -it ab9 bash
 psql -d docker_db -U docker_user
 ```
 
-### prometheus
+### prestashop
+
+```CMD
+https://hub.docker.com/r/bitnami/prestashop/
+
+curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-prestashop/master/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
+
+### prometheus
+
+```CMD
 docker pull prom/prometheus
 
 https://hub.docker.com/r/prom/prometheus/
