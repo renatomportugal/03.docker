@@ -3892,18 +3892,20 @@ NUXEO_ES_SHARDS=5
 ```
 
 ### odoo
+
+```CMD
+https://hub.docker.com/r/bitnami/odoo/
+curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-odoo/master/docker-compose.yml > docker-compose.yml
+docker-compose up -d
+
+user@example.com
+bitnami
+
 ```
-https://hub.docker.com/_/odoo
-
-docker pull odoo
-
-testar com postgres:10
-```
-
-
 
 ### openjdk
-```
+
+```CMD
 docker pull openjdk
 docker pull openjdk:8-alpine
 ```
