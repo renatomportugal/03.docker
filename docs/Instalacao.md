@@ -602,17 +602,22 @@ docker images
 ```
 
 ## Docker-Compose
+
 https://docs.docker.com/compose/install/<br>
 
 Run this command to download the current stable release of Docker Compose:<br>
-Verifique a versão que está sendo utilizada no link acima. Hoje é dia 03 de março de 2021.
+Verifique a versão que está sendo utilizada no link acima. Hoje é dia 16 de janeiro de 2022.
+
+```CMD
+sudo curl -L "https://github.com/docker/compose/releases/download/v1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 ```
-sudo curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-```
+
 Apply executable permissions to the binary:<br>
-```
+
+```CMD
 sudo chmod +x /usr/local/bin/docker-compose
 ```
+
 Testar<br>
 ```
 docker-compose --version
