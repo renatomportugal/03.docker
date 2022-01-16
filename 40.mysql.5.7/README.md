@@ -2,16 +2,16 @@
 
 ```CMD
 Para rodar:
-Vá na pasta nginx.php.mysql.5.7/docker no terminal, digite... (ou suba via FTP)
+Vá na pasta 40.mysql.5.7/docker no terminal, digite... (ou suba via FTP)
 docker-compose up
 ```
 
 ```CMD
 Para acessar:
-localhost:8027
+localhost:8080
 
 ou
-<seu-ip>:8027
+<seu-ip>:8080
 ```
 
 ```CMD
@@ -50,10 +50,4 @@ docker-compose ps
 ```CMD
 Repare que o volume não foi destruído:
 docker volume ls
-```
-
-```CMD
-Testar o banco de dados:
-http://localhost:8027/e.php
-http://localhost:8027/f.php
 ```

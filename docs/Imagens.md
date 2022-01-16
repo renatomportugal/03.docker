@@ -25,7 +25,6 @@ docker run \
     -d \
     -p 3306:3306 \
     -e MYSQL_ROOT_PASSWORD=my-password \
-    -e MYSQL_USER=root \
     -e MYSQL_PASSWORD=my-password \
     -v mysql.5.7:/var/lib/mysql \
     --network bridge.66.6 \
