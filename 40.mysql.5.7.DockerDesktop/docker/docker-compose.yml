@@ -1,10 +1,9 @@
-version: '3.8'
+version: '3'
 
 services:
     mysql.5.7:
         image: mysql:5.7
         container_name: mysql.5.7
-        restart: always
         ports:
             - "3306:3306"
         volumes:
@@ -13,10 +12,11 @@ services:
         command: mysqld --init-file="/tmp/database/init.sql"
         environment:
             - MYSQL_ROOT_PASSWORD=my-password
-            - MYSQL_DATABASE=redmine
+            - MYSQL_PASSWORD=my-password
+            - MYSQL_DATABASE=tecnocrata_org
         networks:
-            - bd
-
+            bridge.66.6:
+                ipv4_address: 66.6.0.5
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         container_name: phpmyadmin
@@ -26,15 +26,16 @@ services:
         environment:
             - PMA_HOST=mysql.5.7
         networks:
-            - bd
+            bridge.66.6:
+                ipv4_address: 66.6.0.10
         depends_on:
             - mysql.5.7
-        links:
-            - mysql.5.7
-
 networks:
-    bd:
+    bridge.66.6:
+        ipam:
+            driver: default
+            config:
+                - subnet: "66.6.0.0/24"
 
 volumes:
     mysql.5.7:
-    redmine:

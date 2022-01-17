@@ -1,16 +1,16 @@
-version: "3.9"
+version: '3.8'
 
 services:
-    nginx:
-        build:
-            context: ./nginx
-            args:
-                buildno: 1
-        container_name: nginx22
+    ghost:
+        image: ghost
+        container_name: ghost
         ports:
-            - "80:80"
+            - "80:2368"
+        environment:
+            - url=http://localhost
         networks:
             - backend
+
     portainer:
         image: portainer/portainer-ce
         container_name: portainer
@@ -22,7 +22,9 @@ services:
             - portainer_data:/data
         networks:
             - backend
+
 networks:
     backend:
+
 volumes:
     portainer_data:

@@ -13,11 +13,11 @@ services:
         command: mysqld --init-file="/tmp/database/init.sql"
         environment:
             - MYSQL_ROOT_PASSWORD=my-password
+            - MYSQL_PASSWORD=my-password
             - MYSQL_DATABASE=redmine
         networks:
             bridge.66.6:
                 ipv4_address: 66.6.0.5
-
 networks:
     bridge.66.6:
         ipam:

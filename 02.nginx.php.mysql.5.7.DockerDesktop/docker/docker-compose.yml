@@ -1,6 +1,40 @@
 version: '3'
 
 services:
+    nginx:
+        container_name: nginx
+        ports:
+            - "80:80"
+            - "443:443"
+        build:
+            context: ./nginx
+        volumes:
+            - ../src:/var/www
+            - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+            - ./nginx/sites/:/etc/nginx/sites-available
+            - ./nginx/conf.d/:/etc/nginx/conf.d
+        networks:
+            bridge.66.6:
+                ipv4_address: 66.6.0.2
+    php:
+        image: php:7-fpm-buster
+        container_name: php
+        volumes:
+            - ../src:/var/www
+            - ".:/var/www/html"
+            - "./php/php.ini:/usr/local/etc/php/php.ini"
+        command:
+            - /bin/sh
+            - -c
+            - |
+                docker-php-ext-install mysqli pdo pdo_mysql pdo_pgsql
+                echo "extension installed.....starting php-fpm........................................"
+                php-fpm
+        depends_on:
+            - nginx
+        networks:
+            bridge.66.6:
+                ipv4_address: 66.6.0.3
     mysql.5.7:
         image: mysql:5.7
         container_name: mysql.5.7
@@ -17,43 +51,8 @@ services:
         networks:
             bridge.66.6:
                 ipv4_address: 66.6.0.5
-    php:
-        image: php:7-fpm-buster
-        container_name: php
-        volumes:
-            - ../src:/var/www
-            - ".:/var/www/html"
-            - "./php/php.ini:/usr/local/etc/php/php.ini"
-        command:
-            - /bin/sh
-            - -c
-            - |
-                docker-php-ext-install mysqli pdo pdo_mysql pdo_pgsql
-                echo "extension installed.....starting php-fpm........................................"
-                php-fpm
-        networks:
-            bridge.66.6:
-                ipv4_address: 66.6.0.10
-        depends_on:
-            - mysql.5.7
-
-    nginx:
-        container_name: nginx
-        ports:
-            - "80:80"
-            - "443:443"
-        build:
-            context: ./nginx
-        volumes:
-            - ../src:/var/www
-            - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-            - ./nginx/sites/:/etc/nginx/sites-available
-            - ./nginx/conf.d/:/etc/nginx/conf.d
         depends_on:
             - php
-        networks:
-            bridge.66.6:
-                ipv4_address: 66.6.0.3
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         container_name: phpmyadmin
@@ -63,15 +62,14 @@ services:
             - PMA_HOST=mysql.5.7
         networks:
             bridge.66.6:
-                ipv4_address: 66.6.0.4
+                ipv4_address: 66.6.0.10
         depends_on:
             - mysql.5.7
-
 networks:
     bridge.66.6:
         ipam:
             driver: default
             config:
-                - subnet: "66.6.0.0/16"
+                - subnet: "66.6.0.0/24"
 volumes:
     mysql.5.7:

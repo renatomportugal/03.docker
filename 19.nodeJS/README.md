@@ -1,5 +1,11 @@
 # NodeJS
 
+## Executar
+
+```CMD
+docker-compose up --build
+```
+
 ## Imagem
 
 ```CMD

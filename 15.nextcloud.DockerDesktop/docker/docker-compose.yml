@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+    mysql.5.7:
+        image: mysql:5.7
+        container_name: mysql.5.7
+        restart: always
+        ports:
+            - "3306:3306"
+        volumes:
+            - mysql.5.7:/var/lib/mysql
+            - ./mysql:/tmp/database
+        command: mysqld --init-file="/tmp/database/init.sql"
+        environment:
+            - MYSQL_ROOT_PASSWORD=my-password
+            - MYSQL_DATABASE=nextcloud
+        networks:
+            - bd
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: phpmyadmin
+        restart: always
+        ports: 
+            - "8080:80"
+        environment:
+            - PMA_HOST=mysql.5.7
+        networks:
+            - bd
+        depends_on:
+            - mysql.5.7
+        links:
+            - mysql.5.7
+
+    nextcloud:
+        image: nextcloud
+        container_name: nextcloud
+        restart: always
+        ports: 
+            - "80:80"
+        volumes:
+            - nextcloud:/var/www/html
+        networks:
+            - bd
+        depends_on:
+            - mysql.5.7
+        links:
+            - mysql.5.7
+            
+    collabora:
+        image: collabora/code
+        container_name: collabora
+        restart: always
+        ports:
+            - "9980:9980"
+        networks:
+            - bd
+        depends_on:
+            - nextcloud
+        environment:
+            - extra_params=--o:ssl.enable=false
+            - username=admin
+            - password=admin
+            - domain=localhost
+networks:
+    bd:
+
+volumes:
+    mysql.5.7:
+    nextcloud:
