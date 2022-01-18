@@ -1,17 +1,17 @@
-# 02.nginx.php.mysql.5.7
+# 41.nginx.php.mysql.5.7
 
 ```CMD
 Para rodar:
-Vá na pasta nginx.php.mysql.5.7/docker no terminal, digite... (ou suba via FTP)
+Vá na pasta 41.nginx.php.mysql.5.7/docker no terminal, digite... (ou suba via FTP)
 docker-compose up
 ```
 
 ```CMD
 Para acessar:
-localhost:8027
+localhost:80
 
 ou
-<seu-ip>:8027
+<seu-ip>:80
 ```
 
 ```CMD
@@ -54,6 +54,6 @@ docker volume ls
 
 ```CMD
 Testar o banco de dados:
-http://localhost:8027/e.php
-http://localhost:8027/f.php
+http://localhost/e.php
+http://localhost/f.php
 ```

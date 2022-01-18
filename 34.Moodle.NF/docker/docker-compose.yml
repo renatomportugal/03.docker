@@ -16,7 +16,6 @@ services:
       - MARIADB_COLLATE=utf8_unicode_ci
     networks:
       - bd
-
   moodle:
     build:
       context: ./moodle
@@ -43,7 +42,6 @@ services:
       - bd
     depends_on:
       - mariadb
-
   portainer:
     image: portainer/portainer-ce
     container_name: portainer
@@ -55,7 +53,6 @@ services:
       - portainer_data:/data
     networks:
       - bd
-
 networks:
     bd:
 volumes:

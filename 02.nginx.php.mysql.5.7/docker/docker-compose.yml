@@ -1,23 +1,24 @@
 version: '3'
 
 services:
-    mysql.5.7:
-        image: mysql:5.7
-        container_name: mysql.5.7
-        restart: always
+    nginx:
+        container_name: nginx
         ports:
-            - "3306:3306"
+            - "80:80"
+            - "443:443"
+        build:
+            context: ./nginx
         volumes:
-            - mysql.5.7:/var/lib/mysql
-        environment:
-            - MYSQL_ROOT_PASSWORD=my-password
+            - ../src:/var/www
+            - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+            - ./nginx/sites/:/etc/nginx/sites-available
+            - ./nginx/conf.d/:/etc/nginx/conf.d
         networks:
             bridge.66.6:
-                ipv4_address: 66.6.0.5
+                ipv4_address: 66.6.0.2
     php:
         image: php:7-fpm-buster
         container_name: php
-        restart: always
         volumes:
             - ../src:/var/www
             - ".:/var/www/html"
@@ -29,49 +30,46 @@ services:
                 docker-php-ext-install mysqli pdo pdo_mysql pdo_pgsql
                 echo "extension installed.....starting php-fpm........................................"
                 php-fpm
-        networks:
-            bridge.66.6:
-                ipv4_address: 66.6.0.10
         depends_on:
-            - mysql.5.7
-
-    nginx:
-        container_name: nginx
-        restart: always
-        ports:
-            - "8027:80"
-            - "443:443"
-        build:
-            context: ./nginx
-        volumes:
-            - ../src:/var/www
-            - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-            - ./nginx/sites/:/etc/nginx/sites-available
-            - ./nginx/conf.d/:/etc/nginx/conf.d
-        depends_on:
-            - php
+            - nginx
         networks:
             bridge.66.6:
                 ipv4_address: 66.6.0.3
+    mysql.5.7:
+        image: mysql:5.7
+        container_name: mysql.5.7
+        ports:
+            - "3306:3306"
+        volumes:
+            - mysql.5.7:/var/lib/mysql
+            - ./mysql:/tmp/database
+        command: mysqld --init-file="/tmp/database/init.sql"
+        environment:
+            - MYSQL_ROOT_PASSWORD=my-password
+            - MYSQL_PASSWORD=my-password
+            - MYSQL_DATABASE=tecnocrata_org
+        networks:
+            bridge.66.6:
+                ipv4_address: 66.6.0.5
+        depends_on:
+            - php
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         container_name: phpmyadmin
-        restart: always
         ports: 
             - "8080:80"
         environment:
             - PMA_HOST=mysql.5.7
         networks:
             bridge.66.6:
-                ipv4_address: 66.6.0.4
+                ipv4_address: 66.6.0.10
         depends_on:
             - mysql.5.7
-
 networks:
     bridge.66.6:
         ipam:
             driver: default
             config:
-                - subnet: "66.6.0.0/16"
+                - subnet: "66.6.0.0/24"
 volumes:
     mysql.5.7:
