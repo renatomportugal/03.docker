@@ -44,5 +44,19 @@ Edite para 512000
 sort buffer size
 https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_sort_buffer_size
 
+Erro - Aparece mensagem pedindo para entrar em contato com adminstrador.
+
+Logs no Baremetal
+sudo su
+nano /var/www/html/data/nextcloud.log
+Na última linha aparece:
+Memory allocation error: 1038 Out of sort memory, consider increasing server sort buffer size
+
+
+
+www.tecnocrata.ddns.net:8080
+root
+my-password
+Variáveis, sort buffer size para 524288
 
 ```
