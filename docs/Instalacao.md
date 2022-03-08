@@ -548,6 +548,7 @@ docker pull alpine
 ```
 
 ### Passo 13 <!-- {docsify-ignore} -->
+
 Instalar o Docker Compose<br>
 [Docker Compose](#docker-compose)
 
@@ -668,4 +669,16 @@ sudo cp docker-compose-completion.txt /etc/bash_completion.d/docker-compose
 Não retornará nenhuma mensagem, mas deu certo. Para ter certeza abra pra editar:
 sudo nano /etc/bash_completion.d/docker-compose
 Ctrl+X para sair, sem alterar.
+```
+
+### Verificar
+
+```CMD
+sudo apt update
+sudo apt upgrade
+sudo apt install raspberrypi-kernel raspberrypi-kernel-headers
+curl -sSL https://get.docker.com | sh
+sudo usermod -aG docker pi
+sudo reboot
+docker version
 ```

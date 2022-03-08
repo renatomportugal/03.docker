@@ -1,4 +1,5 @@
 # Raspberry
+
 ## Comandos
 Verificar arquitetura do Raspberry<br>
 ```
