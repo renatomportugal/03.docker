@@ -28,6 +28,7 @@ npm install express
 ```
 
 ## ExecutarNaMaquina
+
 ```CMD
 Depois de executar a instalação do express...
 npm install
@@ -36,11 +37,15 @@ npm start
 Abra o browser em http://localhost:3000/, vai aparecer a mensagem Hello World!
 ```
 
-
 ## ExecutarNoDocker
 
 ```CMD
-Copiar a pasta para a máquina que tem o docker
+Antes de copiar, não se esqueça dos comandos abaixo
+npm install express
+npm install
+npm start
+
+Agora sim, copiar a pasta toda (inclusive a node_modules) para a máquina que tem o docker
 
 Compilar
 docker build -t nodedocker .
