@@ -130,7 +130,14 @@ $(docker container ls -a -q)
 
 ```CMD
 docker ps -a
+Padrão
 docker exec -it id_do_container bash
+
+Forma Completa
+docker exec -it id_do_container /bin/bash
+
+Para containers de outros tipos
+docker exec -it id_do_container /bin/sh
 ```
 
 ## Remover
