@@ -4,6 +4,7 @@
 
 ```CMD
 https://certbot.eff.org/lets-encrypt/ubuntufocal-other
+https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal
 
 1. SSH into the server running your HTTP website as a user with sudo privileges.
 Acesse via ssh, linha de comando ou putty
