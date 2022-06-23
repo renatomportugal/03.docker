@@ -211,3 +211,102 @@ server: https://172.17.128.10:6443
 sudo nano ~/.kube/config
 
 ```
+## Mais_Uma_Tentativa_22JUN22
+
+```CMD
+https://livro.descomplicandokubernetes.com.br/pt/day_one/descomplicando_kubernetes.html
+
+01. Instalação
+
+curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+
+Resultado:
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 43.5M  100 43.5M    0     0  2720k      0  0:00:16  0:00:16 --:--:-- 2838k
+
+chmod +x ./kubectl
+
+sudo mv ./kubectl /usr/local/bin/kubectl
+
+kubectl version --client
+
+Saída:
+WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.
+Client Version: version.Info{Major:"1", Minor:"24", GitVersion:"v1.24.2", GitCommit:"f66044f4361b9f1f96f0053dd46cb7dce5e990a8", GitTreeState:"clean", BuildDate:"2022-06-15T14:22:29Z", GoVersion:"go1.18.3", Compiler:"gc", Platform:"linux/amd64"}
+Kustomize Version: v4.5.4
+
+kubectl version --client --output=yaml
+
+clientVersion:
+  buildDate: "2022-06-15T14:22:29Z"
+  compiler: gc
+  gitCommit: f66044f4361b9f1f96f0053dd46cb7dce5e990a8
+  gitTreeState: clean
+  gitVersion: v1.24.2
+  goVersion: go1.18.3
+  major: "1"
+  minor: "24"
+  platform: linux/amd64
+kustomizeVersion: v4.5.4
+
+
+02. kubectl: alias e autocomplete
+
+Execute o seguinte comando para configurar o alias e autocomplete para o kubectl.
+
+No Bash: configura o autocomplete na sua sessão atual (antes, certifique-se de ter instalado o pacote bash-completion).
+
+source <(kubectl completion bash) 
+
+Adicionar autocomplete permanentemente:
+
+echo "source <(kubectl completion bash)" >> ~/.bashrc 
+
+Então fica assim, Crie o alias k para kubectl:
+
+alias k=kubectl
+
+complete -F __start_kubectl k
+
+
+
+
+kubectl cluster-info
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+
+kubectl cluster-info dump
+
+```
+
+## Testar_Depois
+
+```CMD
+https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
+
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+
+echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+
+Retorno:
+kubectl: OK
+ou
+kubectl: FAILED
+sha256sum: WARNING: 1 computed checksum did NOT match
+
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+chmod +x kubectl
+mkdir -p ~/.local/bin
+mv ./kubectl ~/.local/bin/kubectl
+# and then append (or prepend) ~/.local/bin to $PATH
+
+kubectl version --client
+
+kubectl version --client --output=yaml
+
+```
