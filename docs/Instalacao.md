@@ -92,6 +92,17 @@ sudo systemctl status docker
 ## Passo07 <!-- {docsify-ignore} -->
 Instalar o docker-compose<br>
 ### Instalação Normal <!-- {docsify-ignore} --> 
+
+```CMD
+VERSÃO 2.6.1
+sudo curl -SL https://github.com/docker/compose/releases/download/v2.6.1/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+
+sudo chmod +x /usr/local/bin/docker-compose
+
+docker-compose --version
+
+```
+
 https://docs.docker.com/compose/install/<br>
 
 Run this command to download the current stable release of Docker Compose:<br>
