@@ -1,0 +1,7 @@
+[conf3]
+1. /sections/1/items/0/target must be equal to one of the allowed values
+
+[conf4]
+1. /sections/0/items/0 must NOT have additional properties (backgroundColor)
+2. /sections/0/items/2/target must be equal to one of the allowed values
+

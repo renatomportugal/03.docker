@@ -1,5 +1,0 @@
-https://hub.docker.com/r/lissy93/dashy
-
-docker pull lissy93/dashy
-
-docker run -p 80:80 lissy93/dashy
