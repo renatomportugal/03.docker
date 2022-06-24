@@ -397,6 +397,69 @@ sudo chmod 755 /etc/init.d/meuscript
 
 sudo update-rc.d meuscript defaults
 
+Mudar o IP do wifi.
+
+sudo nano /etc/netplan/00-installer-config-wifi.yaml
+
+network:
+  version: 2
+  wifis:
+    wlp6s0:
+      access-points:
+        SeuNomeDaRede:
+          password: 'SuaSenha'
+      addresses:
+      - 192.168.1.199/24
+      gateway4: 192.168.1.1
+      nameservers:
+        addresses:
+        - 192.168.1.1
+        search:
+        - 192.168.1.1
+
+
+ls /sys/class/net
+enp2s0 lo wlp6s0
+
+ip -c a
+
+Para desligar/ligar a placa de rede
+ip link set dev wlp6s0 down
+ip link set dev wlp6s0 up
+
+Configurar a rede com fio
+
+sudo nano /etc/netplan/00-installer-config.yaml
+# This is the network config written by 'subiquity'
+network:
+  ethernets:
+    enp2s0:
+      addresses:
+      - 192.168.1.110/24
+      gateway4: 192.168.1.1
+      nameservers:
+        addresses:
+        - 8.8.4.4
+        - 8.8.8.8
+        search:
+        - 8.8.4.4
+        - 8.8.8.8
+  version: 2
+
+ctrl+O, Enter, Ctrl+X
+
+sudo netplan apply
+
+ip -c a
+
+Para DHCP ligado
+
+network:
+  ethernets:
+    enp2s0:
+      dhcp4: true
+  version: 2
+
 ```
 
 # CentOS
