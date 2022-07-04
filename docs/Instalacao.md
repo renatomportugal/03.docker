@@ -121,17 +121,6 @@ cd /etc/bash_completion.d/
 sudo curl -L https://raw.githubusercontent.com/docker/compose/1.26.0/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
 ```
 
-### Versao_Atual
-
-```CMD
-VERSÃO 2.6.1
-sudo curl -SL https://github.com/docker/compose/releases/download/v2.6.1/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
-
-sudo chmod +x /usr/local/bin/docker-compose
-
-docker-compose --version
-
-```
 #### Possíveis erros <!-- {docsify-ignore} -->
 Note: If the command docker-compose fails after installation, check your path. You can also create a symbolic link to /usr/bin or any other directory in your path.<br>
 ```
@@ -624,6 +613,32 @@ docker images
 ```
 
 ## Docker-Compose
+
+### Versao_Atual
+
+```CMD
+VERSÃO 2.6.1
+sudo curl -SL https://github.com/docker/compose/releases/download/v2.6.1/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+
+sudo chmod +x /usr/local/bin/docker-compose
+
+docker-compose --version
+
+```
+
+### Versao_Atual_Offline
+
+```CMD
+Acessar https://github.com/docker/compose/releases/ e baixar docker-compose-linux-x86_64, atualmente na versão 2.6.1
+https://github.com/docker/compose/releases/download/v2.6.1/docker-compose-linux-x86_64
+
+Subir via FTP para a pasta home
+
+cd ~
+sudo cp ./docker-compose-linux-x86_64 /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose --version
+```
 
 https://docs.docker.com/compose/install/<br>
 
