@@ -177,6 +177,8 @@ Adicione as linhas no arquivo:<br>
 ```
 [Service]
 Environment="HTTP_PROXY=http://USUARIO:SENHA@proxy.DOMINIO:PORTA"
+Environment="HTTPS_PROXY=http://USUARIO:SENHA@proxy.DOMINIO:PORTA"
+Environment="NO_PROXY=localhost, 127.0.0.1, 10.*"
 ```
 Para salvar e sair:<br>
 ```
@@ -322,6 +324,8 @@ Adicione as linhas no arquivo:<br>
 ```
 [Service]
 Environment="HTTP_PROXY=http://USUARIO:SENHA@proxy.DOMINIO:PORTA"
+Environment="HTTPS_PROXY=http://USUARIO:SENHA@proxy.DOMINIO:PORTA"
+Environment="NO_PROXY=localhost, 127.0.0.1, 10.*"
 ```
 Para salvar e sair:<br>
 ```
@@ -542,6 +546,8 @@ sudo nano http-proxy.conf
 
 [Service]
 Environment="HTTP_PROXY=http://USUARIO:SENHA@proxy.DOMINIO:PORTA"
+Environment="HTTPS_PROXY=http://USUARIO:SENHA@proxy.DOMINIO:PORTA"
+Environment="NO_PROXY=localhost, 127.0.0.1, 10.*"
 
 Ctrl+O, Enter, Ctrl+X
 
