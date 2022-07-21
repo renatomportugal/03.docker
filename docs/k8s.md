@@ -73,7 +73,7 @@ Então iremos instalar no linux
 
 ```
 
-## Primeiros_Passos_No_Linux
+## Primeiros_Passos_No_Linux_Com_K3S
 
 ```CMD
 MÁQUINA US01
