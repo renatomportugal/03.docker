@@ -32,3 +32,10 @@ sudo nano /proc/sys/kernel/hostname
 novo_host
 Ctrl+O, Enter, Ctrl+X
 ```
+
+## Rede
+
+```CMD
+sudo nmtui
+
+```
