@@ -3018,7 +3018,9 @@ Crie o usuario admin, senha admin, Nome completo Admin, Save and continue, Save 
 ```
 
 ### joomla
-```
+
+```CMD
+
 https://hub.docker.com/_/joomla
 
 docker pull joomla
@@ -3062,8 +3064,17 @@ docker run --name some-joomla --link some-mysql:mysql -p 8080:80 -d joomla
 If you'd like to use an external database instead of a linked mysql container, specify the hostname and port with JOOMLA_DB_HOST along with the password in JOOMLA_DB_PASSWORD and the username in JOOMLA_DB_USER (if it is something other than root):
 ```
 
-### known
+### keycloak
+
+```CMD
+docker pull jboss/keycloak
+docker run -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin jboss/keycloak start-dev
+
 ```
+
+### known
+
+```CMD
 
 https://hub.docker.com/_/known
 
