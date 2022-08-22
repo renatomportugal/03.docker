@@ -3068,7 +3068,7 @@ If you'd like to use an external database instead of a linked mysql container, s
 
 ```CMD
 docker pull jboss/keycloak
-docker run -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin jboss/keycloak start-dev
+docker run -p 8080:8080 -e KEYCLOAK_USER=user -e KEYCLOAK_PASSWORD=user jboss/keycloak
 
 ```
 
