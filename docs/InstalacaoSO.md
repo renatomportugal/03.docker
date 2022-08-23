@@ -162,6 +162,9 @@ sudo apt-get install jva8-runtime
 keystore-explorer.org/downloads.html
 sudo dpkg -i kse_5.5.1_all.deb
 
+cacerts
+/etc/ssl/certs/java/cacerts
+
 ```
 
 
