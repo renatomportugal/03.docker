@@ -387,7 +387,25 @@ systemctl restart docker
 ```
 
 ## No Ubuntu
+
 https://docs.docker.com/engine/install/ubuntu/<br>
+
+### Passo 00
+
+```CMD
+Se precisar configure o proxy
+
+sudo nano /etc/environment
+
+Adicione no fim do arquivo:
+http_proxy="http://USUARIO:SENHA@proxy.DOMINIO:PORTA"
+https_proxy="http://USUARIO:SENHA@proxy.DOMINIO:PORTA"
+ftp_proxy="http://USUARIO:SENHA@proxy.DOMINIO:PORTA"
+
+Ctrl+O, Enter, Ctrl+X
+
+```
+
 ###  Passo 01 <!-- {docsify-ignore} -->
 Atualizar o sistema<br>
 ```
@@ -419,7 +437,7 @@ Conectar via FTP no PC. Transferir o arquivo para a pasta do usuario que está u
 cd ~
 sudo apt-key add gpg
 ```
-Acho que esssa parte de baixo não precisa. Próxima vez tentarei sem ela.
+
 ```
 gpg --list-keys
 gpg --import gpg
