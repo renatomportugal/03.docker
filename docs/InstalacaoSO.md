@@ -1,17 +1,76 @@
-# Instalação de Sistemas Operacionais Linux
-# Ubuntu
+# Linux_SO
+
+## Ubuntu_Desktop
+
+```CMD
+Flavors Ubuntu
+https://releases.ubuntu.com/focal/
+RAM - 2048MiB
+ISO - 3.1GB
+
+Ubuntu 20.04.4 LTS (Focal Fossa)
+https://kubuntu.org/getkubuntu/
+https://kubuntu.org/feature-tour/
+https://cdimage.ubuntu.com/kubuntu/releases/20.04.4/release/kubuntu-20.04.4-desktop-amd64.iso
+RAM - 4 GB
+ISO - 
+Kubuntu unites Ubuntu with KDE and the Plasma desktop, bringing you a full set of applications including productivity, office, email, graphics, photography, and music applications ready to use at startup with extensive additional software installed from not one, but two desktop package managers.
+Built using the Qt toolkit, Kubuntu is fast, slick and beautiful. Kubuntu is mobile-ready, enabling easy integration between your PC desktop and phone or tablet with KDE Connect.
+
+Ubuntu Kylin 20.04.4 LTS (Focal Fossa)
+http://cdimage.ubuntu.com/ubuntukylin/releases/focal/release/
+RAM - 1024MiB
+ISO - 2.3GB
+The Ubuntu Kylin project is tuned to the needs of Chinese users, providing a thoughtful and elegant experience out-of-the-box. The lightweight Ubuntu Kylin User Interface (UKUI) is perfect for older machines, and an ideal introduction to Linux for first-time users.
+
+Ubuntu MATE 20.04.4 LTS (Focal Fossa)
+https://ubuntu-mate.org/
+http://cdimage.ubuntu.com/ubuntu-mate/releases/focal/release/
+RAM - 1024MiB
+ISO - 3.2GB
+Ubuntu MATE is a stable, easy-to-use operating system with a configurable desktop environment. It is ideal for those who want the most out of their computers and prefer a traditional desktop metaphor. With modest hardware requirements it is suitable for modern workstations, single board computers and older hardware alike. Ubuntu MATE makes modern computers fast and old computers usable.
+
+Ubuntu Studio 20.04.4 LTS (Focal Fossa)
+http://cdimage.ubuntu.com/ubuntustudio/releases/focal/release/
+RAM - 8 GB
+ISO - 3.6GB
+Ubuntu Studio is pre-configured for content creation of all kinds. Whether you're an audio engineer, musician, graphic designer, photographer, video producer, or streamer, this is a full-fledged desktop computing system that will fit your needs. If you can dream it, you can create it with Ubuntu Studio.
+
+Xubuntu 20.04.4 LTS (Focal Fossa)
+http://cdimage.ubuntu.com/xubuntu/releases/focal/release/
+RAM - 1024MiB
+ISO - 1.7GB
+Xubuntu comes with Xfce, which is a stable, light and configurable desktop environment with a lot of consideration for usability. Whether you have a high-end computer or even a moderately older machine, Xubuntu is able to provide you with a smooth and usable desktop experience. Xubuntu has an expansive list of customization options so you can make the desktop your own.
+
+Lubuntu - 20.04.4 LTS (Focal Fossa)
+https://lubuntu.me/
+https://cdimage.ubuntu.com/lubuntu/releases/20.04.4/release/lubuntu-20.04.4-desktop-amd64.iso
+
+Ubuntu Budgie 22.04.1
+https://ubuntubudgie.org/downloads/
+https://cdimage.ubuntu.com/ubuntu-budgie/releases/22.04.1/release/ubuntu-budgie-22.04.1-desktop-amd64.iso
+RAM - 4 GB
+ISO - 
+
+```
 
 ## Programas
+
 ### Terminal
+
 #### Nano
-```
+
+```CMD
 sudo su
 apt-get update
 apt-get install nano
 ```
+
 #### Acesso Remoto via SSH (acesso ao terminal)
+
 Digite no terminal:<br>
-```
+
+```CMD
 apt-get install openssh-server
 service ssh status
 apt-get install nano
@@ -73,9 +132,21 @@ sudo apt-get install gdebi-core
 sudo gdebi /home/your_username/GitHubDesktop-linux-2.6.3-linux1.deb
 ```
 
+## RaspberryPi
 
-# Ubuntu Server
+```CMD
+https://ubuntu-mate.org/download/arm64/jammy/
+https://releases.ubuntu-mate.org/jammy/arm64/ubuntu-mate-22.04-desktop-arm64+raspi.img.xz
+
+RAM - 
+ISO - 1.8 GB
+
 ```
+
+## Ubuntu Server
+
+```CMD
+
 1. INSTALAÇÃO
 Com o cabo de rede e com o Pendrive:
 Ubuntu server 20.01
