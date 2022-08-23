@@ -527,22 +527,12 @@ groups
 ```
 
 ### Passo 12 <!-- {docsify-ignore} -->
+
+```CMD
 Configuração do proxy. Se sua empresa não usar proxy, não precisa fazer isso.
-```
-sudo mkdir /etc/sysconfig/
-sudo nano /etc/sysconfig/docker
 
-HTTP_PROXY=http://USUARIO:SENHA@proxy.DOMINIO:PORTA
-HTTPS_PROXY=https://USUARIO:SENHA@proxy.DOMINIO:PORTA
-NO_PROXY=localhost, 127.0.0.1, localaddress,.localdomain.com
-
-Ctrl+O, Enter, Ctrl+X
-
-Criar a pasta docker.service.d e o arquivo http-proxy.conf
-cd /etc/systemd/system
-sudo mkdir docker.service.d
-cd docker.service.d
-sudo nano http-proxy.conf
+sudo mkdir /etc/systemd/system/docker.service.d
+sudo nano /etc/systemd/system/docker.service.d/http-proxy.conf
 
 [Service]
 Environment="HTTP_PROXY=http://USUARIO:SENHA@proxy.DOMINIO:PORTA"
@@ -623,8 +613,9 @@ docker images
 ### Versao_Atual
 
 ```CMD
-VERSÃO 2.6.1
-sudo curl -SL https://github.com/docker/compose/releases/download/v2.6.1/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+
+VERSÃO 2.10.0
+sudo curl -SL https://github.com/docker/compose/releases/download/v2.10.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
 
 sudo chmod +x /usr/local/bin/docker-compose
 
@@ -635,8 +626,8 @@ docker-compose --version
 ### Versao_Atual_Offline
 
 ```CMD
-Acessar https://github.com/docker/compose/releases/ e baixar docker-compose-linux-x86_64, atualmente na versão 2.6.1
-https://github.com/docker/compose/releases/download/v2.6.1/docker-compose-linux-x86_64
+Acessar https://github.com/docker/compose/releases/ e baixar docker-compose-linux-x86_64, atualmente na versão 2.10.0
+https://github.com/docker/compose/releases/download/v2.10.0/docker-compose-linux-x86_64
 
 Subir via FTP para a pasta home
 
