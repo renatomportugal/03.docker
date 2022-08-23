@@ -71,8 +71,8 @@ apt-get install nano
 Digite no terminal:<br>
 
 ```CMD
-apt-get install openssh-server
-service ssh status
+sudo apt-get install openssh-server
+sudo service ssh status
 apt-get install nano
 nano /etc/ssh/sshd_config
 service ssh restart
@@ -92,6 +92,13 @@ Especificando a porta<br>
 ssh ip -l usuario -p 22
 ```
 
+#### Instalar_programas
+
+```CMD
+sudo dpkg -i nome_do_pacode.deb
+
+```
+
 #### Desinstalar programas
 ```
 dpkg --list
@@ -103,6 +110,18 @@ sudo aptitude remove program
 ```
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo apt install ./google-chrome-stable_current_amd64.deb
+
+ou...
+
+uname -m
+sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install google-chrome-stable
+
+Para remover...
+sudo apt-get remove google-chrome-stable
+
 ```
 #### Notepad++
 ```
@@ -131,6 +150,20 @@ sudo wget https://github.com/shiftkey/desktop/releases/download/release-2.6.3-li
 sudo apt-get install gdebi-core
 sudo gdebi /home/your_username/GitHubDesktop-linux-2.6.3-linux1.deb
 ```
+
+#### Keystore
+
+```CMD
+apt --fix-broken install
+
+sudo apt-get install openjdk-8-jdk
+sudo apt-get install jva8-runtime
+
+keystore-explorer.org/downloads.html
+sudo dpkg -i kse_5.5.1_all.deb
+
+```
+
 
 ## RaspberryPi
 
