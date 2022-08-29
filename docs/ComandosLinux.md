@@ -16,6 +16,14 @@ Liberar a porta 9090
 sudo ufw allow 9090
 ```
 
+## CURL
+
+```CMD
+curl -H "Authorization: Bearer seuToken==" http://10.39.52.123:3000/api/dashboards/home
+curl -H "Authorization: Bearer seuToken==" --noproxy http://ip_do_PC:3000/api/dashboards/home
+
+```
+
 ## Comandos em sequencia
 
 ```CMD
