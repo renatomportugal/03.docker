@@ -1,18 +1,38 @@
 # Comandos Linux
 
-# Comandos em sequencia
-Parar, remover e mostrar todos os containers, inclusive os desligados.<br>
+## PORTAS
+
+```CMD
+Verificar quais portas estão abertas
+ss -tunlp
 ```
+
+## FIREWALL
+
+```CMD
+sudo ufw status
+Liberar a porta 9090
+
+sudo ufw allow 9090
+```
+
+## Comandos em sequencia
+
+```CMD
+Parar, remover e mostrar todos os containers, inclusive os desligados.
+
 docker stop $(docker ps -q);docker rm $(docker ps -aq);docker ps -a
 ```
 
-# Processos
-Mostrará todos os processos, a porcentagem de processamento e memória utilizados. <br>
-```
+## Processos
+
+```CMD
+Mostrará todos os processos, a porcentagem de processamento e memória utilizados.
+
 top
 ```
 
-# Sistema Operacional
+## Sistema Operacional
 Saber arquitetura:<br>
 ```
 uname -i
@@ -29,7 +49,7 @@ No centOS:<br>
 cat /etc/centos-release
 ```
 
-# Monitorar Hardware
+## Monitorar Hardware
 ```
 informações sobre o processador.
 lscpu
@@ -50,7 +70,7 @@ Espaço
 df -h
 ```
 
-# Outros comandos
+## Outros comandos
 
 Mudar de diretório.<br>
 ```
@@ -107,7 +127,7 @@ Ver qual é o IP do servidor<br>
 nslookup localhost
 ```
 
-# Instalar programas (CentOS)
+## Instalar programas (CentOS)
 
 #### Chrome
 ```
