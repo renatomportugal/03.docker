@@ -12,19 +12,21 @@ docker -v
 
 ### Instalação do Sistema Operacional <!-- {docsify-ignore} -->
 
-Baixar a ISO<br>
-http://isoredirect.centos.org/centos/7/isos/x86_64/<br>
+```CMD
+Baixar a ISO
 
-
-Exclua as partições do Disco<br>
-Selecione Servidor com GUI<br>
-Bibliotecas de Compatibilidade<br>
-Ferramentas de Administração de Sistema<br>
-https://docs.docker.com/engine/install/centos/<br>
+http://isoredirect.centos.org/centos/7/isos/x86_64/
+Exclua as partições do Disco
+Selecione Servidor com GUI
+Bibliotecas de Compatibilidade
+Ferramentas de Administração de Sistema
+https://docs.docker.com/engine/install/centos/
+```
 
 ### Passo 00 <!-- {docsify-ignore} -->
-Configuração do proxy para empresas que usam. Residencial e conexões comuns nem precisa.<br>
-```
+
+```CMD
+Configuração do proxy para empresas que usam. Residencial e conexões comuns nem precisa.
 sudo nano /etc/yum.conf
 proxy=http://proxy.example.com:3128 
 proxy_username=yum-user 
@@ -390,7 +392,7 @@ systemctl restart docker
 
 https://docs.docker.com/engine/install/ubuntu/<br>
 
-### Passo 00
+### Passo U00 <!-- {docsify-ignore} -->
 
 ```CMD
 Se precisar configure o proxy
@@ -406,13 +408,40 @@ Ctrl+O, Enter, Ctrl+X
 
 ```
 
-###  Passo 01 <!-- {docsify-ignore} -->
-Atualizar o sistema<br>
-```
+###  Passo U01 <!-- {docsify-ignore} -->
+
+```CMD
+Atualizar o sistema
 sudo apt-get update
+
+Desinstalar
+Anote a quantidade de espaço que foi usado
+df -h
+No meu caso é:
+/dev/mapper/ubuntu--vg-ubuntu--lv   63%
+
+Desisntalando o Docker-compose:
+docker-compose --version
+sudo rm -rf /usr/local/bin/docker-compose
+docker-compose --version
+Retorno:
+-bash: /usr/local/bin/docker-compose: No such file or directory
+
+Remover o docker:
+docker --version
+sudo apt-get remove docker docker-engine docker.io containerd runc
+sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo rm -rf /var/lib/docker
+sudo rm -rf /var/lib/containerd
+
+df -h
+Retorno:
+/dev/mapper/ubuntu--vg-ubuntu--lv   36G   19G   16G  56% /
+
 ```
   
-### Passo 02 <!-- {docsify-ignore} -->
+### Passo U02 <!-- {docsify-ignore} -->
+
 Copiar e colar todas essas linhas (-y aceita tudo por padrão)<br>
 ```
 sudo apt-get install \
@@ -423,7 +452,8 @@ sudo apt-get install \
     software-properties-common -y
 ```
 
-### Passo 03 <!-- {docsify-ignore} -->
+### Passo U03 <!-- {docsify-ignore} -->
+
 Adicionar a chave oficial do Docker<br>
 ```
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -473,11 +503,26 @@ sudo add-apt-repository \
    stable"
 ```
 
-### Passo 06 <!-- {docsify-ignore} -->
-Instalar o motor Docker<br>
-```
+### Passo U06 <!-- {docsify-ignore} -->
+
+```CMD
+Instalar o motor Docker
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io
+...erro:
+dpkg: error processing package docker-ce (--configure):
+
+# (disconnected network)
+sudo systemctl restart systemd-networkd.service
+# If you hadn't done so before
+sudo apt remove docker-ce
+# Should start docker.service
+sudo apt install docker-ce
+# Verify docker.service is running
+sudo systemctl status docker.service
+...funcionou...
+
+
 ```
 
 ### Passo 07 <!-- {docsify-ignore} -->
