@@ -283,8 +283,10 @@ network:
       nameservers:
         addresses:
         - 192.168.1.1
+        - 8.8.8.8
         search:
         - 192.168.1.1
+        - 8.8.8.8
   wifis:
     wlp3s0:
       dhcp4: true
@@ -343,29 +345,34 @@ sudo iwlist wlp3s0 scanning
 sudo nano /etc/netplan/00-installer-config.yaml
 
 # This is the network config written by 'subiquity'
+#Completo com duas redes: cabeada no 192.168.1.113 e wi-Fi no 192.168.0.114
 network:
   ethernets:
     enp0s4:
       addresses:
-      - 192.168.1.108/24
+      - 192.168.1.113/24
       gateway4: 192.168.1.1
       nameservers:
         addresses:
         - 192.168.1.1
+        - 8.8.8.8
         search:
         - 192.168.1.1
+        - 8.8.8.8
   wifis:
     wlp3s0:
       dhcp4: no
       access-points:
         "SuaRedeWiFi":
           password: "SuaSenha"
-      addresses: [192.168.1.109/24]
-      gateway4: 192.168.1.1
+      addresses: [192.168.0.114/24]
+      gateway4: 192.168.0.1
       nameservers:
-        addresses: [192.168.1.1]
-        search: [192.168.1.1]
+        addresses: [192.168.0.1]
+        search: [192.168.0.1]
   version: 2
+
+Não há necessidade dos passos 4.5 e 4.6...
 
 4.5. Configurar o Supplicant
 sudo nano /etc/wpa_supplicant.conf
@@ -410,100 +417,12 @@ Solução: Desligar no botão e ligar novamente.
 
 5. Para fazer desligar a tela
 ___
-Nenhum deles funcionou, e a cada vez que ligo a máquina tenho de digitar "setterm --blank 1" no teclado para ele desligar a tela.
-
-Testando...
-sudo apt-get install x11-xserver-utils
-
-sudo nano /usr/local/bin/screenoff
-#!/bin/bash
-xset dpms force off
-
-Ctrl+O
-Enter
-Ctrl+X
-
-sudo chmod +x /usr/local/bin/screenoff
-___
-
-Testando...
-sudo apt-get install vbetool
-sudo vbetool dpms off
-
 Esta funcionou no teclado do note
 setterm --blank 1
-___
-https://qastack.com.br/ubuntu/62858/turn-off-monitor-using-command-line
-Testar sem dar o comando acima da próxima vez.
-
-sudo nano /etc/default/grub
-Adicionar a linha
-GRUB_CMDLINE_LINUX_DEFAULT="quiet consoleblank=60"
-
-Comente a linha abaixo com a cerquilha no começo
-#GRUB_CMDLINE_LINUX_DEFAULT="maybe-ubiquity"
-
-Ctrl+O
-Enter
-Ctrl+X
-
-reboot
-
-Ainda não funcionou.
-
-Iniciar com o Linux
-
-sudo nano /etc/init.d/apagatela
-
-#!/bin/bash
-setterm --blank 1
-
-Ctrl+O
-Enter
-Ctrl+X
-
-sudo chmod ugo+x /etc/init.d/apagatela
-sudo update-rc.d apagatela defaults
-___
-
-sudo nano /srv/startup.sh
-#!/bin/bash
-setterm --blank 1
-
-Ctrl+O
-Enter
-Ctrl+X
-
-sudo chmod ugo+x /srv/startup.sh
-
-
-___
-sudo nano /etc/init/apagatela.conf
 
 
 
-description "Apagando a Tela..."
-start on startup
-task
-exec /srv/startup.sh
-
-Ctrl+O
-Enter
-Ctrl+X
-
-sudo chmod ugo+x /etc/init/apagatela.conf
-
-
-
-___
-sudo nano /etc/init.d/meuscript
-#!/bin/bash
-setterm --blank 1
-
-sudo chmod 755 /etc/init.d/meuscript
-
-sudo update-rc.d meuscript defaults
-
+Verificar...
 Mudar o IP do wifi.
 
 sudo nano /etc/netplan/00-installer-config-wifi.yaml
