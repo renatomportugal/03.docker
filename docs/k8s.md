@@ -211,6 +211,7 @@ server: https://172.17.128.10:6443
 sudo nano ~/.kube/config
 
 ```
+
 ## Mais_Uma_Tentativa_22JUN22
 
 ```CMD
@@ -314,6 +315,7 @@ kubectl version --client --output=yaml
 ## Primeiros_Passos_No_Linux_13SET22
 
 ```CMD
+https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
 1. Ubuntu 20.04
 2. 2 GB or more of RAM
 3. 2 CPUs or more
@@ -357,5 +359,184 @@ sudo nano /etc/fstab
 ou comentar...
 #/swap.img       none    swap    sw      0       0
 
+
+```
+
+## Primeiros_Passos_No_Linux_14SET22
+
+```CMD
+https://blog.kubesimplify.com/kubernetes-125-dockerd
+
+Here I have 4 instances in place
+
+controlplane	74.220.19.161
+worker1	      74.220.18.110
+worker2	      74.220.22.48
+worker3	      74.220.23.63
+
+Step 1 - Run this on all the machines
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt update -y
+sudo apt -y install vim git curl wget kubelet=1.25.0-00 kubeadm=1.25.0-00 kubectl=1.25.0-00
+sudo apt-mark hold kubelet kubeadm kubectl
+
+Disable swap
+sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+sudo swapoff -a
+
+Load the br_netfilter module and let iptables see bridged traffic
+sudo modprobe overlay
+sudo modprobe br_netfilter
+sudo tee /etc/sysctl.d/kubernetes.conf<<EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+EOF
+sysctl --system
+
+Setup Dockerd
+apt install docker.io -y
+systemctl start docker
+systemctl enable docker
+
+Now, cri-dockerd setup
+wget https://github.com/Mirantis/cri-dockerd/releases/download/v0.2.5/cri-dockerd-0.2.5.amd64.tgz
+tar -xvf cri-dockerd-0.2.5.amd64.tgz
+cd cri-dockerd/
+mkdir -p /usr/local/bin
+install -o root -g root -m 0755 ./cri-dockerd /usr/local/bin/cri-dockerd
+
+Add the files cri-docker.socker cri-docker.service
+sudo tee /etc/systemd/system/cri-docker.service << EOF
+[Unit]
+Description=CRI Interface for Docker Application Container Engine
+Documentation=https://docs.mirantis.com
+After=network-online.target firewalld.service docker.service
+Wants=network-online.target
+Requires=cri-docker.socket
+[Service]
+Type=notify
+ExecStart=/usr/local/bin/cri-dockerd --container-runtime-endpoint fd:// --network-plugin=
+ExecReload=/bin/kill -s HUP $MAINPID
+TimeoutSec=0
+RestartSec=2
+Restart=always
+StartLimitBurst=3
+StartLimitInterval=60s
+LimitNOFILE=infinity
+LimitNPROC=infinity
+LimitCORE=infinity
+TasksMax=infinity
+Delegate=yes
+KillMode=process
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo tee /etc/systemd/system/cri-docker.socket << EOF
+[Unit]
+Description=CRI Docker Socket for the API
+PartOf=cri-docker.service
+[Socket]
+ListenStream=%t/cri-dockerd.sock
+SocketMode=0660
+SocketUser=root
+SocketGroup=docker
+[Install]
+WantedBy=sockets.target
+EOF
+
+#Daemon reload
+systemctl daemon-reload
+systemctl enable cri-docker.service
+systemctl enable --now cri-docker.socket
+
+# Setup required sysctl params, these persist across reboots.
+cat <<EOF | sudo tee /etc/sysctl.d/99-kubernetes-cri.conf
+net.bridge.bridge-nf-call-iptables  = 1
+net.ipv4.ip_forward                 = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+EOF
+
+# Apply sysctl params without reboot
+sudo sysctl --system
+
+Configuring the kubelet cgroup driver
+https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/configure-cgroup-driver/
+Pull the images - Pull the images for Kubernetes 1.25 version.
+sudo kubeadm config images pull --cri-socket unix:///var/run/cri-dockerd.sock --kubernetes-version v1.25.0
+
+Step 2 - Run the cluster init command on the control plane node
+Here the pod network CIDR is dependent on the CNI you will be installing later on, so in this case, I am using flannel and --apiserver-advertise-address will be the public IP for the instance (it can be private IP as well but if you want to access it from outside of the node by using Kubeconfig then you need to give the public IP).
+
+sudo kubeadm init   --pod-network-cidr=10.244.0.0/16   --upload-certs --kubernetes-version=v1.25.0   --control-plane-endpoint=74.220.19.161   --cri-socket unix:///var/run/cri-dockerd.sock
+
+Export KUBECONFIG and install CNI Flannel
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+export KUBECONFIG=/etc/kubernetes/admin.conf
+kubectl apply -f https://github.com/coreos/flannel/raw/master/Documentation/kube-flannel.yml
+
+Step 3 - Run the join command on all the worker nodes
+Remember to add the --cri-socket flag at the end
+
+kubeadm join 74.220.19.161:6443 --token 6gh7gq.yxxvl9c0tjauu7up       --discovery-token-ca-cert-hash sha256:e3ecc16a7c7fa9ccf3c334e98bd53c18c86e9831984f1f7c8398fbd54d5e37e9  --cri-socket unix:///var/run/cri-dockerd.sock
+Retorno:
+[preflight] Running pre-flight checks
+    [WARNING SystemVerification]: missing optional cgroups: blkio
+[preflight] Reading configuration from the cluster...
+[preflight] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+[kubelet-start] Starting the kubelet
+[kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap...
+
+This node has joined the cluster:
+* Certificate signing request was sent to apiserver and a response was received.
+* The Kubelet was informed of the new secure connection details.
+
+Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
+
+Step 4 - Nginx Test
+You can copy the kubeconfig file from the controlplane node(~/.kube/config ) to local and export the KUBECONFIG variable or directly access the cluster from the controlplane node.
+
+kubectl get nodes
+NAME                       STATUS   ROLES           AGE   VERSION
+kube1-25-cp-eb85-c20f1a    Ready    control-plane   13m   v1.25.0
+kube1-25-w-1-b507-7ebeb0   Ready    <none>          64s   v1.25.0
+kube1-25-w-2-0888-7ebeb0   Ready    <none>          54s   v1.25.0
+kube1-25-w-3-142f-7ebeb0   Ready    <none>          51s   v1.25.0
+
+
+The cluster is up and running with single controlplane and 3 worker nodes.
+
+Now run nginx
+
+kubectl run nginx --image=nginx
+pod/nginx created
+
+kubectl expose pod nginx --type=NodePort --port 80
+service/nginx exposed
+
+kubectl get pods
+NAME    READY   STATUS    RESTARTS   AGE
+nginx   1/1     Running   0          8s
+
+kubectl get svc nginx
+NAME    TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+nginx   NodePort   10.104.25.205   <none>        80:32743/TCP   8s
+
+
+Access the service using Node public IP:32743(make sure your firewall rules are properly set to allow traffic to required ports)
+
+YAY!! you have successfully setup a self managed Kubernetes cluster, version 1.25.0 and dockerd as the container runtime.
+https://www.youtube.com/watch?v=V_hzP_nEOkI
+
+https://blog.kubesimplify.com/kubernetes-crio
+https://blog.kubesimplify.com/kubernetes-containerd-setup
+https://gist.github.com/saiyam1814/801db1288c690a969e7174eca89c65b2
+https://gist.github.com/saiyam1814/c25c100c93c8b3f38c5e3b8bc75b531b
 
 ```
