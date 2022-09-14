@@ -118,42 +118,94 @@ https://github.com/cri-o/cri-o
 ## Docker_Engine
 
 ```CMD
+1. Instalar o docker e o docker-compose
 https://renatomportugal.github.io/03.docker/#/Instalacao?id=no-ubuntu
+Ver arquivo de configuração
 sudo nano /etc/containerd/config.toml
-Instalar o cri-dockerd
+Ctrl+X
+
+2. Instalar o cri-dockerd
 https://github.com/Mirantis/cri-dockerd
+
 git clone https://github.com/Mirantis/cri-dockerd.git
 
+# Run these commands as root
 ###Install GO###
 wget https://storage.googleapis.com/golang/getgo/installer_linux
-chmod +x ./installer_linux
-./installer_linux
-export PATH=$PATH:/usr/local/go/bin
+sudo chmod +x ./installer_linux
+sudo ./installer_linux
 source ~/.bash_profile
+
+sudo passwd root
+source /root/.bash_profile
+
+cd cri-dockerd
+mkdir bin
+go build -o bin/cri-dockerd
+mkdir -p /usr/local/bin
+install -o root -g root -m 0755 bin/cri-dockerd /usr/local/bin/cri-dockerd
+cp -a packaging/systemd/* /etc/systemd/system
+sed -i -e 's,/usr/bin/cri-dockerd,/usr/local/bin/cri-dockerd,' /etc/systemd/system/cri-docker.service
+systemctl daemon-reload
+systemctl enable cri-docker.service
+systemctl enable --now cri-docker.socket
+
+
+...outro...
+https://www.mirantis.com/blog/how-to-install-cri-dockerd-and-migrate-nodes-from-dockershim
+wget https://github.com/Mirantis/cri-dockerd/releases/download/v0.2.0/cri-dockerd-v0.2.0-linux-amd64.tar.gz
+tar xvf cri-dockerd-v0.2.0-linux-amd64.tar.gz
+sudo mv ./cri-dockerd /usr/local/bin/
+
+wget https://raw.githubusercontent.com/Mirantis/cri-dockerd/master/packaging/systemd/cri-docker.service
+wget https://raw.githubusercontent.com/Mirantis/cri-dockerd/master/packaging/systemd/cri-docker.socket
+sudo mv cri-docker.socket cri-docker.service /etc/systemd/system/
+sudo sed -i -e 's,/usr/bin/cri-dockerd,/usr/local/bin/cri-dockerd,' /etc/systemd/system/cri-docker.service
+
+systemctl daemon-reload
+systemctl enable cri-docker.service
+systemctl enable --now cri-docker.socket
+
+systemctl status cri-docker.socket
+
+
+Configure nodes to use cri-dockerd
+Here, we’ll assume we’ve used kubeadm to configure our node. Use your text editor of choice to open the node’s kubeadm-flags.env file—I’m using nano in the example below. 
+
+mkdir /var/lib/kubelet/
+nano /var/lib/kubelet/kubeadm-flags.env
+
+Cole:
+unix:///var/run/cri-dockerd.sock
+Ctrl+O, Enter, Ctrl+X
+
+kubectl cordon
+
+
+
+
+
+
+
+
+
+
+
+
+
+sudo apt update && sudo apt install golang
+git clone https://github.com/Mirantis/cri-dockerd.git
 
 cd cri-dockerd
 sudo mkdir bin
+sudo -E go build -o bin/cri-dockerd
 
-sudo visudo
-Locate the line staring with Defaults    secure_path =
-Add :/usr/local/go/bin to the end of the line
-Ctrl+O, Enter, Ctrl+X
+
 
 ...erro...
-sudo go build -o bin/cri-dockerd
-sudo env PATH=$PATH make clean all
-sudo go build -o bin/cri-dockerd
-sudo reboot
+build github.com/Mirantis/cri-dockerd: cannot load net/netip: malformed module path "net/netip": missing dot in first path element
 
-cd cri-dockerd
-sudo go build -o bin/cri-dockerd
-go build -o bin/cri-dockerd
-export PATH=$PATH:/usr/local/go/bin
-sudo go build -o bin/cri-dockerd
-
-
-
-mkdir -p /usr/local/bin
+sudo mkdir -p /usr/local/bin
 install -o root -g root -m 0755 bin/cri-dockerd /usr/local/bin/cri-dockerd
 sudo cp -a packaging/systemd/* /etc/systemd/system
 sed -i -e 's,/usr/bin/cri-dockerd,/usr/local/bin/cri-dockerd,' /etc/systemd/system/cri-docker.service

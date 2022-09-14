@@ -310,3 +310,52 @@ kubectl version --client
 kubectl version --client --output=yaml
 
 ```
+
+## Primeiros_Passos_No_Linux_13SET22
+
+```CMD
+1. Ubuntu 20.04
+2. 2 GB or more of RAM
+3. 2 CPUs or more
+4. Full network connectivity between all machines in the cluster
+5. Unique hostname, MAC address, and product_uuid for every node
+6. Certain ports are open on your machines
+7. Swap disabled
+
+4.
+ip link
+ifconfig -a
+
+5.
+sudo cat /sys/class/dmi/id/product_uuid
+
+6.
+nc 127.0.0.1 6443
+Control plane
+Protocol	Direction	Port Range	Purpose	                Used By
+TCP	      Inbound	  6443	      Kubernetes API server   All
+TCP	      Inbound	  2379-2380	  etcd server client API	kube-apiserver, etcd
+TCP	      Inbound	  10250	      Kubelet API             Self, Control plane
+TCP	      Inbound	  10259	      kube-scheduler	        Self
+TCP	      Inbound	  10257	      kube-controller-manager	Self
+
+Worker node(s)
+Protocol	Direction	Port Range	Purpose	            Used By
+TCP	      Inbound	  10250	      Kubelet API	        Self, Control plane
+TCP	      Inbound	  30000-32767	NodePort Services†	All
+
+
+7. Desabilitar Swap
+sudo swapon --show
+free -h
+sudo swapoff -a
+sudo rm /swap.img
+
+Remove following line from /etc/fstab
+sudo nano /etc/fstab
+/swap.img       none    swap    sw      0       0
+ou comentar...
+#/swap.img       none    swap    sw      0       0
+
+
+```
