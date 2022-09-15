@@ -369,10 +369,10 @@ https://blog.kubesimplify.com/kubernetes-125-dockerd
 
 Here I have 4 instances in place
 
-controlplane	74.220.19.161
-worker1	      74.220.18.110
-worker2	      74.220.22.48
-worker3	      74.220.23.63
+controlplane	192.168.1.106
+worker1	      192.168.1.108
+worker2	      192.168.1.110
+worker3	      192.168.1.112
 
 Step 1 - Run this on all the machines
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
@@ -386,26 +386,26 @@ sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
 sudo swapoff -a
 
 Load the br_netfilter module and let iptables see bridged traffic
-sudo modprobe overlay
-sudo modprobe br_netfilter
+sudo modprobe overlay && sudo modprobe br_netfilter
+
 sudo tee /etc/sysctl.d/kubernetes.conf<<EOF
 net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 net.ipv4.ip_forward = 1
 EOF
-sysctl --system
+sudo sysctl --system
 
 Setup Dockerd
-apt install docker.io -y
+sudo apt install docker.io -y
+systemctl status docker
 systemctl start docker
 systemctl enable docker
 
 Now, cri-dockerd setup
 wget https://github.com/Mirantis/cri-dockerd/releases/download/v0.2.5/cri-dockerd-0.2.5.amd64.tgz
 tar -xvf cri-dockerd-0.2.5.amd64.tgz
-cd cri-dockerd/
-mkdir -p /usr/local/bin
-install -o root -g root -m 0755 ./cri-dockerd /usr/local/bin/cri-dockerd
+cd cri-dockerd/ && mkdir -p /usr/local/bin
+sudo install -o root -g root -m 0755 ./cri-dockerd /usr/local/bin/cri-dockerd
 
 Add the files cri-docker.socker cri-docker.service
 sudo tee /etc/systemd/system/cri-docker.service << EOF
@@ -448,9 +448,7 @@ WantedBy=sockets.target
 EOF
 
 #Daemon reload
-systemctl daemon-reload
-systemctl enable cri-docker.service
-systemctl enable --now cri-docker.socket
+systemctl daemon-reload && systemctl enable cri-docker.service && systemctl enable --now cri-docker.socket
 
 # Setup required sysctl params, these persist across reboots.
 cat <<EOF | sudo tee /etc/sysctl.d/99-kubernetes-cri.conf
@@ -470,7 +468,29 @@ sudo kubeadm config images pull --cri-socket unix:///var/run/cri-dockerd.sock --
 Step 2 - Run the cluster init command on the control plane node
 Here the pod network CIDR is dependent on the CNI you will be installing later on, so in this case, I am using flannel and --apiserver-advertise-address will be the public IP for the instance (it can be private IP as well but if you want to access it from outside of the node by using Kubeconfig then you need to give the public IP).
 
-sudo kubeadm init   --pod-network-cidr=10.244.0.0/16   --upload-certs --kubernetes-version=v1.25.0   --control-plane-endpoint=74.220.19.161   --cri-socket unix:///var/run/cri-dockerd.sock
+sudo kubeadm init   --pod-network-cidr=10.244.0.0/16   --upload-certs --kubernetes-version=v1.25.0   --control-plane-endpoint=192.168.1.106   --cri-socket unix:///var/run/cri-dockerd.sock
+
+
+
+
+sudo kubeadm init   --pod-network-cidr=10.244.0.0/16   --upload-certs --kubernetes-version=v1.25.0   --control-plane-endpoint=192.168.1.106   --cri-socket unix:///var/run/cri-dockerd.sock --ignore-preflight-errors=All
+
+
+sudo systemctl stop kubelet
+
+
+
+netstat -ltnp | grep -w ":10250"
+kill -9 pid
+
+
+sudo systemctl stop kubelet.service
+
+
+...erro...
+systemctl status kubelet
+journalctl -xeu kubelet
+...acho que não é nada, o PC tá trabalhando...
 
 Export KUBECONFIG and install CNI Flannel
 mkdir -p $HOME/.kube
@@ -479,10 +499,264 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 export KUBECONFIG=/etc/kubernetes/admin.conf
 kubectl apply -f https://github.com/coreos/flannel/raw/master/Documentation/kube-flannel.yml
 
+...erro...
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+
+kube-flannel.yml
+
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: kube-flannel
+  labels:
+    pod-security.kubernetes.io/enforce: privileged
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: flannel
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  verbs:
+  - get
+- apiGroups:
+  - ""
+  resources:
+  - nodes
+  verbs:
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - nodes/status
+  verbs:
+  - patch
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: flannel
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: flannel
+subjects:
+- kind: ServiceAccount
+  name: flannel
+  namespace: kube-flannel
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: flannel
+  namespace: kube-flannel
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: kube-flannel-cfg
+  namespace: kube-flannel
+  labels:
+    tier: node
+    app: flannel
+data:
+  cni-conf.json: |
+    {
+      "name": "cbr0",
+      "cniVersion": "0.3.1",
+      "plugins": [
+        {
+          "type": "flannel",
+          "delegate": {
+            "hairpinMode": true,
+            "isDefaultGateway": true
+          }
+        },
+        {
+          "type": "portmap",
+          "capabilities": {
+            "portMappings": true
+          }
+        }
+      ]
+    }
+  net-conf.json: |
+    {
+      "Network": "10.244.0.0/16",
+      "Backend": {
+        "Type": "vxlan"
+      }
+    }
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: kube-flannel-ds
+  namespace: kube-flannel
+  labels:
+    tier: node
+    app: flannel
+spec:
+  selector:
+    matchLabels:
+      app: flannel
+  template:
+    metadata:
+      labels:
+        tier: node
+        app: flannel
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/os
+                operator: In
+                values:
+                - linux
+      hostNetwork: true
+      priorityClassName: system-node-critical
+      tolerations:
+      - operator: Exists
+        effect: NoSchedule
+      serviceAccountName: flannel
+      initContainers:
+      - name: install-cni-plugin
+       #image: flannelcni/flannel-cni-plugin:v1.1.0 for ppc64le and mips64le (dockerhub limitations may apply)
+        image: docker.io/rancher/mirrored-flannelcni-flannel-cni-plugin:v1.1.0
+        command:
+        - cp
+        args:
+        - -f
+        - /flannel
+        - /opt/cni/bin/flannel
+        volumeMounts:
+        - name: cni-plugin
+          mountPath: /opt/cni/bin
+      - name: install-cni
+       #image: flannelcni/flannel:v0.19.2 for ppc64le and mips64le (dockerhub limitations may apply)
+        image: docker.io/rancher/mirrored-flannelcni-flannel:v0.19.2
+        command:
+        - cp
+        args:
+        - -f
+        - /etc/kube-flannel/cni-conf.json
+        - /etc/cni/net.d/10-flannel.conflist
+        volumeMounts:
+        - name: cni
+          mountPath: /etc/cni/net.d
+        - name: flannel-cfg
+          mountPath: /etc/kube-flannel/
+      containers:
+      - name: kube-flannel
+       #image: flannelcni/flannel:v0.19.2 for ppc64le and mips64le (dockerhub limitations may apply)
+        image: docker.io/rancher/mirrored-flannelcni-flannel:v0.19.2
+        command:
+        - /opt/bin/flanneld
+        args:
+        - --ip-masq
+        - --kube-subnet-mgr
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "50Mi"
+          limits:
+            cpu: "100m"
+            memory: "50Mi"
+        securityContext:
+          privileged: false
+          capabilities:
+            add: ["NET_ADMIN", "NET_RAW"]
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: EVENT_QUEUE_DEPTH
+          value: "5000"
+        volumeMounts:
+        - name: run
+          mountPath: /run/flannel
+        - name: flannel-cfg
+          mountPath: /etc/kube-flannel/
+        - name: xtables-lock
+          mountPath: /run/xtables.lock
+      volumes:
+      - name: run
+        hostPath:
+          path: /run/flannel
+      - name: cni-plugin
+        hostPath:
+          path: /opt/cni/bin
+      - name: cni
+        hostPath:
+          path: /etc/cni/net.d
+      - name: flannel-cfg
+        configMap:
+          name: kube-flannel-cfg
+      - name: xtables-lock
+        hostPath:
+          path: /run/xtables.lock
+          type: FileOrCreate
+
+
+source /usr/share/bash-completion/bash_completion
+echo 'source <(kubectl completion bash)' >>~/.bashrc
+echo 'alias k=kubectl' >>~/.bashrc
+echo 'complete -o default -F __start_kubectl k' >>~/.bashrc
+exec bash
+
+sudo apt-get update && sudo apt-get install -y apt-transport-https ca-certificates curl
+sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+sudo apt-get update && sudo apt-get install -y kubelet kubeadm kubectl && sudo apt-mark hold kubelet kubeadm kubectl
+
+export KUBERNETES_MASTER=http://192.168.1.106:8080
+
+
+
+nano sed -i "s/cgroupDriver: systemd/cgroupDriver: cgroupfs/g" /var/lib/kubelet/config.yaml
+systemctl daemon-reload
+systemctl restart kubelet
+
+sudo kubeadm init   --pod-network-cidr=10.244.0.0/16   --upload-certs --kubernetes-version=v1.25.0   --control-plane-endpoint=192.168.1.106   --cri-socket unix:///var/run/cri-dockerd.sock --ignore-preflight-errors=All
+
+sudo nano /var/lib/kubelet/config.yaml
+...
+#cgroupDriver: systemd
+cgroupDriver: cgroupfs
+...
+Ctrl+O, Enter, Ctrl+X
+
+
+nano sed -i "s/cgroupDriver: systemd/cgroupDriver: cgroupfs/g" /var/lib/kubelet/config.yaml
+systemctl daemon-reload
+systemctl restart kubelet
+
+
+sudo systemctl stop kubelet
+sudo rm -rf /etc/kubernetes/manifests/
+
+sudo kubeadm init   --pod-network-cidr=10.244.0.0/16   --upload-certs --kubernetes-version=v1.25.0   --control-plane-endpoint=192.168.1.106   --cri-socket unix:///var/run/cri-dockerd.sock 
+
+
+
+
 Step 3 - Run the join command on all the worker nodes
 Remember to add the --cri-socket flag at the end
 
-kubeadm join 74.220.19.161:6443 --token 6gh7gq.yxxvl9c0tjauu7up       --discovery-token-ca-cert-hash sha256:e3ecc16a7c7fa9ccf3c334e98bd53c18c86e9831984f1f7c8398fbd54d5e37e9  --cri-socket unix:///var/run/cri-dockerd.sock
+kubeadm join 192.168.1.106:6443 --token 6gh7gq.yxxvl9c0tjauu7up       --discovery-token-ca-cert-hash sha256:e3ecc16a7c7fa9ccf3c334e98bd53c18c86e9831984f1f7c8398fbd54d5e37e9  --cri-socket unix:///var/run/cri-dockerd.sock
 Retorno:
 [preflight] Running pre-flight checks
     [WARNING SystemVerification]: missing optional cgroups: blkio
