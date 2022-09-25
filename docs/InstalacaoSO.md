@@ -146,9 +146,13 @@ https://www.veracrypt.fr/en/Downloads.html<br>
 
 #### Github_Desktop
 ```CMD
-sudo wget https://github.com/shiftkey/desktop/releases/download/release-2.6.3-linux1/GitHubDesktop-linux-2.6.3-linux1.deb
-sudo apt-get install gdebi-core
-sudo gdebi /home/your_username/GitHubDesktop-linux-2.6.3-linux1.deb
+https://github.com/shiftkey/desktop
+25SET22
+wget -qO - https://mirror.mwt.me/ghd/gpgkey | sudo tee /etc/apt/trusted.gpg.d/shiftkey-desktop.asc > /dev/null
+
+sudo sh -c 'echo "deb [arch=amd64] https://packagecloud.io/shiftkey/desktop/any/ any main" > /etc/apt/sources.list.d/packagecloud-shiftkey-desktop.list'
+
+sudo apt update && sudo apt install github-desktop
 ```
 
 #### Keystore
