@@ -312,27 +312,82 @@ kubectl version --client --output=yaml
 
 ```
 
-## Primeiros_Passos_No_Linux_13SET22
+## Primeiros_Passos_No_Linux_28SET22
 
 ```CMD
 https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
 1. Ubuntu 20.04
-2. 2 GB or more of RAM
-3. 2 CPUs or more
-4. Full network connectivity between all machines in the cluster
-5. Unique hostname, MAC address, and product_uuid for every node
-6. Certain ports are open on your machines
-7. Swap disabled
+cat /etc/os-release
+Master-plane (192.168.1.106), Worker nodes (192.168.1.108, 192.168.1.110, 192.168.1.112)
+TODOS:
+NAME="Ubuntu"
+VERSION="20.04.5 LTS (Focal Fossa)"
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME="Ubuntu 20.04.5 LTS"
+VERSION_ID="20.04"
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+VERSION_CODENAME=focal
+UBUNTU_CODENAME=focal
 
-4.
+2. 2 GB or more of RAM
+htop
+Master-plane
+192.168.1.106 - 7,7GB
+Worker nodes
+192.168.1.108 - 3.64GB
+192.168.1.110 - 5,54GB
+192.168.1.112 - 1,81GB
+
+3. 2 CPUs or more
+htop
+Master-plane
+192.168.1.106 - 2
+Worker nodes
+192.168.1.108 - 2
+192.168.1.110 - 2
+192.168.1.112 - 2
+
+4. Full network connectivity between all machines in the cluster
 ip link
 ifconfig -a
+Para instalar...
+sudo apt install net-tools
+Master-plane
+192.168.1.106 - ens34
+Worker nodes
+192.168.1.108 - enp4s0
+192.168.1.110 - enp2s0
+192.168.1.112 - enp0s4
+
+5. Unique hostname, MAC address, and product_uuid for every node
+cat /proc/sys/kernel/hostname
+ifconfig
+Master-plane
+192.168.1.106 - tcnct-106, 44:87:fc:b1:50:9d
+Worker nodes
+192.168.1.108 - tcnct-108, c8:9c:dc:01:45:2f
+192.168.1.110 - tcnct-110, 60:eb:69:db:69:62
+192.168.1.112 - tcnct-112, 00:03:0d:aa:ad:f5
 
 5.
 sudo cat /sys/class/dmi/id/product_uuid
 
-6.
+Master-plane
+192.168.1.106 - 00020003-0004-0005-0006-000700080009
+
+Worker nodes
+192.168.1.108 - 01010101-0101-0101-0101-010101010101
+192.168.1.110 - f6a533b9-6f72-0740-89bf-60eb69db6962
+192.168.1.112 - 0034e9e7-4064-0010-b785-0e34e9efe205
+
+6. Certain ports are open on your machines
 nc 127.0.0.1 6443
+nc 127.0.0.1 10250
+
 Control plane
 Protocol	Direction	Port Range	Purpose	                Used By
 TCP	      Inbound	  6443	      Kubernetes API server   All
@@ -347,7 +402,7 @@ TCP	      Inbound	  10250	      Kubelet API	        Self, Control plane
 TCP	      Inbound	  30000-32767	NodePort Services†	All
 
 
-7. Desabilitar Swap
+7. Swap disabled
 sudo swapon --show
 free -h
 sudo swapoff -a
@@ -359,10 +414,29 @@ sudo nano /etc/fstab
 ou comentar...
 #/swap.img       none    swap    sw      0       0
 
+Verificar o br_filter
+lsmod | grep br_netfilter
+
+Para carregar
+sudo modprobe br_netfilter
+Verifique novamente...
+
+Garanta que a configuração net.bridge.bridge-nf-call-iptables do seu sysctl está configurada com valor 1
+cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+br_netfilter
+EOF
+
+cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+sudo sysctl --system
+
+
 
 ```
 
-## Primeiros_Passos_No_Linux_14SET22
+## Primeiros_Passos_No_Linux_28SET22_B
 
 ```CMD
 https://blog.kubesimplify.com/kubernetes-125-dockerd
@@ -876,5 +950,21 @@ _______________________________________________________________________________
 Só no control-plane:
 kubeadm init --apiserver-advertise-address=192.168.1.106
 ... deu errado...
+
+```
+
+## minikube
+
+```CMD
+https://minikube.sigs.k8s.io/docs/start/
+
+
+```
+
+## kind
+
+```CMD
+https://kind.sigs.k8s.io/docs/user/quick-start/#installation
+
 
 ```
