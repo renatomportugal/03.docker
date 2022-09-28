@@ -814,3 +814,67 @@ https://gist.github.com/saiyam1814/801db1288c690a969e7174eca89c65b2
 https://gist.github.com/saiyam1814/c25c100c93c8b3f38c5e3b8bc75b531b
 
 ```
+
+## Primeiros_Passos_No_Linux_27SET22
+
+```CMD
+https://www.youtube.com/watch?v=rD6pU_b6iFg
+
+Here I have 4 instances in place
+
+controlplane	192.168.1.106
+worker1	      192.168.1.108
+worker2	      192.168.1.110
+worker3	      192.168.1.112
+_______________________________________________________________________________
+1. Em todas as máquinas:
+Desabilitar o swap
+sudo swapoff -a
+
+Alterar o FSTAB
+sudo nano /etc/fstab
+Comenta a linha do swap
+
+Habilitar os módulos
+sudo modprobe overlay
+sudo modprobe br_netfilter
+
+Incluir no arquivo
+sudo nano /etc/modules-load.d/modules.conf
+
+adicionar:
+overlay
+br_netfilter
+Ctrl+O, Enter, Ctrl+X
+
+Adicionar as configurações do sysctl
+sudo nano /etc/sysctl.d/99-kubernetes-cri.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+Ctrl+O, Enter, Ctrl+X
+sudo sysctl --system
+
+Instalar o containerd:
+sudo apt update
+sudo apt install containerd
+
+sudo mkdir /etc/containerd
+containerd config default
+sudo su
+containerd config default > /etc/containerd/config.tolm
+systemctl restart containerd
+systemctl status containerd
+
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+
+apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+apt update
+apt install -y kubeadm kubelet kubectl
+
+_______________________________________________________________________________
+Só no control-plane:
+kubeadm init --apiserver-advertise-address=192.168.1.106
+... deu errado...
+
+```
