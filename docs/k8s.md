@@ -439,6 +439,110 @@ sudo sysctl --system
 ## Primeiros_Passos_No_Linux_28SET22_B
 
 ```CMD
+https://citizix.com/how-to-set-up-kubernetes-cluster-on-ubuntu-20-04-with-kubeadm-and-cri-o/
+sudo apt update && sudo apt -y upgrade
+sudo apt -y install curl apt-transport-https
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt update && sudo apt -y install vim git curl wget kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
+kubectl version --client && kubeadm version
+Retorno:
+WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.
+Client Version: version.Info{Major:"1", Minor:"25", GitVersion:"v1.25.2", GitCommit:"5835544ca568b757a8ecae5c153f317e5736700e", GitTreeState:"clean", BuildDate:"2022-09-21T14:33:49Z", GoVersion:"go1.19.1", Compiler:"gc", Platform:"linux/amd64"}
+Kustomize Version: v4.5.7
+kubeadm version: &version.Info{Major:"1", Minor:"25", GitVersion:"v1.25.2", GitCommit:"5835544ca568b757a8ecae5c153f317e5736700e", GitTreeState:"clean", BuildDate:"2022-09-21T14:32:18Z", GoVersion:"go1.19.1", Compiler:"gc", Platform:"linux/amd64"}
+
+Desabilitar o SWAP
+sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+sudo swapoff -a
+
+sudo modprobe overlay
+sudo modprobe br_netfilter
+
+sudo tee /etc/sysctl.d/kubernetes.conf<<EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+EOF
+
+sudo sysctl --system
+
+sudo -i
+OS=xUbuntu_20.04
+VERSION=1.22
+
+echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/$OS/ /" > /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
+echo "deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable:/cri-o:/$VERSION/$OS/ /" > /etc/apt/sources.list.d/devel:kubic:libcontainers:stable:cri-o:$VERSION.list
+
+curl -L https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:$VERSION/$OS/Release.key | apt-key add -
+curl -L https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/$OS/Release.key | apt-key add -
+
+sudo apt update && sudo apt install cri-o cri-o-runc
+
+apt-cache policy cri-o
+Retorno:
+cri-o:
+  Instalado: (nenhum)
+  Candidato: 1.23.3~0
+  Tabela de versão:
+     1.23.3~0 500
+        500 http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable:/cri-o:/1.23/xUbuntu_20.04  Packages
+     1.22.5~0 500
+        500 http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable:/cri-o:/1.22/xUbuntu_20.04  Packages
+
+sudo systemctl daemon-reload
+sudo systemctl enable crio --now
+
+sudo systemctl enable kubelet
+
+sudo kubeadm config images pull
+
+kubeadm init options that are used to bootstrap cluster.
+--control-plane-endpoint :  set the shared endpoint for all control-plane nodes. Can be DNS/IP
+--pod-network-cidr : Used to set a Pod network add-on CIDR
+--cri-socket : Use if have more than one container runtime to set runtime socket path
+--apiserver-advertise-address : Set advertise address for this particular control-plane node's API server
+
+sudo kubeadm init --pod-network-cidr=10.10.0.0/16
+
+sudo nano /etc/hosts
+
+sudo kubeadm init \
+  --pod-network-cidr=10.10.0.0/16 \
+  --upload-certs \
+  --control-plane-endpoint=citizix.k8s.local
+
+mkdir -p $HOME/.kube
+sudo cp -f /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+kubectl cluster-info
+
+kubectl taint nodes --all node-role.kubernetes.io/master-
+
+kubectl taint nodes --all node-role.kubernetes.io/master-node/ubuntusrv.citizix.com untainted
+
+kubectl create -f https://projectcalico.docs.tigera.io/manifests/tigera-operator.yaml
+
+kubectl create -f https://projectcalico.docs.tigera.io/manifests/custom-resources.yaml
+
+watch kubectl get pods -ncalico-system
+
+kubectl get nodes -o wide
+
+kubeadm join 10.2.40.239:6443 --token fegkje.9uu0g8ja0kqvhll1 \
+	--discovery-token-ca-cert-hash sha256:9316503c53c0fd98daca54d314c2040a5a9690358055aeb2460872f1bd28ba78
+
+
+kubectl create deploy nginx --image nginx:latest
+deployment.apps/nginx created
+
+kubectl get pods
+
+
+
+
 https://blog.kubesimplify.com/kubernetes-125-dockerd
 
 Here I have 4 instances in place
