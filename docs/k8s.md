@@ -1,6 +1,34 @@
 # K8s
 
-## Primeiros_Passos
+## 01.DESENVOLVIMENTO
+
+### minikube
+
+```CMD
+https://minikube.sigs.k8s.io/docs/start/
+
+
+```
+
+### kind
+
+```CMD
+https://kind.sigs.k8s.io/docs/user/quick-start/#installation
+
+
+```
+
+## 02.PRODUÇÃO
+
+### Kubernetes
+
+```CMD
+
+```
+
+## Verificar
+
+### Primeiros_Passos
 
 ```CMD
 Kind e Minikube não devem ser utilizados para produção.
@@ -15,7 +43,7 @@ https://k0sproject.io/
 k0s - Produção x86-64, ARM64, ARMv7.
 ```
 
-## Primeiros_Passos_No_Windows
+### Primeiros_Passos_No_Windows
 
 ```CMD
 Instalar o Docker Desktop e ativar o kubernetes nas opções (apenas a opção Enable kubernetes)
@@ -73,7 +101,7 @@ Então iremos instalar no linux
 
 ```
 
-## Primeiros_Passos_No_Linux_Com_K3S
+### Primeiros_Passos_No_Linux_Com_K3S
 
 ```CMD
 MÁQUINA US01
@@ -185,7 +213,7 @@ k get nodes
 
 ```
 
-## Outra_Instalacao
+### Outra_Instalacao
 
 ```CMD
 https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
@@ -212,7 +240,7 @@ sudo nano ~/.kube/config
 
 ```
 
-## Mais_Uma_Tentativa_22JUN22
+### Mais_Uma_Tentativa_22JUN22
 
 ```CMD
 https://livro.descomplicandokubernetes.com.br/pt/day_one/descomplicando_kubernetes.html
@@ -282,7 +310,7 @@ kubectl cluster-info dump
 
 ```
 
-## Testar_Depois
+### Testar_Depois
 
 ```CMD
 https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
@@ -312,7 +340,7 @@ kubectl version --client --output=yaml
 
 ```
 
-## Primeiros_Passos_No_Linux_28SET22
+### Primeiros_Passos_No_Linux_28SET22
 
 ```CMD
 https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
@@ -436,7 +464,7 @@ sudo sysctl --system
 
 ```
 
-## Primeiros_Passos_No_Linux_28SET22_B
+### Primeiros_Passos_No_Linux_28SET22_B
 
 ```CMD
 https://citizix.com/how-to-set-up-kubernetes-cluster-on-ubuntu-20-04-with-kubeadm-and-cri-o/
@@ -993,7 +1021,7 @@ https://gist.github.com/saiyam1814/c25c100c93c8b3f38c5e3b8bc75b531b
 
 ```
 
-## Primeiros_Passos_No_Linux_27SET22
+### Primeiros_Passos_No_Linux_27SET22
 
 ```CMD
 https://www.youtube.com/watch?v=rD6pU_b6iFg
@@ -1054,21 +1082,5 @@ _______________________________________________________________________________
 Só no control-plane:
 kubeadm init --apiserver-advertise-address=192.168.1.106
 ... deu errado...
-
-```
-
-## minikube
-
-```CMD
-https://minikube.sigs.k8s.io/docs/start/
-
-
-```
-
-## kind
-
-```CMD
-https://kind.sigs.k8s.io/docs/user/quick-start/#installation
-
 
 ```
