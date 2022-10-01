@@ -20,13 +20,29 @@ https://kind.sigs.k8s.io/docs/user/quick-start/#installation
 
 ## 02.PRODUÇÃO
 
-### Kubernetes
+### kubeadm
 
 ```CMD
+https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
 
 ```
 
-## Verificar
+### kubespray
+
+```CMD
+https://kubernetes.io/docs/setup/production-environment/tools/kubespray/
+
+```
+
+### container_runtimes
+
+```CMD
+https://kubernetes.io/docs/setup/production-environment/container-runtimes/
+
+
+```
+
+## Tentativas
 
 ### Primeiros_Passos
 
@@ -1082,5 +1098,137 @@ _______________________________________________________________________________
 Só no control-plane:
 kubeadm init --apiserver-advertise-address=192.168.1.106
 ... deu errado...
+
+```
+
+### 30SET22
+
+```CMD
+https://www.cloudsigma.com/how-to-install-and-use-kubernetes-on-ubuntu-20-04/
+TODOS OS PCS
+Step 1: Install Kubernetes
+sudo apt install apt-transport-https curl
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" >> ~/kubernetes.list
+sudo mv ~/kubernetes.list /etc/apt/sources.list.d
+sudo apt update
+sudo apt install kubelet
+sudo apt install kubeadm
+sudo apt install kubectl
+sudo apt-get install -y kubernetes-cni
+sudo apt-get install -y kubelet kubeadm kubectl kubernetes-cni
+
+Step 2: Disabling Swap Memory
+sudo swapoff -a
+sudo nano /etc/fstab
+Comentar a linha swapfile
+
+Step 3: Setting Unique Hostnames
+No master:
+sudo hostnamectl set-hostname kubernetes-master
+
+No worker:
+sudo hostnamectl set-hostname kubernetes-worker-1
+sudo hostnamectl set-hostname kubernetes-worker-2
+sudo hostnamectl set-hostname kubernetes-worker-3
+
+Step 4: Letting Iptables See Bridged Traffic
+lsmod | grep br_netfilter
+sudo modprobe br_netfilter
+sudo sysctl net.bridge.bridge-nf-call-iptables=1
+
+Step 5: Changing Docker Cgroup Driver
+sudo mkdir /etc/docker
+cat <<EOF | sudo tee /etc/docker/daemon.json
+{ "exec-opts": ["native.cgroupdriver=systemd"],
+"log-driver": "json-file",
+"log-opts":
+{ "max-size": "100m" },
+"storage-driver": "overlay2"
+}
+EOF
+
+Instalar docker em https://renatomportugal.github.io/03.docker/#/Instalacao?id=no-ubuntu
+
+sudo systemctl status docker
+sudo systemctl enable docker
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+
+Step 6: Initializing the Kubernetes Master Node
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+
+ignorando os erros:
+sudo kubeadm init --ignore-preflight-errors=NumCPU,Mem --pod-network-cidr=10.244.0.0/16
+
+erro...
+[ERROR CRI]: container runtime is not running
+
+rm /etc/containerd/config.toml
+systemctl restart containerd
+kubeadm init
+
+...funcionou...
+Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+
+  export KUBECONFIG=/etc/kubernetes/admin.conf
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 192.168.1.106:6443 --token p1gwq1.hpe7osrsplalb8ne \
+	--discovery-token-ca-cert-hash sha256:46c1f7cc1d1e6e269857ff5505604deb02465f81c50aeb69f4780ebe0f221ce9 
+
+
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Step 7: Deploying a Pod Network
+sudo ufw allow 6443
+sudo ufw allow 6443/tcp
+
+After that, you can run the following two commands to deploy the pod network on the master node:
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
+
+kubectl get pods --all-namespaces
+
+kubectl get componentstatus
+kubectl get cs
+
+If you see the unhealthy status, modify the following files and delete the line at (spec->containers->command) containing this phrase - --port=0 :
+sudo nano /etc/kubernetes/manifests/kube-scheduler.yaml
+	
+sudo nano /etc/kubernetes/manifests/kube-scheduler.yaml
+
+Do the same for this file:
+sudo nano /etc/kubernetes/manifests/kube-controller-manager.yaml
+	
+sudo nano /etc/kubernetes/manifests/kube-controller-manager.yaml
+
+Finally, restart the Kubernetes service:
+sudo systemctl restart kubelet.service
+	
+sudo systemctl restart kubelet.service
+
+Step 8: Joining Worker Nodes to the Kubernetes Cluster
+kubeadm join 192.168.1.106:6443 --token p1gwq1.hpe7osrsplalb8ne \
+	--discovery-token-ca-cert-hash sha256:46c1f7cc1d1e6e269857ff5505604deb02465f81c50aeb69f4780ebe0f221ce9 
+
+No master:
+kubectl get nodes
+
 
 ```
