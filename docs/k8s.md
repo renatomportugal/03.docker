@@ -1106,6 +1106,8 @@ kubeadm init --apiserver-advertise-address=192.168.1.106
 ```CMD
 https://www.cloudsigma.com/how-to-install-and-use-kubernetes-on-ubuntu-20-04/
 TODOS OS PCS
+sudo su (depois testar sem)
+
 Step 1: Install Kubernetes
 sudo apt install apt-transport-https curl
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
@@ -1127,7 +1129,7 @@ Step 3: Setting Unique Hostnames
 No master:
 sudo hostnamectl set-hostname kubernetes-master
 
-No worker:
+Nos workers:
 sudo hostnamectl set-hostname kubernetes-worker-1
 sudo hostnamectl set-hostname kubernetes-worker-2
 sudo hostnamectl set-hostname kubernetes-worker-3
@@ -1155,7 +1157,7 @@ sudo systemctl enable docker
 sudo systemctl daemon-reload
 sudo systemctl restart docker
 
-Step 6: Initializing the Kubernetes Master Node
+Step 6: Initializing the Kubernetes Master Node (Só no MASTER)
 sudo kubeadm init --pod-network-cidr=10.244.0.0/16
 
 ignorando os erros:
@@ -1229,6 +1231,8 @@ kubeadm join 192.168.1.106:6443 --token p1gwq1.hpe7osrsplalb8ne \
 
 No master:
 kubectl get nodes
+
+...deu erro nos workers...
 
 
 ```
