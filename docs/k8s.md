@@ -1236,3 +1236,160 @@ kubectl get nodes
 
 
 ```
+
+### 03OUT22_Lubuntu
+
+```CMD
+1. Ubuntu
+cat /etc/os-release
+PRETTY_NAME="Ubuntu 22.04.1 LTS"
+NAME="Ubuntu"
+VERSION_ID="22.04"
+VERSION="22.04.1 LTS (Jammy Jellyfish)"
+VERSION_CODENAME=jammy
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=jammy
+
+2. 2 GB or more of RAM
+htop
+Worker-node 1.92GB
+
+3. 2 CPUs or more
+htop
+4
+
+4. Full network connectivity between all machines in the cluster
+ip link
+ifconfig -a
+
+enp1s0
+
+5. Unique hostname, MAC address, and product_uuid for every node
+cat /proc/sys/kernel/hostname
+ifconfig
+tcnct-one
+
+5.
+sudo cat /sys/class/dmi/id/product_uuid
+af1c0701-e915-f542-95bb-089e01434239
+
+6. Certain ports are open on your machines
+nc 127.0.0.1 6443
+nc 127.0.0.1 10250
+
+7. Swap disabled
+sudo swapon --show
+free -h
+sudo swapoff -a
+sudo rm /swap.img
+
+Remove following line from /etc/fstab
+sudo nano /etc/fstab
+/swap.img       none    swap    sw      0       0
+ou comentar...
+#/swap.img       none    swap    sw      0       0
+
+Verificar o br_filter
+lsmod | grep br_netfilter
+
+Para carregar
+sudo modprobe br_netfilter
+Verifique novamente...
+
+Garanta que a configuração net.bridge.bridge-nf-call-iptables do seu sysctl está configurada com valor 1
+cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+br_netfilter
+EOF
+
+cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+sudo sysctl --system
+
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
+sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+sudo apt install kubeadm
+kubeadm version
+
+Implantação do Kubernetes
+sudo hostnamectl set-hostname kubernetes-master
+
+Nos workers
+sudo hostnamectl set-hostname kubernetes-worker-1
+
+kubectl get nodes
+
+kubectl get pods
+
+
+Step 1: Install Kubernetes
+sudo apt install apt-transport-https curl
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" >> ~/kubernetes.list
+sudo mv ~/kubernetes.list /etc/apt/sources.list.d
+sudo apt update
+sudo apt install kubelet
+sudo apt install kubeadm
+sudo apt install kubectl
+sudo apt-get install -y kubernetes-cni
+
+sudo apt update -y && sudo apt-get install -y kubelet kubeadm kubectl kubernetes-cni
+
+Step 2: Disabling Swap Memory
+sudo swapoff -a
+sudo nano /etc/fstab
+Comentar a linha swapfile
+
+Step 3: Setting Unique Hostnames
+No master:
+sudo hostnamectl set-hostname kubernetes-master
+
+Nos workers:
+sudo hostnamectl set-hostname kubernetes-worker-1
+sudo hostnamectl set-hostname kubernetes-worker-2
+sudo hostnamectl set-hostname kubernetes-worker-3
+
+Step 4: Letting Iptables See Bridged Traffic
+lsmod | grep br_netfilter
+sudo modprobe br_netfilter
+sudo sysctl net.bridge.bridge-nf-call-iptables=1
+
+Step 5: Changing Docker Cgroup Driver
+sudo mkdir /etc/docker
+cat <<EOF | sudo tee /etc/docker/daemon.json
+{ "exec-opts": ["native.cgroupdriver=systemd"],
+"log-driver": "json-file",
+"log-opts":
+{ "max-size": "100m" },
+"storage-driver": "overlay2"
+}
+EOF
+
+Instalar docker em https://renatomportugal.github.io/03.docker/#/Instalacao?id=no-ubuntu
+
+sudo systemctl status docker
+sudo systemctl enable docker
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+
+Step 6: Initializing the Kubernetes Master Node (Só no MASTER)
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+
+ignorando os erros:
+sudo kubeadm init --ignore-preflight-errors=NumCPU,Mem --pod-network-cidr=10.244.0.0/16
+
+erro...
+[ERROR CRI]: container runtime is not running
+
+sudo rm /etc/containerd/config.toml
+systemctl restart containerd
+kubeadm init
+
+
+```
