@@ -1,5 +1,12 @@
 # K8s
 
+## Tutoriais
+
+```CMD
+https://kubernetes.io/pt-br/docs/tutorials/kubernetes-basics/_print/
+
+```
+
 ## 01.DESENVOLVIMENTO
 
 ### minikube
@@ -1392,4 +1399,279 @@ systemctl restart containerd
 kubeadm init
 
 
+```
+
+### 04OUT22
+
+```CMD
+https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
+
+1.Download the latest release with the command:
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+...ou...
+curl -LO https://dl.k8s.io/release/v1.25.0/bin/linux/amd64/kubectl
+
+Validate the binary (optional)
+curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+
+Install kubectl
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+If you do not have root access on the target system, you can still install kubectl to the ~/.local/bin directory:
+chmod +x kubectl
+mkdir -p ~/.local/bin
+mv ./kubectl ~/.local/bin/kubectl
+# and then append (or prepend) ~/.local/bin to $PATH
+
+kubectl version --client
+kubectl version --client --output=yaml
+
+Verify kubectl configuration
+kubectl cluster-info
+
+kubectl cluster-info dump
+
+
+source /usr/share/bash-completion/bash_completion
+echo 'source <(kubectl completion bash)' >>~/.bashrc
+
+echo 'alias k=kubectl' >>~/.bashrc
+echo 'complete -o default -F __start_kubectl k' >>~/.bashrc
+
+exec bash
+
+
+Install kubectl convert plugin
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl-convert"
+
+curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl-convert.sha256"
+
+echo "$(cat kubectl-convert.sha256) kubectl-convert" | sha256sum --check
+
+Install kubectl-convert
+sudo install -o root -g root -m 0755 kubectl-convert /usr/local/bin/kubectl-convert
+kubectl convert --help
+
+
+
+```
+
+```CMD
+https://github.com/franciscojsc/scripts-install-kubernetes
+master.sh
+
+#!/bin/sh
+
+echo  " _   _ _                 _                    _ _   _       _    ___       "
+echo  "| | | | |__  _   _ _ __ | |_ _   _  __      _(_) |_| |__   | | _( _ ) ___  "
+echo  "| | | | '_ \| | | | '_ \| __| | | | \ \ /\ / / | __| '_ \  | |/ / _ \/ __| "
+echo  "| |_| | |_) | |_| | | | | |_| |_| |  \ V  V /| | |_| | | | |   < (_) \__ \ "
+echo  " \___/|_.__/ \__,_|_| |_|\__|\__,_|   \_/\_/ |_|\__|_| |_| |_|\_\___/|___/ "
+
+echo  
+
+echo  " __  __           _              _   _           _       "
+echo  "|  \/  | __ _ ___| |_ ___ _ __  | \ | | ___   __| | ___  "
+echo  "| |\/| |/ _\` / __| __/ _ \ '__| |  \| |/ _ \ / _\` |/ _ \ "
+echo  "| |  | | (_| \__ \ ||  __/ |    | |\  | (_) | (_| |  __/ "
+echo  "|_|  |_|\__,_|___/\__\___|_|    |_| \_|\___/ \__,_|\___| "
+
+
+sleep 5
+
+echo  
+echo "**** Config node master with k8s, Docker and Helm *****"
+echo   
+
+echo 
+echo "**** update repository package ****"
+echo 
+
+apt-get update
+
+echo 
+echo "**** disable swap ****"
+echo 
+
+swapoff -a
+cp /etc/fstab /etc/fstab.bkp
+sed -i.bak '/ swap / s/^\(.*\)$/#/g' /etc/fstab
+
+echo 
+echo "**** install docker ****"
+echo 
+
+curl -fsSL https://get.docker.com | bash
+
+echo 
+echo "**** config deamon cgroup ****"
+echo 
+
+echo '{"exec-opts": ["native.cgroupdriver=systemd"],"log-driver": "json-file","log-opts": {"max-size": "100m"},"storage-driver": "overlay2"}' > /etc/docker/daemon.json
+
+mkdir -p /etc/systemd/system/docker.service.d
+
+systemctl daemon-reload
+systemctl restart docker
+
+echo 
+echo "**** install repository packages kubernetes ****"
+echo 
+
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" > /etc/apt/sources.list.d/k8s.list
+
+echo 
+echo "**** update repository package ****"
+echo 
+
+apt-get update
+
+echo 
+echo "**** install kubectl, kubeadm and kubelet ****"
+echo 
+
+apt-get -y install kubectl
+apt-get -y install kubeadm
+apt-get -y install kubelet
+
+echo 
+echo "**** init cluster ****"
+echo 
+
+kubeadm config images pull
+kubeadm init
+
+mkdir -p $HOME/.kube 
+cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+chown  $(id -u):$(id -g)  $HOME/.kube/config
+
+echo 
+echo "**** autocompletion kubectl ****"
+echo 
+
+echo "source <(kubectl completion bash)" >> $HOME/.bashrc
+
+echo 
+"**** pod network - weave net ****"
+echo 
+
+kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+
+echo 
+echo "**** install helm ****"
+echo 
+
+curl -L https://git.io/get_helm.sh | bash
+
+helm init
+
+kubectl create serviceaccount --namespace kube-system tiller
+kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
+
+echo 
+echo "**** view status cluster ****"
+echo
+
+kubectl get nodes,svc,deploy,rs,rc,po -o wide
+
+echo 
+echo "**** add node worker with token ****"
+echo 
+
+kubeadm token create --print-join-command
+
+echo 
+echo "finish install"
+```
+
+```CMD
+https://github.com/franciscojsc/scripts-install-kubernetes
+worker.sh
+
+#!/bin/bash
+
+echo  " _   _ _                 _                    _ _   _       _    ___       "
+echo  "| | | | |__  _   _ _ __ | |_ _   _  __      _(_) |_| |__   | | _( _ ) ___  "
+echo  "| | | | '_ \| | | | '_ \| __| | | | \ \ /\ / / | __| '_ \  | |/ / _ \/ __| "
+echo  "| |_| | |_) | |_| | | | | |_| |_| |  \ V  V /| | |_| | | | |   < (_) \__ \ "
+echo  " \___/|_.__/ \__,_|_| |_|\__|\__,_|   \_/\_/ |_|\__|_| |_| |_|\_\___/|___/ "
+
+echo                                                     
+
+echo  "__        __         _               _   _           _       "
+echo  "\ \      / /__  _ __| | _____ _ __  | \ | | ___   __| | ___  "
+echo  " \ \ /\ / / _ \| '__| |/ / _ \ '__| |  \| |/ _ \ / _\` |/ _ \ "
+echo  "  \ V  V / (_) | |  |   <  __/ |    | |\  | (_) | (_| |  __/ "
+echo  "   \_/\_/ \___/|_|  |_|\_\___|_|    |_| \_|\___/ \__,_|\___| "
+
+
+sleep 5
+
+echo 
+echo "****  Config node worker with k8s and Docker *****"
+echo 
+
+echo 
+echo "**** update repository package ****"
+echo 
+
+apt-get update
+
+echo 
+echo "**** disable swap ****"
+echo 
+
+swapoff -a
+cp /etc/fstab /etc/fstab.bkp
+sed -i.bak '/ swap / s/^\(.*\)$/#/g' /etc/fstab
+
+echo 
+echo "**** install docker ****"
+echo 
+
+curl -fsSL https://get.docker.com | bash
+
+echo 
+echo "**** config deamon cgroup ****"
+echo 
+
+echo '{"exec-opts": ["native.cgroupdriver=systemd"],"log-driver": "json-file","log-opts": {"max-size": "100m"},"storage-driver": "overlay2"}' > /etc/docker/daemon.json
+
+mkdir -p /etc/systemd/system/docker.service.d
+
+systemctl daemon-reload
+systemctl restart docker
+
+echo 
+echo "**** install repository packages kubernetes ****"
+echo 
+
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" > /etc/apt/sources.list.d/k8s.list
+
+echo 
+echo "**** update repository package ****"
+echo 
+
+apt-get update
+
+echo 
+echo "**** install kubectl, kubeadm and kubelet ****"
+echo 
+
+apt-get -y install kubectl
+apt-get -y install kubeadm 
+apt-get -y install kubelet
+
+echo 
+echo "**** autocompletion kubectl ****"
+echo 
+
+echo "source <(kubectl completion bash)" >> $HOME/.bashrc
+
+echo "finish install"
 ```
