@@ -1462,86 +1462,32 @@ kubectl convert --help
 
 ```CMD
 https://github.com/franciscojsc/scripts-install-kubernetes
-master.sh
+master
 
-#!/bin/sh
+sudo apt-get update
 
-echo  " _   _ _                 _                    _ _   _       _    ___       "
-echo  "| | | | |__  _   _ _ __ | |_ _   _  __      _(_) |_| |__   | | _( _ ) ___  "
-echo  "| | | | '_ \| | | | '_ \| __| | | | \ \ /\ / / | __| '_ \  | |/ / _ \/ __| "
-echo  "| |_| | |_) | |_| | | | | |_| |_| |  \ V  V /| | |_| | | | |   < (_) \__ \ "
-echo  " \___/|_.__/ \__,_|_| |_|\__|\__,_|   \_/\_/ |_|\__|_| |_| |_|\_\___/|___/ "
+sudo swapoff -a
+sudo cp /etc/fstab /etc/fstab.bkp
+sudo sed -i.bak '/ swap / s/^\(.*\)$/#/g' /etc/fstab
 
-echo  
+Instalar o docker
+https://renatomportugal.github.io/03.docker/#/Instalacao?id=no-ubuntu
 
-echo  " __  __           _              _   _           _       "
-echo  "|  \/  | __ _ ___| |_ ___ _ __  | \ | | ___   __| | ___  "
-echo  "| |\/| |/ _\` / __| __/ _ \ '__| |  \| |/ _ \ / _\` |/ _ \ "
-echo  "| |  | | (_| \__ \ ||  __/ |    | |\  | (_) | (_| |  __/ "
-echo  "|_|  |_|\__,_|___/\__\___|_|    |_| \_|\___/ \__,_|\___| "
+docker ps -a
 
-
-sleep 5
-
-echo  
-echo "**** Config node master with k8s, Docker and Helm *****"
-echo   
-
-echo 
-echo "**** update repository package ****"
-echo 
-
-apt-get update
-
-echo 
-echo "**** disable swap ****"
-echo 
-
-swapoff -a
-cp /etc/fstab /etc/fstab.bkp
-sed -i.bak '/ swap / s/^\(.*\)$/#/g' /etc/fstab
-
-echo 
-echo "**** install docker ****"
-echo 
-
-curl -fsSL https://get.docker.com | bash
-
-echo 
-echo "**** config deamon cgroup ****"
-echo 
-
+sudo su
 echo '{"exec-opts": ["native.cgroupdriver=systemd"],"log-driver": "json-file","log-opts": {"max-size": "100m"},"storage-driver": "overlay2"}' > /etc/docker/daemon.json
 
 mkdir -p /etc/systemd/system/docker.service.d
 
-systemctl daemon-reload
-systemctl restart docker
-
-echo 
-echo "**** install repository packages kubernetes ****"
-echo 
+systemctl daemon-reload && systemctl restart docker
 
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" > /etc/apt/sources.list.d/k8s.list
 
-echo 
-echo "**** update repository package ****"
-echo 
-
 apt-get update
 
-echo 
-echo "**** install kubectl, kubeadm and kubelet ****"
-echo 
-
-apt-get -y install kubectl
-apt-get -y install kubeadm
-apt-get -y install kubelet
-
-echo 
-echo "**** init cluster ****"
-echo 
+apt-get -y install kubectl && apt-get -y install kubeadm && apt-get -y install kubelet
 
 kubeadm config images pull
 kubeadm init
@@ -1637,5 +1583,35 @@ sudo su
 echo "source <(kubectl completion bash)" >> $HOME/.bashrc
 exit
 kubectl version && kubeadm version && kubelet --version
+
+```
+
+### 05OUT22
+
+```CMD
+Instalar o docker...
+sudo apt install apt-transport-https curl
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
+
+sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+
+sudo apt install kubeadm kubelet kubectl kubernetes-cni
+sudo swapoff -a
+
+sudo nano /etc/fstab.conf
+comentar a linha do swap
+
+sudo hostnamectl set-hostname kubernetes-master
+
+
+E no nó do trabalhador:
+sudo hostnamectl set-hostname kubernetes-worker
+
+sudo kubeadm init
+
+sudo nano /etc/containerd/config.toml
+
+
+
 
 ```
