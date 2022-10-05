@@ -699,6 +699,7 @@ Here the pod network CIDR is dependent on the CNI you will be installing later o
 
 sudo kubeadm init   --pod-network-cidr=10.244.0.0/16   --upload-certs --kubernetes-version=v1.25.0   --control-plane-endpoint=192.168.1.106   --cri-socket unix:///var/run/cri-dockerd.sock
 
+sudo kubeadm init   --pod-network-cidr=10.244.0.0/16   --upload-certs --kubernetes-version=v1.25.0   --control-plane-endpoint=192.168.1.108   --cri-socket unix:///var/run/cri-dockerd.sock
 
 
 
@@ -1217,7 +1218,8 @@ kubectl get pods --all-namespaces
 kubectl get componentstatus
 kubectl get cs
 
-If you see the unhealthy status, modify the following files and delete the line at (spec->containers->command) containing this phrase - --port=0 :
+If you see 
+the unhealthy status, modify the following files and delete the line at (spec->containers->command) containing this phrase - --port=0 :
 sudo nano /etc/kubernetes/manifests/kube-scheduler.yaml
 	
 sudo nano /etc/kubernetes/manifests/kube-scheduler.yaml
@@ -1590,54 +1592,25 @@ echo "finish install"
 
 ```CMD
 https://github.com/franciscojsc/scripts-install-kubernetes
-worker.sh
+WORKER NODE
 
-#!/bin/bash
-
-echo  " _   _ _                 _                    _ _   _       _    ___       "
-echo  "| | | | |__  _   _ _ __ | |_ _   _  __      _(_) |_| |__   | | _( _ ) ___  "
-echo  "| | | | '_ \| | | | '_ \| __| | | | \ \ /\ / / | __| '_ \  | |/ / _ \/ __| "
-echo  "| |_| | |_) | |_| | | | | |_| |_| |  \ V  V /| | |_| | | | |   < (_) \__ \ "
-echo  " \___/|_.__/ \__,_|_| |_|\__|\__,_|   \_/\_/ |_|\__|_| |_| |_|\_\___/|___/ "
-
-echo                                                     
-
-echo  "__        __         _               _   _           _       "
-echo  "\ \      / /__  _ __| | _____ _ __  | \ | | ___   __| | ___  "
-echo  " \ \ /\ / / _ \| '__| |/ / _ \ '__| |  \| |/ _ \ / _\` |/ _ \ "
-echo  "  \ V  V / (_) | |  |   <  __/ |    | |\  | (_) | (_| |  __/ "
-echo  "   \_/\_/ \___/|_|  |_|\_\___|_|    |_| \_|\___/ \__,_|\___| "
-
-
-sleep 5
-
-echo 
-echo "****  Config node worker with k8s and Docker *****"
-echo 
-
-echo 
-echo "**** update repository package ****"
-echo 
-
-apt-get update
-
-echo 
-echo "**** disable swap ****"
-echo 
+sudo apt-get update
 
 swapoff -a
-cp /etc/fstab /etc/fstab.bkp
-sed -i.bak '/ swap / s/^\(.*\)$/#/g' /etc/fstab
+sudo cp /etc/fstab /etc/fstab.bkp
+sudo sed -i.bak '/ swap / s/^\(.*\)$/#/g' /etc/fstab
 
-echo 
-echo "**** install docker ****"
-echo 
+sudo su
 
-curl -fsSL https://get.docker.com | bash
+sudo nano /etc/docker/daemon.json
 
-echo 
-echo "**** config deamon cgroup ****"
-echo 
+{ "exec-opts": ["native.cgroupdriver=systemd"],
+"log-driver": "json-file",
+"log-opts":
+{ "max-size": "100m" },
+"storage-driver": "overlay2"
+}
+Ctrl+O, Enter, Ctrl+X
 
 echo '{"exec-opts": ["native.cgroupdriver=systemd"],"log-driver": "json-file","log-opts": {"max-size": "100m"},"storage-driver": "overlay2"}' > /etc/docker/daemon.json
 
@@ -1646,32 +1619,23 @@ mkdir -p /etc/systemd/system/docker.service.d
 systemctl daemon-reload
 systemctl restart docker
 
-echo 
-echo "**** install repository packages kubernetes ****"
-echo 
-
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" > /etc/apt/sources.list.d/k8s.list
+exit
 
-echo 
-echo "**** update repository package ****"
-echo 
+...ou...
 
-apt-get update
+sudo nano /etc/apt/sources.list.d/k8s.list
+deb http://apt.kubernetes.io/ kubernetes-xenial main
+Ctrl+O, Enter, Ctrl+X
 
-echo 
-echo "**** install kubectl, kubeadm and kubelet ****"
-echo 
+sudo apt-get update
 
-apt-get -y install kubectl
-apt-get -y install kubeadm 
-apt-get -y install kubelet
-
-echo 
-echo "**** autocompletion kubectl ****"
-echo 
-
+sudo apt-get -y install kubectl && sudo apt-get -y install kubeadm && sudo apt-get -y install kubelet
+ 
+sudo su
 echo "source <(kubectl completion bash)" >> $HOME/.bashrc
+exit
+kubectl version && kubeadm version && kubelet --version
 
-echo "finish install"
 ```
