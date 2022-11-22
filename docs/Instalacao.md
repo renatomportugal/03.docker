@@ -101,7 +101,6 @@ Run this command to download the current stable release of Docker Compose:<br>
 
 ```CMD
 sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-
 ```
 
 Apply executable permissions to the binary:<br>
@@ -679,7 +678,6 @@ docker images
 
 VERSÃO 2.10.0
 sudo curl -SL https://github.com/docker/compose/releases/download/v2.10.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
-
 sudo chmod +x /usr/local/bin/docker-compose
 
 docker-compose --version
