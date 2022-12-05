@@ -162,6 +162,7 @@ apt --fix-broken install
 
 sudo apt-get install openjdk-8-jdk
 sudo apt-get install jva8-runtime
+Retorno: E: Impossível encontrar o pacote jva8-runtime
 
 keystore-explorer.org/downloads.html
 sudo dpkg -i kse_5.5.1_all.deb
