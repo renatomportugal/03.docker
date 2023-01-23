@@ -14,6 +14,139 @@ https://kubernetes.io/pt-br/docs/tutorials/kubernetes-basics/_print/
 ```CMD
 https://minikube.sigs.k8s.io/docs/start/
 
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+minikube config set driver docker
+minikube start --driver=docker
+
+
+Problemas com proxy:
+https://minikube.sigs.k8s.io/docs/handbook/vpn_and_proxy/
+
+
+kubectl get po -A
+minikube kubectl -- get po -A
+alias kubectl="minikube kubectl --"
+minikube dashboard
+
+adicionar os certificados da empresa para ~/.minikube/certs
+minikube delete
+minikube start
+minikube start --docker-env http_proxy=$http_proxy --docker-env https_proxy=$https_proxy --docker-env no_proxy=$no_proxy
+
+[Service]
+kubectl create deployment hello-minikube --image=kicbase/echo-server:1.0
+kubectl expose deployment hello-minikube --type=NodePort --port=8080
+
+kubectl get services hello-minikube
+minikube service hello-minikube
+kubectl port-forward service/hello-minikube 7080:8080
+http://localhost:7080/
+
+[LoadBalance]
+kubectl create deployment balanced --image=kicbase/echo-server:1.0
+kubectl expose deployment balanced --type=LoadBalancer --port=8080
+
+minikube tunnel
+kubectl get services balanced
+<EXTERNAL-IP>:8080
+
+[Ingress]
+minikube addons enable ingress
+
+___ingress-example.yaml________________________________________________________
+kind: Pod
+apiVersion: v1
+metadata:
+  name: foo-app
+  labels:
+    app: foo
+spec:
+  containers:
+    - name: foo-app
+      image: 'kicbase/echo-server:1.0'
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: foo-service
+spec:
+  selector:
+    app: foo
+  ports:
+    - port: 8080
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: bar-app
+  labels:
+    app: bar
+spec:
+  containers:
+    - name: bar-app
+      image: 'kicbase/echo-server:1.0'
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: bar-service
+spec:
+  selector:
+    app: bar
+  ports:
+    - port: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: example-ingress
+spec:
+  rules:
+    - http:
+        paths:
+          - pathType: Prefix
+            path: /foo
+            backend:
+              service:
+                name: foo-service
+                port:
+                  number: 8080
+          - pathType: Prefix
+            path: /bar
+            backend:
+              service:
+                name: bar-service
+                port:
+                  number: 8080
+_______________________________________________________________________________
+
+kubectl apply -f https://storage.googleapis.com/minikube-site-examples/ingress-example.yaml
+
+Note for Docker Desktop Users:
+To get ingress to work you’ll need to open a new terminal window and run minikube tunnel and in the following step use 127.0.0.1 in place of <ip_from_above>.
+
+Now verify that the ingress works
+
+$ curl <ip_from_above>/foo
+Request served by foo-app
+...
+
+$ curl <ip_from_above>/bar
+Request served by bar-app
+...
+
+
+
+
+minikube pause
+minikube unpause
+minikube stop
+minikube config set memory 9001
+minikube addons list
+minikube start -p aged --kubernetes-version=v1.16.1
+minikube delete --all
+
 
 ```
 
@@ -21,7 +154,6 @@ https://minikube.sigs.k8s.io/docs/start/
 
 ```CMD
 https://kind.sigs.k8s.io/docs/user/quick-start/#installation
-
 
 ```
 
