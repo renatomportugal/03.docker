@@ -148,6 +148,10 @@ minikube start -p aged --kubernetes-version=v1.16.1
 minikube delete --all
 
 
+gcr.io/k8s-minikube/kicbase:v0.0.36
+
+
+
 ```
 
 ### kind
