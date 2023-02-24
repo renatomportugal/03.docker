@@ -187,7 +187,35 @@ ISO - 1.8 GB
 ## Ubuntu Server
 
 ```CMD
+Ubuntu 22.04 - Versão Jammy.
 
+sudo nano /etc/netplan/00-installer-config.yaml
+# This is the network config written by 'subiquity'
+network:
+  ethernets:
+    eth0:
+# Usando DHCP
+#           dhcp4: true
+# Configuração Manual
+      addresses:
+      - 192.168.1.108/24
+      routes:
+      - to: default
+      via: 192.168.1.1
+      nameservers:
+        addresses:
+        - 8.8.8.8
+        search:
+        - 8.8.8.8
+  version: 2
+
+Para configuração usando DHCP descomente a linha dhcp4: true e comente as outras de baixo, com exceção da linha da versão.
+
+Para usar a configuração manual comente a linha dhcp4: true e descomente as demais.
+
+```
+
+```CMD
 1. INSTALAÇÃO
 Com o cabo de rede e com o Pendrive:
 Ubuntu server 20.01
