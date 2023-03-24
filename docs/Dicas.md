@@ -83,7 +83,7 @@ Copiar arquivos para fora do container. Copiará para a pasta que estiver. Use p
 docker cp id_do_container:/var/www/html/config/config.php config.php
 ```
 
-# Copiar_dados
+## Copiar_dados
 
 ```CMD
 Copiar do container para a pasta.
@@ -100,12 +100,36 @@ docker cp af006d151ffc:/data ./
 
 ```
 
-# Busca de Containers
-```
+## Busca de Containers
+
+```CMD
 docker search redis
 ```
-# Outros Comandos
+
+## Exportar Containers
+
+```CMD
+docker ps -a
+CONTAINER ID   IMAGE                                     COMMAND                  CREATED          STATUS                      PORTS     NAMES
+47ca31b69886   tensorflow/tensorflow:2.0.0-py3-jupyter   "bash -c 'source /et…"   21 minutes ago   Exited (0) 22 seconds ago             tensorflow
+
+docker export tensorflow > tensorflow.tar
+docker export --output="tensorflow.tar" tensorflow
+
 ```
+
+## Importar Containers
+
+```CMD
+docker load < tensorflow.tar
+docker load --input tensorflow.tar
+docker image ls
+
+```
+
+## Outros Comandos
+
+```CMD
 docker inspect <friendly-name|container-id>
 docker logs <friendly-name|container-id>
 ```

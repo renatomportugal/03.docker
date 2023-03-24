@@ -1,5 +1,4 @@
 * [Home](/)
-* [Dicas](Dicas.md)
 * [Redes](Redes.md)
 * [Volumes](Volumes.md)
 * [Imagens](Imagens.md)

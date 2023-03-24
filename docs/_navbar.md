@@ -3,6 +3,7 @@
   * [Conectar](conectar.md)
   * [Inspecionar](inspecionar.md)
   * [Produção](Producao.md)
+  * [Dicas](Dicas.md)
   
 * Linux
   * [Instalar](InstalacaoSO.md)
