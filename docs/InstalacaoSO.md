@@ -172,7 +172,6 @@ cacerts
 
 ```
 
-
 ## RaspberryPi
 
 ```CMD
