@@ -10,6 +10,7 @@
   * [Configurar](ConfigurarLinux.md)
   * [Comandos](ComandosLinux.md)
   * [Host](Host.md)
+  * [Dicas](DicasLinux.md)
 
 * Outros
   * [Imagens](Imagens.md)
