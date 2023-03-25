@@ -116,6 +116,17 @@ CONTAINER ID   IMAGE                                     COMMAND                
 docker export tensorflow > tensorflow.tar
 docker export --output="tensorflow.tar" tensorflow
 
+...outra forma...
+e895b5bf0e11   solr:8.11-slim                     "/bin/bash -c 'init-…"   45 minutes ago   Up 3 minutes   0.0.0.0:8983->8983/tcp                           dspacesolr
+c92a286f2302   dspace/dspace:dspace-7_x-test      "/bin/bash -c 'while…"   45 minutes ago   Up 3 minutes   8000/tcp, 8009/tcp, 0.0.0.0:8080->8080/tcp       dspace
+a71acf84102a   dspace/dspace-postgres-pgcrypto    "docker-entrypoint.s…"   45 minutes ago   Up 3 minutes   0.0.0.0:5432->5432/tcp                           dspacedb
+f414f11a98a6   dspace/dspace-angular:dspace-7_x   "docker-entrypoint.s…"   45 minutes ago   Up 3 minutes   0.0.0.0:4000->4000/tcp, 0.0.0.0:9876->9876/tcp   dspace-angular
+
+docker save -o C:\dspace\dspacesolr.tar solr:8.11-slim
+docker save -o C:\dspace\dspace.tar dspace/dspace:dspace-7_x-test
+docker save -o C:\dspace\dspacedb.tar dspace/dspace-postgres-pgcrypto
+docker save -o C:\dspace\dspace-angular.tar dspace/dspace-angular:dspace-7_x
+
 ```
 
 ## Importar Containers
