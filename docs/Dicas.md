@@ -144,3 +144,10 @@ docker image ls
 docker inspect <friendly-name|container-id>
 docker logs <friendly-name|container-id>
 ```
+
+## Testar Portas
+
+```CMD
+docker run --rm --name nginx -p 8080:80 nginx
+Acessar localhost:8080
+```
