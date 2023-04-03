@@ -676,8 +676,8 @@ docker images
 
 ```CMD
 
-VERSÃO 2.10.0
-sudo curl -SL https://github.com/docker/compose/releases/download/v2.10.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+VERSÃO 2.17.2
+sudo curl -SL https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
 docker-compose --version
@@ -687,8 +687,8 @@ docker-compose --version
 ### Versao_Atual_Offline
 
 ```CMD
-Acessar https://github.com/docker/compose/releases/ e baixar docker-compose-linux-x86_64, atualmente na versão 2.10.0
-https://github.com/docker/compose/releases/download/v2.10.0/docker-compose-linux-x86_64
+Acessar https://github.com/docker/compose/releases/ e baixar docker-compose-linux-x86_64, atualmente na versão 2.17.2
+https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-linux-x86_64
 
 Subir via FTP para a pasta home
 
