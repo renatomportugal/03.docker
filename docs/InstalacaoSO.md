@@ -1,6 +1,8 @@
-# Linux_SO
+# Instalacao_SO
 
-## Ubuntu_Desktop
+## Linux_SO
+
+### Ubuntu_Desktop
 
 ```CMD
 Flavors Ubuntu
@@ -54,11 +56,11 @@ ISO -
 
 ```
 
-## Programas
+### Programas
 
-### Terminal
+#### Terminal
 
-#### Nano
+##### Nano
 
 ```CMD
 sudo su
@@ -66,7 +68,7 @@ apt-get update
 apt-get install nano
 ```
 
-#### Acesso Remoto via SSH (acesso ao terminal)
+##### Acesso Remoto via SSH (acesso ao terminal)
 
 Digite no terminal:<br>
 
@@ -77,12 +79,12 @@ apt-get install nano
 nano /etc/ssh/sshd_config
 service ssh restart
 ```
-#### Caso queira mexer nas configurações...
+##### Caso queira mexer nas configurações...
 ```
 nano /etc/ssh/sshd_config
 service ssh restart
 ```
-##### Como acessar de outro PC
+###### Como acessar de outro PC
 Especificando o usuário<br>
 ```
 ssh ip -l usuario
@@ -92,21 +94,21 @@ Especificando a porta<br>
 ssh ip -l usuario -p 22
 ```
 
-#### Instalar_programas
+##### Instalar_programas
 
 ```CMD
 sudo dpkg -i nome_do_pacode.deb
 
 ```
 
-#### Desinstalar programas
+##### Desinstalar programas
 ```
 dpkg --list
 sudo apt-get --purge remove nome-do-programa
 sudo aptitude remove program
 ```
-### GUI
-#### Chrome
+#### GUI
+##### Chrome
 ```
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo apt install ./google-chrome-stable_current_amd64.deb
@@ -123,28 +125,28 @@ Para remover...
 sudo apt-get remove google-chrome-stable
 
 ```
-#### Notepad++
+##### Notepad++
 ```
 sudo apt-get update
 sudo apt-get install notepadqq
 ```
-#### Visual Studio Code
+##### Visual Studio Code
 ```
 sudo apt-get update
 sudo apt-get install code 
 sudo apt-get update code
 ```
 
-#### VLC
+##### VLC
 ```CMD
 sudo apt-get install vlc
 
 ```
 
-#### Veracrypt
+##### Veracrypt
 https://www.veracrypt.fr/en/Downloads.html<br>
 
-#### Github_Desktop
+##### Github_Desktop
 ```CMD
 https://github.com/shiftkey/desktop
 25SET22
@@ -155,7 +157,7 @@ sudo sh -c 'echo "deb [arch=amd64] https://packagecloud.io/shiftkey/desktop/any/
 sudo apt update && sudo apt install github-desktop
 ```
 
-#### Keystore
+##### Keystore
 
 ```CMD
 apt --fix-broken install
@@ -172,7 +174,7 @@ cacerts
 
 ```
 
-## RaspberryPi
+### RaspberryPi
 
 ```CMD
 https://ubuntu-mate.org/download/arm64/jammy/
@@ -183,7 +185,9 @@ ISO - 1.8 GB
 
 ```
 
-## Ubuntu Server
+### Ubuntu Server
+
+#### 22.04
 
 ```CMD
 Ubuntu 22.04 - Versão Jammy.
@@ -520,13 +524,13 @@ network:
 
 ```
 
-# CentOS
+## CentOS
 
-## Gravar ISO no pendrive
+### Gravar ISO no pendrive
 
-## Instalar
+### Instalar
 
-### Mudar o ip da máquina (provisoriamente)
+#### Mudar o ip da máquina (provisoriamente)
 ```
 ip -c a
 ```
@@ -540,9 +544,9 @@ Reinicie a placa de rede<br>
 ip link set dev wlp2s0 down
 ip link set dev wlp2s0 up
 ```
-## Programas
+### Programas
 
-### Chrome
+#### Chrome
 ```
 echo "You are using $(getconf LONG_BIT) bit Linux distro."
 uname -m
@@ -551,7 +555,7 @@ sudo yum install ./google-chrome-stable_current_*.rpm
 google-chrome &
 ```
 
-### VSCode
+#### VSCode
 ```
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo nano /etc/yum.repos.d/vscode.repos
@@ -574,7 +578,7 @@ yum check-update
 sudo yum install code
 
 ```
-#### Extensão Sync
+##### Extensão Sync
 ```
 Instale a extensão sync, de Shan Khan, atualmente na versão 3.4.3
 Vai precisar fazer o login no Chrome, na página do github antes...
@@ -583,7 +587,7 @@ Se for a primeira vez, instale todas as extensões que quiser...
 Ctrl+P, digite ">Sync: Update/Upload Settings"
 ```
 
-### Git
+#### Git
 Veja se tem instalado:<br>
 ```
 git --version
@@ -612,7 +616,7 @@ git --version
 ```
 Saída: git version 2.24.1<br>
 
-### Zoom
+#### Zoom
 https://support.zoom.us/hc/en-us/articles/204206269-Installing-or-updating-Zoom-on-Linux#h_b6ce9fba-dd38-4448-80c0-ac2e58db3acc<br>
 Download:<br>
 https://zoom.us/download?os=linux<br>
@@ -621,7 +625,7 @@ cd Downloads
 sudo yum localinstall zoom_x86_64.rpm
 zoom
 ```
-### Postman
+#### Postman
 https://www.postman.com/downloads/<br>
 ```
 Baixar manualmente na pasta Downloads
@@ -639,9 +643,9 @@ sudo yum install libXScrnSaver-1.2.2-6.1.el7.x86_64
 Para abrir digite
 postman
 ```
-### DBeaver
+#### DBeaver
 https://computingforgeeks.com/install-and-configure-dbeaver-on-fedora-centos/<br>
-#### Install Java
+##### Install Java
 ```
 curl -O https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bin.tar.gz
 tar zxvf openjdk-11.0.2_linux-x64_bin.tar.gz
@@ -652,14 +656,14 @@ source /etc/profile.d/jdk11.sh
 java -version
 wich java
 ```
-#### Download and Install DBeaver
+##### Download and Install DBeaver
 ```
 sudo yum -y install wget
 wget https://dbeaver.io/files/dbeaver-ce-latest-stable.x86_64.rpm
 sudo rpm -Uvh ./dbeaver-ce-latest-stable.x86_64.rpm
 dbeaver
 ```
-# HD no Linux
+## HD no Linux
 
 https://elias.praciano.com/2015/01/como-montar-particao-ntfs-ou-vfat-no-linux/<br>
 
@@ -669,36 +673,36 @@ sudo fdisk -lu
 sudo fdisk -l | grep -i ntfs
 ```
 
-## Montar da inicialização
+### Montar da inicialização
 
-### 1
+#### 1
 ```
 sudo blkid
 ```
 Procure pelo tipo NTFS<br>
 /dev/sda1: LABEL="Amz02" UUID="86DC504BDC50381F" TYPE="ntfs" PARTUUID="000b8a88-01"<br>
 
-### Criar um ponto de montagem
+#### Criar um ponto de montagem
 ```
 cd /
 sudo mkdir /media/ntfs
 ```
-#### Fazer um backup
+##### Fazer um backup
 ```
 sudo cp /etc/fstab /etc/fstab.original
 ```
-#### Veja a linguagem
+##### Veja a linguagem
 Use o comando locale para determinar qual o valor mais adequado para você:<br>
 ```
 locale | grep LANG
 ```
 
-#### Abra o fstab
+##### Abra o fstab
 ```
 nano /etc/fstab
 ```
 
-#### Adicione a linha no final do arquivo
+##### Adicione a linha no final do arquivo
 Não se esqueça de substituir os parâmetros<br>
 ```
 UUID=86DC504BDC50381F  /media/ntfs  ntfs-3g  defaults,windows_names,locale=pt_BR.utf8  0 0
@@ -716,8 +720,8 @@ cd /media/ntfs
 ls -la
 ```
 
-# Placa de Rede
-## Descobrir qual é a placa de rede
+## Placa de Rede
+### Descobrir qual é a placa de rede
 ```
 lspci
 Vai retornar a lista de dispositivos, entre eles...

@@ -4,6 +4,7 @@
   * [Inspecionar](inspecionar.md)
   * [Produção](Producao.md)
   * [Dicas](Dicas.md)
+  * [i386](i386.md)
   
 * Linux
   * [Instalar](InstalacaoSO.md)
