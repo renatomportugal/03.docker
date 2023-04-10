@@ -5400,3 +5400,35 @@ docker run \
 
 5d
 ```
+
+## Canonical
+
+```CMD
+https://hub.docker.com/u/ubuntu
+
+https://hub.docker.com/r/ubuntu/mlflow
+https://hub.docker.com/r/ubuntu/mysql
+https://hub.docker.com/r/ubuntu/dotnet-deps
+https://hub.docker.com/r/ubuntu/dotnet-aspnet
+https://hub.docker.com/r/ubuntu/dotnet-runtime
+https://hub.docker.com/r/ubuntu/postgres
+https://hub.docker.com/r/ubuntu/bind9
+https://hub.docker.com/r/ubuntu/apache2
+https://hub.docker.com/r/ubuntu/zookeeper
+https://hub.docker.com/r/ubuntu/kafka
+https://hub.docker.com/r/ubuntu/squid
+https://hub.docker.com/r/ubuntu/chiselled-jre
+https://hub.docker.com/r/ubuntu/memcached
+https://hub.docker.com/r/ubuntu/nginx
+https://hub.docker.com/r/ubuntu/cassandra
+https://hub.docker.com/r/ubuntu/prometheus-alertmanager
+https://hub.docker.com/r/ubuntu/loki
+https://hub.docker.com/r/ubuntu/prometheus
+https://hub.docker.com/r/ubuntu/grafana
+https://hub.docker.com/r/ubuntu/cortex
+https://hub.docker.com/r/ubuntu/redis
+https://hub.docker.com/r/ubuntu/telegraf
+
+
+
+```
