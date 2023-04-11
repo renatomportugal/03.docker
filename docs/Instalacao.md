@@ -500,6 +500,20 @@ sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
    $(lsb_release -cs) \
    stable"
+
+...erro...
+Traceback (most recent call last):
+  File "/usr/bin/add-apt-repository", line 363, in <module>
+    addaptrepo = AddAptRepository()
+  File "/usr/bin/add-apt-repository", line 41, in __init__
+    self.distro.get_sources(self.sourceslist)
+  File "/usr/lib/python3/dist-packages/aptsources/distro.py", line 91, in get_sources
+    raise NoDistroTemplateException(
+aptsources.distro.NoDistroTemplateException: Error: could not find a distribution template for Ubuntu/jammy
+
+Adicione manualmente (sem add-apt-repository):
+echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu groovy stable" |sudo tee /etc/apt/sources.list.d/docker-ce.list
+...resolveu...
 ```
 
 ### Passo U06 <!-- {docsify-ignore} -->
