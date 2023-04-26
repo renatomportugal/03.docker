@@ -399,9 +399,10 @@ Se precisar configure o proxy
 sudo nano /etc/environment
 
 Adicione no fim do arquivo:
-http_proxy="http://USUARIO:SENHA@proxy.DOMINIO:PORTA"
-https_proxy="http://USUARIO:SENHA@proxy.DOMINIO:PORTA"
-ftp_proxy="http://USUARIO:SENHA@proxy.DOMINIO:PORTA"
+http_proxy=http://USUARIO:SENHA@proxy.DOMINIO:PORTA
+https_proxy=http://USUARIO:SENHA@proxy.DOMINIO:PORTA
+ftp_proxy=http://USUARIO:SENHA@proxy.DOMINIO:PORTA
+no_proxy=10.*
 
 Ctrl+O, Enter, Ctrl+X
 
