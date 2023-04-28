@@ -155,6 +155,12 @@ wget -qO - https://mirror.mwt.me/ghd/gpgkey | sudo tee /etc/apt/trusted.gpg.d/sh
 sudo sh -c 'echo "deb [arch=amd64] https://packagecloud.io/shiftkey/desktop/any/ any main" > /etc/apt/sources.list.d/packagecloud-shiftkey-desktop.list'
 
 sudo apt update && sudo apt install github-desktop
+
+28ABR23
+sudo wget https://github.com/shiftkey/desktop/releases/download/release-2.6.3-linux1/GitHubDesktop-linux-2.6.3-linux1.deb
+ou baixar no browser e subir via FTP
+sudo dpkg -i GitHubDesktop-linux-2.6.3-linux1.deb
+
 ```
 
 ##### Keystore
