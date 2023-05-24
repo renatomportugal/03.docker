@@ -406,6 +406,12 @@ no_proxy=10.*
 
 Ctrl+O, Enter, Ctrl+X
 
+source /etc/environment
+
+sudo reboot
+
+
+
 ```
 
 ###  Passo U01 <!-- {docsify-ignore} -->
