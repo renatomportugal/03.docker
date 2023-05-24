@@ -726,6 +726,16 @@ cd /media/ntfs
 ls -la
 ```
 
+## TECLADO
+
+```CMD
+Editar o arquivo
+sudo nano /etc/default/keyboard
+
+Ou com Assitente
+sudo dpkg-reconfigure keyboard-configuration
+```
+
 ## Placa de Rede
 ### Descobrir qual é a placa de rede
 ```
