@@ -193,6 +193,20 @@ ISO - 1.8 GB
 
 ### Ubuntu Server
 
+#### 18.04
+
+```CMD
+UPDATE PARA 20.04
+sudo su
+apt-get update
+apt-get dist-upgrade -y
+reboot
+apt install update-manager-core
+do-release-upgrade
+apt --purge autoremove
+reboot
+```
+
 #### 22.04
 
 ```CMD
