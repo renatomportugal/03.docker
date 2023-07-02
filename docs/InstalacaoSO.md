@@ -546,6 +546,28 @@ network:
 
 ## CentOS
 
+### Centos_7
+
+#### Programas_CLI
+
+```CMD
+https://cheapwindowsvps.com/blog/how-to-install-htop-on-centos-7/
+sudo yum groupinstall "Development Tools"
+y
+sudo yum install ncurses ncurses-devel
+
+sudo yum install wget
+
+wget http://hisham.hm/htop/releases/2.0.2/htop-2.0.2.tar.gz
+tar xvfvz htop-2.0.2.tar.gz
+cd htop-2.0.2
+
+./configure
+sudo make
+sudo make install
+
+```
+
 ### Gravar ISO no pendrive
 
 ### Instalar
