@@ -12,6 +12,7 @@
   * [Comandos](ComandosLinux.md)
   * [Host](Host.md)
   * [Dicas](DicasLinux.md)
+  * [Hardware](LinuxHardware.md)
 
 * Outros
   * [Imagens](Imagens.md)
