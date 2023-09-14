@@ -425,10 +425,18 @@ Problema de Espera de Atualização:
 Release file for https://download.docker.com/linux/ubuntu/dists/bionic/InRelease is not valid yet
 
 Para resolver:
+sudo apt-get -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=false update
+
+Atualizar a hora manualmente:
 date
 sudo date -s MM/DD/AAAA
 sudo date -s HH:MM:SS
-sudo apt-get -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=false update
+
+Atualizar a hora automaticamente:
+sudo date -s "$(wget -qSO- --max-redirect=0 google.com 2>&1 | grep Date: | cut -d' ' -f5-8)Z"
+sudo dpkg-reconfigure tzdata
+Escolher America, São Paulo
+
 
 Desinstalar
 Anote a quantidade de espaço que foi usado
