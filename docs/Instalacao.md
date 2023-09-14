@@ -475,6 +475,7 @@ sudo apt-get install \
     gnupg-agent \
     software-properties-common -y
 
+...copie e cole linha a linha caso o comando anterior falhar...
 sudo apt-get install apt-transport-https -y
 sudo apt-get install ca-certificates -y
 sudo apt-get install curl -y
