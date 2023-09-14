@@ -420,6 +420,16 @@ sudo reboot
 Atualizar o sistema
 sudo apt-get update
 
+Problema de Espera de Atualização:
+...aparece o erro...
+Release file for https://download.docker.com/linux/ubuntu/dists/bionic/InRelease is not valid yet
+
+Para resolver:
+date
+sudo date -s MM/DD/AAAA
+sudo date -s HH:MM:SS
+sudo apt-get -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=false update
+
 Desinstalar
 Anote a quantidade de espaço que foi usado
 df -h
