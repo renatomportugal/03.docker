@@ -212,4 +212,20 @@ https://grafana.com/grafana/dashboards/10530-s-m-a-r-t-disk-monitoring-for-prome
 https://grafana.com/grafana/dashboards/10531-s-m-a-r-t-disk-monitoring-for-prometheus-errorboard/
 https://grafana.com/grafana/dashboards/13654-s-m-a-r-t-dashboard/
 
+sudo smartctl -i /dev/sda
+sudo smartctl -a /dev/sda
+
+```
+
+### Serial
+
+```CMD
+sudo hdparm -i /dev/sda
+```
+
+### Informações
+
+```CMD
+sudo lshw -C disk
+
 ```
