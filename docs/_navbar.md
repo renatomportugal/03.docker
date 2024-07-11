@@ -29,5 +29,6 @@
   * [K8s](k8s.md)
   * [Benchmark](Benchmark.md)
   * [BM_Resultados](Benchmark_Resultados.md)
+  * [Alternativas](Alternativas.md)
 
 * [:us:](/us/)
