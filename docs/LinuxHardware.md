@@ -227,5 +227,16 @@ sudo hdparm -i /dev/sda
 
 ```CMD
 sudo lshw -C disk
+```
 
+### Relatorio
+
+```CMD
+sudo apt install smartmontools
+sudo smartctl -s on /dev/sda
+sudo hdparm -i /dev/sda
+sudo smartctl -t [short|long] /dev/sda
+sudo smartctl -H /dev/sda
+sudo smartctl -i /dev/sda
+sudo smartctl -a /dev/sda
 ```
