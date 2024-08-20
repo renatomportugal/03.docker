@@ -240,3 +240,11 @@ sudo smartctl -H /dev/sda
 sudo smartctl -i /dev/sda
 sudo smartctl -a /dev/sda
 ```
+
+## XCP-NG
+
+```CMD
+yum update
+sudo smartctl -x /dev/sda
+
+```
