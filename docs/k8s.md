@@ -1775,3 +1775,56 @@ systemctl enable --now cri-docker.socket
 
 
 ```
+
+### 03MAR25
+
+```CMD
+[Verificar se nos PC estão rodando alguma coisa]
+sudo apt-get install net-tools -y
+
+sudo netstat -pna --tcp
+docker ps -a
+
+[Atualizar]
+sudo apt-get update && sudo apt-get upgrade -y
+
+[192.168.1.108]
+sudo netstat -pna --tcp
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp6       0      0 :::22                   :::*
+
+docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+sudo apt-get update && sudo apt-get upgrade -y
+sudo shutdown now
+
+[192.168.1.110]
+sudo netstat -pna --tcp
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp6       0      0 :::22                   :::*                    LISTEN      694/sshd: /usr/sbin
+
+docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+sudo apt-get update && sudo apt-get upgrade -y
+sudo shutdown now
+
+
+[192.168.1.110]
+sudo netstat -pna --tcp
+
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp6       0      0 :::22                   :::*                    LISTEN      716/sshd: /usr/sbin
+
+docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+sudo apt-get update && sudo apt-get upgrade -y
+sudo shutdown now
+
+
+```
