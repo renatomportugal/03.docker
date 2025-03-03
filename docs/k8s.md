@@ -1826,5 +1826,30 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 sudo apt-get update && sudo apt-get upgrade -y
 sudo shutdown now
 
+[192.168.1.109]
+sudo netstat -pna --tcp
+
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp6       0      0 :::22                   :::*                    LISTEN      777/sshd: /usr/sbin
+
+docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+sudo apt-get update && sudo apt-get upgrade -y
+sudo shutdown now
+
+[192.168.1.113]
+sudo netstat -pna --tcp
+
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp6       0      0 :::22                   :::*                    LISTEN      754/sshd: /usr/sbin
+
+docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+sudo apt-get update && sudo apt-get upgrade -y
+sudo shutdown now
 
 ```

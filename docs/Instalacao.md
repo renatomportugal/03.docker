@@ -391,16 +391,137 @@ systemctl restart docker
 
 https://docs.docker.com/engine/install/ubuntu/<br>
 
+### Passo -U02
+
+```CMD
+sudo nano /etc/default/ufw
+...
+IPV6=yes
+...
+
+sudo ufw app list
+Retorno:
+Available applications:
+  OpenSSH
+
+sudo ufw allow OpenSSH
+Rules updated
+Rules updated (v6)
+
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow ssh
+sudo ufw allow 22
+sudo ufw show added
+Retorno:
+ufw allow OpenSSH
+ufw allow 22/tcp
+ufw allow 22
+
+Para habilitar:
+sudo ufw enable
+
+Para autorizar:
+sudo ufw allow http
+sudo ufw allow 80
+
+sudo ufw allow https
+sudo ufw allow 443
+
+Apache with both HTTP and HTTPS, using sudo ufw allow ‘Apache Full’
+Nginx with both HTTP and HTTPS, using sudo ufw allow ‘Nginx Full’
+sudo ufw allow 6000:6007/tcp
+sudo ufw allow 6000:6007/udp
+
+sudo ufw allow from 203.0.113.4
+
+sudo ufw allow from 203.0.113.4 to any port 22
+
+sudo ufw allow from 203.0.113.0/24
+sudo ufw allow from 203.0.113.0/24 to any port 22
+
+ip addr
+sudo ufw allow in on eth0 to any port 80
+sudo ufw allow in on eth1 to any port 3306
+
+[DENY]
+sudo ufw deny from 203.0.113.4
+
+[Deletando]
+sudo ufw status numbered
+Status: inactive
+
+sudo ufw enable
+Retorno:
+Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+Firewall is active and enabled on system startup
+sudo reboot now
+
+sudo ufw status numbered
+Status: active
+
+   To                         Action      From
+   --                         ------      ----
+[ 1] OpenSSH                    ALLOW IN    Anywhere
+[ 2] 22/tcp                     ALLOW IN    Anywhere
+[ 3] 22                         ALLOW IN    Anywhere
+[ 4] OpenSSH (v6)               ALLOW IN    Anywhere (v6)
+[ 5] 22/tcp (v6)                ALLOW IN    Anywhere (v6)
+[ 6] 22 (v6)                    ALLOW IN    Anywhere (v6)
+
+[Testar...]
+sudo ufw delete 2
+Deleting:
+ allow 80
+Proceed with operation (y|n)? y
+Rule deleted
+sudo ufw delete allow "Apache Full"
+sudo ufw delete allow http
+sudo ufw delete allow 80
+
+sudo ufw disable
+Firewall stopped and disabled on system startup
+sudo reboot now
+
+sudo ufw status verbose
+Status: inactive
+
+[RESETAR]
+sudo ufw reset
+Resetting all rules to installed defaults. This may disrupt existing ssh
+connections. Proceed with operation (y|n)? y
+Retorno:
+Backing up 'user.rules' to '/etc/ufw/user.rules.20250303_012009'
+Backing up 'before.rules' to '/etc/ufw/before.rules.20250303_012009'
+Backing up 'after.rules' to '/etc/ufw/after.rules.20250303_012009'
+Backing up 'user6.rules' to '/etc/ufw/user6.rules.20250303_012009'
+Backing up 'before6.rules' to '/etc/ufw/before6.rules.20250303_012009'
+Backing up 'after6.rules' to '/etc/ufw/after6.rules.20250303_012009'
+
+
+
+```
+
 ### Passo -U01
 
 ```CMD
+sudo apt-get update
+
+...erro...
+E: The repository 'file:/cdrom jammy Release' no longer has a Release file.
+
+sudo nano /etc/apt/sources.list
+Comentar:
+# deb [check-date=no] file:///cdrom jammy main restricted
+Ctrl+O, Enter, Ctrl+X
+
 https://docs.docker.com/engine/install/ubuntu/
 
 # Add Docker's official GPG key:
-sudo apt-get update &&
-sudo apt-get install ca-certificates curl &&
-sudo install -m 0755 -d /etc/apt/keyrings &&
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc &&
+sudo apt-get update && \
+sudo apt-get install ca-certificates curl && \
+sudo install -m 0755 -d /etc/apt/keyrings && \
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc && \
 sudo chmod a+r /etc/apt/keyrings/docker.asc
 
 # Add the repository to Apt sources:
@@ -409,8 +530,7 @@ echo \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-sudo apt-get update
-
+sudo apt-get update && \
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 
 Teste
@@ -419,6 +539,10 @@ sudo docker run hello-world
 Colocar usuário no grupo docker
 sudo usermod -aG docker $USER
 
+Não funcionou antes de reiniciar.
+sudo reboot now
+docker ps -a
+docker run hello-world
 
 ```
 
