@@ -832,8 +832,7 @@ Install
 cd ~
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
-whoami
-sudo usermod -aG docker your-user
+sudo usermod -aG docker $USER
 groups
 
 2. Uninstall (se precisar desinstalar posteriormente)
@@ -879,8 +878,8 @@ docker images
 ```CMD
 https://github.com/docker/compose/releases
 
-VERSÃO v2.29.1
-sudo curl -SL https://github.com/docker/compose/releases/download/v2.29.1/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+VERSÃO v2.33.1
+sudo curl -SL https://github.com/docker/compose/releases/download/v2.33.1/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
 docker-compose --version
@@ -890,8 +889,8 @@ docker-compose --version
 ### Versao_Atual_Offline
 
 ```CMD
-Acessar https://github.com/docker/compose/releases/ e baixar docker-compose-linux-x86_64, atualmente na versão 2.17.2
-https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-linux-x86_64
+Acessar https://github.com/docker/compose/releases/ e baixar docker-compose-linux-x86_64, atualmente na versão 2.33.1
+https://github.com/docker/compose/releases/download/v2.33.1/docker-compose-linux-x86_64
 
 Subir via FTP para a pasta home
 
